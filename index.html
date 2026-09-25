@@ -2,33 +2,36 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="theme-color" content="#0b0a10">
-<title>369 — Manifestation Journal</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0910">
+<title>369 — Manifestation & Mindset</title>
 
 <style>
-:root{
-  --bg:#0b0a10;
-  --bg2:#11101a;
-  --card:#171521;
-  --card2:#1d1a29;
-  --line:rgba(255,255,255,.08);
-  --text:#f8f7fb;
-  --muted:#a8a3b5;
-  --gold:#f5c451;
-  --gold2:#ffe39a;
-  --purple:#8b5cf6;
-  --purple2:#b69cff;
-  --green:#45d483;
-  --red:#ff6678;
-  --shadow:0 18px 50px rgba(0,0,0,.28);
-  --radius:22px;
-}
-
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
+}
+
+:root{
+  --bg:#09070d;
+  --bg2:#100c16;
+  --panel:#15111d;
+  --panel2:#1b1625;
+  --panel3:#211a2d;
+  --gold:#f5c451;
+  --gold2:#ffe29a;
+  --purple:#9b6cff;
+  --purple2:#c4a8ff;
+  --text:#f8f5fc;
+  --muted:#aaa2b5;
+  --muted2:#766e82;
+  --line:#2c2438;
+  --success:#54d69b;
+  --danger:#ff667d;
+  --warning:#ffb84d;
+  --radius:20px;
+  --shadow:0 18px 45px rgba(0,0,0,.35);
 }
 
 html{
@@ -43,8 +46,8 @@ body{
     "Myanmar Text",
     sans-serif;
   background:
-    radial-gradient(circle at 10% 0%,rgba(139,92,246,.12),transparent 28%),
-    radial-gradient(circle at 90% 0%,rgba(245,196,81,.09),transparent 25%),
+    radial-gradient(circle at 20% 0%,rgba(155,108,255,.12),transparent 28%),
+    radial-gradient(circle at 90% 10%,rgba(245,196,81,.08),transparent 25%),
     var(--bg);
   color:var(--text);
   min-height:100vh;
@@ -58,187 +61,158 @@ select{
 }
 
 button{
-  cursor:pointer;
   border:0;
+  cursor:pointer;
 }
 
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible{
-  outline:2px solid var(--gold);
-  outline-offset:2px;
-}
-
-input,
 textarea,
+input,
 select{
   width:100%;
-  background:#100f17;
   color:var(--text);
+  background:#0f0c15;
   border:1px solid var(--line);
-  border-radius:15px;
+  border-radius:14px;
   padding:13px 14px;
+  outline:none;
+  transition:.2s;
 }
 
 textarea{
-  min-height:110px;
   resize:vertical;
-  line-height:1.7;
+  min-height:100px;
+  line-height:1.6;
 }
 
-select{
-  appearance:auto;
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--purple);
+  box-shadow:0 0 0 3px rgba(155,108,255,.12);
+}
+
+textarea::placeholder,
+input::placeholder{
+  color:#655d70;
 }
 
 .app{
+  display:flex;
   min-height:100vh;
 }
 
 .sidebar{
+  width:260px;
+  flex:0 0 260px;
+  background:rgba(15,11,21,.96);
+  border-right:1px solid var(--line);
+  padding:22px 14px;
   position:fixed;
   left:0;
   top:0;
   bottom:0;
-  width:255px;
-  background:rgba(13,12,18,.94);
-  border-right:1px solid var(--line);
-  padding:22px 14px;
   z-index:50;
-  backdrop-filter:blur(18px);
+  overflow-y:auto;
 }
 
 .brand{
-  padding:5px 12px 22px;
+  padding:4px 10px 22px;
 }
 
 .brand-mark{
   width:48px;
   height:48px;
-  border-radius:15px;
+  border-radius:16px;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(135deg,var(--gold),#fff0b7);
-  color:#17120a;
-  font-size:20px;
+  background:linear-gradient(135deg,var(--gold),var(--purple));
+  color:#110d16;
   font-weight:900;
-  box-shadow:0 10px 30px rgba(245,196,81,.18);
+  font-size:18px;
+  margin-bottom:12px;
+  box-shadow:0 10px 30px rgba(155,108,255,.22);
 }
 
 .brand h1{
-  margin-top:12px;
-  font-size:21px;
+  font-size:22px;
   letter-spacing:.5px;
 }
 
 .brand p{
-  margin-top:5px;
   color:var(--muted);
   font-size:12px;
+  margin-top:4px;
 }
 
 .nav{
-  display:flex;
-  flex-direction:column;
+  display:grid;
   gap:5px;
 }
 
-.nav-btn{
+.nav button{
   width:100%;
-  text-align:left;
-  color:#bcb7c7;
-  background:transparent;
-  border-radius:14px;
-  padding:12px 13px;
   display:flex;
   align-items:center;
   gap:11px;
+  padding:12px 13px;
+  border-radius:13px;
+  background:transparent;
+  color:var(--muted);
+  text-align:left;
   transition:.2s;
 }
 
-.nav-btn:hover{
-  background:rgba(255,255,255,.05);
-  color:#fff;
+.nav button:hover{
+  background:var(--panel2);
+  color:var(--text);
 }
 
-.nav-btn.active{
-  background:linear-gradient(
-    90deg,
-    rgba(139,92,246,.22),
-    rgba(245,196,81,.08)
-  );
-  color:#fff;
+.nav button.active{
+  color:var(--gold2);
+  background:linear-gradient(90deg,rgba(245,196,81,.13),rgba(155,108,255,.10));
+  border:1px solid rgba(245,196,81,.12);
 }
 
 .nav-icon{
-  width:27px;
+  width:23px;
   text-align:center;
 }
 
-.sidebar-bottom{
-  position:absolute;
-  bottom:20px;
-  left:20px;
-  right:20px;
-}
-
-.small-user{
-  padding:13px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  background:rgba(255,255,255,.025);
-}
-
-.small-user strong{
-  display:block;
-  font-size:13px;
-}
-
-.small-user span{
-  display:block;
-  margin-top:3px;
-  color:var(--muted);
-  font-size:11px;
-}
-
 .main{
-  margin-left:255px;
-  min-height:100vh;
+  margin-left:260px;
+  width:calc(100% - 260px);
+  min-width:0;
 }
 
 .topbar{
-  position:sticky;
-  top:0;
-  z-index:30;
+  height:72px;
+  border-bottom:1px solid var(--line);
+  background:rgba(9,7,13,.72);
+  backdrop-filter:blur(18px);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:18px 28px;
-  background:rgba(11,10,16,.82);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
+  padding:0 28px;
+  position:sticky;
+  top:0;
+  z-index:30;
 }
 
 .topbar-title{
-  font-size:20px;
   font-weight:800;
 }
 
-.date{
+.topbar-date{
   color:var(--muted);
   font-size:12px;
-  margin-top:3px;
-}
-
-.mobile-menu{
-  display:none;
 }
 
 .content{
-  max-width:1250px;
+  max-width:1400px;
   margin:auto;
   padding:28px;
+  padding-bottom:100px;
 }
 
 .view{
@@ -256,595 +230,737 @@ select{
 }
 
 .hero{
+  padding:30px;
   border:1px solid var(--line);
   border-radius:28px;
-  padding:28px;
   background:
-    radial-gradient(circle at 90% 0%,rgba(245,196,81,.12),transparent 28%),
-    radial-gradient(circle at 0% 100%,rgba(139,92,246,.13),transparent 30%),
-    var(--card);
+    radial-gradient(circle at 85% 15%,rgba(245,196,81,.12),transparent 30%),
+    radial-gradient(circle at 15% 80%,rgba(155,108,255,.13),transparent 35%),
+    var(--panel);
   box-shadow:var(--shadow);
+  margin-bottom:20px;
 }
 
-.hero-label{
-  display:inline-flex;
-  padding:6px 10px;
-  border-radius:999px;
-  background:rgba(245,196,81,.1);
-  color:var(--gold2);
+.eyebrow{
+  color:var(--gold);
   font-size:11px;
-  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-weight:800;
+  margin-bottom:8px;
 }
 
 .hero h2{
-  margin-top:13px;
-  font-size:clamp(26px,4vw,40px);
-  line-height:1.25;
+  font-size:clamp(27px,4vw,42px);
+  line-height:1.15;
+  margin-bottom:10px;
 }
 
 .hero p{
   color:var(--muted);
-  line-height:1.8;
-  margin-top:9px;
-  max-width:750px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-  margin-top:18px;
-}
-
-.stat{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:18px;
-}
-
-.stat small{
-  color:var(--muted);
-  font-size:11px;
-}
-
-.stat strong{
-  display:block;
-  margin-top:7px;
-  font-size:27px;
+  line-height:1.7;
+  max-width:720px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
-  margin-top:18px;
+  gap:16px;
+}
+
+.grid-2{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.grid-3{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.grid-4{
+  grid-template-columns:repeat(4,minmax(0,1fr));
 }
 
 .card{
-  background:var(--card);
+  background:linear-gradient(180deg,rgba(27,22,37,.98),rgba(18,14,25,.98));
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:21px;
-  box-shadow:0 12px 40px rgba(0,0,0,.12);
+  padding:20px;
+  box-shadow:0 12px 35px rgba(0,0,0,.18);
 }
 
-.card h3{
-  font-size:17px;
-}
-
-.card-sub{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:5px;
-  line-height:1.7;
-}
-
-.section-title{
+.card-head{
   display:flex;
+  align-items:flex-start;
   justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:13px;
+  gap:12px;
+  margin-bottom:15px;
 }
 
-.session-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-}
-
-.session{
-  position:relative;
-  overflow:hidden;
-  padding:19px;
-  border-radius:20px;
-  border:1px solid var(--line);
-  background:#12111a;
-}
-
-.session.morning{
-  box-shadow:inset 0 2px 0 rgba(245,196,81,.6);
-}
-
-.session.afternoon{
-  box-shadow:inset 0 2px 0 rgba(139,92,246,.7);
-}
-
-.session.evening{
-  box-shadow:inset 0 2px 0 rgba(182,156,255,.55);
-}
-
-.session-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.session-name{
+.card-title{
+  font-size:16px;
   font-weight:800;
 }
 
-.count{
-  font-size:11px;
+.card-subtitle{
   color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+  line-height:1.5;
 }
 
-.progress{
-  height:7px;
-  border-radius:99px;
-  background:#272432;
+.stat{
+  position:relative;
   overflow:hidden;
-  margin-top:14px;
 }
 
-.progress > span{
-  display:block;
-  height:100%;
-  border-radius:99px;
-  width:0;
-  background:linear-gradient(90deg,var(--purple),var(--gold));
-  transition:.3s;
+.stat:after{
+  content:"";
+  position:absolute;
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:rgba(155,108,255,.08);
+  right:-25px;
+  bottom:-25px;
 }
 
-.session-text{
-  color:#ddd9e5;
-  font-size:13px;
-  line-height:1.7;
-  margin-top:13px;
-  min-height:70px;
+.stat-label{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.stat-value{
+  font-size:28px;
+  font-weight:900;
+  margin-top:8px;
+}
+
+.stat-small{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:5px;
+}
+
+.btn{
+  min-height:42px;
+  padding:10px 15px;
+  border-radius:12px;
+  background:var(--panel3);
+  border:1px solid var(--line);
+  color:var(--text);
+  transition:.2s;
+  font-weight:700;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+  border-color:#493b5c;
+}
+
+.btn-primary{
+  color:#18120a;
+  background:linear-gradient(135deg,var(--gold),#ffe3a0);
+  border-color:transparent;
+}
+
+.btn-purple{
+  background:linear-gradient(135deg,#8b5cf6,#b795ff);
+  color:white;
+  border-color:transparent;
+}
+
+.btn-success{
+  background:rgba(84,214,155,.12);
+  border-color:rgba(84,214,155,.25);
+  color:var(--success);
+}
+
+.btn-danger{
+  color:#ff8b9c;
+  background:rgba(255,102,125,.08);
+  border-color:rgba(255,102,125,.2);
+}
+
+.btn-small{
+  min-height:34px;
+  padding:7px 10px;
+  font-size:12px;
 }
 
 .btn-row{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
-  margin-top:15px;
 }
 
-.btn{
+.session-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+
+.session{
+  position:relative;
+  overflow:hidden;
+}
+
+.session.morning{
+  border-top:3px solid #f5c451;
+}
+
+.session.afternoon{
+  border-top:3px solid #9b6cff;
+}
+
+.session.evening{
+  border-top:3px solid #c98cff;
+}
+
+.session-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.session-icon{
+  width:40px;
+  height:40px;
   border-radius:13px;
-  padding:11px 14px;
-  font-weight:700;
-  font-size:12px;
-  color:#fff;
-  background:#25222f;
-  border:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(245,196,81,.1);
 }
 
-.btn:hover{
-  filter:brightness(1.12);
+.afternoon .session-icon{
+  background:rgba(155,108,255,.12);
 }
 
-.btn-primary{
-  background:linear-gradient(135deg,var(--purple),#6d3be8);
+.evening .session-icon{
+  background:rgba(201,140,255,.12);
 }
 
-.btn-gold{
-  background:linear-gradient(135deg,#d9a82d,var(--gold));
-  color:#17120a;
+.target-badge{
+  margin-left:auto;
+  padding:6px 9px;
+  border-radius:999px;
+  background:var(--panel3);
+  color:var(--gold2);
+  font-size:11px;
+  font-weight:800;
 }
 
-.btn-danger{
-  color:#fff;
-  background:rgba(255,102,120,.1);
-  border-color:rgba(255,102,120,.2);
+.progress-wrap{
+  margin:15px 0;
 }
 
-.btn-success{
-  background:rgba(69,212,131,.12);
-  border-color:rgba(69,212,131,.2);
-  color:#8bf1b8;
-}
-
-.label{
-  display:block;
-  font-size:12px;
-  color:#d7d2df;
+.progress-info{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:11px;
   margin-bottom:7px;
 }
 
-.form-group{
-  margin-top:15px;
+.progress{
+  height:8px;
+  background:#0c0911;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress > span{
+  display:block;
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--gold),var(--purple));
+  transition:.3s;
+}
+
+.session textarea{
+  min-height:105px;
+}
+
+.reflection{
+  margin-top:12px;
+}
+
+.reflection label,
+.field label{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+.session-actions{
+  display:flex;
+  gap:7px;
+  margin-top:12px;
+  flex-wrap:wrap;
 }
 
 .note-list{
   display:grid;
-  gap:10px;
-  margin-top:15px;
+  gap:12px;
 }
 
 .note-item{
+  padding:16px;
+  background:rgba(10,8,14,.65);
   border:1px solid var(--line);
-  background:#12111a;
-  border-radius:17px;
-  padding:15px;
+  border-radius:16px;
 }
 
-.note-item-head{
+.note-item.favorite{
+  border-color:rgba(245,196,81,.3);
+}
+
+.note-top{
   display:flex;
+  align-items:flex-start;
   justify-content:space-between;
   gap:10px;
 }
 
-.note-item h4{
-  font-size:14px;
+.note-title{
+  font-weight:800;
 }
 
-.note-item p{
-  color:#bbb6c5;
-  font-size:12px;
-  line-height:1.7;
-  margin-top:7px;
-}
-
-.tag{
+.note-category{
   display:inline-flex;
-  padding:5px 8px;
+  margin-top:6px;
+  padding:4px 8px;
   border-radius:999px;
-  background:rgba(139,92,246,.12);
-  color:#c9b9ff;
+  background:rgba(155,108,255,.1);
+  color:var(--purple2);
   font-size:10px;
-  margin-top:8px;
 }
 
-.practice-form{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
+.note-text{
+  color:#e6e0eb;
+  line-height:1.7;
+  margin-top:12px;
+  white-space:pre-wrap;
 }
 
-.full{
-  grid-column:1/-1;
-}
-
-.info{
-  padding:12px 14px;
-  border-radius:15px;
-  background:rgba(245,196,81,.07);
-  border:1px solid rgba(245,196,81,.12);
-  color:#dcd5c2;
-  font-size:12px;
-  line-height:1.8;
+.note-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:13px;
 }
 
 .empty{
+  padding:30px 15px;
   text-align:center;
-  padding:28px 15px;
   color:var(--muted);
-  font-size:13px;
+  border:1px dashed var(--line);
+  border-radius:16px;
 }
 
-.table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:12px;
+.section-title{
+  font-size:25px;
+  margin-bottom:5px;
 }
 
-.table th,
-.table td{
-  padding:11px 8px;
-  text-align:left;
-  border-bottom:1px solid var(--line);
-  font-size:12px;
-}
-
-.table th{
+.section-desc{
   color:var(--muted);
-  font-weight:600;
+  margin-bottom:20px;
+  line-height:1.6;
 }
 
-.day-list{
-  display:grid;
-  gap:9px;
-  margin-top:14px;
+.search{
+  margin-bottom:15px;
 }
 
-.day-item{
-  padding:13px;
-  border-radius:15px;
+.goal-item{
+  padding:16px;
   border:1px solid var(--line);
-  background:#12111a;
+  background:#100d16;
+  border-radius:16px;
+  margin-bottom:10px;
 }
 
-.day-head{
+.goal-top{
   display:flex;
   justify-content:space-between;
   gap:10px;
 }
 
-.day-head strong{
-  font-size:13px;
+.goal-name{
+  font-weight:800;
 }
 
-.day-head span{
-  color:var(--gold2);
-  font-size:12px;
+.goal-value{
+  color:var(--gold);
+  font-weight:800;
 }
 
-.day-detail{
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.7;
-  margin-top:6px;
+.goal-bar{
+  margin-top:12px;
 }
 
-.guide{
+.badges{
   display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:12px;
-  margin-top:16px;
 }
 
-.guide-step{
-  display:grid;
-  grid-template-columns:48px 1fr;
-  gap:13px;
-  align-items:start;
-  padding:16px;
-  background:#12111a;
+.badge{
+  text-align:center;
+  padding:18px 10px;
   border:1px solid var(--line);
-  border-radius:18px;
+  border-radius:16px;
+  background:#100d16;
+  opacity:.42;
 }
 
-.guide-num{
-  width:42px;
-  height:42px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-radius:13px;
-  background:rgba(139,92,246,.14);
-  color:var(--gold2);
-  font-weight:900;
+.badge.unlocked{
+  opacity:1;
+  border-color:rgba(245,196,81,.3);
+  background:linear-gradient(180deg,rgba(245,196,81,.08),#100d16);
 }
 
-.guide-step h4{
-  font-size:14px;
+.badge-icon{
+  font-size:28px;
+  margin-bottom:8px;
 }
 
-.guide-step p{
-  color:var(--muted);
+.badge-title{
   font-size:12px;
-  line-height:1.8;
+  font-weight:800;
+}
+
+.badge-desc{
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.4;
   margin-top:4px;
 }
 
-.example{
-  margin-top:10px;
-  padding:11px 13px;
-  background:rgba(245,196,81,.05);
-  border-left:2px solid var(--gold);
-  border-radius:0 12px 12px 0;
-  color:#e9e3d4;
-  font-size:12px;
-  line-height:1.8;
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:5px;
 }
 
-.modal-wrap{
+.calendar-head{
+  text-align:center;
+  color:var(--muted);
+  font-size:10px;
+  padding:5px;
+}
+
+.day{
+  min-height:52px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#100d16;
+  padding:7px;
+  position:relative;
+  font-size:11px;
+}
+
+.day.empty-day{
+  opacity:.25;
+}
+
+.day.complete{
+  border-color:rgba(84,214,155,.35);
+  background:rgba(84,214,155,.08);
+}
+
+.day.partial{
+  border-color:rgba(245,196,81,.3);
+  background:rgba(245,196,81,.05);
+}
+
+.day-number{
+  font-weight:800;
+}
+
+.day-count{
+  color:var(--muted);
+  font-size:9px;
+  margin-top:7px;
+}
+
+.quote{
+  padding:20px;
+  border-left:3px solid var(--gold);
+  background:rgba(245,196,81,.05);
+  border-radius:0 14px 14px 0;
+  line-height:1.8;
+  color:#eee7f3;
+}
+
+.steps{
+  display:grid;
+  gap:12px;
+}
+
+.step{
+  display:flex;
+  gap:12px;
+}
+
+.step-num{
+  flex:0 0 32px;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(155,108,255,.12);
+  color:var(--purple2);
+  font-weight:900;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.small{
+  font-size:12px;
+}
+
+.divider{
+  height:1px;
+  background:var(--line);
+  margin:18px 0;
+}
+
+.switch-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.switch{
+  width:48px;
+  height:27px;
+  background:#292331;
+  border-radius:999px;
+  padding:3px;
+  transition:.2s;
+}
+
+.switch span{
+  display:block;
+  width:21px;
+  height:21px;
+  border-radius:50%;
+  background:#81788d;
+  transition:.2s;
+}
+
+.switch.on{
+  background:rgba(245,196,81,.25);
+}
+
+.switch.on span{
+  transform:translateX(21px);
+  background:var(--gold);
+}
+
+.toast{
+  position:fixed;
+  right:18px;
+  bottom:20px;
+  z-index:200;
+  padding:13px 16px;
+  border-radius:13px;
+  background:#211a2d;
+  border:1px solid #453653;
+  box-shadow:var(--shadow);
+  color:white;
+  transform:translateY(20px);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  max-width:320px;
+  font-size:13px;
+}
+
+.toast.show{
+  opacity:1;
+  transform:none;
+}
+
+.modal-backdrop{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.72);
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(7px);
+  z-index:100;
   display:none;
   align-items:center;
   justify-content:center;
-  z-index:100;
-  padding:15px;
+  padding:18px;
 }
 
-.modal-wrap.show{
+.modal-backdrop.show{
   display:flex;
 }
 
 .modal{
-  width:min(650px,100%);
+  width:min(620px,100%);
   max-height:90vh;
   overflow:auto;
-  background:#15131d;
+  background:#15111d;
   border:1px solid var(--line);
-  border-radius:25px;
-  box-shadow:0 30px 100px rgba(0,0,0,.5);
+  border-radius:24px;
+  box-shadow:0 30px 90px rgba(0,0,0,.55);
   padding:22px;
 }
 
 .modal-head{
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   justify-content:space-between;
-  gap:12px;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.modal-title{
+  font-size:20px;
+  font-weight:900;
 }
 
 .close{
-  width:38px;
-  height:38px;
-  border-radius:12px;
-  background:#25222f;
-  color:#fff;
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  background:var(--panel3);
+  color:var(--text);
 }
 
-.write-target{
-  margin-top:17px;
-  padding:15px;
-  border-radius:17px;
-  background:#100f17;
-  border:1px solid var(--line);
-  color:#e8e4ee;
-  line-height:1.8;
-  font-size:14px;
-}
-
-.write-progress{
-  margin-top:15px;
-}
-
-.write-progress-text{
+.modal-actions{
   display:flex;
-  justify-content:space-between;
-  color:var(--muted);
-  font-size:11px;
-}
-
-.write-input{
-  min-height:130px;
-  margin-top:13px;
-}
-
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:88px;
-  transform:translate(-50%,20px);
-  opacity:0;
-  pointer-events:none;
-  z-index:200;
-  background:#f5f2ea;
-  color:#17130c;
-  padding:11px 15px;
-  border-radius:13px;
-  font-size:12px;
-  font-weight:700;
-  transition:.25s;
-  box-shadow:var(--shadow);
-  max-width:90vw;
-  text-align:center;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
+  gap:8px;
+  justify-content:flex-end;
+  margin-top:15px;
 }
 
 .mobile-nav{
   display:none;
 }
 
-.setting-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  padding:14px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.setting-row:last-child{
-  border-bottom:0;
-}
-
-.setting-row strong{
-  display:block;
-  font-size:13px;
-}
-
-.setting-row span{
-  display:block;
+.mobile-nav button{
+  background:transparent;
   color:var(--muted);
-  font-size:11px;
-  margin-top:4px;
+  font-size:10px;
+}
+
+.mobile-nav button.active{
+  color:var(--gold);
+}
+
+.mobile-nav .nav-icon{
+  display:block;
+  font-size:19px;
+  margin-bottom:2px;
+  width:auto;
+}
+
+.kpi-big{
+  font-size:42px;
+  font-weight:950;
+  background:linear-gradient(135deg,var(--gold2),var(--purple2));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.session-preview{
+  padding:12px;
+  border-radius:12px;
+  background:#0f0c15;
+  border:1px solid var(--line);
+  color:#dcd4e4;
+  font-size:12px;
   line-height:1.6;
+  margin-top:10px;
+  min-height:65px;
 }
 
-.switch{
-  width:47px;
-  height:27px;
-  border-radius:99px;
-  background:#312d3b;
-  position:relative;
+.select-note{
+  margin-top:9px;
+}
+
+.copy-list{
+  display:grid;
+  gap:8px;
+  margin-top:10px;
+}
+
+.copy-option{
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#0f0c15;
   cursor:pointer;
-  flex:none;
 }
 
-.switch span{
-  position:absolute;
-  width:21px;
-  height:21px;
-  top:3px;
-  left:3px;
-  border-radius:50%;
-  background:#fff;
-  transition:.2s;
+.copy-option:hover{
+  border-color:var(--purple);
 }
 
-.switch.on{
-  background:var(--purple);
+.timer{
+  text-align:center;
+  padding:25px;
 }
 
-.switch.on span{
-  left:23px;
+.timer-value{
+  font-size:65px;
+  font-weight:900;
+  color:var(--gold);
 }
 
-@media(max-width:900px){
-  .sidebar{
-    transform:translateX(-100%);
-    transition:.25s;
-    width:280px;
+@media(max-width:1100px){
+  .grid-4{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
+  .session-grid{
+    grid-template-columns:1fr;
+  }
+}
 
-  .sidebar.open{
-    transform:translateX(0);
+@media(max-width:800px){
+  .sidebar{
+    display:none;
   }
 
   .main{
     margin-left:0;
-  }
-
-  .mobile-menu{
-    display:flex;
-    width:40px;
-    height:40px;
-    border-radius:12px;
-    align-items:center;
-    justify-content:center;
-    background:#211e2b;
-    color:#fff;
+    width:100%;
   }
 
   .topbar{
-    padding:13px 16px;
+    height:62px;
+    padding:0 16px;
   }
 
   .content{
-    padding:18px 15px 95px;
+    padding:18px 14px 90px;
   }
 
-  .stats{
-    grid-template-columns:repeat(2,1fr);
+  .hero{
+    padding:22px;
   }
 
-  .grid{
+  .grid-2,
+  .grid-3,
+  .grid-4{
     grid-template-columns:1fr;
   }
 
-  .session-grid{
-    grid-template-columns:1fr;
-  }
-
-  .practice-form{
-    grid-template-columns:1fr;
-  }
-
-  .full{
-    grid-column:auto;
+  .badges{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
   .mobile-nav{
@@ -852,56 +968,37 @@ select{
     left:10px;
     right:10px;
     bottom:10px;
-    z-index:70;
+    z-index:60;
+    height:64px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:rgba(20,16,27,.95);
+    backdrop-filter:blur(20px);
     display:grid;
     grid-template-columns:repeat(5,1fr);
-    padding:7px;
-    border-radius:20px;
-    background:rgba(20,18,28,.94);
-    border:1px solid var(--line);
-    backdrop-filter:blur(18px);
-    box-shadow:0 15px 40px rgba(0,0,0,.35);
+    align-items:center;
+    box-shadow:0 15px 45px rgba(0,0,0,.45);
   }
 
   .mobile-nav button{
-    background:transparent;
-    color:#9994a5;
-    padding:7px 2px;
-    border-radius:14px;
-    font-size:9px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:100%;
   }
 
-  .mobile-nav button.active{
-    color:var(--gold2);
-    background:rgba(245,196,81,.08);
+  .calendar{
+    gap:3px;
   }
 
-  .mobile-nav button b{
-    display:block;
-    font-size:17px;
-    margin-bottom:2px;
-  }
-}
-
-@media(max-width:500px){
-  .hero{
-    padding:21px;
+  .day{
+    min-height:45px;
+    padding:5px;
   }
 
-  .stats{
-    gap:9px;
-  }
-
-  .stat{
-    padding:14px;
-  }
-
-  .stat strong{
-    font-size:23px;
-  }
-
-  .topbar-title{
-    font-size:17px;
+  .day-count{
+    font-size:8px;
   }
 }
 </style>
@@ -911,1167 +1008,205 @@ select{
 
 <div class="app">
 
-  <aside class="sidebar" id="sidebar">
-
-    <div class="brand">
-      <div class="brand-mark">369</div>
-      <h1>Manifestation Journal</h1>
-      <p>Write • Reflect • Focus • Act</p>
-    </div>
-
-    <nav class="nav">
-
-      <button class="nav-btn active" data-view="dashboard">
-        <span class="nav-icon">⌂</span>
-        Dashboard
-      </button>
-
-      <button class="nav-btn" data-view="practice">
-        <span class="nav-icon">✍</span>
-        369 Practice
-      </button>
-
-      <button class="nav-btn" data-view="notes">
-        <span class="nav-icon">📝</span>
-        My Affirmations
-      </button>
-
-      <button class="nav-btn" data-view="guide">
-        <span class="nav-icon">◈</span>
-        How 369 Works
-      </button>
-
-      <button class="nav-btn" data-view="history">
-        <span class="nav-icon">◷</span>
-        History
-      </button>
-
-      <button class="nav-btn" data-view="journal">
-        <span class="nav-icon">♡</span>
-        Journal
-      </button>
-
-      <button class="nav-btn" data-view="settings">
-        <span class="nav-icon">⚙</span>
-        Settings
-      </button>
-
-    </nav>
-
-    <div class="sidebar-bottom">
-      <div class="small-user">
-        <strong>369 Daily Practice</strong>
-        <span>18 writings · 3 sessions</span>
-      </div>
-    </div>
-
-  </aside>
-
-  <main class="main">
-
-    <header class="topbar">
-
-      <div style="display:flex;align-items:center;gap:11px">
-
-        <button class="mobile-menu" id="mobileMenu">☰</button>
-
-        <div>
-          <div class="topbar-title" id="pageTitle">Dashboard</div>
-          <div class="date" id="todayDate"></div>
-        </div>
-
-      </div>
-
-      <button class="btn btn-gold" id="quickPractice">
-        ✍ Practice
-      </button>
-
-    </header>
-
-    <div class="content">
-
-      <!-- DASHBOARD -->
-
-      <section class="view active" id="view-dashboard">
-
-        <div class="hero">
-
-          <span class="hero-label">TODAY'S 369 JOURNEY</span>
-
-          <h2>
-            Write your intention.<br>
-            Reflect on your day.
-          </h2>
-
-          <p>
-            Morning 3 times, Afternoon 6 times, Evening 9 times
-            — and use Notes / Reflections to record what you are thinking,
-            feeling and learning each day
-          </p>
-
-          <div class="btn-row">
-            <button class="btn btn-primary" id="dashPractice">
-              Start Today's Practice
-            </button>
-
-            <button class="btn" id="dashGuide">
-              Learn 369
-            </button>
-          </div>
-
-        </div>
-
-        <div class="stats">
-
-          <div class="stat">
-            <small>Today's Writing</small>
-            <strong id="statToday">0 / 18</strong>
-          </div>
-
-          <div class="stat">
-            <small>Current Streak</small>
-            <strong id="statStreak">0</strong>
-          </div>
-
-          <div class="stat">
-            <small>Completed Days</small>
-            <strong id="statDays">0</strong>
-          </div>
-
-          <div class="stat">
-            <small>Total Writings</small>
-            <strong id="statTotal">0</strong>
-          </div>
-
-        </div>
-
-        <div class="card" style="margin-top:18px">
-
-          <div class="section-title">
-            <div>
-              <h3>Today's 3 · 6 · 9</h3>
-              <div class="card-sub">
-                Each session can have a completely different affirmation
-              </div>
-            </div>
-          </div>
-
-          <div class="session-grid">
-
-            <div class="session morning">
-
-              <div class="session-top">
-                <div class="session-name">🌅 Morning</div>
-                <div class="count" id="dashMorningCount">0 / 3</div>
-              </div>
-
-              <div class="progress">
-                <span id="dashMorningProgress"></span>
-              </div>
-
-              <div class="session-text" id="dashMorningText">
-                No affirmation yet
-              </div>
-
-            </div>
-
-            <div class="session afternoon">
-
-              <div class="session-top">
-                <div class="session-name">☀️ Afternoon</div>
-                <div class="count" id="dashAfternoonCount">0 / 6</div>
-              </div>
-
-              <div class="progress">
-                <span id="dashAfternoonProgress"></span>
-              </div>
-
-              <div class="session-text" id="dashAfternoonText">
-                No affirmation yet
-              </div>
-
-            </div>
-
-            <div class="session evening">
-
-              <div class="session-top">
-                <div class="session-name">🌙 Evening</div>
-                <div class="count" id="dashEveningCount">0 / 9</div>
-              </div>
-
-              <div class="progress">
-                <span id="dashEveningProgress"></span>
-              </div>
-
-              <div class="session-text" id="dashEveningText">
-                No affirmation yet
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="grid">
-
-          <div class="card">
-
-            <div class="section-title">
-              <h3>Today's Notes</h3>
-              <button class="btn" data-go="journal">Open Journal</button>
-            </div>
-
-            <div id="dashNotes" class="empty">
-              No notes or reflections yet
-            </div>
-
-          </div>
-
-          <div class="card">
-
-            <div class="section-title">
-              <h3>Daily Principle</h3>
-            </div>
-
-            <div class="info">
-              369 ကို goal ရရှိမယ်လို့ အာမခံတဲ့နည်းလမ်းအဖြစ်မဟုတ်ဘဲ
-              ကိုယ့်ရဲ့ intention ကို နေ့စဉ်အာရုံစိုက်ပြီး
-              reflection နဲ့ action တွဲလုပ်တဲ့ writing routine အဖြစ် အသုံးပြုနိုင်ပါတယ်
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- PRACTICE -->
-
-      <section class="view" id="view-practice">
-
-        <div class="hero">
-
-          <span class="hero-label">TODAY'S PRACTICE</span>
-
-          <h2>3 · 6 · 9 Writing</h2>
-
-          <p>
-            Morning, Afternoon, Evening ကို သီးခြား affirmation
-            သုံးခုထည့်နိုင်ပါတယ်
-          </p>
-
-        </div>
-
-        <div class="card" style="margin-top:18px">
-
-          <div class="section-title">
-            <div>
-              <h3>Today's Affirmations</h3>
-              <div class="card-sub">
-                တစ်နေ့တည်းမှာ စာမတူလည်း ရပါတယ်
-              </div>
-            </div>
-
-            <button class="btn btn-primary" id="savePractice">
-              Save Today
-            </button>
-          </div>
-
-          <div class="practice-form">
-
-            <div>
-
-              <label class="label">
-                🌅 Morning — 3 Times
-              </label>
-
-              <textarea
-                id="morningAffirmation"
-                placeholder="မနက် ၃ ကြိမ်ရေးမယ့် affirmation..."
-              ></textarea>
-
-            </div>
-
-            <div>
-
-              <label class="label">
-                ☀️ Afternoon — 6 Times
-              </label>
-
-              <textarea
-                id="afternoonAffirmation"
-                placeholder="နေ့လည် ၆ ကြိမ်ရေးမယ့် affirmation..."
-              ></textarea>
-
-            </div>
-
-            <div class="full">
-
-              <label class="label">
-                🌙 Evening — 9 Times
-              </label>
-
-              <textarea
-                id="eveningAffirmation"
-                placeholder="ည ၉ ကြိမ်ရေးမယ့် affirmation..."
-              ></textarea>
-
-            </div>
-
-          </div>
-
-          <div class="info" style="margin-top:15px">
-            ဥပမာ — Morning မှာ ငွေကြေးအကြောင်း,
-            Afternoon မှာ အလုပ်အကိုင်အကြောင်း,
-            Evening မှာ စိတ်အေးချမ်းမှုအကြောင်း
-            သီးခြားရေးနိုင်ပါတယ်
-          </div>
-
-        </div>
-
-
-        <div class="card" style="margin-top:18px">
-
-          <div class="section-title">
-            <div>
-              <h3>Writing Sessions</h3>
-              <div class="card-sub">
-                ကိုယ်တိုင်ရေးပြီး တစ်ကြိမ်ချင်းစီ Complete လုပ်ပါ
-              </div>
-            </div>
-          </div>
-
-          <div class="session-grid">
-
-            <div class="session morning">
-
-              <div class="session-top">
-                <div class="session-name">🌅 Morning</div>
-                <div class="count" id="practiceMorningCount">
-                  0 / 3
-                </div>
-              </div>
-
-              <div class="progress">
-                <span id="practiceMorningProgress"></span>
-              </div>
-
-              <div class="session-text" id="practiceMorningPreview">
-                Affirmation ထည့်ပါ
-              </div>
-
-              <div class="btn-row">
-                <button
-                  class="btn btn-primary"
-                  data-session="morning"
-                >
-                  Start 3
-                </button>
-              </div>
-
-            </div>
-
-
-            <div class="session afternoon">
-
-              <div class="session-top">
-                <div class="session-name">☀️ Afternoon</div>
-                <div class="count" id="practiceAfternoonCount">
-                  0 / 6
-                </div>
-              </div>
-
-              <div class="progress">
-                <span id="practiceAfternoonProgress"></span>
-              </div>
-
-              <div class="session-text" id="practiceAfternoonPreview">
-                Affirmation ထည့်ပါ
-              </div>
-
-              <div class="btn-row">
-                <button
-                  class="btn btn-primary"
-                  data-session="afternoon"
-                >
-                  Start 6
-                </button>
-              </div>
-
-            </div>
-
-
-            <div class="session evening">
-
-              <div class="session-top">
-                <div class="session-name">🌙 Evening</div>
-                <div class="count" id="practiceEveningCount">
-                  0 / 9
-                </div>
-              </div>
-
-              <div class="progress">
-                <span id="practiceEveningProgress"></span>
-              </div>
-
-              <div class="session-text" id="practiceEveningPreview">
-                Affirmation ထည့်ပါ
-              </div>
-
-              <div class="btn-row">
-                <button
-                  class="btn btn-primary"
-                  data-session="evening"
-                >
-                  Start 9
-                </button>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="card" style="margin-top:18px">
-
-          <div class="section-title">
-            <div>
-              <h3>Today's Reflection</h3>
-              <div class="card-sub">
-                369 ရေးပြီးနောက် ကိုယ့်အတွေး၊ ခံစားချက်နဲ့ လုပ်ဆောင်ချက်ကို မှတ်ထားပါ
-              </div>
-            </div>
-          </div>
-
-          <textarea
-            id="practiceReflection"
-            placeholder="ဒီနေ့ ဘာတွေသတိထားမိလဲ၊ ဘာတွေကောင်းခဲ့လဲ၊ မနက်ဖြန် ဘာလုပ်မလဲ..."
-          ></textarea>
-
-          <div class="btn-row">
-            <button class="btn btn-success" id="saveReflection">
-              Save Reflection
-            </button>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- NOTES -->
-
-      <section class="view" id="view-notes">
-
-        <div class="hero">
-
-          <span class="hero-label">MY AFFIRMATIONS</span>
-
-          <h2>My Affirmation Library</h2>
-
-          <p>
-            Affirmation တွေကို သီးခြားသိမ်းထားပြီး
-            လိုတဲ့နေ့မှာ Morning / Afternoon / Evening အတွက်
-            အသီးသီးအသုံးပြုနိုင်ပါတယ်
-          </p>
-
-        </div>
-
-        <div class="grid">
-
-          <div class="card">
-
-            <h3>Create Affirmation</h3>
-
-            <div class="form-group">
-              <label class="label">Title</label>
-              <input id="noteTitle" placeholder="ဥပမာ — Financial Growth">
-            </div>
-
-            <div class="form-group">
-              <label class="label">Category</label>
-
-              <select id="noteCategory">
-                <option>Money</option>
-                <option>Business</option>
-                <option>Career</option>
-                <option>Love</option>
-                <option>Family</option>
-                <option>Health</option>
-                <option>Peace</option>
-                <option>Growth</option>
-                <option>Other</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="label">Affirmation</label>
-
-              <textarea
-                id="noteText"
-                placeholder="ကျွန်တော့် affirmation ကို ဒီမှာရေးပါ..."
-              ></textarea>
-            </div>
-
-            <div class="btn-row">
-              <button class="btn btn-primary" id="addNote">
-                Save Affirmation
-              </button>
-            </div>
-
-          </div>
-
-
-          <div class="card">
-
-            <div class="section-title">
-              <div>
-                <h3>Saved Affirmations</h3>
-                <div class="card-sub">
-                  <span id="noteCount">0</span> saved
-                </div>
-              </div>
-            </div>
-
-            <div id="notesList" class="note-list"></div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- GUIDE -->
-
-      <section class="view" id="view-guide">
-
-        <div class="hero">
-
-          <span class="hero-label">369 GUIDE</span>
-
-          <h2>369 ကို ဘယ်လိုရေးမလဲ</h2>
-
-          <p>
-            အဓိကက 3 / 6 / 9 ဆိုတဲ့ count နဲ့
-            ကိုယ့်အာရုံစိုက်လိုတဲ့ intention ကို
-            နေ့စဉ် writing practice အဖြစ် ပြန်လည်လုပ်ဆောင်ခြင်းပါ
-          </p>
-
-        </div>
-
-        <div class="card" style="margin-top:18px">
-
-          <div class="guide">
-
-            <div class="guide-step">
-
-              <div class="guide-num">1</div>
-
-              <div>
-                <h4>Morning — 3 Times</h4>
-
-                <p>
-                  မနက်ပိုင်းမှာ ကိုယ့်ရဲ့ intention / affirmation ကို
-                  ၃ ကြိမ် ကိုယ်တိုင်ရေးပါ
-                </p>
-
-                <div class="example">
-                  “ကျွန်တော်သည် မိမိရည်မှန်းချက်များအတွက်
-                  နေ့စဉ်အာရုံစိုက်ပြီး လုပ်ဆောင်နေပါတယ်”
-                </div>
-              </div>
-
-            </div>
-
-
-            <div class="guide-step">
-
-              <div class="guide-num">2</div>
-
-              <div>
-                <h4>Afternoon — 6 Times</h4>
-
-                <p>
-                  နေ့လည်ပိုင်းမှာ မနက်နဲ့မတူတဲ့
-                  affirmation ကိုလည်း ထည့်နိုင်ပါတယ်
-                </p>
-
-                <div class="example">
-                  “ကျွန်တော်သည် မိမိလုပ်ငန်းတိုးတက်စေရန်
-                  အကျိုးရှိသောအလုပ်များကို စနစ်တကျလုပ်ဆောင်နေပါတယ်”
-                </div>
-              </div>
-
-            </div>
-
-
-            <div class="guide-step">
-
-              <div class="guide-num">3</div>
-
-              <div>
-                <h4>Evening — 9 Times</h4>
-
-                <p>
-                  ညပိုင်းမှာ ကိုယ့်ရဲ့နေ့တာကို ပြန်သုံးသပ်ပြီး
-                  ကိုယ်အာရုံစိုက်လိုတဲ့ affirmation ကို ၉ ကြိမ်ရေးပါ
-                </p>
-
-                <div class="example">
-                  “ကျွန်တော်သည် စိတ်အေးချမ်းစွာ
-                  မိမိဘဝကို တိုးတက်အောင် တစ်နေ့ချင်းစီ
-                  တည်ဆောက်နေပါတယ်”
-                </div>
-              </div>
-
-            </div>
-
-
-            <div class="guide-step">
-
-              <div class="guide-num">4</div>
-
-              <div>
-                <h4>Notes / Reflection</h4>
-
-                <p>
-                  ရေးပြီးတဲ့နောက် ဘာတွေသတိထားမိလဲ၊
-                  ဘာလုပ်နိုင်ခဲ့လဲ၊ နောက်တစ်နေ့မှာ ဘာလုပ်မလဲ
-                  ဆိုတာကို မှတ်တမ်းတင်ပါ
-                </p>
-              </div>
-
-            </div>
-
-
-            <div class="guide-step">
-
-              <div class="guide-num">5</div>
-
-              <div>
-                <h4>One Small Action</h4>
-
-                <p>
-                  Affirmation ကို ရေးရုံသာမက
-                  ကိုယ့်ရည်မှန်းချက်နဲ့ဆိုင်တဲ့
-                  လက်တွေ့လုပ်ဆောင်ချက်တစ်ခု ထည့်ထားရင်
-                  journaling routine ပိုအသုံးဝင်လာနိုင်ပါတယ်
-                </p>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="grid">
-
-          <div class="card">
-
-            <h3>Example — Business Day</h3>
-
-            <div class="example">
-              🌅 Morning × 3<br><br>
-              “ကျွန်တော့်လုပ်ငန်းသည် တနေ့ထက်တနေ့
-              ပိုမိုတိုးတက်လာအောင် စနစ်တကျလုပ်ဆောင်နေပါတယ်”
-            </div>
-
-            <div class="example">
-              ☀️ Afternoon × 6<br><br>
-              “ကျွန်တော်သည် ဖောက်သည်များအတွက်
-              တန်ဖိုးရှိတဲ့အရာတွေကို ပိုမိုကောင်းမွန်စွာ
-              ပေးနိုင်အောင် လုပ်ဆောင်နေပါတယ်”
-            </div>
-
-            <div class="example">
-              🌙 Evening × 9<br><br>
-              “ကျွန်တော်သည် ဒီနေ့လုပ်ခဲ့တဲ့အရာတွေထဲက
-              အကျိုးရှိတာတွေကို ဆက်လက်တိုးတက်အောင်
-              လုပ်ဆောင်နေပါတယ်”
-            </div>
-
-          </div>
-
-
-          <div class="card">
-
-            <h3>Example — Money & Growth</h3>
-
-            <div class="example">
-              🌅 Morning × 3<br><br>
-              “ကျွန်တော်သည် ငွေကြေးကို စနစ်တကျ
-              စီမံခန့်ခွဲနေပါတယ်”
-            </div>
-
-            <div class="example">
-              ☀️ Afternoon × 6<br><br>
-              “ကျွန်တော်သည် ဝင်ငွေတိုးတက်စေမည့်
-              အခွင့်အရေးများကို အာရုံစိုက်လုပ်ဆောင်နေပါတယ်”
-            </div>
-
-            <div class="example">
-              🌙 Evening × 9<br><br>
-              “ကျွန်တော်သည် ငွေကြေးပိုင်းဆိုင်ရာ
-              အလေ့အထကောင်းများကို နေ့စဉ်တည်ဆောက်နေပါတယ်”
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- HISTORY -->
-
-      <section class="view" id="view-history">
-
-        <div class="hero">
-
-          <span class="hero-label">YOUR JOURNEY</span>
-
-          <h2>History</h2>
-
-          <p>
-            နေ့တိုင်းရေးထားတဲ့ 3 / 6 / 9 sessions နဲ့
-            Notes / Reflection တွေကို ပြန်ကြည့်နိုင်ပါတယ်
-          </p>
-
-        </div>
-
-        <div class="stats">
-
-          <div class="stat">
-            <small>Completed Days</small>
-            <strong id="historyDays">0</strong>
-          </div>
-
-          <div class="stat">
-            <small>Total Writings</small>
-            <strong id="historyWritings">0</strong>
-          </div>
-
-          <div class="stat">
-            <small>Best Streak</small>
-            <strong id="historyBest">0</strong>
-          </div>
-
-          <div class="stat">
-            <small>Completion</small>
-            <strong id="historyCompletion">0%</strong>
-          </div>
-
-        </div>
-
-        <div class="card" style="margin-top:18px">
-
-          <div class="section-title">
-            <h3>Daily Records</h3>
-          </div>
-
-          <div id="historyList" class="day-list"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- JOURNAL -->
-
-      <section class="view" id="view-journal">
-
-        <div class="hero">
-
-          <span class="hero-label">DAILY JOURNAL</span>
-
-          <h2>Notes & Reflections</h2>
-
-          <p>
-            369 practice အပြင် နေ့စဉ်အတွေးများ၊
-            gratitude၊ reflection၊ action plan တွေကိုလည်း ရေးထားနိုင်ပါတယ်
-          </p>
-
-        </div>
-
-        <div class="grid">
-
-          <div class="card">
-
-            <h3>Today's Journal</h3>
-
-            <div class="form-group">
-
-              <label class="label">
-                🙏 Gratitude
-              </label>
-
-              <textarea
-                id="journalGratitude"
-                placeholder="ဒီနေ့ ကျေးဇူးတင်မိတဲ့အရာ..."
-              ></textarea>
-
-            </div>
-
-            <div class="form-group">
-
-              <label class="label">
-                📝 Notes
-              </label>
-
-              <textarea
-                id="journalNotes"
-                placeholder="ဒီနေ့အတွေးများ၊ မှတ်စုများ..."
-              ></textarea>
-
-            </div>
-
-            <div class="form-group">
-
-              <label class="label">
-                🔎 Reflection
-              </label>
-
-              <textarea
-                id="journalReflection"
-                placeholder="ဒီနေ့ ဘာတွေသင်ယူခဲ့လဲ..."
-              ></textarea>
-
-            </div>
-
-            <div class="form-group">
-
-              <label class="label">
-                🎯 Tomorrow's Action
-              </label>
-
-              <textarea
-                id="journalAction"
-                placeholder="မနက်ဖြန် လုပ်မယ့်အရေးကြီးဆုံးအရာ..."
-              ></textarea>
-
-            </div>
-
-            <div class="btn-row">
-
-              <button
-                class="btn btn-primary"
-                id="saveJournal"
-              >
-                Save Journal
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <div class="card">
-
-            <h3>Today's 369 Summary</h3>
-
-            <div class="day-list">
-
-              <div class="day-item">
-
-                <div class="day-head">
-                  <strong>Morning</strong>
-                  <span id="journalMorning">0 / 3</span>
-                </div>
-
-              </div>
-
-              <div class="day-item">
-
-                <div class="day-head">
-                  <strong>Afternoon</strong>
-                  <span id="journalAfternoon">0 / 6</span>
-                </div>
-
-              </div>
-
-              <div class="day-item">
-
-                <div class="day-head">
-                  <strong>Evening</strong>
-                  <span id="journalEvening">0 / 9</span>
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- SETTINGS -->
-
-      <section class="view" id="view-settings">
-
-        <div class="hero">
-
-          <span class="hero-label">SETTINGS</span>
-
-          <h2>App Settings</h2>
-
-          <p>
-            ဒီ App က browser/device ထဲမှာ local data အဖြစ် သိမ်းထားပါတယ်
-          </p>
-
-        </div>
-
-        <div class="card" style="margin-top:18px">
-
-          <div class="setting-row">
-
-            <div>
-              <strong>Daily Reminder</strong>
-              <span>နေ့စဉ် 369 practice လုပ်ဖို့ reminder preference</span>
-            </div>
-
-            <div
-              class="switch"
-              id="reminderSwitch"
-              role="button"
-              tabindex="0"
-            >
-              <span></span>
-            </div>
-
-          </div>
-
-
-          <div class="setting-row">
-
-            <div>
-              <strong>Export Data</strong>
-              <span>Notes, practice, journal data ကို JSON အဖြစ်သိမ်းပါ</span>
-            </div>
-
-            <button class="btn" id="exportData">
-              Export
-            </button>
-
-          </div>
-
-
-          <div class="setting-row">
-
-            <div>
-              <strong>Import Data</strong>
-              <span>အရင် export လုပ်ထားတဲ့ JSON ကို ပြန်ထည့်ပါ</span>
-            </div>
-
-            <button class="btn" id="importData">
-              Import
-            </button>
-
-            <input
-              type="file"
-              id="importFile"
-              accept=".json,application/json"
-              hidden
-            >
-
-          </div>
-
-
-          <div class="setting-row">
-
-            <div>
-              <strong>Reset App</strong>
-              <span>App ထဲက local data အားလုံးကို ဖျက်ပါမယ်</span>
-            </div>
-
-            <button class="btn btn-danger" id="resetData">
-              Reset
-            </button>
-
-          </div>
-
-        </div>
-
-      </section>
-
-    </div>
-
-  </main>
-
-
-  <nav class="mobile-nav">
-
-    <button class="active" data-view="dashboard">
-      <b>⌂</b>
-      Home
-    </button>
-
-    <button data-view="practice">
-      <b>✍</b>
-      Practice
-    </button>
-
-    <button data-view="notes">
-      <b>📝</b>
-      Notes
-    </button>
-
-    <button data-view="history">
-      <b>◷</b>
-      History
-    </button>
-
-    <button data-view="settings">
-      <b>⚙</b>
-      Settings
-    </button>
-
-  </nav>
-
-</div>
-
-
-<!-- WRITING MODAL -->
-
-<div class="modal-wrap" id="writingModal">
-
-  <div class="modal">
-
-    <div class="modal-head">
-
-      <div>
-        <h3 id="modalTitle">Morning Writing</h3>
-
-        <div
-          class="card-sub"
-          id="modalSubtitle"
-        >
-          Write your affirmation
-        </div>
-      </div>
-
-      <button class="close" id="closeModal">×</button>
-
-    </div>
-
-
-    <div class="write-progress">
-
-      <div class="write-progress-text">
-
-        <span id="writeProgressText">
-          0 / 3
-        </span>
-
-        <span id="writeSessionName">
-          Morning
-        </span>
-
-      </div>
-
-      <div class="progress">
-        <span id="writeProgress"></span>
-      </div>
-
-    </div>
-
-
-    <div class="write-target" id="writeTarget">
-      —
-    </div>
-
-
-    <textarea
-      class="write-input"
-      id="writeInput"
-      placeholder="အပေါ်မှာပြထားတဲ့ affirmation ကို ကိုယ်တိုင်ရေးပါ..."
-    ></textarea>
-
-
-    <div class="info" style="margin-top:12px">
-      “Use Saved Text” ကိုနှိပ်ရင် စာသားကို ထည့်ပေးမယ်
-      ဒါပေမယ့် writing ကို အလိုအလျောက် Complete မလုပ်ပါ
-    </div>
-
-
-    <div class="btn-row">
-
-      <button
-        class="btn"
-        id="useSavedText"
-      >
-        Use Saved Text
-      </button>
-
-      <button
-        class="btn btn-primary"
-        id="completeWriting"
-      >
-        Complete Writing
-      </button>
-
-    </div>
-
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-mark">369</div>
+    <h1>369</h1>
+    <p>Write It • Feel It • Believe It</p>
   </div>
 
+  <nav class="nav">
+    <button data-view="dashboard" class="active"><span class="nav-icon">⌂</span>Dashboard</button>
+    <button data-view="practice"><span class="nav-icon">✍</span>369 Practice</button>
+    <button data-view="notes"><span class="nav-icon">📝</span>My 369 Notes</button>
+    <button data-view="library"><span class="nav-icon">✨</span>Manifest Library</button>
+    <button data-view="builder"><span class="nav-icon">⚡</span>Manifest Builder</button>
+    <button data-view="goals"><span class="nav-icon">🎯</span>My Goals</button>
+    <button data-view="journey"><span class="nav-icon">🧭</span>My Journey</button>
+    <button data-view="progress"><span class="nav-icon">📊</span>Progress</button>
+    <button data-view="achievements"><span class="nav-icon">🏆</span>Achievements</button>
+    <button data-view="gratitude"><span class="nav-icon">🙏</span>Gratitude</button>
+    <button data-view="visualization"><span class="nav-icon">👁</span>Visualization</button>
+    <button data-view="journal"><span class="nav-icon">📔</span>Journal</button>
+    <button data-view="history"><span class="nav-icon">📅</span>History</button>
+    <button data-view="guide"><span class="nav-icon">❔</span>How 369 Works</button>
+    <button data-view="settings"><span class="nav-icon">⚙</span>Settings</button>
+  </nav>
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+  <div>
+    <div class="topbar-title" id="topTitle">Dashboard</div>
+    <div class="topbar-date" id="topDate"></div>
+  </div>
+
+  <button class="btn btn-small btn-primary" data-view="practice">
+    ✍ Start 369
+  </button>
+</header>
+
+<div class="content">
+
+<!-- DASHBOARD -->
+<section id="view-dashboard" class="view active"></section>
+
+<!-- PRACTICE -->
+<section id="view-practice" class="view"></section>
+
+<!-- NOTES -->
+<section id="view-notes" class="view"></section>
+
+<!-- LIBRARY -->
+<section id="view-library" class="view"></section>
+
+<!-- BUILDER -->
+<section id="view-builder" class="view"></section>
+
+<!-- GOALS -->
+<section id="view-goals" class="view"></section>
+
+<!-- JOURNEY -->
+<section id="view-journey" class="view"></section>
+
+<!-- PROGRESS -->
+<section id="view-progress" class="view"></section>
+
+<!-- ACHIEVEMENTS -->
+<section id="view-achievements" class="view"></section>
+
+<!-- GRATITUDE -->
+<section id="view-gratitude" class="view"></section>
+
+<!-- VISUALIZATION -->
+<section id="view-visualization" class="view"></section>
+
+<!-- JOURNAL -->
+<section id="view-journal" class="view"></section>
+
+<!-- HISTORY -->
+<section id="view-history" class="view"></section>
+
+<!-- GUIDE -->
+<section id="view-guide" class="view"></section>
+
+<!-- SETTINGS -->
+<section id="view-settings" class="view"></section>
+
+</div>
+</main>
 </div>
 
+<div class="mobile-nav">
+  <button data-view="dashboard" class="active">
+    <span class="nav-icon">⌂</span>Home
+  </button>
+  <button data-view="practice">
+    <span class="nav-icon">✍</span>Practice
+  </button>
+  <button data-view="notes">
+    <span class="nav-icon">📝</span>Notes
+  </button>
+  <button data-view="progress">
+    <span class="nav-icon">📊</span>Progress
+  </button>
+  <button data-view="settings">
+    <span class="nav-icon">⚙</span>Settings
+  </button>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="modal"></div>
+</div>
 
 <div class="toast" id="toast"></div>
-
 
 <script>
 "use strict";
 
 /* =========================================================
-   369 MANIFESTATION JOURNAL
-   VERSION 5
+   369 V5.1
+   Notes -> Copy -> Morning 3 / Afternoon 6 / Evening 9
    ========================================================= */
 
-const STORAGE_KEY = "369_manifestation_journal_v5";
+const STORAGE_KEY = "369_manifest_app_v5_1";
 
-const DEFAULT_STATE = {
-  version: 5,
-
-  notes: [],
-
-  practices: {},
-
-  journals: {},
-
-  settings: {
-    reminder: false
+const SESSION_CONFIG = {
+  morning:{
+    label:"Morning",
+    my:"မနက်ပိုင်း",
+    icon:"🌅",
+    target:3,
+    className:"morning"
+  },
+  afternoon:{
+    label:"Afternoon",
+    my:"နေ့လယ်ပိုင်း",
+    icon:"☀️",
+    target:6,
+    className:"afternoon"
+  },
+  evening:{
+    label:"Evening",
+    my:"ညပိုင်း",
+    icon:"🌙",
+    target:9,
+    className:"evening"
   }
 };
 
+const VIEW_TITLES = {
+  dashboard:"Dashboard",
+  practice:"369 Practice",
+  notes:"My 369 Notes",
+  library:"Manifest Library",
+  builder:"Manifest Builder",
+  goals:"My Goals",
+  journey:"My Journey",
+  progress:"Progress",
+  achievements:"Achievements",
+  gratitude:"Gratitude",
+  visualization:"Visualization",
+  journal:"Journal",
+  history:"History",
+  guide:"How 369 Works",
+  settings:"Settings"
+};
+
+const DEFAULT_STATE = {
+  version:"5.1",
+  notes:[],
+  selectedNoteId:null,
+  practices:{},
+  goals:[],
+  gratitude:{},
+  journal:{},
+  vision:{
+    vision:"",
+    futureSelf:""
+  },
+  settings:{
+    language:"my",
+    reminder:false,
+    journeyStart:"",
+    theme:"dark"
+  }
+};
 
 let state = loadState();
-
-let currentSession = null;
-
-
-/* =========================================================
-   HELPERS
-   ========================================================= */
+let currentView = "dashboard";
+let currentDate = todayKey();
+let activeWriting = null;
+let visualizationTimer = null;
+let toastTimer = null;
 
 function clone(obj){
   return JSON.parse(JSON.stringify(obj));
 }
 
-
 function loadState(){
-
   try{
-
     const raw = localStorage.getItem(STORAGE_KEY);
 
     if(!raw){
@@ -2081,1823 +1216,2514 @@ function loadState(){
     const parsed = JSON.parse(raw);
 
     return normalizeState(parsed);
-
-  }catch(error){
-
-    console.error(error);
-
+  }catch(err){
+    console.error(err);
     return clone(DEFAULT_STATE);
-
   }
-
 }
 
-
-function normalizeState(data){
-
+function normalizeState(s){
   const base = clone(DEFAULT_STATE);
 
-  if(!data || typeof data !== "object"){
+  if(!s || typeof s !== "object"){
     return base;
   }
 
-  base.version = 5;
+  base.version = "5.1";
 
-  if(Array.isArray(data.notes)){
-    base.notes = data.notes;
+  if(Array.isArray(s.notes)){
+    base.notes = s.notes.map(n => ({
+      id:String(n.id || uid()),
+      title:String(n.title || "My Affirmation"),
+      category:String(n.category || "Personal"),
+      text:String(n.text || ""),
+      favorite:Boolean(n.favorite),
+      createdAt:n.createdAt || new Date().toISOString(),
+      updatedAt:n.updatedAt || n.createdAt || new Date().toISOString()
+    })).filter(n => n.text.trim());
   }
 
-  if(data.practices && typeof data.practices === "object"){
-    base.practices = data.practices;
+  base.selectedNoteId = s.selectedNoteId || null;
+
+  if(s.practices && typeof s.practices === "object"){
+    base.practices = s.practices;
   }
 
-  if(data.journals && typeof data.journals === "object"){
-    base.journals = data.journals;
+  if(Array.isArray(s.goals)){
+    base.goals = s.goals;
   }
 
-  if(data.settings && typeof data.settings === "object"){
+  if(s.gratitude && typeof s.gratitude === "object"){
+    base.gratitude = s.gratitude;
+  }
+
+  if(s.journal && typeof s.journal === "object"){
+    base.journal = s.journal;
+  }
+
+  if(s.vision && typeof s.vision === "object"){
+    base.vision = {
+      vision:String(s.vision.vision || ""),
+      futureSelf:String(s.vision.futureSelf || "")
+    };
+  }
+
+  if(s.settings && typeof s.settings === "object"){
     base.settings = {
       ...base.settings,
-      ...data.settings
+      ...s.settings
     };
   }
 
   return base;
 }
 
-
-function saveState(){
-
+function save(){
   try{
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(state)
-    );
-
-  }catch(error){
-
-    console.error(error);
-
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+  }catch(err){
+    console.error(err);
     showToast("Data save မအောင်မြင်ပါ");
-
   }
-
 }
 
-
-function todayKey(){
-
-  const d = new Date();
-
-  const y = d.getFullYear();
-
-  const m = String(d.getMonth()+1).padStart(2,"0");
-
-  const day = String(d.getDate()).padStart(2,"0");
-
-  return `${y}-${m}-${day}`;
-
+function uid(){
+  return Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8);
 }
 
+function todayKey(date=new Date()){
+  const y=date.getFullYear();
+  const m=String(date.getMonth()+1).padStart(2,"0");
+  const d=String(date.getDate()).padStart(2,"0");
+  return `${y}-${m}-${d}`;
+}
 
-function escapeHTML(value){
+function parseDate(key){
+  const [y,m,d]=key.split("-").map(Number);
+  return new Date(y,m-1,d);
+}
 
+function addDays(date,n){
+  const d=new Date(date);
+  d.setDate(d.getDate()+n);
+  return d;
+}
+
+function formatDate(key){
+  try{
+    return new Intl.DateTimeFormat("my-MM",{
+      weekday:"short",
+      year:"numeric",
+      month:"long",
+      day:"numeric"
+    }).format(parseDate(key));
+  }catch(e){
+    return key;
+  }
+}
+
+function escapeHtml(value){
   return String(value ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
-
 }
 
-
-function normalizeText(value){
-
-  return String(value ?? "")
-    .replace(/\s+/g," ")
-    .trim();
-
-}
-
-
-function uid(prefix="id"){
-
-  return prefix + "_" +
-    Date.now().toString(36) +
-    Math.random().toString(36).slice(2,8);
-
-}
-
-
-function getTodayPractice(){
-
-  const key = todayKey();
-
-  if(!state.practices[key]){
-
-    state.practices[key] = {
-      date:key,
-
+function getPractice(dateKey=currentDate){
+  if(!state.practices[dateKey]){
+    state.practices[dateKey] = {
       morning:{
-        affirmation:"",
-        count:0
+        text:"",
+        writings:[],
+        note:"",
+        completed:false
       },
-
       afternoon:{
-        affirmation:"",
-        count:0
+        text:"",
+        writings:[],
+        note:"",
+        completed:false
       },
-
       evening:{
-        affirmation:"",
-        count:0
+        text:"",
+        writings:[],
+        note:"",
+        completed:false
       },
-
-      reflection:"",
-
+      dailyNote:"",
       updatedAt:new Date().toISOString()
-
     };
-
   }
 
-  return state.practices[key];
+  const p=state.practices[dateKey];
 
-}
-
-
-function totalForPractice(p){
-
-  if(!p) return 0;
-
-  return (
-    Number(p.morning?.count || 0) +
-    Number(p.afternoon?.count || 0) +
-    Number(p.evening?.count || 0)
-  );
-
-}
-
-
-function isComplete(p){
-
-  if(!p) return false;
-
-  return (
-    Number(p.morning?.count || 0) >= 3 &&
-    Number(p.afternoon?.count || 0) >= 6 &&
-    Number(p.evening?.count || 0) >= 9
-  );
-
-}
-
-
-function showToast(message){
-
-  const el = document.getElementById("toast");
-
-  if(!el) return;
-
-  el.textContent = message;
-
-  el.classList.add("show");
-
-  clearTimeout(showToast.timer);
-
-  showToast.timer = setTimeout(()=>{
-    el.classList.remove("show");
-  },2500);
-
-}
-
-
-function formatDate(){
-
-  const d = new Date();
-
-  return d.toLocaleDateString(
-    "en-US",
-    {
-      weekday:"long",
-      year:"numeric",
-      month:"long",
-      day:"numeric"
+  Object.keys(SESSION_CONFIG).forEach(key=>{
+    if(!p[key]){
+      p[key]={
+        text:"",
+        writings:[],
+        note:"",
+        completed:false
+      };
     }
-  );
 
+    if(!Array.isArray(p[key].writings)){
+      p[key].writings=[];
+    }
+
+    if(typeof p[key].text!=="string"){
+      p[key].text="";
+    }
+
+    if(typeof p[key].note!=="string"){
+      p[key].note="";
+    }
+
+    p[key].completed =
+      p[key].writings.length >= SESSION_CONFIG[key].target;
+  });
+
+  if(typeof p.dailyNote!=="string"){
+    p.dailyNote="";
+  }
+
+  return p;
 }
 
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-
-const titles = {
-
-  dashboard:"Dashboard",
-
-  practice:"369 Practice",
-
-  notes:"My Affirmations",
-
-  guide:"How 369 Works",
-
-  history:"History",
-
-  journal:"Journal",
-
-  settings:"Settings"
-
-};
-
-
-function openView(view){
-
-  document.querySelectorAll(".view")
-    .forEach(v=>{
-      v.classList.toggle(
-        "active",
-        v.id === `view-${view}`
-      );
-    });
-
-
-  document.querySelectorAll("[data-view]")
-    .forEach(btn=>{
-      btn.classList.toggle(
-        "active",
-        btn.dataset.view === view
-      );
-    });
-
-
-  const title =
-    document.getElementById("pageTitle");
-
-  if(title){
-    title.textContent =
-      titles[view] || "369";
-  }
-
-
-  document.getElementById("sidebar")
-    ?.classList.remove("open");
-
-
-  if(view === "dashboard"){
-    renderDashboard();
-  }
-
-  if(view === "practice"){
-    renderPractice();
-  }
-
-  if(view === "notes"){
-    renderNotes();
-  }
-
-  if(view === "history"){
-    renderHistory();
-  }
-
-  if(view === "journal"){
-    renderJournal();
-  }
-
+function sessionProgress(dateKey,key){
+  const p=getPractice(dateKey)[key];
+  const target=SESSION_CONFIG[key].target;
+  return Math.min(p.writings.length,target);
 }
 
+function dayTotal(dateKey){
+  const p=getPractice(dateKey);
 
-document.querySelectorAll("[data-view]")
-  .forEach(btn=>{
+  return Object.keys(SESSION_CONFIG)
+    .reduce((sum,key)=>sum+sessionProgress(dateKey,key),0);
+}
 
-    btn.addEventListener("click",()=>{
+function isDayComplete(dateKey){
+  return Object.keys(SESSION_CONFIG)
+    .every(key=>sessionProgress(dateKey,key)===SESSION_CONFIG[key].target);
+}
 
-      openView(btn.dataset.view);
-
-    });
-
-  });
-
-
-document.querySelectorAll("[data-go]")
-  .forEach(btn=>{
-
-    btn.addEventListener("click",()=>{
-
-      openView(btn.dataset.go);
-
-    });
-
-  });
-
-
-document.getElementById("mobileMenu")
-  .addEventListener("click",()=>{
-
-    document.getElementById("sidebar")
-      .classList.toggle("open");
-
-  });
-
-
-document.getElementById("quickPractice")
-  .addEventListener("click",()=>{
-    openView("practice");
-  });
-
-
-document.getElementById("dashPractice")
-  .addEventListener("click",()=>{
-    openView("practice");
-  });
-
-
-document.getElementById("dashGuide")
-  .addEventListener("click",()=>{
-    openView("guide");
-  });
-
-
-/* =========================================================
-   DASHBOARD
-   ========================================================= */
-
-function getAllPracticeKeys(){
-
+function completedDays(){
   return Object.keys(state.practices)
-    .sort();
-
-}
-
-
-function getTotalWritings(){
-
-  return getAllPracticeKeys()
-    .reduce((sum,key)=>{
-
-      return sum +
-        totalForPractice(state.practices[key]);
-
-    },0);
-
-}
-
-
-function getCompletedDays(){
-
-  return getAllPracticeKeys()
-    .filter(key=>isComplete(state.practices[key]))
+    .filter(k=>isDayComplete(k))
     .length;
-
 }
 
+function totalWritings(){
+  return Object.keys(state.practices).reduce((sum,date)=>{
+    const p=getPractice(date);
 
-function calculateStreak(){
+    return sum+
+      p.morning.writings.length+
+      p.afternoon.writings.length+
+      p.evening.writings.length;
+  },0);
+}
 
-  let streak = 0;
+function currentStreak(){
+  let d=parseDate(todayKey());
+  let key=todayKey();
 
-  const d = new Date();
-
-  const today = todayKey();
-
-  const todayPractice =
-    state.practices[today];
-
-  if(!isComplete(todayPractice)){
-
-    d.setDate(d.getDate()-1);
-
+  if(!isDayComplete(key)){
+    d=addDays(d,-1);
   }
 
+  let count=0;
 
   while(true){
+    key=todayKey(d);
 
-    const key =
-      d.getFullYear() +
-      "-" +
-      String(d.getMonth()+1).padStart(2,"0") +
-      "-" +
-      String(d.getDate()).padStart(2,"0");
+    if(!isDayComplete(key)) break;
 
-    const p = state.practices[key];
+    count++;
+    d=addDays(d,-1);
 
-    if(!isComplete(p)){
-      break;
-    }
-
-    streak++;
-
-    d.setDate(d.getDate()-1);
-
+    if(count>5000) break;
   }
 
-  return streak;
-
+  return count;
 }
 
+function longestStreak(){
+  const dates=Object.keys(state.practices)
+    .filter(isDayComplete)
+    .sort();
 
-function calculateBestStreak(){
+  let longest=0;
+  let run=0;
+  let previous=null;
 
-  const keys =
-    getAllPracticeKeys()
-      .filter(key=>isComplete(state.practices[key]));
+  dates.forEach(key=>{
+    if(previous){
+      const diff=(parseDate(key)-parseDate(previous))/86400000;
 
-  if(!keys.length) return 0;
-
-  let best = 0;
-  let current = 0;
-  let previous = null;
-
-  keys.forEach(key=>{
-
-    if(!previous){
-
-      current = 1;
-
-    }else{
-
-      const a = new Date(previous);
-      const b = new Date(key);
-
-      const diff =
-        Math.round(
-          (b-a)/(1000*60*60*24)
-        );
-
-      if(diff === 1){
-        current++;
+      if(diff===1){
+        run++;
       }else{
-        current = 1;
+        run=1;
       }
-
+    }else{
+      run=1;
     }
 
-    best = Math.max(best,current);
-
-    previous = key;
-
+    longest=Math.max(longest,run);
+    previous=key;
   });
 
-  return best;
-
+  return longest;
 }
 
+function showToast(message){
+  const el=document.getElementById("toast");
 
-function updateProgressBar(id,count,total){
+  clearTimeout(toastTimer);
 
-  const el = document.getElementById(id);
+  el.textContent=message;
+  el.classList.add("show");
 
-  if(!el) return;
-
-  const percent =
-    Math.min(100,(count/total)*100);
-
-  el.style.width = percent + "%";
-
+  toastTimer=setTimeout(()=>{
+    el.classList.remove("show");
+  },2600);
 }
 
+function setView(view){
+  if(!VIEW_TITLES[view]) return;
+
+  currentView=view;
+
+  document.querySelectorAll(".view").forEach(v=>{
+    v.classList.toggle("active",v.id==="view-"+view);
+  });
+
+  document.querySelectorAll("[data-view]").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.view===view);
+  });
+
+  document.getElementById("topTitle").textContent=VIEW_TITLES[view];
+
+  renderView(view);
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+function renderView(view){
+  switch(view){
+    case"dashboard":renderDashboard();break;
+    case"practice":renderPractice();break;
+    case"notes":renderNotes();break;
+    case"library":renderLibrary();break;
+    case"builder":renderBuilder();break;
+    case"goals":renderGoals();break;
+    case"journey":renderJourney();break;
+    case"progress":renderProgress();break;
+    case"achievements":renderAchievements();break;
+    case"gratitude":renderGratitude();break;
+    case"visualization":renderVisualization();break;
+    case"journal":renderJournal();break;
+    case"history":renderHistory();break;
+    case"guide":renderGuide();break;
+    case"settings":renderSettings();break;
+  }
+}
 
 function renderDashboard(){
+  const p=getPractice(currentDate);
+  const total=dayTotal(currentDate);
 
-  const p = getTodayPractice();
+  const sessions=Object.keys(SESSION_CONFIG).map(key=>{
+    const c=SESSION_CONFIG[key];
+    const count=sessionProgress(currentDate,key);
 
-  const total = totalForPractice(p);
+    return `
+      <div class="card">
+        <div class="card-head">
+          <div class="session-label">
+            <div class="session-icon">${c.icon}</div>
+            <div>
+              <div class="card-title">${c.my}</div>
+              <div class="card-subtitle">${c.label}</div>
+            </div>
+          </div>
+          <span class="target-badge">${count}/${c.target}</span>
+        </div>
 
-  document.getElementById("statToday")
-    .textContent = `${total} / 18`;
+        <div class="progress">
+          <span style="width:${count/c.target*100}%"></span>
+        </div>
 
-  document.getElementById("statStreak")
-    .textContent = calculateStreak();
+        <div class="session-preview">
+          ${escapeHtml(p[key].text || "ဒီ session အတွက် affirmation မထည့်ရသေးပါ")}
+        </div>
 
-  document.getElementById("statDays")
-    .textContent = getCompletedDays();
+        <div class="btn-row" style="margin-top:12px">
+          <button class="btn btn-small btn-primary"
+            data-action="open-writing"
+            data-session="${key}">
+            ${count>=c.target?"Completed":"Continue Writing"}
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
 
-  document.getElementById("statTotal")
-    .textContent = getTotalWritings();
+  document.getElementById("view-dashboard").innerHTML=`
+    <div class="hero">
+      <div class="eyebrow">Daily 369 Practice</div>
+      <h2>Write It. Feel It. Build It.</h2>
+      <p>
+        Notes ထဲမှာသိမ်းထားတဲ့ affirmation ကို
+        Morning, Afternoon, Evening အတွက် copy လုပ်ပြီး
+        တစ်နေ့တာ 18 writings ကို ပြီးအောင်လုပ်နိုင်ပါတယ်
+      </p>
 
+      <div class="btn-row" style="margin-top:18px">
+        <button class="btn btn-primary" data-view="practice">✍ Continue 369 Practice</button>
+        <button class="btn" data-view="notes">📝 My 369 Notes</button>
+      </div>
+    </div>
 
-  const sessions = [
-    ["morning",3],
-    ["afternoon",6],
-    ["evening",9]
-  ];
+    <div class="grid grid-4" style="margin-bottom:16px">
+      <div class="card stat">
+        <div class="stat-label">Today</div>
+        <div class="stat-value">${total}/18</div>
+        <div class="stat-small">${isDayComplete(currentDate)?"Day Complete ✓":"Keep going"}</div>
+      </div>
 
+      <div class="card stat">
+        <div class="stat-label">Current Streak</div>
+        <div class="stat-value">${currentStreak()}</div>
+        <div class="stat-small">days</div>
+      </div>
 
-  sessions.forEach(([name,max])=>{
+      <div class="card stat">
+        <div class="stat-label">Completed Days</div>
+        <div class="stat-value">${completedDays()}</div>
+        <div class="stat-small">all time</div>
+      </div>
 
-    const count =
-      Number(p[name]?.count || 0);
+      <div class="card stat">
+        <div class="stat-label">Total Writings</div>
+        <div class="stat-value">${totalWritings()}</div>
+        <div class="stat-small">repetitions</div>
+      </div>
+    </div>
 
-    const text =
-      p[name]?.affirmation ||
-      "No affirmation yet";
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Today — ${escapeHtml(formatDate(currentDate))}</div>
+          <div class="card-subtitle">Session တစ်ခုချင်းစီမှာ affirmation မတူလည်းရပါတယ်</div>
+        </div>
+        <span class="target-badge">${total}/18</span>
+      </div>
 
-    const countEl =
-      document.getElementById(
-        `dash${capitalize(name)}Count`
-      );
+      <div class="progress">
+        <span style="width:${total/18*100}%"></span>
+      </div>
 
-    const progressEl =
-      document.getElementById(
-        `dash${capitalize(name)}Progress`
-      );
+      <div class="session-grid" style="margin-top:16px">
+        ${sessions}
+      </div>
+    </div>
 
-    const textEl =
-      document.getElementById(
-        `dash${capitalize(name)}Text`
-      );
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Today's Daily Reflection</div>
+            <div class="card-subtitle">တစ်နေ့တာအတွေးကို သိမ်းထားပါ</div>
+          </div>
+        </div>
 
-    if(countEl){
-      countEl.textContent =
-        `${count} / ${max}`;
-    }
+        <textarea
+          data-action="daily-note"
+          placeholder="ဒီနေ့ ဘာကိုခံစားမိလဲ၊ ဘာတွေကောင်းခဲ့လဲ...">${escapeHtml(p.dailyNote)}</textarea>
+      </div>
 
-    if(textEl){
-      textEl.textContent = text;
-    }
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Quick Actions</div>
+            <div class="card-subtitle">369 routine ကို မြန်မြန်စတင်ပါ</div>
+          </div>
+        </div>
 
-    if(progressEl){
+        <div class="btn-row">
+          <button class="btn btn-primary" data-view="notes">📝 Create Affirmation</button>
+          <button class="btn" data-view="gratitude">🙏 Gratitude</button>
+          <button class="btn" data-view="visualization">👁 Visualize</button>
+          <button class="btn" data-view="history">📅 History</button>
+        </div>
+      </div>
+    </div>
+  `;
 
-      progressEl.style.width =
-        Math.min(100,(count/max)*100) + "%";
-
-    }
-
-  });
-
-
-  const journal =
-    state.journals[todayKey()];
-
-
-  const dashNotes =
-    document.getElementById("dashNotes");
-
-
-  if(journal &&
-    (
-      journal.gratitude ||
-      journal.notes ||
-      journal.reflection ||
-      journal.action
-    )
-  ){
-
-    const items = [];
-
-    if(journal.gratitude){
-      items.push("🙏 " + journal.gratitude);
-    }
-
-    if(journal.notes){
-      items.push("📝 " + journal.notes);
-    }
-
-    if(journal.reflection){
-      items.push("🔎 " + journal.reflection);
-    }
-
-    if(journal.action){
-      items.push("🎯 " + journal.action);
-    }
-
-    dashNotes.innerHTML =
-      escapeHTML(items.join(" · "));
-
-  }else{
-
-    dashNotes.textContent =
-      "No notes or reflections yet";
-
-  }
-
+  bindAutosave();
 }
-
-
-function capitalize(value){
-
-  return value.charAt(0).toUpperCase() +
-    value.slice(1);
-
-}
-
-
-/* =========================================================
-   PRACTICE
-   ========================================================= */
 
 function renderPractice(){
+  const p=getPractice(currentDate);
 
-  const p = getTodayPractice();
+  const sessionHtml=Object.keys(SESSION_CONFIG).map(key=>{
+    const c=SESSION_CONFIG[key];
+    const s=p[key];
+    const count=sessionProgress(currentDate,key);
+    const selectedNote=state.notes.find(n=>n.id===state.selectedNoteId);
 
+    return `
+      <div class="card session ${c.className}">
+        <div class="card-head">
+          <div class="session-label">
+            <div class="session-icon">${c.icon}</div>
+            <div>
+              <div class="card-title">${c.my}</div>
+              <div class="card-subtitle">${c.label} affirmation</div>
+            </div>
+          </div>
 
-  document.getElementById("morningAffirmation")
-    .value =
-      p.morning.affirmation || "";
+          <span class="target-badge">${count}/${c.target}</span>
+        </div>
 
+        <div class="field">
+          <label>
+            ${c.label} Affirmation
+          </label>
 
-  document.getElementById("afternoonAffirmation")
-    .value =
-      p.afternoon.affirmation || "";
+          <textarea
+            data-action="session-text"
+            data-session="${key}"
+            placeholder="Notes ထဲက affirmation ကို Copy လုပ်ပြီး ဒီမှာထည့်ပါ">${escapeHtml(s.text)}</textarea>
+        </div>
 
+        <div class="select-note">
+          <select data-action="copy-note-select" data-session="${key}">
+            <option value="">📝 My 369 Notes ထဲက affirmation ရွေးပါ</option>
+            ${state.notes.map(n=>`
+              <option value="${escapeHtml(n.id)}">
+                ${escapeHtml(n.title)} — ${escapeHtml(n.text.slice(0,55))}
+              </option>
+            `).join("")}
+          </select>
+        </div>
 
-  document.getElementById("eveningAffirmation")
-    .value =
-      p.evening.affirmation || "";
+        <div class="btn-row" style="margin-top:9px">
+          <button
+            class="btn btn-small"
+            data-action="use-selected-note"
+            data-session="${key}">
+            📋 Use Selected Note
+          </button>
 
+          ${selectedNote ? `
+            <button
+              class="btn btn-small btn-purple"
+              data-action="copy-selected-note"
+              data-session="${key}">
+              ✨ Copy “${escapeHtml(selectedNote.title)}”
+            </button>
+          `:""}
+        </div>
 
-  document.getElementById("practiceReflection")
-    .value =
-      p.reflection || "";
+        <div class="progress-wrap">
+          <div class="progress-info">
+            <span>Writing Progress</span>
+            <strong>${count}/${c.target}</strong>
+          </div>
 
+          <div class="progress">
+            <span style="width:${count/c.target*100}%"></span>
+          </div>
+        </div>
 
-  renderSessionCard(
-    "morning",
-    3,
-    "practiceMorningCount",
-    "practiceMorningProgress",
-    "practiceMorningPreview"
-  );
+        <div class="btn-row">
+          <button
+            class="btn btn-primary"
+            data-action="open-writing"
+            data-session="${key}"
+            ${!s.text.trim()?"disabled":""}>
+            ${count>=c.target?"✓ Session Complete":"✍ Start Writing"}
+          </button>
 
+          ${count>0 && count<c.target ? `
+            <button
+              class="btn btn-small btn-danger"
+              data-action="reset-session"
+              data-session="${key}">
+              Reset
+            </button>
+          `:""}
+        </div>
 
-  renderSessionCard(
-    "afternoon",
-    6,
-    "practiceAfternoonCount",
-    "practiceAfternoonProgress",
-    "practiceAfternoonPreview"
-  );
+        <div class="reflection">
+          <label>Notes / Reflection — ${c.label}</label>
 
+          <textarea
+            data-action="session-note"
+            data-session="${key}"
+            placeholder="${c.label} ပြီးတဲ့နောက် ကိုယ့်အတွေးကိုရေးပါ">${escapeHtml(s.note)}</textarea>
+        </div>
+      </div>
+    `;
+  }).join("");
 
-  renderSessionCard(
-    "evening",
-    9,
-    "practiceEveningCount",
-    "practiceEveningProgress",
-    "practiceEveningPreview"
-  );
+  const total=dayTotal(currentDate);
 
-}
+  document.getElementById("view-practice").innerHTML=`
+    <div class="hero">
+      <div class="eyebrow">369 Writing Practice</div>
+      <h2>Today’s Practice</h2>
+      <p>
+        Notes ထဲက affirmation ကို session တစ်ခုချင်းစီမှာ
+        copy လုပ်ပြီး လက်နဲ့ပြန်ရေးနိုင်ပါတယ်
+        တစ်နေ့တည်းမှာ Morning / Afternoon / Evening စာမတူလည်းရပါတယ်
+      </p>
 
+      <div class="grid grid-4" style="margin-top:20px">
+        <div>
+          <div class="stat-label">Morning</div>
+          <div class="stat-value" style="font-size:25px">${sessionProgress(currentDate,"morning")}/3</div>
+        </div>
+        <div>
+          <div class="stat-label">Afternoon</div>
+          <div class="stat-value" style="font-size:25px">${sessionProgress(currentDate,"afternoon")}/6</div>
+        </div>
+        <div>
+          <div class="stat-label">Evening</div>
+          <div class="stat-value" style="font-size:25px">${sessionProgress(currentDate,"evening")}/9</div>
+        </div>
+        <div>
+          <div class="stat-label">Total</div>
+          <div class="stat-value" style="font-size:25px">${total}/18</div>
+        </div>
+      </div>
+    </div>
 
-function renderSessionCard(
-  session,
-  max,
-  countId,
-  progressId,
-  previewId
-){
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Practice Date</div>
+          <div class="card-subtitle">${escapeHtml(formatDate(currentDate))}</div>
+        </div>
 
-  const p = getTodayPractice();
+        <input
+          id="practiceDate"
+          type="date"
+          value="${currentDate}"
+          style="max-width:170px"
+        >
+      </div>
+    </div>
 
-  const count =
-    Number(p[session]?.count || 0);
+    <div class="session-grid">
+      ${sessionHtml}
+    </div>
 
-  const affirmation =
-    p[session]?.affirmation || "";
+    <div class="card" style="margin-top:16px">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Daily Notes / Reflection</div>
+          <div class="card-subtitle">
+            Session တစ်ခုချင်းစီအပြင် တစ်နေ့လုံးအတွက် note တစ်ခုရေးနိုင်ပါတယ်
+          </div>
+        </div>
+      </div>
 
+      <textarea
+        data-action="daily-note"
+        placeholder="ဒီနေ့ရဲ့ overall reflection...">${escapeHtml(p.dailyNote)}</textarea>
+    </div>
 
-  document.getElementById(countId)
-    .textContent =
-      `${count} / ${max}`;
+    <div class="card" style="margin-top:16px">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Important</div>
+          <div class="card-subtitle">
+            Affirmation တစ်ခုတည်းကို 3/6/9 session အားလုံးမှာ သုံးချင်ရင်
+            Notes ထဲက affirmation ကို session တစ်ခုချင်းစီမှာ Copy လုပ်ပါ
+          </div>
+        </div>
+      </div>
 
+      <div class="quote">
+        📝 Notes → Copy → Morning 3 → Afternoon 6 → Evening 9
+      </div>
+    </div>
+  `;
 
-  document.getElementById(progressId)
-    .style.width =
-      Math.min(100,(count/max)*100) + "%";
-
-
-  document.getElementById(previewId)
-    .textContent =
-      affirmation ||
-      "Affirmation ထည့်ပါ";
-
-}
-
-
-document.getElementById("savePractice")
-  .addEventListener("click",()=>{
-
-    const p = getTodayPractice();
-
-
-    p.morning.affirmation =
-      document.getElementById(
-        "morningAffirmation"
-      ).value.trim();
-
-
-    p.afternoon.affirmation =
-      document.getElementById(
-        "afternoonAffirmation"
-      ).value.trim();
-
-
-    p.evening.affirmation =
-      document.getElementById(
-        "eveningAffirmation"
-      ).value.trim();
-
-
-    p.updatedAt =
-      new Date().toISOString();
-
-
-    saveState();
-
+  document.getElementById("practiceDate").addEventListener("change",e=>{
+    currentDate=e.target.value || todayKey();
     renderPractice();
-
-    renderDashboard();
-
-    showToast(
-      "Today's 3 / 6 / 9 affirmations saved"
-    );
-
   });
 
-
-document.getElementById("saveReflection")
-  .addEventListener("click",()=>{
-
-    const p = getTodayPractice();
-
-    p.reflection =
-      document.getElementById(
-        "practiceReflection"
-      ).value.trim();
-
-    p.updatedAt =
-      new Date().toISOString();
-
-    saveState();
-
-    renderDashboard();
-
-    showToast(
-      "Reflection saved"
-    );
-
-  });
-
-
-/* =========================================================
-   START SESSION
-   ========================================================= */
-
-document.querySelectorAll("[data-session]")
-  .forEach(btn=>{
-
-    btn.addEventListener("click",()=>{
-
-      startWritingSession(
-        btn.dataset.session
-      );
-
-    });
-
-  });
-
-
-function startWritingSession(session){
-
-  const p = getTodayPractice();
-
-  const affirmation =
-    p[session]?.affirmation || "";
-
-
-  if(!affirmation){
-
-    showToast(
-      "အရင်ဆုံး ဒီ session အတွက် affirmation ထည့်ပြီး Save Today လုပ်ပါ"
-    );
-
-    return;
-
-  }
-
-
-  const limits = {
-    morning:3,
-    afternoon:6,
-    evening:9
-  };
-
-
-  currentSession = {
-
-    session,
-
-    target:limits[session],
-
-    current:Number(
-      p[session].count || 0
-    )
-
-  };
-
-
-  document.getElementById("writingModal")
-    .classList.add("show");
-
-
-  document.getElementById("modalTitle")
-    .textContent =
-      `${capitalize(session)} Writing`;
-
-
-  document.getElementById("modalSubtitle")
-    .textContent =
-      `Complete ${limits[session]} writings`;
-
-
-  document.getElementById("writeSessionName")
-    .textContent =
-      capitalize(session);
-
-
-  document.getElementById("writeTarget")
-    .textContent =
-      affirmation;
-
-
-  document.getElementById("writeInput")
-    .value = "";
-
-
-  updateWritingModal();
-
+  bindAutosave();
 }
-
-
-function updateWritingModal(){
-
-  if(!currentSession) return;
-
-
-  const p = getTodayPractice();
-
-  const count =
-    Number(
-      p[currentSession.session].count || 0
-    );
-
-
-  currentSession.current = count;
-
-
-  const target =
-    currentSession.target;
-
-
-  document.getElementById("writeProgressText")
-    .textContent =
-      `${count} / ${target}`;
-
-
-  document.getElementById("writeProgress")
-    .style.width =
-      Math.min(100,(count/target)*100) + "%";
-
-
-  if(count >= target){
-
-    document.getElementById("modalSubtitle")
-      .textContent =
-        "Session completed ✓";
-
-    document.getElementById("completeWriting")
-      .textContent =
-        "Session Complete ✓";
-
-    return;
-
-  }
-
-
-  document.getElementById("modalSubtitle")
-    .textContent =
-      `Writing ${count+1} of ${target}`;
-
-
-  document.getElementById("completeWriting")
-    .textContent =
-      "Complete Writing";
-
-}
-
-
-document.getElementById("useSavedText")
-  .addEventListener("click",()=>{
-
-    if(!currentSession) return;
-
-    const p = getTodayPractice();
-
-    document.getElementById("writeInput")
-      .value =
-        p[currentSession.session]
-          .affirmation || "";
-
-    document.getElementById("writeInput")
-      .focus();
-
-  });
-
-
-document.getElementById("completeWriting")
-  .addEventListener("click",()=>{
-
-    if(!currentSession) return;
-
-
-    const p = getTodayPractice();
-
-    const session =
-      currentSession.session;
-
-    const target =
-      currentSession.target;
-
-    const current =
-      Number(p[session].count || 0);
-
-
-    if(current >= target){
-
-      showToast("ဒီ session ပြီးပါပြီ");
-
-      return;
-
-    }
-
-
-    const expected =
-      normalizeText(
-        p[session].affirmation
-      );
-
-    const typed =
-      normalizeText(
-        document.getElementById(
-          "writeInput"
-        ).value
-      );
-
-
-    if(!typed){
-
-      showToast(
-        "Affirmation ကို ကိုယ်တိုင်ရေးပါ"
-      );
-
-      return;
-
-    }
-
-
-    if(typed !== expected){
-
-      const confirmed =
-        confirm(
-          "ရေးထားတဲ့စာက saved affirmation နဲ့ မတူပါ\n\nဒီစာကိုပဲ writing အဖြစ် Complete လုပ်မလား?"
-        );
-
-      if(!confirmed){
-        return;
-      }
-
-    }
-
-
-    p[session].count =
-      Math.min(target,current+1);
-
-
-    p.updatedAt =
-      new Date().toISOString();
-
-
-    saveState();
-
-
-    document.getElementById("writeInput")
-      .value = "";
-
-
-    updateWritingModal();
-
-    renderPractice();
-
-    renderDashboard();
-
-
-    if(p[session].count >= target){
-
-      showToast(
-        `${capitalize(session)} session completed ✓`
-      );
-
-    }else{
-
-      showToast(
-        `Writing ${p[session].count} / ${target} completed`
-      );
-
-    }
-
-  });
-
-
-document.getElementById("closeModal")
-  .addEventListener("click",closeWritingModal);
-
-
-document.getElementById("writingModal")
-  .addEventListener("click",(event)=>{
-
-    if(event.target.id === "writingModal"){
-      closeWritingModal();
-    }
-
-  });
-
-
-function closeWritingModal(){
-
-  document.getElementById("writingModal")
-    .classList.remove("show");
-
-  currentSession = null;
-
-}
-
-
-/* =========================================================
-   AFFIRMATION LIBRARY
-   ========================================================= */
-
-document.getElementById("addNote")
-  .addEventListener("click",()=>{
-
-    const title =
-      document.getElementById("noteTitle")
-        .value.trim();
-
-    const category =
-      document.getElementById("noteCategory")
-        .value;
-
-    const text =
-      document.getElementById("noteText")
-        .value.trim();
-
-
-    if(!text){
-
-      showToast(
-        "Affirmation ရေးပါ"
-      );
-
-      return;
-
-    }
-
-
-    state.notes.unshift({
-
-      id:uid("note"),
-
-      title:title || "My Affirmation",
-
-      category,
-
-      text,
-
-      createdAt:new Date().toISOString()
-
-    });
-
-
-    saveState();
-
-
-    document.getElementById("noteTitle")
-      .value = "";
-
-    document.getElementById("noteText")
-      .value = "";
-
-
-    renderNotes();
-
-    showToast(
-      "Affirmation saved"
-    );
-
-  });
-
 
 function renderNotes(){
+  const query=(window.noteSearch || "").toLowerCase();
 
-  document.getElementById("noteCount")
-    .textContent =
-      state.notes.length;
+  const filtered=state.notes
+    .filter(n=>
+      !query ||
+      n.title.toLowerCase().includes(query) ||
+      n.text.toLowerCase().includes(query) ||
+      n.category.toLowerCase().includes(query)
+    )
+    .sort((a,b)=>{
+      if(a.favorite!==b.favorite) return b.favorite-a.favorite;
+      return new Date(b.updatedAt)-new Date(a.updatedAt);
+    });
 
+  document.getElementById("view-notes").innerHTML=`
+    <div class="section-title">My 369 Notes</div>
+    <div class="section-desc">
+      Affirmation ကို ဒီနေရာမှာ တစ်ခါရေးပြီး
+      Morning / Afternoon / Evening Practice ထဲကို ပြန် Copy လုပ်နိုင်ပါတယ်
+    </div>
 
-  const list =
-    document.getElementById("notesList");
-
-
-  if(!state.notes.length){
-
-    list.innerHTML =
-      `<div class="empty">
-        Affirmation မရှိသေးပါ
-      </div>`;
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-    state.notes.map(note=>{
-
-      return `
-        <div class="note-item">
-
-          <div class="note-item-head">
-
-            <div>
-              <h4>
-                ${escapeHTML(note.title)}
-              </h4>
-
-              <span class="tag">
-                ${escapeHTML(note.category)}
-              </span>
-            </div>
-
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Create New Affirmation</div>
+            <div class="card-subtitle">သင်နေ့စဉ်ပြန်ရေးချင်တဲ့စာကို သိမ်းထားပါ</div>
           </div>
-
-          <p>
-            ${escapeHTML(note.text)}
-          </p>
-
-          <div class="btn-row">
-
-            <button
-              class="btn btn-primary"
-              data-use-note="${escapeHTML(note.id)}"
-            >
-              Use Today
-            </button>
-
-            <button
-              class="btn btn-danger"
-              data-delete-note="${escapeHTML(note.id)}"
-            >
-              Delete
-            </button>
-
-          </div>
-
         </div>
-      `;
 
-    }).join("");
+        <div class="field">
+          <label>Title</label>
+          <input id="noteTitle" placeholder="ဥပမာ — Business Success">
+        </div>
 
+        <div class="field" style="margin-top:12px">
+          <label>Category</label>
+          <select id="noteCategory">
+            <option>Personal</option>
+            <option>Business</option>
+            <option>Money</option>
+            <option>Career</option>
+            <option>Love</option>
+            <option>Family</option>
+            <option>Health</option>
+            <option>Peace</option>
+            <option>Self Growth</option>
+          </select>
+        </div>
 
-  list.querySelectorAll("[data-use-note]")
-    .forEach(btn=>{
+        <div class="field" style="margin-top:12px">
+          <label>Affirmation</label>
+          <textarea id="noteText" placeholder="ဥပမာ — ကျွန်တော့်လုပ်ငန်းက တနေ့ထက်တနေ့ ပိုမိုတိုးတက်အောင်မြင်လာနေပါတယ်"></textarea>
+        </div>
 
-      btn.addEventListener("click",()=>{
+        <div class="btn-row" style="margin-top:12px">
+          <button class="btn btn-primary" data-action="add-note">＋ Save Affirmation</button>
+          <button class="btn" data-action="clear-note-form">Clear</button>
+        </div>
+      </div>
 
-        useNoteForToday(
-          btn.dataset.useNote
-        );
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">How to Use</div>
+            <div class="card-subtitle">Notes ကနေ Practice ထဲကို</div>
+          </div>
+        </div>
 
-      });
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <strong>Write</strong>
+              <div class="muted small">Affirmation တစ်ခုရေးပြီး Save လုပ်ပါ</div>
+            </div>
+          </div>
 
-    });
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <strong>Copy</strong>
+              <div class="muted small">Morning / Afternoon / Evening ကိုရွေးပြီး Copy လုပ်ပါ</div>
+            </div>
+          </div>
 
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <strong>Write Again</strong>
+              <div class="muted small">Session အလိုက် 3 / 6 / 9 ကြိမ်ပြန်ရေးပါ</div>
+            </div>
+          </div>
 
-  list.querySelectorAll("[data-delete-note]")
-    .forEach(btn=>{
+          <div class="step">
+            <div class="step-num">4</div>
+            <div>
+              <strong>Reflect</strong>
+              <div class="muted small">Session ပြီးတိုင်း Notes / Reflection ရေးပါ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      btn.addEventListener("click",()=>{
+    <div class="card" style="margin-top:16px">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Saved Affirmations — ${state.notes.length}</div>
+          <div class="card-subtitle">⭐ Favorite လုပ်ထားတာတွေ အပေါ်မှာပြပါမယ်</div>
+        </div>
 
-        deleteNote(
-          btn.dataset.deleteNote
-        );
+        <input
+          id="noteSearch"
+          class="search"
+          value="${escapeHtml(query)}"
+          placeholder="Search notes..."
+          style="max-width:240px;margin:0"
+        >
+      </div>
 
-      });
+      <div class="note-list">
+        ${
+          filtered.length
+          ? filtered.map(noteCard).join("")
+          : `<div class="empty">Affirmation မရှိသေးပါ<br><br>အပေါ်က form မှာ ပထမဆုံး affirmation တစ်ခုရေးပါ</div>`
+        }
+      </div>
+    </div>
+  `;
 
-    });
-
+  document.getElementById("noteSearch").addEventListener("input",e=>{
+    window.noteSearch=e.target.value;
+    renderNotes();
+  });
 }
 
+function noteCard(n){
+  return `
+    <div class="note-item ${n.favorite?"favorite":""}">
+      <div class="note-top">
+        <div>
+          <div class="note-title">
+            ${n.favorite?"⭐ ":""}${escapeHtml(n.title)}
+          </div>
+          <span class="note-category">${escapeHtml(n.category)}</span>
+        </div>
+      </div>
 
-function useNoteForToday(id){
+      <div class="note-text">${escapeHtml(n.text)}</div>
 
-  const note =
-    state.notes.find(n=>n.id === id);
+      <div class="note-actions">
+        <button class="btn btn-small btn-primary"
+          data-action="note-copy"
+          data-id="${escapeHtml(n.id)}">
+          📋 Copy
+        </button>
 
-  if(!note) return;
+        <button class="btn btn-small"
+          data-action="note-use-morning"
+          data-id="${escapeHtml(n.id)}">
+          🌅 Morning
+        </button>
 
+        <button class="btn btn-small"
+          data-action="note-use-afternoon"
+          data-id="${escapeHtml(n.id)}">
+          ☀️ Afternoon
+        </button>
 
-  openView("practice");
+        <button class="btn btn-small"
+          data-action="note-use-evening"
+          data-id="${escapeHtml(n.id)}">
+          🌙 Evening
+        </button>
 
+        <button class="btn btn-small"
+          data-action="favorite-note"
+          data-id="${escapeHtml(n.id)}">
+          ${n.favorite?"★ Unfavorite":"☆ Favorite"}
+        </button>
 
-  const p = getTodayPractice();
+        <button class="btn btn-small"
+          data-action="edit-note"
+          data-id="${escapeHtml(n.id)}">
+          Edit
+        </button>
 
+        <button class="btn btn-small btn-danger"
+          data-action="delete-note"
+          data-id="${escapeHtml(n.id)}">
+          Delete
+        </button>
+      </div>
+    </div>
+  `;
+}
 
-  const session =
-    prompt(
-      "ဒီ affirmation ကို ဘယ် session မှာသုံးမလဲ?\n\n1 = Morning\n2 = Afternoon\n3 = Evening"
-    );
+function renderLibrary(){
+  const library=[
+    ["Business Growth","Business","ကျွန်တော့်လုပ်ငန်းက နေ့စဉ်တိုးတက်ပြီး အောင်မြင်မှုအသစ်တွေကို ရရှိနေပါတယ်"],
+    ["Financial Growth","Money","ငွေကြေးအခွင့်အလမ်းကောင်းတွေကို သတိရှိစွာလက်ခံပြီး ငွေကြေးစီမံခန့်ခွဲမှုကောင်းလာနေပါတယ်"],
+    ["Career Success","Career","ကျွန်တော့်အလုပ်မှာ တန်ဖိုးရှိတဲ့ရလဒ်တွေကို ဖန်တီးပြီး အခွင့်အလမ်းကောင်းတွေ ရရှိနေပါတယ်"],
+    ["Confidence","Personal","ကျွန်တော်ဟာ ကိုယ့်ကိုယ်ကိုယုံကြည်ပြီး မှန်ကန်တဲ့ဆုံးဖြတ်ချက်တွေကို ပြတ်သားစွာချနိုင်ပါတယ်"],
+    ["Peace","Peace","ကျွန်တော်ဟာ နေ့စဉ်စိတ်အေးချမ်းမှုနဲ့ အတွင်းစိတ်တည်ငြိမ်မှုကို ခံစားနေပါတယ်"],
+    ["Self Growth","Self Growth","ကျွန်တော်ဟာ နေ့စဉ်ပိုမိုကောင်းမွန်တဲ့ ကိုယ်ပိုင်ဗားရှင်းတစ်ခု ဖြစ်လာနေပါတယ်"],
+    ["Family","Family","ကျွန်တော့်မိသားစုမှာ ချစ်ခြင်း၊ နားလည်မှုနဲ့ ပျော်ရွှင်မှုတွေ ပိုမိုတိုးပွားလာနေပါတယ်"],
+    ["Healthy Lifestyle","Health","ကျွန်တော်ဟာ ကျန်းမာရေးကိုဂရုစိုက်ပြီး ကောင်းမွန်တဲ့အလေ့အကျင့်တွေ တည်ဆောက်နေပါတယ်"]
+  ];
 
+  document.getElementById("view-library").innerHTML=`
+    <div class="section-title">Manifest Library</div>
+    <div class="section-desc">
+      ကြိုက်တဲ့ affirmation ကို Notes ထဲသိမ်းပြီး 369 Practice မှာ အသုံးပြုနိုင်ပါတယ်
+    </div>
 
-  if(session === "1"){
+    <div class="grid grid-2">
+      ${library.map((item,i)=>`
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <div class="card-title">${escapeHtml(item[0])}</div>
+              <span class="note-category">${escapeHtml(item[1])}</span>
+            </div>
+          </div>
 
-    p.morning.affirmation =
-      note.text;
+          <div class="quote">${escapeHtml(item[2])}</div>
 
-  }else if(session === "2"){
+          <div class="btn-row" style="margin-top:13px">
+            <button class="btn btn-primary"
+              data-action="library-save"
+              data-index="${i}">
+              ＋ Save to My Notes
+            </button>
 
-    p.afternoon.affirmation =
-      note.text;
+            <button class="btn btn-small"
+              data-action="library-use"
+              data-index="${i}">
+              ✍ Use Today
+            </button>
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `;
 
-  }else if(session === "3"){
+  window.manifestLibrary=library;
+}
 
-    p.evening.affirmation =
-      note.text;
+function renderBuilder(){
+  document.getElementById("view-builder").innerHTML=`
+    <div class="section-title">Manifest Builder</div>
+    <div class="section-desc">
+      ကိုယ်လိုချင်တဲ့အရာနဲ့ အာရုံစိုက်ချင်တဲ့ခံစားချက်ကို ထည့်ပြီး affirmation တစ်ခုတည်ဆောက်ပါ
+    </div>
 
-  }else{
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="field">
+          <label>What do you want?</label>
+          <input id="builderWant" placeholder="ဥပမာ — လုပ်ငန်းတိုးတက်မှု">
+        </div>
 
-    return;
+        <div class="field" style="margin-top:12px">
+          <label>How do you want to feel?</label>
+          <input id="builderFeel" placeholder="ဥပမာ — confident and peaceful">
+        </div>
 
+        <div class="field" style="margin-top:12px">
+          <label>Why does it matter?</label>
+          <input id="builderWhy" placeholder="ဥပမာ — family နဲ့ပိုကောင်းတဲ့ဘဝတည်ဆောက်ဖို့">
+        </div>
+
+        <button class="btn btn-primary"
+          style="margin-top:14px"
+          data-action="build-manifest">
+          ✨ Create Affirmation
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Your Affirmation</div>
+        <div class="card-subtitle">Generated result</div>
+
+        <div id="builderResult" class="quote" style="margin-top:15px">
+          Information ဖြည့်ပြီး Create Affirmation ကိုနှိပ်ပါ
+        </div>
+
+        <button class="btn btn-purple"
+          style="margin-top:13px"
+          data-action="save-builder"
+          disabled>
+          📝 Save to My Notes
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function renderGoals(){
+  document.getElementById("view-goals").innerHTML=`
+    <div class="section-title">My Goals</div>
+    <div class="section-desc">Affirmation နဲ့ လက်တွေ့လုပ်ဆောင်ချက်ကို Goal တစ်ခုနဲ့ချိတ်ထားပါ</div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="field">
+          <label>Goal</label>
+          <input id="goalName" placeholder="ဥပမာ — Monthly Business Revenue">
+        </div>
+
+        <div class="field" style="margin-top:12px">
+          <label>Target</label>
+          <input id="goalTarget" type="number" placeholder="100">
+        </div>
+
+        <div class="field" style="margin-top:12px">
+          <label>Current</label>
+          <input id="goalCurrent" type="number" placeholder="0">
+        </div>
+
+        <button class="btn btn-primary"
+          style="margin-top:14px"
+          data-action="add-goal">
+          ＋ Add Goal
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Goal Mindset</div>
+        <div class="quote" style="margin-top:13px">
+          Affirmation က mindset ကို focus ပေးပြီး
+          Goal က လက်တွေ့လုပ်ဆောင်ရမယ့် direction ကိုရှင်းပေးပါတယ်
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Your Goals</div>
+          <div class="card-subtitle">${state.goals.length} goals</div>
+        </div>
+      </div>
+
+      ${
+        state.goals.length
+        ? state.goals.map(g=>{
+            const pct=g.target>0
+              ?Math.min(100,Math.max(0,(g.current/g.target)*100))
+              :0;
+
+            return `
+              <div class="goal-item">
+                <div class="goal-top">
+                  <div class="goal-name">${escapeHtml(g.name)}</div>
+                  <div class="goal-value">${g.current}/${g.target}</div>
+                </div>
+
+                <div class="goal-bar progress">
+                  <span style="width:${pct}%"></span>
+                </div>
+
+                <div class="btn-row" style="margin-top:10px">
+                  <button class="btn btn-small"
+                    data-action="goal-plus"
+                    data-id="${escapeHtml(g.id)}">
+                    +10%
+                  </button>
+
+                  <button class="btn btn-small btn-danger"
+                    data-action="delete-goal"
+                    data-id="${escapeHtml(g.id)}">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            `;
+          }).join("")
+        : `<div class="empty">Goal မရှိသေးပါ</div>`
+      }
+    </div>
+  `;
+}
+
+function renderJourney(){
+  const start=state.settings.journeyStart;
+
+  document.getElementById("view-journey").innerHTML=`
+    <div class="section-title">My Journey</div>
+    <div class="section-desc">369 practice ကို habit တစ်ခုအဖြစ် တည်ဆောက်ပါ</div>
+
+    <div class="grid grid-3">
+      <div class="card stat">
+        <div class="stat-label">Current Streak</div>
+        <div class="stat-value">${currentStreak()}</div>
+        <div class="stat-small">days</div>
+      </div>
+
+      <div class="card stat">
+        <div class="stat-label">Longest Streak</div>
+        <div class="stat-value">${longestStreak()}</div>
+        <div class="stat-small">days</div>
+      </div>
+
+      <div class="card stat">
+        <div class="stat-label">Completed Days</div>
+        <div class="stat-value">${completedDays()}</div>
+        <div class="stat-small">days</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Journey Start Date</div>
+          <div class="card-subtitle">
+            ကိုယ့် 369 journey စတင်ခဲ့တဲ့နေ့
+          </div>
+        </div>
+      </div>
+
+      <input
+        id="journeyStart"
+        type="date"
+        value="${escapeHtml(start)}"
+        style="max-width:220px"
+      >
+
+      <div class="divider"></div>
+
+      <div class="quote">
+        Consistency ကို အဓိကထားပါ
+        တစ်နေ့ပြီးတစ်နေ့ ပြန်လုပ်နိုင်တာက journey ရဲ့ အရေးကြီးဆုံးအပိုင်းပါ
+      </div>
+    </div>
+  `;
+
+  document.getElementById("journeyStart").addEventListener("change",e=>{
+    state.settings.journeyStart=e.target.value;
+    save();
+    showToast("Journey start date သိမ်းပြီးပါပြီ");
+  });
+}
+
+function renderProgress(){
+  const total=totalWritings();
+  const days=completedDays();
+
+  const now=new Date();
+  const month=now.getMonth();
+  const year=now.getFullYear();
+
+  const daysInMonth=new Date(year,month+1,0).getDate();
+
+  let elapsed=now.getDate();
+  let completedThisMonth=0;
+
+  for(let i=1;i<=elapsed;i++){
+    const key=todayKey(new Date(year,month,i));
+    if(isDayComplete(key)) completedThisMonth++;
   }
 
+  const monthPct=elapsed
+    ?Math.round(completedThisMonth/elapsed*100)
+    :0;
 
-  saveState();
+  document.getElementById("view-progress").innerHTML=`
+    <div class="section-title">Progress</div>
+    <div class="section-desc">သင့်ရဲ့ 369 consistency ကို ကြည့်ပါ</div>
 
-  renderPractice();
+    <div class="grid grid-4">
+      <div class="card stat">
+        <div class="stat-label">Total Writings</div>
+        <div class="stat-value">${total}</div>
+      </div>
 
-  showToast(
-    "Affirmation added to today's practice"
-  );
+      <div class="card stat">
+        <div class="stat-label">Completed Days</div>
+        <div class="stat-value">${days}</div>
+      </div>
 
+      <div class="card stat">
+        <div class="stat-label">Current Streak</div>
+        <div class="stat-value">${currentStreak()}</div>
+      </div>
+
+      <div class="card stat">
+        <div class="stat-label">Longest Streak</div>
+        <div class="stat-value">${longestStreak()}</div>
+      </div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:16px">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">This Month</div>
+            <div class="card-subtitle">${completedThisMonth} completed days / ${elapsed} elapsed days</div>
+          </div>
+          <div class="kpi-big">${monthPct}%</div>
+        </div>
+
+        <div class="progress">
+          <span style="width:${monthPct}%"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Daily Target</div>
+            <div class="card-subtitle">3 + 6 + 9 = 18 writings</div>
+          </div>
+        </div>
+
+        <div class="grid grid-3">
+          <div>
+            <div class="stat-label">Morning</div>
+            <div class="stat-value" style="font-size:25px">3</div>
+          </div>
+          <div>
+            <div class="stat-label">Afternoon</div>
+            <div class="stat-value" style="font-size:25px">6</div>
+          </div>
+          <div>
+            <div class="stat-label">Evening</div>
+            <div class="stat-value" style="font-size:25px">9</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-title">Recent Activity</div>
+      <div class="note-list" style="margin-top:13px">
+        ${recentActivity()}
+      </div>
+    </div>
+  `;
 }
 
+function recentActivity(){
+  const dates=Object.keys(state.practices)
+    .sort()
+    .reverse()
+    .slice(0,8);
 
-function deleteNote(id){
-
-  const note =
-    state.notes.find(n=>n.id === id);
-
-  if(!note) return;
-
-
-  if(!confirm(
-    `"${note.title}" ကို ဖျက်မလား?`
-  )){
-    return;
+  if(!dates.length){
+    return `<div class="empty">Activity မရှိသေးပါ</div>`;
   }
 
+  return dates.map(date=>{
+    const p=getPractice(date);
+    const total=dayTotal(date);
 
-  state.notes =
-    state.notes.filter(
-      n=>n.id !== id
-    );
+    return `
+      <div class="note-item">
+        <div class="note-top">
+          <strong>${escapeHtml(formatDate(date))}</strong>
+          <span class="target-badge">${total}/18</span>
+        </div>
 
-
-  saveState();
-
-  renderNotes();
-
-  showToast("Affirmation deleted");
-
+        <div class="muted small" style="margin-top:8px">
+          Morning ${p.morning.writings.length}/3 ·
+          Afternoon ${p.afternoon.writings.length}/6 ·
+          Evening ${p.evening.writings.length}/9
+        </div>
+      </div>
+    `;
+  }).join("");
 }
 
+function getAchievementData(){
+  const writings=totalWritings();
+  const days=completedDays();
+  const streak=longestStreak();
 
-/* =========================================================
-   JOURNAL
-   ========================================================= */
+  return [
+    ["🌱","First Writing","ပထမဆုံး writing ပြီးပါပြီ",writings>=1],
+    ["🌟","First Complete Day","တစ်နေ့ 18 writings ပြည့်ပါပြီ",days>=1],
+    ["🔥","3 Day Streak","3 ရက်ဆက်တိုက်",streak>=3],
+    ["🔥","7 Day Streak","7 ရက်ဆက်တိုက်",streak>=7],
+    ["💎","14 Day Streak","14 ရက်ဆက်တိုက်",streak>=14],
+    ["👑","21 Day Streak","21 ရက်ဆက်တိုက်",streak>=21],
+    ["🏆","30 Day Streak","30 ရက်ဆက်တိုက်",streak>=30],
+    ["✍️","100 Writings","100 writings",writings>=100],
+    ["🚀","500 Writings","500 writings",writings>=500],
+    ["💫","1000 Writings","1000 writings",writings>=1000]
+  ];
+}
+
+function renderAchievements(){
+  const data=getAchievementData();
+
+  document.getElementById("view-achievements").innerHTML=`
+    <div class="section-title">Achievements</div>
+    <div class="section-desc">Consistency တိုးလာတာနဲ့ badge တွေ unlock ဖြစ်ပါမယ်</div>
+
+    <div class="badges">
+      ${data.map(b=>`
+        <div class="badge ${b[3]?"unlocked":""}">
+          <div class="badge-icon">${b[0]}</div>
+          <div class="badge-title">${escapeHtml(b[1])}</div>
+          <div class="badge-desc">${escapeHtml(b[2])}</div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderGratitude(){
+  const g=state.gratitude[currentDate] || "";
+
+  document.getElementById("view-gratitude").innerHTML=`
+    <div class="section-title">Gratitude</div>
+    <div class="section-desc">ဒီနေ့ ကျေးဇူးတင်ချင်တဲ့အရာတွေကို ရေးပါ</div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">${escapeHtml(formatDate(currentDate))}</div>
+          <div class="card-subtitle">At least 3 things</div>
+        </div>
+      </div>
+
+      <textarea
+        data-action="gratitude"
+        placeholder="1. ဒီနေ့ ကျေးဇူးတင်တာ...&#10;2. ဒီနေ့ ကျေးဇူးတင်တာ...&#10;3. ဒီနေ့ ကျေးဇူးတင်တာ...">${escapeHtml(g)}</textarea>
+    </div>
+  `;
+
+  bindAutosave();
+}
+
+function renderVisualization(){
+  document.getElementById("view-visualization").innerHTML=`
+    <div class="section-title">Visualization</div>
+    <div class="section-desc">
+      ကိုယ်လိုချင်တဲ့ future ကို အေးအေးဆေးဆေးစိတ်ကူးကြည့်ဖို့ timer အသုံးပြုပါ
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-title">My Vision</div>
+        <div class="card-subtitle">What does your ideal future look like?</div>
+
+        <textarea
+          data-action="vision-text"
+          data-field="vision"
+          style="margin-top:12px"
+          placeholder="ကျွန်တော်လိုချင်တဲ့ဘဝ...">${escapeHtml(state.vision.vision)}</textarea>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Future Me</div>
+        <div class="card-subtitle">Imagine yourself already living it</div>
+
+        <textarea
+          data-action="vision-text"
+          data-field="futureSelf"
+          style="margin-top:12px"
+          placeholder="Future me က...">${escapeHtml(state.vision.futureSelf)}</textarea>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="timer">
+        <div class="eyebrow">Visualization Timer</div>
+        <div id="timerValue" class="timer-value">60</div>
+        <div class="muted">seconds</div>
+
+        <div class="btn-row" style="justify-content:center;margin-top:15px">
+          <button class="btn btn-primary" data-action="start-timer" data-seconds="60">1 Minute</button>
+          <button class="btn" data-action="start-timer" data-seconds="180">3 Minutes</button>
+          <button class="btn" data-action="stop-timer">Stop</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  bindAutosave();
+}
 
 function renderJournal(){
+  const p=getPractice(currentDate);
 
-  const j =
-    state.journals[todayKey()] || {};
+  document.getElementById("view-journal").innerHTML=`
+    <div class="section-title">Journal</div>
+    <div class="section-desc">နေ့စဉ်အတွေ့အကြုံနဲ့ ကိုယ့်အတွေးတွေကို သိမ်းထားပါ</div>
 
+    <div class="card">
+      <div class="field">
+        <label>Today's Journal</label>
+        <textarea
+          data-action="journal"
+          placeholder="ဒီနေ့ ဘာတွေဖြစ်ခဲ့လဲ...">${escapeHtml(state.journal[currentDate] || "")}</textarea>
+      </div>
 
-  document.getElementById("journalGratitude")
-    .value =
-      j.gratitude || "";
+      <div class="divider"></div>
 
+      <div class="card-title">369 Reflection Summary</div>
 
-  document.getElementById("journalNotes")
-    .value =
-      j.notes || "";
+      <div class="grid grid-3" style="margin-top:13px">
+        ${Object.keys(SESSION_CONFIG).map(key=>{
+          const c=SESSION_CONFIG[key];
+          return `
+            <div class="note-item">
+              <strong>${c.icon} ${c.label}</strong>
+              <div class="muted small" style="margin-top:8px">
+                ${escapeHtml(p[key].note || "Reflection မရေးရသေးပါ")}
+              </div>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </div>
+  `;
 
-
-  document.getElementById("journalReflection")
-    .value =
-      j.reflection || "";
-
-
-  document.getElementById("journalAction")
-    .value =
-      j.action || "";
-
-
-  const p = getTodayPractice();
-
-
-  document.getElementById("journalMorning")
-    .textContent =
-      `${p.morning.count} / 3`;
-
-
-  document.getElementById("journalAfternoon")
-    .textContent =
-      `${p.afternoon.count} / 6`;
-
-
-  document.getElementById("journalEvening")
-    .textContent =
-      `${p.evening.count} / 9`;
-
+  bindAutosave();
 }
-
-
-document.getElementById("saveJournal")
-  .addEventListener("click",()=>{
-
-    const key = todayKey();
-
-
-    state.journals[key] = {
-
-      gratitude:
-        document.getElementById(
-          "journalGratitude"
-        ).value.trim(),
-
-      notes:
-        document.getElementById(
-          "journalNotes"
-        ).value.trim(),
-
-      reflection:
-        document.getElementById(
-          "journalReflection"
-        ).value.trim(),
-
-      action:
-        document.getElementById(
-          "journalAction"
-        ).value.trim(),
-
-      updatedAt:
-        new Date().toISOString()
-
-    };
-
-
-    saveState();
-
-    renderDashboard();
-
-    showToast(
-      "Journal saved"
-    );
-
-  });
-
-
-/* =========================================================
-   HISTORY
-   ========================================================= */
 
 function renderHistory(){
+  const now=new Date();
+  const year=window.historyYear ?? now.getFullYear();
+  const month=window.historyMonth ?? now.getMonth();
 
-  const days =
-    getCompletedDays();
+  const first=new Date(year,month,1);
+  const last=new Date(year,month+1,0);
+  const startDay=first.getDay();
 
-  const writings =
-    getTotalWritings();
+  const monthName=new Intl.DateTimeFormat("my-MM",{
+    month:"long",
+    year:"numeric"
+  }).format(first);
 
-  const best =
-    calculateBestStreak();
+  let cells="";
 
-
-  const keys =
-    getAllPracticeKeys()
-      .sort()
-      .reverse();
-
-
-  document.getElementById("historyDays")
-    .textContent = days;
-
-
-  document.getElementById("historyWritings")
-    .textContent = writings;
-
-
-  document.getElementById("historyBest")
-    .textContent = best;
-
-
-  const elapsedDays =
-    new Date().getDate();
-
-
-  const currentMonth =
-    new Date().toISOString().slice(0,7);
-
-
-  const completedThisMonth =
-    keys.filter(key=>{
-
-      return key.startsWith(currentMonth) &&
-        isComplete(state.practices[key]);
-
-    }).length;
-
-
-  const completion =
-    elapsedDays > 0
-      ? Math.round(
-          (completedThisMonth/elapsedDays)*100
-        )
-      : 0;
-
-
-  document.getElementById("historyCompletion")
-    .textContent =
-      `${Math.min(100,completion)}%`;
-
-
-  const list =
-    document.getElementById("historyList");
-
-
-  if(!keys.length){
-
-    list.innerHTML =
-      `<div class="empty">
-        History မရှိသေးပါ
-      </div>`;
-
-    return;
-
+  for(let i=0;i<startDay;i++){
+    cells+=`<div class="day empty-day"></div>`;
   }
 
+  for(let d=1;d<=last.getDate();d++){
+    const key=todayKey(new Date(year,month,d));
+    const count=dayTotal(key);
 
-  list.innerHTML =
-    keys.map(key=>{
+    let cls="";
 
-      const p =
-        state.practices[key];
+    if(count===18) cls="complete";
+    else if(count>0) cls="partial";
 
-      const total =
-        totalForPractice(p);
+    cells+=`
+      <div class="day ${cls}">
+        <div class="day-number">${d}</div>
+        <div class="day-count">${count}/18</div>
+      </div>
+    `;
+  }
 
-      const complete =
-        isComplete(p);
+  document.getElementById("view-history").innerHTML=`
+    <div class="section-title">History</div>
+    <div class="section-desc">ဘယ်နေ့တွေမှာ practice ပြီးခဲ့လဲ ကြည့်ပါ</div>
 
-
-      return `
-        <div class="day-item">
-
-          <div class="day-head">
-
-            <strong>
-              ${escapeHTML(key)}
-            </strong>
-
-            <span>
-              ${total} / 18
-              ${complete ? " ✓" : ""}
-            </span>
-
-          </div>
-
-          <div class="day-detail">
-
-            🌅 ${p.morning.count}/3 —
-            ${escapeHTML(
-              p.morning.affirmation || "No affirmation"
-            )}
-
-            <br>
-
-            ☀️ ${p.afternoon.count}/6 —
-            ${escapeHTML(
-              p.afternoon.affirmation || "No affirmation"
-            )}
-
-            <br>
-
-            🌙 ${p.evening.count}/9 —
-            ${escapeHTML(
-              p.evening.affirmation || "No affirmation"
-            )}
-
-            ${
-              p.reflection
-              ? `<br><br>🔎 Reflection:
-                ${escapeHTML(p.reflection)}`
-              : ""
-            }
-
-          </div>
-
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">${escapeHtml(monthName)}</div>
+          <div class="card-subtitle">Green = Complete · Gold = Partial</div>
         </div>
-      `;
 
-    }).join("");
+        <div class="btn-row">
+          <button class="btn btn-small" data-action="history-prev">‹</button>
+          <button class="btn btn-small" data-action="history-today">Today</button>
+          <button class="btn btn-small" data-action="history-next">›</button>
+        </div>
+      </div>
 
+      <div class="calendar">
+        ${["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(x=>`
+          <div class="calendar-head">${x}</div>
+        `).join("")}
+        ${cells}
+      </div>
+    </div>
+  `;
 }
 
+function renderGuide(){
+  document.getElementById("view-guide").innerHTML=`
+    <div class="section-title">How 369 Works</div>
+    <div class="section-desc">သင့်ရဲ့ daily writing routine ကို ရိုးရှင်းစွာလုပ်ဆောင်ပါ</div>
 
-/* =========================================================
-   SETTINGS
-   ========================================================= */
+    <div class="card">
+      <div class="quote">
+        <strong>3 — Morning</strong><br>
+        မနက်ပိုင်းမှာ ကိုယ်ရွေးထားတဲ့ affirmation ကို 3 ကြိမ်ရေးပါ
+        <br><br>
+        <strong>6 — Afternoon</strong><br>
+        နေ့လယ်ပိုင်းမှာ 6 ကြိမ်ရေးပါ
+        <br><br>
+        <strong>9 — Evening</strong><br>
+        ညပိုင်းမှာ 9 ကြိမ်ရေးပါ
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <strong>My 369 Notes</strong>
+            <div class="muted small">
+              Affirmation ကို အရင်ဆုံးရေးပြီး Save လုပ်ပါ
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <strong>Copy</strong>
+            <div class="muted small">
+              Saved affirmation ကို Morning / Afternoon / Evening ထဲ Copy လုပ်ပါ
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <strong>Write</strong>
+            <div class="muted small">
+              Morning 3, Afternoon 6, Evening 9 ကြိမ် ပြန်ရေးပါ
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <div>
+            <strong>Reflect</strong>
+            <div class="muted small">
+              Session ပြီးတိုင်း Notes / Reflection ရေးပါ
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="card-title">Same or Different Affirmations?</div>
+
+      <div class="muted" style="margin-top:8px;line-height:1.7">
+        တစ်နေ့တည်းမှာ affirmation တစ်ခုတည်းကို
+        3/6/9 အားလုံးမှာသုံးလို့ရပါတယ်
+        ဒါမှမဟုတ် Morning, Afternoon, Evening အတွက်
+        မတူတဲ့ affirmation သုံးလို့လည်းရပါတယ်
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-title">Real-Life Action</div>
+      <div class="muted" style="margin-top:8px;line-height:1.7">
+        ဒီ app ကို journaling, focus, reflection နဲ့ goal-setting routine
+        အဖြစ်အသုံးပြုနိုင်ပါတယ်
+        Affirmation တစ်ခုရေးရုံနဲ့ ရလဒ်တစ်ခု အလိုအလျောက်ဖြစ်မယ်လို့
+        အာမခံထားတဲ့ system မဟုတ်ပါ
+        ရည်မှန်းချက်နဲ့အတူ လက်တွေ့လုပ်ဆောင်ချက်ကိုလည်း ထည့်သွင်းပါ
+      </div>
+    </div>
+  `;
+}
 
 function renderSettings(){
+  document.getElementById("view-settings").innerHTML=`
+    <div class="section-title">Settings</div>
+    <div class="section-desc">App data နဲ့ practice settings</div>
 
-  const sw =
-    document.getElementById(
-      "reminderSwitch"
-    );
+    <div class="card">
+      <div class="switch-row">
+        <div>
+          <strong>Daily Reminder</strong>
+          <div class="muted small">Reminder preference သိမ်းထားပါ</div>
+        </div>
 
+        <button
+          class="switch ${state.settings.reminder?"on":""}"
+          data-action="toggle-reminder">
+          <span></span>
+        </button>
+      </div>
 
-  sw.classList.toggle(
-    "on",
-    !!state.settings.reminder
-  );
+      <div class="switch-row">
+        <div>
+          <strong>Language</strong>
+          <div class="muted small">App language preference</div>
+        </div>
 
+        <select id="languageSelect" style="width:130px">
+          <option value="my" ${state.settings.language==="my"?"selected":""}>Myanmar</option>
+          <option value="en" ${state.settings.language==="en"?"selected":""}>English</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-title">Data</div>
+      <div class="card-subtitle">LocalStorage data ကို backup လုပ်နိုင်ပါတယ်</div>
+
+      <div class="btn-row" style="margin-top:14px">
+        <button class="btn btn-primary" data-action="export-json">⬇ Export JSON</button>
+        <button class="btn" data-action="export-text">📄 Export TXT</button>
+        <button class="btn" data-action="print">🖨 Print / Save PDF</button>
+        <button class="btn" data-action="import-json">⬆ Import JSON</button>
+      </div>
+
+      <input
+        id="importFile"
+        type="file"
+        accept=".json,application/json"
+        style="display:none"
+      >
+    </div>
+
+    <div class="card" style="margin-top:16px;border-color:rgba(255,102,125,.2)">
+      <div class="card-title">Danger Zone</div>
+      <div class="card-subtitle">App data အားလုံးကို ပြန်ဖျက်ပါမယ်</div>
+
+      <button
+        class="btn btn-danger"
+        style="margin-top:13px"
+        data-action="reset-all">
+        Reset All Data
+      </button>
+    </div>
+  `;
+
+  document.getElementById("languageSelect").addEventListener("change",e=>{
+    state.settings.language=e.target.value;
+    save();
+    showToast("Language preference သိမ်းပြီးပါပြီ");
+  });
 }
 
+function bindAutosave(){
+  document.querySelectorAll("[data-action='session-text']").forEach(el=>{
+    el.addEventListener("input",()=>{
+      const p=getPractice(currentDate);
+      p[el.dataset.session].text=el.value;
+      p.updatedAt=new Date().toISOString();
+      save();
+    });
+  });
 
-document.getElementById("reminderSwitch")
-  .addEventListener("click",()=>{
+  document.querySelectorAll("[data-action='session-note']").forEach(el=>{
+    el.addEventListener("input",()=>{
+      const p=getPractice(currentDate);
+      p[el.dataset.session].note=el.value;
+      p.updatedAt=new Date().toISOString();
+      save();
+    });
+  });
 
-    state.settings.reminder =
-      !state.settings.reminder;
+  document.querySelectorAll("[data-action='daily-note']").forEach(el=>{
+    el.addEventListener("input",()=>{
+      const p=getPractice(currentDate);
+      p.dailyNote=el.value;
+      p.updatedAt=new Date().toISOString();
+      save();
+    });
+  });
 
-    saveState();
+  document.querySelectorAll("[data-action='gratitude']").forEach(el=>{
+    el.addEventListener("input",()=>{
+      state.gratitude[currentDate]=el.value;
+      save();
+    });
+  });
 
-    renderSettings();
+  document.querySelectorAll("[data-action='journal']").forEach(el=>{
+    el.addEventListener("input",()=>{
+      state.journal[currentDate]=el.value;
+      save();
+    });
+  });
 
-    showToast(
-      state.settings.reminder
-        ? "Reminder preference enabled"
-        : "Reminder preference disabled"
+  document.querySelectorAll("[data-action='vision-text']").forEach(el=>{
+    el.addEventListener("input",()=>{
+      state.vision[el.dataset.field]=el.value;
+      save();
+    });
+  });
+}
+
+function openWriting(sessionKey){
+  const c=SESSION_CONFIG[sessionKey];
+  const p=getPractice(currentDate);
+  const s=p[sessionKey];
+
+  if(!s.text.trim()){
+    showToast("အရင်ဆုံး affirmation ထည့်ပါ");
+    return;
+  }
+
+  if(s.writings.length>=c.target){
+    showToast(`${c.label} session ပြီးပါပြီ`);
+    return;
+  }
+
+  activeWriting={
+    sessionKey,
+    dateKey:currentDate,
+    index:s.writings.length
+  };
+
+  const modal=document.getElementById("modal");
+
+  modal.innerHTML=`
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">${c.icon} ${c.label} Writing</div>
+        <div class="card-subtitle">
+          Writing ${s.writings.length+1} of ${c.target}
+        </div>
+      </div>
+
+      <button class="close" data-action="close-modal">×</button>
+    </div>
+
+    <div class="quote">
+      ${escapeHtml(s.text)}
+    </div>
+
+    <div class="field" style="margin-top:16px">
+      <label>
+        အပေါ်က affirmation ကို ပြန်ရေးပါ
+      </label>
+
+      <textarea
+        id="writingInput"
+        placeholder="Affirmation ကို ဒီမှာပြန်ရေးပါ"></textarea>
+    </div>
+
+    <div class="btn-row" style="margin-top:10px">
+      <button class="btn btn-small"
+        data-action="fill-writing">
+        📋 Use Affirmation
+      </button>
+
+      <button class="btn btn-small"
+        data-action="speak-writing">
+        🔊 Read
+      </button>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn" data-action="close-modal">Cancel</button>
+      <button class="btn btn-primary" data-action="complete-writing">
+        ✓ Complete Writing
+      </button>
+    </div>
+  `;
+
+  document.getElementById("modalBackdrop").classList.add("show");
+
+  setTimeout(()=>{
+    document.getElementById("writingInput")?.focus();
+  },50);
+}
+
+function closeModal(){
+  document.getElementById("modalBackdrop").classList.remove("show");
+  document.getElementById("modal").innerHTML="";
+  activeWriting=null;
+}
+
+function completeWriting(){
+  if(!activeWriting) return;
+
+  const input=document.getElementById("writingInput");
+
+  if(!input) return;
+
+  const value=input.value.trim();
+
+  if(!value){
+    showToast("Affirmation ကို ပြန်ရေးပါ");
+    return;
+  }
+
+  const {sessionKey,dateKey}=activeWriting;
+  const c=SESSION_CONFIG[sessionKey];
+  const p=getPractice(dateKey);
+  const s=p[sessionKey];
+
+  if(s.writings.length>=c.target){
+    closeModal();
+    return;
+  }
+
+  if(value!==s.text.trim()){
+    const ok=confirm(
+      "သင်ရေးထားတဲ့စာက saved affirmation နဲ့ မတူပါ\n\n" +
+      "ဒီစာကိုပဲ သိမ်းမလား?"
     );
 
-  });
+    if(!ok) return;
+  }
 
+  s.writings.push(value);
+  s.completed=s.writings.length>=c.target;
 
-document.getElementById("exportData")
-  .addEventListener("click",()=>{
+  p.updatedAt=new Date().toISOString();
 
-    const data =
-      JSON.stringify(
-        state,
-        null,
-        2
-      );
+  save();
 
+  const count=s.writings.length;
 
-    const blob =
-      new Blob(
-        [data],
-        {type:"application/json"}
-      );
+  if(count>=c.target){
+    closeModal();
+    showToast(`${c.label} ${c.target} writings ပြီးပါပြီ ✓`);
 
+    if(isDayComplete(dateKey)){
+      setTimeout(()=>{
+        showToast("🎉 Today 369 — 18/18 Complete!");
+      },700);
+    }
+  }else{
+    openWriting(sessionKey);
+  }
 
-    const url =
-      URL.createObjectURL(blob);
+  renderView(currentView);
+}
 
+function addNote(){
+  const title=document.getElementById("noteTitle").value.trim();
+  const category=document.getElementById("noteCategory").value;
+  const text=document.getElementById("noteText").value.trim();
 
-    const a =
-      document.createElement("a");
+  if(!text){
+    showToast("Affirmation ရေးပါ");
+    return;
+  }
 
+  const now=new Date().toISOString();
 
-    a.href = url;
+  const note={
+    id:uid(),
+    title:title || "My Affirmation",
+    category,
+    text,
+    favorite:false,
+    createdAt:now,
+    updatedAt:now
+  };
 
-    a.download =
-      `369-backup-${todayKey()}.json`;
+  state.notes.push(note);
 
+  if(!state.selectedNoteId){
+    state.selectedNoteId=note.id;
+  }
 
-    document.body.appendChild(a);
+  save();
 
-    a.click();
+  document.getElementById("noteTitle").value="";
+  document.getElementById("noteText").value="";
 
-    a.remove();
+  showToast("Affirmation saved ✓");
 
-    URL.revokeObjectURL(url);
+  renderNotes();
+}
 
+function useNote(noteId,sessionKey){
+  const note=state.notes.find(n=>n.id===noteId);
 
-    showToast(
-      "Data exported"
+  if(!note) return;
+
+  const p=getPractice(currentDate);
+  const s=p[sessionKey];
+
+  if(s.writings.length>0 && s.text.trim()!==note.text.trim()){
+    const ok=confirm(
+      "ဒီ session မှာ writing တွေရှိပြီးသားပါ\n" +
+      "Affirmation ပြောင်းလိုက်ရင် လက်ရှိ writings တွေ reset ဖြစ်ပါမယ်\n\n" +
+      "ဆက်လုပ်မလား?"
     );
-
-  });
-
-
-document.getElementById("importData")
-  .addEventListener("click",()=>{
-
-    document.getElementById("importFile")
-      .click();
-
-  });
-
-
-document.getElementById("importFile")
-  .addEventListener("change",(event)=>{
-
-    const file =
-      event.target.files?.[0];
-
-    if(!file) return;
-
-
-    const reader =
-      new FileReader();
-
-
-    reader.onload = ()=>{
-
-      try{
-
-        const imported =
-          JSON.parse(
-            reader.result
-          );
-
-
-        state =
-          normalizeState(imported);
-
-
-        saveState();
-
-        renderAll();
-
-        showToast(
-          "Data imported successfully"
-        );
-
-      }catch(error){
-
-        console.error(error);
-
-        showToast(
-          "Invalid JSON file"
-        );
-
-      }
-
-    };
-
-
-    reader.readAsText(file);
-
-  });
-
-
-document.getElementById("resetData")
-  .addEventListener("click",()=>{
-
-    const ok =
-      confirm(
-        "369 App ထဲက data အားလုံးကို ဖျက်မှာ သေချာပါသလား?"
-      );
-
 
     if(!ok) return;
 
-
-    state =
-      clone(DEFAULT_STATE);
-
-
-    saveState();
-
-    renderAll();
-
-    showToast(
-      "App data reset"
-    );
-
-  });
-
-
-/* =========================================================
-   RENDER ALL
-   ========================================================= */
-
-function renderAll(){
-
-  document.getElementById("todayDate")
-    .textContent =
-      formatDate();
-
-  renderDashboard();
-
-  renderPractice();
-
-  renderNotes();
-
-  renderHistory();
-
-  renderJournal();
-
-  renderSettings();
-
-}
-
-
-renderAll();
-
-
-/* =========================================================
-   AUTO SAVE PRACTICE TEXT
-   ========================================================= */
-
-[
-  ["morningAffirmation","morning"],
-  ["afternoonAffirmation","afternoon"],
-  ["eveningAffirmation","evening"]
-].forEach(([id,session])=>{
-
-  document.getElementById(id)
-    .addEventListener("input",event=>{
-
-      const p =
-        getTodayPractice();
-
-      p[session].affirmation =
-        event.target.value;
-
-      p.updatedAt =
-        new Date().toISOString();
-
-      saveState();
-
-      renderSessionCard(
-        session,
-        session === "morning"
-          ? 3
-          : session === "afternoon"
-            ? 6
-            : 9,
-        `practice${capitalize(session)}Count`,
-        `practice${capitalize(session)}Progress`,
-        `practice${capitalize(session)}Preview`
-      );
-
-    });
-
-});
-
-
-/* =========================================================
-   KEYBOARD ESC
-   ========================================================= */
-
-document.addEventListener("keydown",(event)=>{
-
-  if(event.key === "Escape"){
-
-    closeWritingModal();
-
-    document.getElementById("sidebar")
-      ?.classList.remove("open");
-
+    s.writings=[];
+    s.completed=false;
   }
 
+  s.text=note.text;
+
+  state.selectedNoteId=note.id;
+
+  save();
+
+  showToast(`${SESSION_CONFIG[sessionKey].label} အတွက် affirmation ထည့်ပြီးပါပြီ`);
+
+  renderView(currentView);
+}
+
+function editNote(id){
+  const note=state.notes.find(n=>n.id===id);
+
+  if(!note) return;
+
+  const modal=document.getElementById("modal");
+
+  modal.innerHTML=`
+    <div class="modal-head">
+      <div class="modal-title">Edit Affirmation</div>
+      <button class="close" data-action="close-modal">×</button>
+    </div>
+
+    <div class="field">
+      <label>Title</label>
+      <input id="editNoteTitle" value="${escapeHtml(note.title)}">
+    </div>
+
+    <div class="field" style="margin-top:12px">
+      <label>Category</label>
+      <select id="editNoteCategory">
+        ${["Personal","Business","Money","Career","Love","Family","Health","Peace","Self Growth"]
+          .map(c=>`<option ${note.category===c?"selected":""}>${c}</option>`).join("")}
+      </select>
+    </div>
+
+    <div class="field" style="margin-top:12px">
+      <label>Affirmation</label>
+      <textarea id="editNoteText">${escapeHtml(note.text)}</textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn" data-action="close-modal">Cancel</button>
+      <button class="btn btn-primary"
+        data-action="save-edit-note"
+        data-id="${escapeHtml(id)}">
+        Save Changes
+      </button>
+    </div>
+  `;
+
+  document.getElementById("modalBackdrop").classList.add("show");
+}
+
+function saveEditedNote(id){
+  const note=state.notes.find(n=>n.id===id);
+
+  if(!note) return;
+
+  const title=document.getElementById("editNoteTitle").value.trim();
+  const category=document.getElementById("editNoteCategory").value;
+  const text=document.getElementById("editNoteText").value.trim();
+
+  if(!text){
+    showToast("Affirmation မရှိပါ");
+    return;
+  }
+
+  note.title=title || "My Affirmation";
+  note.category=category;
+  note.text=text;
+  note.updatedAt=new Date().toISOString();
+
+  save();
+  closeModal();
+  renderNotes();
+
+  showToast("Affirmation updated ✓");
+}
+
+function deleteNote(id){
+  const note=state.notes.find(n=>n.id===id);
+
+  if(!note) return;
+
+  if(!confirm(`"${note.title}" ကို ဖျက်မလား?`)) return;
+
+  state.notes=state.notes.filter(n=>n.id!==id);
+
+  if(state.selectedNoteId===id){
+    state.selectedNoteId=state.notes[0]?.id || null;
+  }
+
+  save();
+  renderNotes();
+
+  showToast("Note deleted");
+}
+
+function addGoal(){
+  const name=document.getElementById("goalName").value.trim();
+  const target=Number(document.getElementById("goalTarget").value);
+  const current=Number(document.getElementById("goalCurrent").value || 0);
+
+  if(!name || !target){
+    showToast("Goal နဲ့ Target ထည့်ပါ");
+    return;
+  }
+
+  state.goals.push({
+    id:uid(),
+    name,
+    target,
+    current:Math.max(0,current),
+    createdAt:new Date().toISOString()
+  });
+
+  save();
+  renderGoals();
+
+  showToast("Goal added ✓");
+}
+
+function saveBuilder(){
+  if(!window.builderResult) return;
+
+  const note={
+    id:uid(),
+    title:"Generated Affirmation",
+    category:"Personal",
+    text:window.builderResult,
+    favorite:false,
+    createdAt:new Date().toISOString(),
+    updatedAt:new Date().toISOString()
+  };
+
+  state.notes.push(note);
+  state.selectedNoteId=note.id;
+
+  save();
+
+  showToast("Generated affirmation saved ✓");
+  setView("notes");
+}
+
+function exportJSON(){
+  const blob=new Blob(
+    [JSON.stringify(state,null,2)],
+    {type:"application/json"}
+  );
+
+  downloadBlob(blob,`369-backup-${todayKey()}.json`);
+}
+
+function exportText(){
+  let output="369 — MY AFFIRMATIONS & PRACTICE\n\n";
+
+  output+="MY 369 NOTES\n";
+  output+="====================\n\n";
+
+  state.notes.forEach((n,i)=>{
+    output+=`${i+1}. ${n.title}\n`;
+    output+=`Category: ${n.category}\n`;
+    output+=`${n.text}\n\n`;
+  });
+
+  output+="PRACTICE HISTORY\n";
+  output+="====================\n\n";
+
+  Object.keys(state.practices)
+    .sort()
+    .reverse()
+    .forEach(date=>{
+      const p=getPractice(date);
+
+      output+=`${date} — ${dayTotal(date)}/18\n`;
+      output+=`Morning: ${p.morning.text}\n`;
+      output+=`Afternoon: ${p.afternoon.text}\n`;
+      output+=`Evening: ${p.evening.text}\n`;
+      output+=`Daily Note: ${p.dailyNote}\n\n`;
+    });
+
+  const blob=new Blob([output],{type:"text/plain;charset=utf-8"});
+
+  downloadBlob(blob,`369-journal-${todayKey()}.txt`);
+}
+
+function downloadBlob(blob,name){
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+
+  a.href=url;
+  a.download=name;
+
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function importJSON(){
+  document.getElementById("importFile").click();
+}
+
+function handleImport(file){
+  if(!file) return;
+
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+    try{
+      const imported=JSON.parse(reader.result);
+
+      state=normalizeState(imported);
+
+      save();
+
+      renderView(currentView);
+
+      showToast("Backup imported ✓");
+    }catch(err){
+      console.error(err);
+      showToast("JSON file မမှန်ပါ");
+    }
+  };
+
+  reader.readAsText(file);
+}
+
+function resetAll(){
+  if(!confirm("369 app data အားလုံးကို ဖျက်မလား?")) return;
+
+  if(!confirm("ဒီလုပ်ဆောင်ချက်ကို ပြန်ပြင်လို့မရပါ")) return;
+
+  state=clone(DEFAULT_STATE);
+
+  save();
+
+  currentDate=todayKey();
+
+  renderView(currentView);
+
+  showToast("All data reset");
+}
+
+function startTimer(seconds){
+  clearInterval(visualizationTimer);
+
+  let remaining=seconds;
+
+  const el=document.getElementById("timerValue");
+
+  if(el) el.textContent=remaining;
+
+  visualizationTimer=setInterval(()=>{
+    remaining--;
+
+    const target=document.getElementById("timerValue");
+
+    if(target){
+      target.textContent=remaining;
+    }
+
+    if(remaining<=0){
+      clearInterval(visualizationTimer);
+      showToast("Visualization session complete ✨");
+    }
+  },1000);
+}
+
+function stopTimer(){
+  clearInterval(visualizationTimer);
+
+  const el=document.getElementById("timerValue");
+
+  if(el) el.textContent="60";
+}
+
+function speak(text){
+  if(!("speechSynthesis" in window)){
+    showToast("ဒီ device မှာ Voice မရပါ");
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const u=new SpeechSynthesisUtterance(text);
+
+  u.lang="my-MM";
+  u.rate=.85;
+
+  speechSynthesis.speak(u);
+}
+
+document.addEventListener("click",e=>{
+  const viewBtn=e.target.closest("[data-view]");
+
+  if(viewBtn){
+    setView(viewBtn.dataset.view);
+    return;
+  }
+
+  const actionEl=e.target.closest("[data-action]");
+
+  if(!actionEl) return;
+
+  const action=actionEl.dataset.action;
+
+  switch(action){
+
+    case"add-note":
+      addNote();
+      break;
+
+    case"clear-note-form":
+      document.getElementById("noteTitle").value="";
+      document.getElementById("noteText").value="";
+      break;
+
+    case"note-copy":{
+      const note=state.notes.find(n=>n.id===actionEl.dataset.id);
+
+      if(note){
+        state.selectedNoteId=note.id;
+        save();
+
+        if(navigator.clipboard){
+          navigator.clipboard.writeText(note.text)
+            .then(()=>showToast("Affirmation copied ✓"))
+            .catch(()=>showToast("Note selected ✓"));
+        }else{
+          showToast("Note selected ✓");
+        }
+
+        renderNotes();
+      }
+      break;
+    }
+
+    case"note-use-morning":
+      useNote(actionEl.dataset.id,"morning");
+      break;
+
+    case"note-use-afternoon":
+      useNote(actionEl.dataset.id,"afternoon");
+      break;
+
+    case"note-use-evening":
+      useNote(actionEl.dataset.id,"evening");
+      break;
+
+    case"favorite-note":{
+      const note=state.notes.find(n=>n.id===actionEl.dataset.id);
+
+      if(note){
+        note.favorite=!note.favorite;
+        save();
+        renderNotes();
+      }
+
+      break;
+    }
+
+    case"edit-note":
+      editNote(actionEl.dataset.id);
+      break;
+
+    case"save-edit-note":
+      saveEditedNote(actionEl.dataset.id);
+      break;
+
+    case"delete-note":
+      deleteNote(actionEl.dataset.id);
+      break;
+
+    case"open-writing":
+      openWriting(actionEl.dataset.session);
+      break;
+
+    case"close-modal":
+      closeModal();
+      break;
+
+    case"fill-writing":{
+      if(!activeWriting) break;
+
+      const p=getPractice(activeWriting.dateKey);
+      const text=p[activeWriting.sessionKey].text;
+
+      const input=document.getElementById("writingInput");
+
+      if(input){
+        input.value=text;
+        input.focus();
+      }
+
+      break;
+    }
+
+    case"speak-writing":{
+      if(!activeWriting) break;
+
+      const p=getPractice(activeWriting.dateKey);
+      speak(p[activeWriting.sessionKey].text);
+      break;
+    }
+
+    case"complete-writing":
+      completeWriting();
+      break;
+
+    case"use-selected-note":{
+      const session=actionEl.dataset.session;
+      const select=document.querySelector(
+        `select[data-action="copy-note-select"][data-session="${session}"]`
+      );
+
+      if(!select || !select.value){
+        showToast("အရင်ဆုံး Note ရွေးပါ");
+        return;
+      }
+
+      useNote(select.value,session);
+      break;
+    }
+
+    case"copy-selected-note":{
+      if(state.selectedNoteId){
+        useNote(state.selectedNoteId,actionEl.dataset.session);
+      }
+      break;
+    }
+
+    case"reset-session":{
+      const session=actionEl.dataset.session;
+
+      if(!confirm(`${SESSION_CONFIG[session].label} writings reset လုပ်မလား?`)){
+        return;
+      }
+
+      const p=getPractice(currentDate);
+
+      p[session].writings=[];
+      p[session].completed=false;
+
+      save();
+      renderView(currentView);
+
+      showToast("Session reset");
+      break;
+    }
+
+    case"copy-note-select":
+      break;
+
+    case"library-save":{
+      const item=window.manifestLibrary?.[Number(actionEl.dataset.index)];
+
+      if(!item) break;
+
+      const note={
+        id:uid(),
+        title:item[0],
+        category:item[1],
+        text:item[2],
+        favorite:false,
+        createdAt:new Date().toISOString(),
+        updatedAt:new Date().toISOString()
+      };
+
+      state.notes.push(note);
+      state.selectedNoteId=note.id;
+
+      save();
+
+      showToast("Saved to My Notes ✓");
+      break;
+    }
+
+    case"library-use":{
+      const item=window.manifestLibrary?.[Number(actionEl.dataset.index)];
+
+      if(!item) break;
+
+      const p=getPractice(currentDate);
+
+      p.morning.text=item[2];
+
+      save();
+
+      showToast("Morning အတွက် affirmation ထည့်ပြီးပါပြီ");
+
+      setView("practice");
+      break;
+    }
+
+    case"build-manifest":{
+      const want=document.getElementById("builderWant").value.trim();
+      const feel=document.getElementById("builderFeel").value.trim();
+      const why=document.getElementById("builderWhy").value.trim();
+
+      if(!want){
+        showToast("What do you want? ဖြည့်ပါ");
+        return;
+      }
+
+      let result=
+        `ကျွန်တော်/ကျွန်မ ${want} ကို တန်ဖိုးရှိစွာ ရရှိခံစားနေပြီး `+
+        `${feel || "ယုံကြည်မှုနဲ့ စိတ်အေးချမ်းမှု"} နဲ့ နေ့စဉ်ရှေ့ဆက်နေပါတယ်`;
+
+      if(why){
+        result+=` ${why} အတွက် ကျေးဇူးတင်ရှိပါတယ်`;
+      }
+
+      window.builderResult=result;
+
+      document.getElementById("builderResult").textContent=result;
+
+      const saveBtn=document.querySelector("[data-action='save-builder']");
+
+      if(saveBtn){
+        saveBtn.disabled=false;
+      }
+
+      break;
+    }
+
+    case"save-builder":
+      saveBuilder();
+      break;
+
+    case"add-goal":
+      addGoal();
+      break;
+
+    case"goal-plus":{
+      const g=state.goals.find(x=>x.id===actionEl.dataset.id);
+
+      if(g){
+        g.current=Math.min(g.target,g.current+(g.target*.1));
+        save();
+        renderGoals();
+      }
+
+      break;
+    }
+
+    case"delete-goal":
+      state.goals=state.goals.filter(
+        x=>x.id!==actionEl.dataset.id
+      );
+
+      save();
+      renderGoals();
+      break;
+
+    case"toggle-reminder":
+      state.settings.reminder=!state.settings.reminder;
+      save();
+      renderSettings();
+      showToast(
+        state.settings.reminder
+        ?"Reminder preference ON"
+        :"Reminder preference OFF"
+      );
+      break;
+
+    case"export-json":
+      exportJSON();
+      break;
+
+    case"export-text":
+      exportText();
+      break;
+
+    case"print":
+      window.print();
+      break;
+
+    case"import-json":
+      importJSON();
+      break;
+
+    case"reset-all":
+      resetAll();
+      break;
+
+    case"history-prev":
+      window.historyMonth=(window.historyMonth ?? new Date().getMonth())-1;
+      if(window.historyMonth<0){
+        window.historyMonth=11;
+        window.historyYear=(window.historyYear ?? new Date().getFullYear())-1;
+      }
+      renderHistory();
+      break;
+
+    case"history-next":
+      window.historyMonth=(window.historyMonth ?? new Date().getMonth())+1;
+      if(window.historyMonth>11){
+        window.historyMonth=0;
+        window.historyYear=(window.historyYear ?? new Date().getFullYear())+1;
+      }
+      renderHistory();
+      break;
+
+    case"history-today":{
+      const now=new Date();
+      window.historyYear=now.getFullYear();
+      window.historyMonth=now.getMonth();
+      renderHistory();
+      break;
+    }
+
+    case"start-timer":
+      startTimer(Number(actionEl.dataset.seconds));
+      break;
+
+    case"stop-timer":
+      stopTimer();
+      break;
+  }
 });
 
-
-/* =========================================================
-   FINAL INIT
-   ========================================================= */
-
-window.addEventListener("beforeunload",()=>{
-  saveState();
+document.getElementById("modalBackdrop").addEventListener("click",e=>{
+  if(e.target.id==="modalBackdrop"){
+    closeModal();
+  }
 });
+
+document.addEventListener("change",e=>{
+  const el=e.target;
+
+  if(el.matches("[data-action='copy-note-select']")){
+    const session=el.dataset.session;
+
+    if(el.value){
+      useNote(el.value,session);
+    }
+  }
+});
+
+document.getElementById("importFile")?.addEventListener("change",e=>{
+  handleImport(e.target.files[0]);
+  e.target.value="";
+});
+
+function init(){
+  currentDate=todayKey();
+
+  document.getElementById("topDate").textContent=formatDate(currentDate);
+
+  getPractice(currentDate);
+
+  save();
+
+  renderView("dashboard");
+}
+
+init();
 
 </script>
-
 </body>
 </html>
