@@ -4,27 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#09070f">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>369 — Manifest & Build</title>
+<meta name="description" content="369 Manifestation — Write It • Feel It • Believe It • Build It">
+<title>369 Manifestation</title>
 
 <style>
 :root{
   --bg:#09070f;
-  --bg2:#100c18;
-  --panel:#15101f;
-  --panel2:#1b1527;
-  --panel3:#211a2e;
-  --text:#f7f3ff;
-  --muted:#a8a0b7;
-  --muted2:#776f86;
-  --gold:#e5b86b;
-  --gold2:#f5d99d;
-  --purple:#9d7aff;
-  --purple2:#7654d9;
-  --green:#57d69a;
-  --red:#ff6d7f;
-  --border:rgba(255,255,255,.08);
-  --shadow:0 25px 70px rgba(0,0,0,.35);
+  --bg2:#100d19;
+  --panel:#15111f;
+  --panel2:#1b1628;
+  --panel3:#211a30;
+  --gold:#f5c96a;
+  --gold2:#ffe3a0;
+  --purple:#9b7cff;
+  --purple2:#c3b3ff;
+  --text:#f7f4fb;
+  --muted:#a9a1b8;
+  --line:rgba(255,255,255,.08);
+  --success:#69d39b;
+  --danger:#ff7474;
+  --warning:#f2b866;
+  --shadow:0 20px 60px rgba(0,0,0,.35);
   --radius:22px;
 }
 
@@ -39,18 +39,13 @@ html{
 }
 
 body{
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Noto Sans Myanmar",
-    "Myanmar Text",
-    sans-serif;
+  min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Myanmar","Myanmar Text",Arial,sans-serif;
   background:
-    radial-gradient(circle at 80% -10%,rgba(157,122,255,.14),transparent 30%),
-    radial-gradient(circle at 10% 20%,rgba(229,184,107,.08),transparent 25%),
+    radial-gradient(circle at 75% 0%,rgba(155,124,255,.12),transparent 28%),
+    radial-gradient(circle at 15% 20%,rgba(245,201,106,.07),transparent 25%),
     var(--bg);
   color:var(--text);
-  min-height:100vh;
   overflow-x:hidden;
 }
 
@@ -65,18 +60,13 @@ button{
   cursor:pointer;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible{
+  outline:2px solid var(--gold);
+  outline-offset:2px;
 }
-
-.hidden{
-  display:none!important;
-}
-
-/* =========================
-   APP SHELL
-========================= */
 
 .app{
   min-height:100vh;
@@ -87,1170 +77,966 @@ a{
   left:0;
   top:0;
   bottom:0;
-  width:270px;
+  width:268px;
   padding:24px 16px;
-  background:rgba(12,9,18,.92);
-  backdrop-filter:blur(24px);
-  border-right:1px solid var(--border);
+  background:rgba(13,10,20,.94);
+  border-right:1px solid var(--line);
+  backdrop-filter:blur(18px);
   z-index:50;
-  display:flex;
-  flex-direction:column;
+  overflow-y:auto;
 }
 
 .brand{
   display:flex;
   align-items:center;
   gap:12px;
-  padding:4px 10px 26px;
+  padding:8px 10px 28px;
 }
 
-.brand-mark{
-  width:44px;
-  height:44px;
-  border-radius:15px;
+.logo{
+  width:48px;
+  height:48px;
+  border-radius:16px;
   display:grid;
   place-items:center;
-  background:
-    linear-gradient(145deg,var(--gold2),var(--gold));
-  color:#17100a;
+  font-weight:900;
   font-size:20px;
-  font-weight:900;
-  box-shadow:
-    0 8px 30px rgba(229,184,107,.2);
+  color:#15100a;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  box-shadow:0 10px 30px rgba(245,201,106,.2);
 }
 
-.brand-name{
-  font-size:19px;
-  font-weight:900;
-  letter-spacing:.5px;
+.brand-text strong{
+  display:block;
+  font-size:18px;
+  letter-spacing:.8px;
 }
 
-.brand-sub{
-  color:var(--muted2);
+.brand-text span{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.nav-section{
+  margin:18px 10px 8px;
+  color:#746c82;
   font-size:10px;
-  margin-top:2px;
-  letter-spacing:1.5px;
   text-transform:uppercase;
+  letter-spacing:1.5px;
+  font-weight:800;
 }
 
 .nav{
   display:flex;
   flex-direction:column;
   gap:5px;
-  overflow:auto;
-}
-
-.nav-label{
-  color:var(--muted2);
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  padding:16px 12px 7px;
 }
 
 .nav-btn{
-  border:0;
+  border:1px solid transparent;
   background:transparent;
-  color:var(--muted);
+  color:#bdb5ca;
+  min-height:46px;
   width:100%;
-  min-height:45px;
-  padding:0 12px;
-  border-radius:13px;
+  border-radius:14px;
+  padding:0 13px;
   display:flex;
   align-items:center;
-  gap:11px;
+  gap:12px;
   text-align:left;
-  transition:.2s ease;
+  transition:.2s;
 }
 
 .nav-btn:hover{
   background:rgba(255,255,255,.045);
-  color:var(--text);
+  color:white;
 }
 
 .nav-btn.active{
-  color:var(--text);
-  background:
-    linear-gradient(90deg,rgba(157,122,255,.18),rgba(157,122,255,.05));
-  box-shadow:inset 3px 0 0 var(--purple);
+  color:var(--gold2);
+  background:linear-gradient(90deg,rgba(245,201,106,.12),rgba(155,124,255,.08));
+  border-color:rgba(245,201,106,.12);
 }
 
 .nav-icon{
   width:24px;
   text-align:center;
-  font-size:16px;
-}
-
-.nav-text{
-  font-size:13px;
-  font-weight:700;
+  font-size:17px;
 }
 
 .sidebar-bottom{
-  margin-top:auto;
-  padding:15px 8px 2px;
-  border-top:1px solid var(--border);
+  margin-top:28px;
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:linear-gradient(145deg,rgba(245,201,106,.06),rgba(155,124,255,.05));
 }
 
-.mini-profile{
-  display:flex;
-  align-items:center;
-  gap:10px;
+.mini-label{
+  color:var(--muted);
+  font-size:11px;
 }
 
-.avatar{
-  width:38px;
-  height:38px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(145deg,#292038,#171122);
-  border:1px solid var(--border);
-  color:var(--gold2);
-  font-weight:900;
-}
-
-.profile-name{
-  font-size:12px;
+.mini-value{
+  margin-top:6px;
   font-weight:800;
-}
-
-.profile-sub{
-  font-size:10px;
-  color:var(--muted2);
-  margin-top:2px;
+  font-size:14px;
 }
 
 .main{
-  margin-left:270px;
+  margin-left:268px;
   min-height:100vh;
-  padding:28px 30px 50px;
+  padding:26px;
 }
 
-.topbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:28px;
-}
-
-.page-title{
-  font-size:29px;
-  font-weight:900;
-  letter-spacing:-.7px;
-}
-
-.page-subtitle{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:5px;
-}
-
-.top-actions{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-.icon-btn,
-.ghost-btn,
-.primary-btn,
-.gold-btn,
-.danger-btn{
-  border:1px solid var(--border);
-  border-radius:13px;
-  min-height:42px;
-  padding:0 15px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  color:var(--text);
-  transition:.2s ease;
-}
-
-.icon-btn{
-  width:42px;
-  padding:0;
-  background:var(--panel);
-}
-
-.icon-btn:hover,
-.ghost-btn:hover{
-  background:var(--panel2);
-  transform:translateY(-1px);
-}
-
-.ghost-btn{
-  background:transparent;
-}
-
-.primary-btn{
-  background:linear-gradient(135deg,var(--purple),var(--purple2));
-  border-color:transparent;
-  font-weight:800;
-  box-shadow:0 8px 25px rgba(118,84,217,.25);
-}
-
-.primary-btn:hover{
-  transform:translateY(-1px);
-  filter:brightness(1.06);
-}
-
-.gold-btn{
-  background:linear-gradient(135deg,var(--gold2),var(--gold));
-  color:#1a1209;
-  border-color:transparent;
-  font-weight:900;
-  box-shadow:0 8px 25px rgba(229,184,107,.18);
-}
-
-.danger-btn{
-  color:#ff9aa8;
-  background:rgba(255,109,127,.06);
-}
-
-.mobile-menu{
+.mobile-header{
   display:none;
 }
-
-/* =========================
-   VIEWS
-========================= */
 
 .view{
   display:none;
-  animation:fadeIn .22s ease;
+  max-width:1400px;
+  margin:0 auto;
 }
 
 .view.active{
   display:block;
 }
 
-@keyframes fadeIn{
-  from{
-    opacity:0;
-    transform:translateY(5px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-/* =========================
-   COMMON CARDS
-========================= */
-
-.card{
-  background:
-    linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.015));
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-}
-
-.card-pad{
-  padding:21px;
-}
-
-.section-head{
+.page-head{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
-  gap:15px;
-  margin-bottom:16px;
+  gap:20px;
+  margin-bottom:24px;
 }
 
-.section-title{
-  font-size:16px;
-  font-weight:900;
+.page-head h1{
+  font-size:30px;
+  line-height:1.15;
+  letter-spacing:-.5px;
 }
 
-.section-sub{
+.page-head p{
   color:var(--muted);
-  font-size:12px;
-  margin-top:4px;
-  line-height:1.55;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:26px;
-  padding:0 10px;
-  border-radius:999px;
-  background:rgba(157,122,255,.12);
-  border:1px solid rgba(157,122,255,.18);
-  color:#cdbfff;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:.5px;
-}
-
-.gold-badge{
-  background:rgba(229,184,107,.11);
-  border-color:rgba(229,184,107,.18);
-  color:var(--gold2);
-}
-
-.green-badge{
-  background:rgba(87,214,154,.1);
-  border-color:rgba(87,214,154,.16);
-  color:#8be7bb;
-}
-
-/* =========================
-   DASHBOARD
-========================= */
-
-.hero{
-  position:relative;
-  overflow:hidden;
-  padding:28px;
-  border-radius:28px;
-  background:
-    radial-gradient(circle at 85% 20%,rgba(157,122,255,.2),transparent 30%),
-    radial-gradient(circle at 15% 100%,rgba(229,184,107,.1),transparent 30%),
-    linear-gradient(145deg,#171126,#0f0b17);
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  margin-bottom:18px;
-}
-
-.hero::after{
-  content:"369";
-  position:absolute;
-  right:-15px;
-  bottom:-45px;
-  font-size:180px;
-  font-weight:1000;
-  line-height:1;
-  color:rgba(255,255,255,.025);
-  pointer-events:none;
-}
-
-.hero-content{
-  position:relative;
-  z-index:1;
-  max-width:690px;
+  margin-top:8px;
+  font-size:14px;
+  line-height:1.6;
 }
 
 .eyebrow{
   color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:1.8px;
   font-size:10px;
   font-weight:900;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  margin-bottom:10px;
+  margin-bottom:8px;
+}
+
+.btn{
+  min-height:44px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:0 16px;
+  color:var(--text);
+  background:var(--panel2);
+  transition:.2s;
+  font-weight:700;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+  border-color:rgba(245,201,106,.3);
+}
+
+.btn.primary{
+  color:#171107;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  border-color:transparent;
+}
+
+.btn.purple{
+  background:linear-gradient(135deg,#a78bfa,#7c5cff);
+  color:white;
+  border:0;
+}
+
+.btn.success{
+  color:#07150d;
+  background:var(--success);
+  border:0;
+}
+
+.btn.danger{
+  color:#ffd1d1;
+  background:rgba(255,116,116,.08);
+  border-color:rgba(255,116,116,.2);
+}
+
+.btn.small{
+  min-height:36px;
+  padding:0 12px;
+  font-size:12px;
+}
+
+.btn.full{
+  width:100%;
+}
+
+.grid{
+  display:grid;
+  gap:16px;
+}
+
+.stats-grid{
+  grid-template-columns:repeat(5,1fr);
+  margin-bottom:18px;
+}
+
+.stat{
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018));
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+.stat-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.stat-icon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:rgba(245,201,106,.08);
+  color:var(--gold);
+}
+
+.stat-label{
+  margin-top:15px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.stat-value{
+  margin-top:5px;
+  font-size:26px;
+  font-weight:900;
+}
+
+.stat-sub{
+  color:#81788e;
+  font-size:11px;
+  margin-top:4px;
+}
+
+.card{
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:22px;
+}
+
+.card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.card-head h2{
+  font-size:17px;
+}
+
+.card-head p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.dashboard-main{
+  grid-template-columns:1.35fr .65fr;
+}
+
+.hero{
+  min-height:300px;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(155,124,255,.2),transparent 28%),
+    radial-gradient(circle at 15% 80%,rgba(245,201,106,.12),transparent 32%),
+    var(--panel);
+}
+
+.hero-369{
+  position:absolute;
+  right:28px;
+  bottom:-25px;
+  font-size:170px;
+  font-weight:1000;
+  line-height:1;
+  color:rgba(245,201,106,.045);
+  letter-spacing:-12px;
 }
 
 .hero h2{
   font-size:32px;
+  max-width:620px;
   line-height:1.15;
-  letter-spacing:-1px;
-  margin-bottom:10px;
+  position:relative;
 }
 
 .hero p{
   color:var(--muted);
+  max-width:650px;
+  margin-top:12px;
   line-height:1.7;
-  font-size:13px;
-  max-width:590px;
+  position:relative;
 }
 
 .hero-actions{
   display:flex;
   flex-wrap:wrap;
   gap:9px;
-  margin-top:20px;
+  margin-top:24px;
+  position:relative;
 }
 
-.stats-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-  margin-bottom:18px;
+.progress-wrap{
+  margin-top:22px;
 }
 
-.stat-card{
-  padding:17px;
-  min-height:120px;
+.progress-row{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.progress-row span:first-child{
+  color:var(--muted);
+}
+
+.progress-track{
+  width:100%;
+  height:10px;
+  border-radius:20px;
+  background:#282131;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--purple),var(--gold));
+  transition:.35s;
+}
+
+.session-grid{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.session{
+  padding:20px;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.025);
   position:relative;
   overflow:hidden;
 }
 
-.stat-icon{
-  width:34px;
-  height:34px;
-  border-radius:11px;
-  display:grid;
-  place-items:center;
-  background:rgba(157,122,255,.1);
-  color:#cdbfff;
-  margin-bottom:14px;
+.session.completed{
+  border-color:rgba(105,211,155,.28);
+  background:rgba(105,211,155,.05);
 }
 
-.stat-label{
+.session-number{
+  font-size:42px;
+  font-weight:1000;
+  color:var(--gold);
+  line-height:1;
+}
+
+.session h3{
+  margin-top:14px;
+  font-size:16px;
+}
+
+.session p{
+  margin-top:5px;
   color:var(--muted);
-  font-size:11px;
-}
-
-.stat-value{
-  font-size:24px;
-  font-weight:950;
-  margin-top:3px;
-  letter-spacing:-.5px;
-}
-
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:1.15fr .85fr;
-  gap:18px;
-}
-
-.progress-ring-wrap{
-  display:flex;
-  align-items:center;
-  gap:20px;
-}
-
-.progress-ring{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  background:
-    conic-gradient(var(--gold) var(--progress,0%),rgba(255,255,255,.06) 0);
-  display:grid;
-  place-items:center;
-  flex:none;
-  position:relative;
-}
-
-.progress-ring::before{
-  content:"";
-  width:92px;
-  height:92px;
-  border-radius:50%;
-  background:var(--panel);
-  position:absolute;
-}
-
-.progress-ring-content{
-  position:relative;
-  text-align:center;
-}
-
-.progress-ring-number{
-  font-size:25px;
-  font-weight:950;
-}
-
-.progress-ring-small{
-  color:var(--muted);
-  font-size:9px;
-  margin-top:2px;
-}
-
-.session-list{
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-  width:100%;
-}
-
-.session-item{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:12px 13px;
-  border:1px solid var(--border);
-  border-radius:14px;
-  background:rgba(255,255,255,.018);
-}
-
-.session-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.session-dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:var(--muted2);
-}
-
-.session-item.complete .session-dot{
-  background:var(--green);
-  box-shadow:0 0 14px rgba(87,214,154,.45);
-}
-
-.session-name{
   font-size:12px;
-  font-weight:800;
 }
 
 .session-count{
-  font-size:11px;
-  color:var(--muted);
-}
-
-.selected-note{
   margin-top:16px;
-  padding:16px;
-  border-radius:17px;
-  background:
-    linear-gradient(135deg,rgba(229,184,107,.08),rgba(157,122,255,.06));
-  border:1px solid rgba(229,184,107,.12);
-}
-
-.selected-note-label{
-  color:var(--gold);
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-bottom:7px;
-}
-
-.selected-note-title{
-  font-size:15px;
+  font-size:24px;
   font-weight:900;
 }
 
-.selected-note-text{
+.session-status{
+  margin-top:4px;
   color:var(--muted);
-  font-size:12px;
-  line-height:1.65;
-  margin-top:7px;
+  font-size:11px;
 }
 
-/* =========================
-   NOTES
-========================= */
+.session .btn{
+  margin-top:16px;
+}
 
-.note-toolbar{
+.sentence-box{
+  border:1px solid rgba(245,201,106,.16);
+  background:linear-gradient(135deg,rgba(245,201,106,.07),rgba(155,124,255,.05));
+  border-radius:18px;
+  padding:18px;
+}
+
+.sentence-title{
+  color:var(--gold);
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.sentence-text{
+  margin-top:9px;
+  font-size:18px;
+  line-height:1.8;
+  font-weight:700;
+}
+
+.empty{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--muted);
+}
+
+.empty-icon{
+  font-size:42px;
+  margin-bottom:12px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.field.full-width{
+  grid-column:1/-1;
+}
+
+.field label{
+  color:#c9c2d3;
+  font-size:12px;
+  font-weight:700;
+}
+
+.input,
+.textarea,
+.select{
+  width:100%;
+  border:1px solid var(--line);
+  background:#0f0c17;
+  color:var(--text);
+  border-radius:14px;
+  padding:13px 14px;
+  min-height:45px;
+}
+
+.textarea{
+  resize:vertical;
+  min-height:120px;
+  line-height:1.7;
+}
+
+.input::placeholder,
+.textarea::placeholder{
+  color:#5f576c;
+}
+
+.form-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
+  margin-top:16px;
+}
+
+.notes-toolbar{
   display:flex;
   gap:10px;
   margin-bottom:16px;
 }
 
-.search-box{
+.notes-toolbar .input{
   flex:1;
-  position:relative;
 }
 
-.search-box span{
-  position:absolute;
-  left:14px;
-  top:50%;
-  transform:translateY(-50%);
-  color:var(--muted2);
-}
-
-.input,
-.select,
-.textarea{
-  width:100%;
-  background:#0f0b16;
-  color:var(--text);
-  border:1px solid var(--border);
-  outline:none;
-  border-radius:14px;
-  transition:.2s ease;
-}
-
-.input,
-.select{
-  height:46px;
-  padding:0 14px;
-}
-
-.search-box .input{
-  padding-left:40px;
-}
-
-.textarea{
-  padding:13px 14px;
-  min-height:120px;
-  resize:vertical;
-  line-height:1.7;
-}
-
-.input:focus,
-.select:focus,
-.textarea:focus{
-  border-color:rgba(157,122,255,.55);
-  box-shadow:0 0 0 3px rgba(157,122,255,.08);
-}
-
-.notes-grid{
+.note-list{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:13px;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
 }
 
-.note-card{
+.note{
+  border:1px solid var(--line);
+  border-radius:20px;
   padding:18px;
-  position:relative;
-  min-height:205px;
-  display:flex;
-  flex-direction:column;
+  background:rgba(255,255,255,.025);
+  transition:.2s;
 }
 
-.note-card.today{
-  border-color:rgba(229,184,107,.28);
-  box-shadow:0 12px 40px rgba(229,184,107,.06);
+.note:hover{
+  border-color:rgba(245,201,106,.2);
+}
+
+.note.selected{
+  border-color:rgba(245,201,106,.4);
+  box-shadow:0 0 0 1px rgba(245,201,106,.08);
 }
 
 .note-top{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
-  gap:10px;
+  gap:12px;
 }
 
 .note-title{
-  font-size:15px;
   font-weight:900;
-  line-height:1.35;
 }
 
-.favorite-btn{
+.favorite{
   border:0;
   background:transparent;
-  color:var(--muted2);
-  font-size:18px;
-  padding:0;
+  color:#645b6f;
+  font-size:20px;
 }
 
-.favorite-btn.active{
+.favorite.on{
   color:var(--gold);
 }
 
 .note-text{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.7;
-  margin-top:13px;
-  display:-webkit-box;
-  -webkit-line-clamp:4;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
+  color:#d4cedc;
+  line-height:1.75;
+  margin-top:12px;
+  font-size:14px;
 }
 
 .note-meta{
-  color:var(--muted2);
-  font-size:9px;
-  margin-top:auto;
-  padding-top:14px;
+  color:#746c7d;
+  font-size:10px;
+  margin-top:12px;
 }
 
 .note-actions{
   display:flex;
+  flex-wrap:wrap;
   gap:7px;
-  margin-top:13px;
+  margin-top:15px;
 }
 
-.small-btn{
-  flex:1;
-  min-height:34px;
-  border-radius:10px;
-  border:1px solid var(--border);
+.guide-grid{
+  grid-template-columns:repeat(2,1fr);
+}
+
+.guide-card{
   background:rgba(255,255,255,.025);
-  color:var(--muted);
-  font-size:10px;
-  font-weight:800;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:20px;
 }
 
-.small-btn:hover{
-  color:var(--text);
-  background:rgba(255,255,255,.05);
-}
-
-.small-btn.primary{
-  background:rgba(157,122,255,.1);
-  color:#cdbfff;
-  border-color:rgba(157,122,255,.17);
-}
-
-.small-btn.gold{
-  background:rgba(229,184,107,.09);
-  color:var(--gold2);
-  border-color:rgba(229,184,107,.15);
-}
-
-.empty-state{
-  text-align:center;
-  padding:45px 20px;
-  color:var(--muted);
-}
-
-.empty-icon{
-  width:58px;
-  height:58px;
-  margin:0 auto 12px;
-  border-radius:19px;
+.guide-number{
+  width:36px;
+  height:36px;
   display:grid;
   place-items:center;
-  background:rgba(157,122,255,.08);
-  color:#cdbfff;
-  font-size:24px;
-}
-
-.empty-title{
-  color:var(--text);
-  font-size:15px;
+  border-radius:11px;
+  background:rgba(245,201,106,.1);
+  color:var(--gold);
   font-weight:900;
 }
 
-.empty-text{
-  font-size:11px;
-  margin-top:5px;
-  line-height:1.6;
-}
-
-/* =========================
-   PRACTICE
-========================= */
-
-.practice-top{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  margin-bottom:18px;
-}
-
-.selected-practice{
-  padding:21px;
-}
-
-.practice-sentence{
-  margin-top:15px;
-  padding:18px;
-  border-radius:17px;
-  background:rgba(229,184,107,.055);
-  border:1px solid rgba(229,184,107,.12);
-  color:var(--gold2);
-  font-size:15px;
-  font-weight:800;
-  line-height:1.8;
-}
-
-.practice-controls{
-  display:flex;
-  gap:8px;
+.guide-card h3{
   margin-top:14px;
+  font-size:16px;
 }
 
-.sessions-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-}
-
-.session-card{
-  padding:20px;
-  position:relative;
-  overflow:hidden;
-}
-
-.session-card.complete{
-  border-color:rgba(87,214,154,.2);
-}
-
-.session-number{
-  font-size:38px;
-  line-height:1;
-  font-weight:1000;
-  color:rgba(255,255,255,.12);
-  position:absolute;
-  right:15px;
-  top:13px;
-}
-
-.session-card h3{
-  font-size:17px;
-  font-weight:900;
-}
-
-.session-card p{
+.guide-card p,
+.guide-card li{
   color:var(--muted);
-  font-size:11px;
-  margin-top:5px;
+  line-height:1.75;
+  font-size:13px;
 }
 
-.session-progress{
-  height:7px;
-  border-radius:999px;
-  background:rgba(255,255,255,.06);
-  overflow:hidden;
-  margin:18px 0 10px;
+.guide-card p{
+  margin-top:8px;
 }
 
-.session-progress-fill{
-  height:100%;
-  width:0%;
-  border-radius:999px;
-  background:linear-gradient(90deg,var(--purple),var(--gold));
-  transition:.3s ease;
+.guide-card ul{
+  padding-left:20px;
+  margin-top:9px;
 }
 
-.session-count-big{
-  font-size:28px;
-  font-weight:950;
-}
-
-.session-count-big span{
-  color:var(--muted2);
-  font-size:14px;
-}
-
-.session-card .primary-btn,
-.session-card .gold-btn{
-  width:100%;
-  margin-top:14px;
-}
-
-/* =========================
-   GOALS
-========================= */
-
-.goals-grid{
+.example-list{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:13px;
+  gap:12px;
 }
 
-.goal-card{
-  padding:19px;
+.example{
+  border:1px solid var(--line);
+  background:#100d18;
+  border-radius:17px;
+  padding:16px;
 }
 
-.goal-head{
+.example-top{
   display:flex;
-  align-items:flex-start;
+  align-items:center;
   justify-content:space-between;
   gap:10px;
 }
 
-.goal-name{
-  font-size:15px;
+.example-category{
+  color:var(--gold);
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.example-text{
+  color:#e8e2ee;
+  line-height:1.8;
+  margin-top:8px;
+  font-size:14px;
+}
+
+.practice-layout{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:16px;
+}
+
+.practice-current{
+  position:sticky;
+  top:20px;
+  align-self:start;
+}
+
+.big-progress{
+  display:grid;
+  place-items:center;
+  width:170px;
+  height:170px;
+  margin:20px auto;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at center,var(--panel) 57%,transparent 58%),
+    conic-gradient(var(--gold) var(--progress),#30283b 0);
+}
+
+.big-progress-inner{
+  text-align:center;
+}
+
+.big-progress-number{
+  font-size:35px;
+  font-weight:1000;
+}
+
+.big-progress-label{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.practice-sessions{
+  display:grid;
+  gap:12px;
+}
+
+.practice-session{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(255,255,255,.025);
+}
+
+.practice-session.done{
+  border-color:rgba(105,211,155,.3);
+}
+
+.ps-number{
+  width:48px;
+  height:48px;
+  flex:none;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:rgba(245,201,106,.08);
+  color:var(--gold);
+  font-size:20px;
+  font-weight:1000;
+}
+
+.ps-info{
+  flex:1;
+}
+
+.ps-info strong{
+  display:block;
+  font-size:14px;
+}
+
+.ps-info span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.ps-count{
+  font-weight:900;
+  font-size:14px;
+}
+
+.goal-list{
+  display:grid;
+  gap:12px;
+}
+
+.goal{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:17px;
+}
+
+.goal-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.goal-title{
   font-weight:900;
 }
 
 .goal-category{
-  color:var(--muted2);
+  color:var(--gold);
   font-size:10px;
+  text-transform:uppercase;
   margin-top:4px;
 }
 
-.goal-target{
-  margin-top:17px;
-  font-size:27px;
-  font-weight:950;
-}
-
-.goal-bar{
-  height:7px;
-  background:rgba(255,255,255,.06);
-  border-radius:999px;
-  margin-top:11px;
-  overflow:hidden;
-}
-
-.goal-fill{
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,var(--purple),var(--gold));
-  border-radius:999px;
-}
-
-.goal-bottom{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:9px;
-  color:var(--muted);
-  font-size:10px;
+.goal-progress{
+  margin-top:13px;
 }
 
 .goal-actions{
   display:flex;
   gap:7px;
-  margin-top:13px;
+  margin-top:12px;
 }
 
-/* =========================
-   JOURNAL / VISION
-========================= */
+.journal-layout,
+.vision-layout{
+  max-width:900px;
+}
 
-.two-col{
+.achievement-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
 }
 
-.field{
-  margin-bottom:14px;
+.badge{
+  padding:20px;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.025);
+  text-align:center;
+  opacity:.45;
 }
 
-.field:last-child{
-  margin-bottom:0;
+.badge.unlocked{
+  opacity:1;
+  border-color:rgba(245,201,106,.28);
+  background:linear-gradient(145deg,rgba(245,201,106,.08),rgba(155,124,255,.05));
 }
 
-.field label{
-  display:block;
+.badge-icon{
+  font-size:35px;
+}
+
+.badge h3{
+  margin-top:10px;
+  font-size:13px;
+}
+
+.badge p{
   color:var(--muted);
   font-size:10px;
-  font-weight:800;
-  margin-bottom:7px;
+  margin-top:5px;
+  line-height:1.5;
 }
 
-.vision-card{
-  min-height:220px;
-}
-
-.big-quote{
-  font-size:24px;
-  color:var(--gold);
-  margin-bottom:9px;
-}
-
-.vision-display{
-  color:var(--muted);
-  line-height:1.8;
-  font-size:13px;
-  white-space:pre-wrap;
-}
-
-/* =========================
-   HISTORY
-========================= */
-
-.history-grid{
+.history-summary{
   display:grid;
-  grid-template-columns:1fr .85fr;
-  gap:17px;
-}
-
-.calendar{
-  padding:20px;
-}
-
-.calendar-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
   margin-bottom:16px;
 }
 
-.month-title{
-  font-size:15px;
-  font-weight:900;
+.month-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
 }
 
-.calendar-weekdays,
-.calendar-days{
+.month-header h2{
+  font-size:18px;
+}
+
+.calendar{
   display:grid;
   grid-template-columns:repeat(7,1fr);
-  gap:6px;
+  gap:7px;
 }
 
-.calendar-weekdays div{
+.weekday{
   text-align:center;
-  color:var(--muted2);
-  font-size:9px;
-  padding-bottom:4px;
+  color:#6f667a;
+  font-size:10px;
+  padding:5px;
 }
 
 .day{
-  min-height:49px;
-  border-radius:11px;
-  border:1px solid transparent;
-  background:rgba(255,255,255,.018);
-  padding:6px;
+  min-height:65px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#100d17;
+  padding:8px;
   position:relative;
 }
 
-.day.empty{
-  background:transparent;
-}
-
-.day.today{
-  border-color:rgba(229,184,107,.4);
-}
-
-.day.complete{
-  background:rgba(87,214,154,.08);
-  border-color:rgba(87,214,154,.13);
+.day.empty-day{
+  opacity:0;
+  border:0;
+  pointer-events:none;
 }
 
 .day-number{
-  font-size:10px;
-  font-weight:800;
+  font-size:11px;
+  color:#a59cab;
 }
 
 .day-count{
   position:absolute;
-  right:6px;
-  bottom:5px;
-  color:var(--muted2);
-  font-size:8px;
-}
-
-.history-stats{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.history-stat{
-  padding:16px;
-}
-
-.history-stat-label{
-  color:var(--muted);
+  right:7px;
+  bottom:6px;
   font-size:10px;
+  font-weight:800;
+  color:#756b80;
 }
 
-.history-stat-value{
-  font-size:25px;
-  font-weight:950;
-  margin-top:4px;
+.day.partial{
+  background:rgba(245,201,106,.07);
+  border-color:rgba(245,201,106,.15);
 }
 
-.month-nav{
-  display:flex;
-  gap:5px;
+.day.complete{
+  background:rgba(105,211,155,.09);
+  border-color:rgba(105,211,155,.28);
 }
 
-/* =========================
-   ACHIEVEMENTS
-========================= */
-
-.achievements-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:13px;
+.day.today{
+  box-shadow:inset 0 0 0 1px var(--gold);
 }
-
-.achievement{
-  padding:20px;
-  text-align:center;
-  min-height:175px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  opacity:.48;
-  filter:grayscale(.6);
-}
-
-.achievement.unlocked{
-  opacity:1;
-  filter:none;
-  border-color:rgba(229,184,107,.18);
-}
-
-.achievement-icon{
-  width:58px;
-  height:58px;
-  border-radius:20px;
-  display:grid;
-  place-items:center;
-  font-size:25px;
-  background:rgba(229,184,107,.08);
-  border:1px solid rgba(229,184,107,.1);
-}
-
-.achievement-title{
-  margin-top:11px;
-  font-size:13px;
-  font-weight:900;
-}
-
-.achievement-desc{
-  color:var(--muted);
-  font-size:9px;
-  line-height:1.5;
-  margin-top:4px;
-}
-
-/* =========================
-   SETTINGS
-========================= */
 
 .settings-list{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
+  display:grid;
+  gap:12px;
 }
 
-.setting-row{
+.setting{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:15px;
+  gap:20px;
   padding:17px;
-  border:1px solid var(--border);
-  border-radius:15px;
-  background:rgba(255,255,255,.018);
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:rgba(255,255,255,.025);
 }
 
-.setting-info strong{
+.setting strong{
   display:block;
   font-size:13px;
 }
 
-.setting-info span{
+.setting span{
   display:block;
   color:var(--muted);
-  font-size:10px;
-  margin-top:3px;
+  font-size:11px;
+  margin-top:4px;
 }
 
 .toggle{
-  width:48px;
-  height:27px;
-  border-radius:999px;
+  width:50px;
+  height:28px;
   border:0;
-  background:#30283b;
+  border-radius:20px;
+  background:#302a39;
   padding:3px;
   flex:none;
 }
 
 .toggle span{
   display:block;
-  width:21px;
-  height:21px;
+  width:22px;
+  height:22px;
   border-radius:50%;
-  background:#8c8398;
-  transition:.2s ease;
+  background:#81798a;
+  margin:0;
+  transition:.2s;
 }
 
 .toggle.on{
-  background:rgba(157,122,255,.45);
+  background:rgba(245,201,106,.3);
 }
 
 .toggle.on span{
-  transform:translateX(21px);
-  background:#fff;
+  transform:translateX(22px);
+  background:var(--gold);
 }
-
-/* =========================
-   MODALS
-========================= */
 
 .modal-backdrop{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(12px);
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(10px);
   z-index:100;
   display:none;
   align-items:center;
@@ -1258,31 +1044,23 @@ a{
   padding:18px;
 }
 
-.modal-backdrop.show{
+.modal-backdrop.open{
   display:flex;
 }
 
 .modal{
-  width:min(560px,100%);
-  max-height:90vh;
+  width:min(700px,100%);
+  max-height:92vh;
   overflow:auto;
+  border:1px solid rgba(255,255,255,.1);
   border-radius:25px;
-  background:#120e1a;
-  border:1px solid var(--border);
-  box-shadow:0 40px 100px rgba(0,0,0,.6);
+  background:#110d19;
+  box-shadow:0 30px 100px rgba(0,0,0,.6);
   padding:22px;
-  animation:modalIn .2s ease;
 }
 
-@keyframes modalIn{
-  from{
-    opacity:0;
-    transform:translateY(10px) scale(.98);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
+.modal.writing{
+  width:min(760px,100%);
 }
 
 .modal-head{
@@ -1293,169 +1071,144 @@ a{
   margin-bottom:18px;
 }
 
-.modal-title{
-  font-size:19px;
-  font-weight:950;
+.modal-head h2{
+  font-size:21px;
 }
 
-.modal-sub{
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.6;
-  margin-top:4px;
+.close-btn{
+  width:38px;
+  height:38px;
+  border:1px solid var(--line);
+  background:#1a1524;
+  color:#ddd5e6;
+  border-radius:12px;
 }
 
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:11px;
-}
-
-.form-full{
-  grid-column:1/-1;
-}
-
-.modal-actions{
+.writing-session{
   display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:17px;
-}
-
-.writing-modal{
-  width:min(680px,100%);
-}
-
-.writing-mode-header{
-  display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:10px;
-}
-
-.writing-step{
-  color:var(--gold);
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.writing-progress-text{
-  color:var(--muted);
-  font-size:10px;
-}
-
-.writing-progress{
-  height:8px;
-  background:rgba(255,255,255,.06);
-  border-radius:999px;
-  overflow:hidden;
-  margin:16px 0;
-}
-
-.writing-progress-fill{
-  width:0;
-  height:100%;
-  background:linear-gradient(90deg,var(--purple),var(--gold));
-  transition:.25s ease;
-}
-
-.writing-sentence-box{
-  padding:19px;
-  border-radius:18px;
-  background:
-    linear-gradient(135deg,rgba(229,184,107,.08),rgba(157,122,255,.07));
-  border:1px solid rgba(229,184,107,.13);
+  align-items:center;
+  gap:12px;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:16px;
   margin-bottom:14px;
 }
 
-.writing-sentence-label{
-  color:var(--gold);
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1px;
-  margin-bottom:7px;
-}
-
-.writing-sentence{
-  color:var(--gold2);
-  font-size:16px;
-  font-weight:800;
-  line-height:1.8;
-}
-
-.writing-input{
-  min-height:145px;
-  font-size:15px;
-}
-
-.match-hint{
-  color:var(--muted);
-  font-size:10px;
-  line-height:1.5;
-  margin-top:8px;
-}
-
-.modal-error{
-  display:none;
-  color:#ff9aa8;
-  background:rgba(255,109,127,.07);
-  border:1px solid rgba(255,109,127,.12);
-  padding:10px 12px;
-  border-radius:12px;
-  font-size:10px;
-  margin-top:10px;
-}
-
-.modal-error.show{
+.writing-session strong{
   display:block;
 }
 
-/* =========================
-   TOAST
-========================= */
+.writing-session span{
+  color:var(--muted);
+  font-size:11px;
+}
 
-.toast-wrap{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  z-index:200;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  pointer-events:none;
+.writing-progress{
+  margin-bottom:15px;
+}
+
+.writing-progress .progress-track{
+  height:8px;
+}
+
+.saved-reference{
+  border:1px solid rgba(245,201,106,.16);
+  background:rgba(245,201,106,.05);
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:14px;
+}
+
+.saved-reference small{
+  color:var(--gold);
+}
+
+.saved-reference p{
+  margin-top:6px;
+  color:#ddd5e6;
+  line-height:1.7;
+  font-size:13px;
+}
+
+.warning{
+  display:none;
+  border:1px solid rgba(242,184,102,.3);
+  background:rgba(242,184,102,.07);
+  color:#f4d4a0;
+  padding:12px;
+  border-radius:14px;
+  font-size:12px;
+  line-height:1.6;
+  margin-bottom:12px;
+}
+
+.warning.show{
+  display:block;
 }
 
 .toast{
-  max-width:330px;
-  padding:12px 15px;
-  border-radius:13px;
-  background:#211a2e;
-  border:1px solid var(--border);
-  box-shadow:0 15px 45px rgba(0,0,0,.4);
-  color:var(--text);
-  font-size:11px;
-  animation:toastIn .2s ease;
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:200;
+  max-width:360px;
+  background:#211b2d;
+  border:1px solid rgba(245,201,106,.2);
+  border-radius:15px;
+  padding:13px 16px;
+  color:#eee8f2;
+  box-shadow:var(--shadow);
+  transform:translateY(20px);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  font-size:12px;
 }
 
-@keyframes toastIn{
-  from{
-    opacity:0;
-    transform:translateY(7px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
 }
 
-/* =========================
-   MOBILE
-========================= */
-
-.mobile-bottom{
+.bottom-nav{
   display:none;
+}
+
+.divider{
+  height:1px;
+  background:var(--line);
+  margin:20px 0;
+}
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+.chip{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.025);
+  color:#bcb3c8;
+  border-radius:100px;
+  padding:7px 10px;
+  font-size:10px;
+}
+
+.notice{
+  border:1px solid rgba(155,124,255,.2);
+  background:rgba(155,124,255,.06);
+  border-radius:18px;
+  padding:15px;
+  color:#c9c0d7;
+  font-size:12px;
+  line-height:1.7;
+  margin-bottom:16px;
+}
+
+.notice strong{
+  color:var(--purple2);
 }
 
 @media(max-width:1100px){
@@ -1463,21 +1216,24 @@ a{
     grid-template-columns:repeat(3,1fr);
   }
 
-  .notes-grid,
-  .goals-grid{
-    grid-template-columns:repeat(2,1fr);
+  .dashboard-main,
+  .practice-layout{
+    grid-template-columns:1fr;
   }
 
-  .achievements-grid{
+  .practice-current{
+    position:static;
+  }
+
+  .achievement-grid{
     grid-template-columns:repeat(2,1fr);
   }
 }
 
-@media(max-width:800px){
+@media(max-width:900px){
   .sidebar{
-    transform:translateX(-100%);
-    transition:.25s ease;
-    box-shadow:30px 0 80px rgba(0,0,0,.5);
+    transform:translateX(-105%);
+    transition:.25s;
   }
 
   .sidebar.open{
@@ -1486,1511 +1242,1139 @@ a{
 
   .main{
     margin-left:0;
-    padding:18px 15px 100px;
+    padding:16px;
+    padding-bottom:90px;
   }
 
-  .mobile-menu{
-    display:inline-flex;
+  .mobile-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:18px;
   }
 
-  .page-title{
-    font-size:24px;
+  .mobile-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
   }
 
-  .topbar{
-    margin-bottom:20px;
+  .mobile-brand .logo{
+    width:39px;
+    height:39px;
+    border-radius:12px;
+    font-size:15px;
+  }
+
+  .mobile-brand strong{
+    font-size:15px;
+  }
+
+  .menu-btn{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    color:white;
+    background:var(--panel);
+  }
+
+  .bottom-nav{
+    position:fixed;
+    left:10px;
+    right:10px;
+    bottom:10px;
+    height:66px;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    background:rgba(17,13,25,.94);
+    border:1px solid var(--line);
+    border-radius:21px;
+    backdrop-filter:blur(18px);
+    z-index:60;
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
+  }
+
+  .bottom-btn{
+    border:0;
+    background:transparent;
+    color:#8d8499;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:3px;
+    font-size:9px;
+    min-width:55px;
+  }
+
+  .bottom-btn span:first-child{
+    font-size:18px;
+  }
+
+  .bottom-btn.active{
+    color:var(--gold);
+  }
+
+  .nav-desktop-only{
+    display:none;
+  }
+
+  .page-head h1{
+    font-size:25px;
+  }
+}
+
+@media(max-width:640px){
+  .stats-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .session-grid,
+  .note-list,
+  .guide-grid,
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .history-summary{
+    grid-template-columns:1fr;
+  }
+
+  .page-head{
+    flex-direction:column;
+  }
+
+  .page-head .btn{
+    width:100%;
   }
 
   .hero{
-    padding:22px;
-    border-radius:23px;
+    min-height:350px;
   }
 
   .hero h2{
     font-size:26px;
   }
 
-  .stats-grid{
-    grid-template-columns:repeat(2,1fr);
+  .hero-369{
+    font-size:110px;
   }
 
-  .dashboard-grid,
-  .practice-top,
-  .two-col,
-  .history-grid{
-    grid-template-columns:1fr;
-  }
-
-  .sessions-grid{
-    grid-template-columns:1fr;
-  }
-
-  .notes-grid,
-  .goals-grid{
-    grid-template-columns:1fr;
-  }
-
-  .mobile-bottom{
-    display:flex;
-    position:fixed;
-    left:10px;
-    right:10px;
-    bottom:10px;
-    height:65px;
-    z-index:60;
-    background:rgba(18,14,26,.92);
-    backdrop-filter:blur(20px);
-    border:1px solid var(--border);
-    border-radius:20px;
-    box-shadow:0 18px 50px rgba(0,0,0,.5);
-    align-items:center;
-    justify-content:space-around;
-  }
-
-  .mobile-nav-btn{
-    border:0;
-    background:transparent;
-    color:var(--muted2);
-    min-width:58px;
-    height:55px;
-    border-radius:14px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:3px;
-  }
-
-  .mobile-nav-btn.active{
-    color:var(--gold2);
-    background:rgba(229,184,107,.07);
-  }
-
-  .mobile-nav-icon{
-    font-size:16px;
-  }
-
-  .mobile-nav-text{
-    font-size:8px;
-    font-weight:800;
-  }
-}
-
-@media(max-width:480px){
-  .stats-grid{
-    gap:8px;
-  }
-
-  .stat-card{
-    padding:14px;
-    min-height:108px;
-  }
-
-  .stat-value{
-    font-size:21px;
-  }
-
-  .hero-actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-  }
-
-  .hero-actions button{
-    width:100%;
-  }
-
-  .note-toolbar{
-    flex-direction:column;
-  }
-
-  .progress-ring-wrap{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .progress-ring{
-    margin:auto;
-  }
-
-  .calendar-days,
-  .calendar-weekdays{
+  .calendar{
     gap:4px;
   }
 
   .day{
-    min-height:43px;
+    min-height:54px;
+    padding:6px;
   }
 
   .day-count{
-    display:none;
+    right:5px;
+    bottom:4px;
   }
 
-  .form-grid{
-    grid-template-columns:1fr;
+  .achievement-grid{
+    grid-template-columns:1fr 1fr;
   }
 
-  .form-full{
-    grid-column:auto;
+  .setting{
+    padding:14px;
+  }
+
+  .toast{
+    left:16px;
+    right:16px;
+    bottom:86px;
+  }
+
+  .modal{
+    padding:16px;
+    border-radius:20px;
   }
 }
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
-
     <div class="brand">
-      <div class="brand-mark">369</div>
-      <div>
-        <div class="brand-name">369</div>
-        <div class="brand-sub">Manifest & Build</div>
+      <div class="logo">369</div>
+      <div class="brand-text">
+        <strong>369 Manifest</strong>
+        <span>Write • Feel • Believe • Build</span>
       </div>
     </div>
 
+    <div class="nav-section">Main</div>
     <nav class="nav">
-
-      <div class="nav-label">Main</div>
-
-      <button class="nav-btn active" data-go="dashboard">
-        <span class="nav-icon">⌂</span>
-        <span class="nav-text">Dashboard</span>
+      <button class="nav-btn active" data-view="dashboard">
+        <span class="nav-icon">⌂</span><span>Dashboard</span>
       </button>
-
-      <button class="nav-btn" data-go="practice">
-        <span class="nav-icon">369</span>
-        <span class="nav-text">369 Practice</span>
+      <button class="nav-btn" data-view="practice">
+        <span class="nav-icon">✍</span><span>369 Practice</span>
       </button>
-
-      <button class="nav-btn" data-go="notes">
-        <span class="nav-icon">✎</span>
-        <span class="nav-text">My 369 Notes</span>
+      <button class="nav-btn" data-view="notes">
+        <span class="nav-icon">📝</span><span>My 369 Notes</span>
       </button>
-
-      <div class="nav-label">Growth</div>
-
-      <button class="nav-btn" data-go="goals">
-        <span class="nav-icon">◎</span>
-        <span class="nav-text">My Goals</span>
+      <button class="nav-btn" data-view="guide">
+        <span class="nav-icon">✨</span><span>Manifestation Guide</span>
       </button>
-
-      <button class="nav-btn" data-go="journal">
-        <span class="nav-icon">☷</span>
-        <span class="nav-text">Journal</span>
+      <button class="nav-btn" data-view="goals">
+        <span class="nav-icon">🎯</span><span>My Goals</span>
       </button>
+    </nav>
 
-      <button class="nav-btn" data-go="vision">
-        <span class="nav-icon">◈</span>
-        <span class="nav-text">My Vision</span>
+    <div class="nav-section">Personal</div>
+    <nav class="nav">
+      <button class="nav-btn" data-view="journal">
+        <span class="nav-icon">📖</span><span>Journal</span>
       </button>
-
-      <div class="nav-label">Progress</div>
-
-      <button class="nav-btn" data-go="history">
-        <span class="nav-icon">▦</span>
-        <span class="nav-text">History</span>
+      <button class="nav-btn" data-view="vision">
+        <span class="nav-icon">🔮</span><span>My Vision</span>
       </button>
-
-      <button class="nav-btn" data-go="achievements">
-        <span class="nav-icon">★</span>
-        <span class="nav-text">Achievements</span>
+      <button class="nav-btn" data-view="history">
+        <span class="nav-icon">◷</span><span>History</span>
       </button>
-
-      <div class="nav-label">System</div>
-
-      <button class="nav-btn" data-go="settings">
-        <span class="nav-icon">⚙</span>
-        <span class="nav-text">Settings</span>
+      <button class="nav-btn" data-view="achievements">
+        <span class="nav-icon">🏆</span><span>Achievements</span>
       </button>
+    </nav>
 
+    <div class="nav-section">System</div>
+    <nav class="nav">
+      <button class="nav-btn" data-view="settings">
+        <span class="nav-icon">⚙</span><span>Settings</span>
+      </button>
     </nav>
 
     <div class="sidebar-bottom">
-      <div class="mini-profile">
-        <div class="avatar">3</div>
-        <div>
-          <div class="profile-name">369 Journey</div>
-          <div class="profile-sub">Write • Feel • Believe • Build</div>
-        </div>
-      </div>
+      <div class="mini-label">Today's Practice</div>
+      <div class="mini-value" id="sideProgress">0 / 18 writings</div>
     </div>
-
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
 
-    <header class="topbar">
-
-      <div>
-        <div class="page-title" id="pageTitle">Dashboard</div>
-        <div class="page-subtitle" id="pageSubtitle">
-          Your daily manifestation practice
-        </div>
+    <div class="mobile-header">
+      <div class="mobile-brand">
+        <div class="logo">369</div>
+        <strong>369 Manifest</strong>
       </div>
+      <button class="menu-btn" id="menuBtn">☰</button>
+    </div>
 
-      <div class="top-actions">
-        <button class="icon-btn mobile-menu" id="menuBtn">☰</button>
-        <button class="gold-btn" id="quickNoteBtn">＋ New Note</button>
-      </div>
-
-    </header>
-
-    <!-- ================= DASHBOARD ================= -->
-
+    <!-- DASHBOARD -->
     <section class="view active" id="view-dashboard">
-
-      <div class="hero">
-
-        <div class="hero-content">
-
-          <div class="eyebrow">Daily 369 Practice</div>
-
-          <h2>Write it. Feel it. Believe it. Build it.</h2>
-
-          <p>
-            Create one powerful sentence, save it in your 369 Notes,
-            then practice it manually 3 times in the morning,
-            6 times in the afternoon and 9 times in the evening
-          </p>
-
-          <div class="hero-actions">
-            <button class="gold-btn" data-go="practice">
-              Start Today's 369
-            </button>
-
-            <button class="ghost-btn" data-go="notes">
-              Manage Notes
-            </button>
-          </div>
-
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Daily manifestation system</div>
+          <h1>Good energy starts with intention</h1>
+          <p>သင်လိုချင်တဲ့အရာကို ရှင်းလင်းစွာရေးပြီး နေ့စဉ် 3 / 6 / 9 စနစ်နဲ့ အာရုံစိုက်လေ့ကျင့်ပါ</p>
         </div>
-
+        <button class="btn primary" id="dashboardPracticeBtn">Start Today's 369</button>
       </div>
 
-      <div class="stats-grid">
-
-        <div class="card stat-card">
-          <div class="stat-icon">🔥</div>
+      <div class="grid stats-grid">
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-icon">🔥</span>
+          </div>
           <div class="stat-label">Current Streak</div>
           <div class="stat-value" id="statStreak">0</div>
+          <div class="stat-sub">completed days</div>
         </div>
 
-        <div class="card stat-card">
-          <div class="stat-icon">✓</div>
-          <div class="stat-label">Complete Days</div>
-          <div class="stat-value" id="statCompleteDays">0</div>
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-icon">✓</span>
+          </div>
+          <div class="stat-label">Completed Days</div>
+          <div class="stat-value" id="statCompleted">0</div>
+          <div class="stat-sub">18 / 18 days</div>
         </div>
 
-        <div class="card stat-card">
-          <div class="stat-icon">✎</div>
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-icon">✍</span>
+          </div>
           <div class="stat-label">Total Writings</div>
           <div class="stat-value" id="statWritings">0</div>
+          <div class="stat-sub">all time</div>
         </div>
 
-        <div class="card stat-card">
-          <div class="stat-icon">☆</div>
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-icon">📝</span>
+          </div>
           <div class="stat-label">Saved Notes</div>
           <div class="stat-value" id="statNotes">0</div>
+          <div class="stat-sub">manifestations</div>
         </div>
 
-        <div class="card stat-card">
-          <div class="stat-icon">◎</div>
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-icon">🎯</span>
+          </div>
           <div class="stat-label">Active Goals</div>
           <div class="stat-value" id="statGoals">0</div>
+          <div class="stat-sub">personal goals</div>
         </div>
-
       </div>
 
-      <div class="dashboard-grid">
+      <div class="grid dashboard-main">
 
-        <div class="card card-pad">
+        <div class="card hero">
+          <div class="eyebrow">Today's energy</div>
+          <h2>Write It • Feel It • Believe It • Build It</h2>
+          <p>
+            Manifestation ကို စိတ်ကူးယဉ်ထားရုံမဟုတ်ဘဲ
+            ကိုယ်လိုချင်တဲ့အရာကို ရှင်းလင်းစွာသတ်မှတ်ပြီး
+            နေ့စဉ်အာရုံစိုက်နိုင်ဖို့ ဒီ 369 system ကို အသုံးပြုပါ
+          </p>
 
-          <div class="section-head">
-            <div>
-              <div class="section-title">Today's Progress</div>
-              <div class="section-sub">
-                Complete all 18 writings to complete your day
-              </div>
+          <div class="sentence-box" style="margin-top:20px;position:relative">
+            <div class="sentence-title">Today's 369 Sentence</div>
+            <div class="sentence-text" id="dashboardSentence">
+              Manifestation sentence မရွေးထားသေးပါ
             </div>
-
-            <span class="badge gold-badge" id="todayBadge">
-              0 / 18
-            </span>
           </div>
 
-          <div class="progress-ring-wrap">
-
-            <div class="progress-ring" id="dashboardRing">
-              <div class="progress-ring-content">
-                <div class="progress-ring-number" id="dashboardPercent">0%</div>
-                <div class="progress-ring-small">TODAY</div>
-              </div>
-            </div>
-
-            <div class="session-list">
-
-              <div class="session-item" id="dashMorning">
-                <div class="session-left">
-                  <span class="session-dot"></span>
-                  <span class="session-name">Morning</span>
-                </div>
-                <span class="session-count" id="dashMorningCount">0 / 3</span>
-              </div>
-
-              <div class="session-item" id="dashAfternoon">
-                <div class="session-left">
-                  <span class="session-dot"></span>
-                  <span class="session-name">Afternoon</span>
-                </div>
-                <span class="session-count" id="dashAfternoonCount">0 / 6</span>
-              </div>
-
-              <div class="session-item" id="dashEvening">
-                <div class="session-left">
-                  <span class="session-dot"></span>
-                  <span class="session-name">Evening</span>
-                </div>
-                <span class="session-count" id="dashEveningCount">0 / 9</span>
-              </div>
-
-            </div>
-
+          <div class="hero-actions">
+            <button class="btn primary" id="dashboardNotesBtn">Choose Sentence</button>
+            <button class="btn" id="dashboardGuideBtn">Learn How</button>
           </div>
 
-          <div class="selected-note">
-
-            <div class="selected-note-label">
-              Today's 369 Sentence
-            </div>
-
-            <div class="selected-note-title" id="dashboardNoteTitle">
-              No sentence selected
-            </div>
-
-            <div class="selected-note-text" id="dashboardNoteText">
-              Create a note and set it as Today's 369 sentence
-            </div>
-
-          </div>
-
+          <div class="hero-369">369</div>
         </div>
 
-        <div class="card card-pad">
-
-          <div class="section-head">
-
+        <div class="card">
+          <div class="card-head">
             <div>
-              <div class="section-title">Achievements</div>
-              <div class="section-sub">
-                Build your consistency
-              </div>
+              <h2>Today's Progress</h2>
+              <p>18 writings in one complete day</p>
+            </div>
+            <strong id="dashboardPercent">0%</strong>
+          </div>
+
+          <div class="big-progress" id="dashboardCircle" style="--progress:0%">
+            <div class="big-progress-inner">
+              <div class="big-progress-number" id="dashboardProgress">0/18</div>
+              <div class="big-progress-label">today</div>
+            </div>
+          </div>
+
+          <div class="grid session-grid" style="margin-top:10px">
+            <div class="session" id="dashMorning">
+              <div class="session-number">3</div>
+              <h3>Morning</h3>
+              <p>Set your intention</p>
+              <div class="session-count" id="dashMorningCount">0/3</div>
+              <div class="session-status">Not started</div>
             </div>
 
-            <button class="ghost-btn" data-go="achievements">
-              View All
-            </button>
+            <div class="session" id="dashAfternoon">
+              <div class="session-number">6</div>
+              <h3>Afternoon</h3>
+              <p>Stay focused</p>
+              <div class="session-count" id="dashAfternoonCount">0/6</div>
+              <div class="session-status">Not started</div>
+            </div>
 
+            <div class="session" id="dashEvening">
+              <div class="session-number">9</div>
+              <h3>Evening</h3>
+              <p>Close the day</p>
+              <div class="session-count" id="dashEveningCount">0/9</div>
+              <div class="session-status">Not started</div>
+            </div>
           </div>
-
-          <div class="achievements-grid" id="dashboardAchievements"
-               style="grid-template-columns:repeat(2,1fr);">
-          </div>
-
         </div>
-
       </div>
-
     </section>
 
-    <!-- ================= PRACTICE ================= -->
-
+    <!-- PRACTICE -->
     <section class="view" id="view-practice">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Daily writing</div>
+          <h1>369 Practice</h1>
+          <p>တစ်ကြောင်းတည်းကို Morning 3 ကြိမ်၊ Afternoon 6 ကြိမ်၊ Evening 9 ကြိမ် ရေးပါ</p>
+        </div>
+      </div>
 
-      <div class="practice-top">
-
-        <div class="card selected-practice">
-
-          <div class="section-head">
+      <div class="practice-layout">
+        <div class="card">
+          <div class="card-head">
             <div>
-              <div class="section-title">Today's 369 Sentence</div>
-              <div class="section-sub">
-                Choose the sentence you want to practice today
-              </div>
+              <h2>Today's Manifestation</h2>
+              <p>ဒီနေ့အသုံးပြုမယ့် စာကြောင်း</p>
             </div>
-
-            <span class="badge gold-badge">TODAY</span>
+            <button class="btn small" id="changeTodayNoteBtn">Change</button>
           </div>
 
-          <div class="practice-sentence" id="practiceSentence">
-            No sentence selected
+          <div class="sentence-box">
+            <div class="sentence-title" id="practiceNoteTitle">No sentence selected</div>
+            <div class="sentence-text" id="practiceSentence">
+              My 369 Notes ထဲက စာကြောင်းတစ်ကြောင်းကို ရွေးပါ
+            </div>
           </div>
 
-          <div class="practice-controls">
-            <button class="gold-btn" id="practiceSelectNoteBtn">
-              Choose Note
-            </button>
-
-            <button class="ghost-btn" id="practiceCreateNoteBtn">
-              ＋ New
-            </button>
+          <div class="progress-wrap">
+            <div class="progress-row">
+              <span>Daily Progress</span>
+              <strong id="practiceProgressText">0 / 18</strong>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="practiceProgressFill" style="width:0%"></div>
+            </div>
           </div>
 
+          <div class="chips" style="margin-top:15px">
+            <span class="chip">Morning × 3</span>
+            <span class="chip">Afternoon × 6</span>
+            <span class="chip">Evening × 9</span>
+          </div>
+
+          <div class="notice" style="margin-top:16px">
+            <strong>မှတ်ချက်</strong><br>
+            App က စာကြောင်းကို အလိုအလျောက် 18 ကြိမ်ဖြည့်ပေးမှာမဟုတ်ပါ
+            ကိုယ်တိုင်ရေးခြင်းကို practice အဖြစ်သတ်မှတ်ထားပါတယ်
+          </div>
         </div>
 
-        <div class="card card-pad">
-
-          <div class="section-head">
+        <div class="card practice-current">
+          <div class="card-head">
             <div>
-              <div class="section-title">Daily Rule</div>
-              <div class="section-sub">
-                One sentence · 18 total writings
+              <h2>Today's Sessions</h2>
+              <p>Complete all 3 sessions</p>
+            </div>
+          </div>
+
+          <div class="practice-sessions">
+
+            <div class="practice-session" id="practiceMorning">
+              <div class="ps-number">3</div>
+              <div class="ps-info">
+                <strong>Morning</strong>
+                <span>3 repetitions</span>
               </div>
+              <div class="ps-count" id="practiceMorningCount">0/3</div>
+              <button class="btn small primary session-start" data-session="morning">Write</button>
             </div>
+
+            <div class="practice-session" id="practiceAfternoon">
+              <div class="ps-number">6</div>
+              <div class="ps-info">
+                <strong>Afternoon</strong>
+                <span>6 repetitions</span>
+              </div>
+              <div class="ps-count" id="practiceAfternoonCount">0/6</div>
+              <button class="btn small primary session-start" data-session="afternoon">Write</button>
+            </div>
+
+            <div class="practice-session" id="practiceEvening">
+              <div class="ps-number">9</div>
+              <div class="ps-info">
+                <strong>Evening</strong>
+                <span>9 repetitions</span>
+              </div>
+              <div class="ps-count" id="practiceEveningCount">0/9</div>
+              <button class="btn small primary session-start" data-session="evening">Write</button>
+            </div>
+
           </div>
-
-          <div class="selected-note">
-            <div class="selected-note-label">369 Method</div>
-
-            <div class="selected-note-title">
-              3 → Morning
-            </div>
-
-            <div class="selected-note-text">
-              Write the same sentence 3 times in the morning,
-              6 times in the afternoon and 9 times in the evening
-            </div>
-          </div>
-
         </div>
-
       </div>
-
-      <div class="sessions-grid">
-
-        <div class="card session-card" id="sessionMorning">
-
-          <div class="session-number">3</div>
-
-          <span class="badge">MORNING</span>
-
-          <h3 style="margin-top:14px;">Morning 3</h3>
-
-          <p>Write your sentence 3 times</p>
-
-          <div class="session-progress">
-            <div class="session-progress-fill" id="morningProgress"></div>
-          </div>
-
-          <div class="session-count-big">
-            <span id="morningCount">0</span>
-            <span>/ 3</span>
-          </div>
-
-          <button class="gold-btn" data-session="morning">
-            Start Writing
-          </button>
-
-        </div>
-
-        <div class="card session-card" id="sessionAfternoon">
-
-          <div class="session-number">6</div>
-
-          <span class="badge">AFTERNOON</span>
-
-          <h3 style="margin-top:14px;">Afternoon 6</h3>
-
-          <p>Write your sentence 6 times</p>
-
-          <div class="session-progress">
-            <div class="session-progress-fill" id="afternoonProgress"></div>
-          </div>
-
-          <div class="session-count-big">
-            <span id="afternoonCount">0</span>
-            <span>/ 6</span>
-          </div>
-
-          <button class="primary-btn" data-session="afternoon">
-            Start Writing
-          </button>
-
-        </div>
-
-        <div class="card session-card" id="sessionEvening">
-
-          <div class="session-number">9</div>
-
-          <span class="badge">EVENING</span>
-
-          <h3 style="margin-top:14px;">Evening 9</h3>
-
-          <p>Write your sentence 9 times</p>
-
-          <div class="session-progress">
-            <div class="session-progress-fill" id="eveningProgress"></div>
-          </div>
-
-          <div class="session-count-big">
-            <span id="eveningCount">0</span>
-            <span>/ 9</span>
-          </div>
-
-          <button class="gold-btn" data-session="evening">
-            Start Writing
-          </button>
-
-        </div>
-
-      </div>
-
-      <div class="card card-pad" style="margin-top:16px;">
-
-        <div class="section-head">
-
-          <div>
-            <div class="section-title">How to Practice</div>
-            <div class="section-sub">
-              Keep the process simple and consistent
-            </div>
-          </div>
-
-        </div>
-
-        <div class="two-col">
-
-          <div class="selected-note">
-            <div class="selected-note-label">STEP 01</div>
-            <div class="selected-note-title">Choose one sentence</div>
-            <div class="selected-note-text">
-              Save a meaningful sentence in My 369 Notes and set it as Today's sentence
-            </div>
-          </div>
-
-          <div class="selected-note">
-            <div class="selected-note-label">STEP 02</div>
-            <div class="selected-note-title">Write manually</div>
-            <div class="selected-note-text">
-              Type your sentence for each repetition and complete it one by one
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
     </section>
 
-    <!-- ================= NOTES ================= -->
-
+    <!-- NOTES -->
     <section class="view" id="view-notes">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Your manifestation library</div>
+          <h1>My 369 Notes</h1>
+          <p>သင်အမြဲသုံးချင်တဲ့ Manifestation စာကြောင်းတွေကို သိမ်းထားပါ</p>
+        </div>
+        <button class="btn primary" id="addNoteBtn">+ Add New Note</button>
+      </div>
 
-      <div class="card card-pad">
+      <div class="notice">
+        <strong>အသုံးပြုပုံ</strong><br>
+        Manifestation စာကြောင်းတစ်ခုကို အရင်သိမ်းပါ → <b>Use for Today</b> နှိပ်ပါ →
+        369 Practice ထဲသွားပြီး 3 / 6 / 9 ကို ကိုယ်တိုင်ရေးပါ
+      </div>
 
-        <div class="section-head">
+      <div class="notes-toolbar">
+        <input class="input" id="noteSearch" placeholder="Search your manifestation notes...">
+        <button class="btn" id="sortFavoriteBtn">⭐ Favorites</button>
+      </div>
 
-          <div>
-            <div class="section-title">My 369 Notes</div>
-            <div class="section-sub">
-              Save the sentences you want to practice
-            </div>
-          </div>
+      <div class="note-list" id="noteList"></div>
+    </section>
 
-          <button class="gold-btn" id="newNoteBtn">
-            ＋ Create Note
-          </button>
+    <!-- GUIDE -->
+    <section class="view" id="view-guide">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Learn the method</div>
+          <h1>Manifestation Guide</h1>
+          <p>369 ကို ဘယ်လိုရေးမလဲ၊ ဘယ်လိုစာကြောင်းရွေးမလဲဆိုတာ ဒီနေရာမှာ လေ့လာနိုင်ပါတယ်</p>
+        </div>
+      </div>
 
+      <div class="grid guide-grid">
+
+        <div class="guide-card">
+          <div class="guide-number">01</div>
+          <h3>Goal ကို ရှင်းလင်းစွာသတ်မှတ်ပါ</h3>
+          <p>
+            “ချမ်းသာချင်တယ်” လို့ အကျယ်ကြီးမရေးဘဲ
+            ကိုယ်လိုချင်တဲ့ result ကို ရှင်းရှင်းလင်းလင်းရေးပါ
+          </p>
         </div>
 
-        <div class="note-toolbar">
-
-          <div class="search-box">
-            <span>⌕</span>
-            <input
-              class="input"
-              id="noteSearch"
-              placeholder="Search your 369 notes..."
-            >
-          </div>
-
-          <button class="ghost-btn" id="favoritesOnlyBtn">
-            ☆ Favorites
-          </button>
-
+        <div class="guide-card">
+          <div class="guide-number">02</div>
+          <h3>Present Tense သုံးပါ</h3>
+          <p>
+            ရရှိမယ်၊ ဖြစ်လာမယ်ဆိုတာထက်
+            ဖြစ်နေပြီ / ရရှိနေပြီ ဆိုတဲ့ပုံစံနဲ့ ရေးခြင်းက
+            ကိုယ်လိုချင်တဲ့အရာကို ပိုရှင်းလင်းစွာ အာရုံစိုက်နိုင်စေပါတယ်
+          </p>
         </div>
 
-        <div class="notes-grid" id="notesGrid"></div>
+        <div class="guide-card">
+          <div class="guide-number">03</div>
+          <h3>Positive Statement ရေးပါ</h3>
+          <p>
+            မလိုချင်တဲ့အရာကို မရေးဘဲ လိုချင်တဲ့အရာကို အာရုံစိုက်ပြီး ရေးပါ
+          </p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-number">04</div>
+          <h3>တစ်ကြောင်းတည်းကို ဆက်သုံးပါ</h3>
+          <p>
+            တစ်နေ့အတွင်း 3 / 6 / 9 မှာ စာကြောင်းမပြောင်းဘဲ
+            တူညီတဲ့ Manifestation sentence ကို အသုံးပြုပါ
+          </p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-number">05</div>
+          <h3>Feel + Believe</h3>
+          <p>
+            ရေးတဲ့အချိန်မှာ ကိုယ်လိုချင်တဲ့အခြေအနေကို စိတ်ကူးပြီး
+            ကျေးဇူးတင်မှုနဲ့ အာရုံစိုက်ရေးပါ
+          </p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-number">06</div>
+          <h3>Action ပါတွဲပါ</h3>
+          <p>
+            Manifestation ကို goal-setting နဲ့ action plan အစားထိုးမသုံးဘဲ
+            ကိုယ်လုပ်ရမယ့် လက်တွေ့လုပ်ဆောင်ချက်တွေနဲ့ တွဲသုံးပါ
+          </p>
+        </div>
 
       </div>
 
+      <div class="card" style="margin-top:16px">
+        <div class="card-head">
+          <div>
+            <h2>369 Method</h2>
+            <p>Daily writing structure</p>
+          </div>
+        </div>
+
+        <div class="grid session-grid">
+          <div class="session">
+            <div class="session-number">3</div>
+            <h3>Morning</h3>
+            <p>နေ့စတင်ချိန်မှာ ကိုယ့်ရည်ရွယ်ချက်ကို သတ်မှတ်ပါ</p>
+          </div>
+          <div class="session">
+            <div class="session-number">6</div>
+            <h3>Afternoon</h3>
+            <p>နေ့လယ်မှာ အာရုံစူးစိုက်မှုကို ပြန်တည်ဆောက်ပါ</p>
+          </div>
+          <div class="session">
+            <div class="session-number">9</div>
+            <h3>Evening</h3>
+            <p>ညမှာ တစ်နေ့တာကို ပြန်အာရုံစိုက်ပြီး အဆုံးသတ်ပါ</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <div class="card-head">
+          <div>
+            <h2>Manifestation Examples</h2>
+            <p>နမူနာစာကြောင်းများ — ကိုယ့်ဘဝနဲ့ကိုက်အောင် ပြင်ပြီးသုံးနိုင်ပါတယ်</p>
+          </div>
+        </div>
+
+        <div class="example-list" id="exampleList"></div>
+      </div>
     </section>
 
-    <!-- ================= GOALS ================= -->
-
+    <!-- GOALS -->
     <section class="view" id="view-goals">
-
-      <div class="card card-pad">
-
-        <div class="section-head">
-
-          <div>
-            <div class="section-title">My Goals</div>
-            <div class="section-sub">
-              Turn your intention into measurable targets
-            </div>
-          </div>
-
-          <button class="gold-btn" id="newGoalBtn">
-            ＋ Add Goal
-          </button>
-
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Turn intention into action</div>
+          <h1>My Goals</h1>
+          <p>Manifestation နဲ့အတူ လက်တွေ့ Goal တွေကိုပါ track လုပ်ပါ</p>
         </div>
-
-        <div class="goals-grid" id="goalsGrid"></div>
-
+        <button class="btn primary" id="addGoalBtn">+ Add Goal</button>
       </div>
 
+      <div class="card">
+        <div class="goal-list" id="goalList"></div>
+      </div>
     </section>
 
-    <!-- ================= JOURNAL ================= -->
-
+    <!-- JOURNAL -->
     <section class="view" id="view-journal">
-
-      <div class="two-col">
-
-        <div class="card card-pad">
-
-          <div class="section-head">
-            <div>
-              <div class="section-title">Today's Journal</div>
-              <div class="section-sub">
-                Record what you are grateful for
-              </div>
-            </div>
-          </div>
-
-          <div class="field">
-            <label>GRATITUDE</label>
-            <textarea
-              class="textarea"
-              id="gratitudeInput"
-              placeholder="What are you grateful for today?"
-            ></textarea>
-          </div>
-
-          <div class="field">
-            <label>REFLECTION</label>
-            <textarea
-              class="textarea"
-              id="reflectionInput"
-              placeholder="What did you learn or notice today?"
-            ></textarea>
-          </div>
-
-          <button class="gold-btn" id="saveJournalBtn">
-            Save Journal
-          </button>
-
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Daily reflection</div>
+          <h1>Journal</h1>
+          <p>နေ့စဉ် Gratitude နဲ့ Reflection ကို မှတ်တမ်းတင်ပါ</p>
         </div>
-
-        <div class="card card-pad">
-
-          <div class="section-head">
-            <div>
-              <div class="section-title">Daily Reminder</div>
-              <div class="section-sub">
-                Keep your practice visible in your routine
-              </div>
-            </div>
-          </div>
-
-          <div class="selected-note">
-            <div class="selected-note-label">MORNING</div>
-            <div class="selected-note-title">Write 3 times</div>
-            <div class="selected-note-text">
-              Start your day by focusing on your selected sentence
-            </div>
-          </div>
-
-          <div class="selected-note">
-            <div class="selected-note-label">AFTERNOON</div>
-            <div class="selected-note-title">Write 6 times</div>
-            <div class="selected-note-text">
-              Reconnect with the intention during the day
-            </div>
-          </div>
-
-          <div class="selected-note">
-            <div class="selected-note-label">EVENING</div>
-            <div class="selected-note-title">Write 9 times</div>
-            <div class="selected-note-text">
-              Finish the day with your complete 369 practice
-            </div>
-          </div>
-
-        </div>
-
       </div>
 
+      <div class="journal-layout">
+        <div class="card">
+          <div class="form-grid">
+            <div class="field full-width">
+              <label>Today I am grateful for</label>
+              <textarea class="textarea" id="journalGratitude" placeholder="ဒီနေ့ ကျေးဇူးတင်မိတဲ့အရာများ..."></textarea>
+            </div>
+
+            <div class="field full-width">
+              <label>Today's Reflection</label>
+              <textarea class="textarea" id="journalReflection" placeholder="ဒီနေ့ရဲ့ အတွေ့အကြုံ၊ ခံစားချက်၊ သင်ခန်းစာ..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn primary" id="saveJournalBtn">Save Journal</button>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- ================= VISION ================= -->
-
+    <!-- VISION -->
     <section class="view" id="view-vision">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Future self</div>
+          <h1>My Vision</h1>
+          <p>ကိုယ်တည်ဆောက်ချင်တဲ့ဘဝကို စာသားနဲ့ ရှင်းလင်းစွာသတ်မှတ်ပါ</p>
+        </div>
+      </div>
 
-      <div class="two-col">
-
-        <div class="card card-pad vision-card">
-
-          <div class="section-head">
-            <div>
-              <div class="section-title">My Vision</div>
-              <div class="section-sub">
-                Describe the life you are building
-              </div>
-            </div>
-          </div>
-
+      <div class="vision-layout">
+        <div class="card">
           <div class="field">
-            <label>VISION</label>
-            <textarea
-              class="textarea"
-              id="visionInput"
-              placeholder="Write your future vision..."
-              style="min-height:180px;"
-            ></textarea>
+            <label>My Dream Life</label>
+            <textarea class="textarea" id="visionText" style="min-height:180px" placeholder="ကျွန်တော်တည်ဆောက်ချင်တဲ့ဘဝက..."></textarea>
           </div>
 
-          <button class="gold-btn" id="saveVisionBtn">
-            Save Vision
-          </button>
-
-        </div>
-
-        <div class="card card-pad vision-card">
-
-          <div class="big-quote">“</div>
-
-          <div class="section-title">Future Me</div>
-
-          <div
-            class="vision-display"
-            id="visionDisplay"
-            style="margin-top:13px;"
-          >
-            Your vision will appear here
+          <div class="field" style="margin-top:16px">
+            <label>My Future Self</label>
+            <textarea class="textarea" id="futureSelfText" style="min-height:160px" placeholder="အနာဂတ်မှာ ကျွန်တော်ဘယ်လိုလူဖြစ်ချင်လဲ..."></textarea>
           </div>
 
+          <div class="form-actions">
+            <button class="btn primary" id="saveVisionBtn">Save Vision</button>
+          </div>
         </div>
-
       </div>
-
     </section>
 
-    <!-- ================= HISTORY ================= -->
-
+    <!-- HISTORY -->
     <section class="view" id="view-history">
-
-      <div class="history-grid">
-
-        <div class="card calendar">
-
-          <div class="calendar-head">
-
-            <div class="month-title" id="calendarMonth">
-              September 2026
-            </div>
-
-            <div class="month-nav">
-
-              <button class="icon-btn" id="prevMonthBtn">‹</button>
-              <button class="icon-btn" id="nextMonthBtn">›</button>
-
-            </div>
-
-          </div>
-
-          <div class="calendar-weekdays">
-            <div>Sun</div>
-            <div>Mon</div>
-            <div>Tue</div>
-            <div>Wed</div>
-            <div>Thu</div>
-            <div>Fri</div>
-            <div>Sat</div>
-          </div>
-
-          <div class="calendar-days" id="calendarDays"></div>
-
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Your journey</div>
+          <h1>History</h1>
+          <p>နေ့စဉ် 369 writing progress ကို ပြန်ကြည့်နိုင်ပါတယ်</p>
         </div>
-
-        <div class="history-stats">
-
-          <div class="card history-stat">
-            <div class="history-stat-label">COMPLETED DAYS</div>
-            <div class="history-stat-value" id="historyCompletedDays">0</div>
-          </div>
-
-          <div class="card history-stat">
-            <div class="history-stat-label">TOTAL WRITINGS</div>
-            <div class="history-stat-value" id="historyTotalWritings">0</div>
-          </div>
-
-          <div class="card history-stat">
-            <div class="history-stat-label">CURRENT STREAK</div>
-            <div class="history-stat-value" id="historyStreak">0</div>
-          </div>
-
-          <div class="card history-stat">
-            <div class="history-stat-label">MONTH COMPLETION</div>
-            <div class="history-stat-value" id="historyMonthPercent">0%</div>
-          </div>
-
-        </div>
-
       </div>
 
+      <div class="history-summary">
+        <div class="stat">
+          <div class="stat-label">Completed Days</div>
+          <div class="stat-value" id="historyCompleted">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Total Writings</div>
+          <div class="stat-value" id="historyWritings">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">This Month</div>
+          <div class="stat-value" id="historyPercent">0%</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="month-header">
+          <button class="btn small" id="prevMonthBtn">←</button>
+          <h2 id="monthTitle">September 2026</h2>
+          <button class="btn small" id="nextMonthBtn">→</button>
+        </div>
+
+        <div class="calendar" id="calendar"></div>
+      </div>
     </section>
 
-    <!-- ================= ACHIEVEMENTS ================= -->
-
+    <!-- ACHIEVEMENTS -->
     <section class="view" id="view-achievements">
-
-      <div class="card card-pad">
-
-        <div class="section-head">
-
-          <div>
-            <div class="section-title">Achievements</div>
-            <div class="section-sub">
-              Milestones unlocked through consistent practice
-            </div>
-          </div>
-
-          <span class="badge gold-badge" id="achievementCount">
-            0 / 8
-          </span>
-
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Keep going</div>
+          <h1>Achievements</h1>
+          <p>နေ့စဉ် practice ဆက်လုပ်ရင်း milestones တွေ unlock လုပ်ပါ</p>
         </div>
-
-        <div class="achievements-grid" id="achievementsGrid"></div>
-
       </div>
 
+      <div class="achievement-grid" id="achievementList"></div>
     </section>
 
-    <!-- ================= SETTINGS ================= -->
-
+    <!-- SETTINGS -->
     <section class="view" id="view-settings">
-
-      <div class="two-col">
-
-        <div class="card card-pad">
-
-          <div class="section-head">
-            <div>
-              <div class="section-title">Preferences</div>
-              <div class="section-sub">
-                Control how the app behaves
-              </div>
-            </div>
-          </div>
-
-          <div class="settings-list">
-
-            <div class="setting-row">
-
-              <div class="setting-info">
-                <strong>Daily Reminder</strong>
-                <span>Enable your practice reminder preference</span>
-              </div>
-
-              <button class="toggle" id="reminderToggle">
-                <span></span>
-              </button>
-
-            </div>
-
-          </div>
-
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">App settings</div>
+          <h1>Settings</h1>
+          <p>Data နဲ့ app preference တွေကို စီမံပါ</p>
         </div>
-
-        <div class="card card-pad">
-
-          <div class="section-head">
-            <div>
-              <div class="section-title">Data</div>
-              <div class="section-sub">
-                Your data is stored locally on this device
-              </div>
-            </div>
-          </div>
-
-          <div style="display:flex;flex-direction:column;gap:9px;">
-
-            <button class="ghost-btn" id="exportBtn">
-              ↓ Export Backup
-            </button>
-
-            <button class="ghost-btn" id="importBtn">
-              ↑ Import Backup
-            </button>
-
-            <button class="danger-btn" id="resetBtn">
-              Reset All Data
-            </button>
-
-            <input
-              type="file"
-              id="importFile"
-              accept=".json,application/json"
-              class="hidden"
-            >
-
-          </div>
-
-        </div>
-
       </div>
 
-      <div class="card card-pad" style="margin-top:16px;">
+      <div class="card">
+        <div class="settings-list">
 
-        <div class="section-title">About 369</div>
+          <div class="setting">
+            <div>
+              <strong>Daily Reminder Preference</strong>
+              <span>Reminder သတိပေးချက်ကို သင့် preference အဖြစ်သိမ်းထားမယ်</span>
+            </div>
+            <button class="toggle" id="reminderToggle" aria-label="Toggle reminder">
+              <span></span>
+            </button>
+          </div>
 
-        <div class="section-sub" style="max-width:700px;line-height:1.8;margin-top:9px;">
-          The app is designed as a personal writing and reflection tracker.
-          Use one meaningful sentence and practice it consistently using the
-          3 / 6 / 9 daily structure
+          <div class="setting">
+            <div>
+              <strong>Auto Save</strong>
+              <span>369 data အားလုံး browser ထဲမှာ အလိုအလျောက်သိမ်းပါတယ်</span>
+            </div>
+            <span style="color:var(--success);font-weight:800">ON</span>
+          </div>
+
         </div>
 
-        <div style="margin-top:15px;">
-          <span class="badge">VERSION 4.0 PREMIUM</span>
+        <div class="divider"></div>
+
+        <div class="form-actions" style="justify-content:flex-start;flex-wrap:wrap">
+          <button class="btn" id="exportBtn">Export Data</button>
+          <button class="btn" id="importBtn">Import Data</button>
+          <button class="btn danger" id="resetBtn">Reset All Data</button>
         </div>
 
+        <input type="file" id="importFile" accept=".json,application/json" hidden>
       </div>
-
     </section>
 
   </main>
 
-  <!-- MOBILE BOTTOM -->
-  <nav class="mobile-bottom">
-
-    <button class="mobile-nav-btn active" data-go="dashboard">
-      <span class="mobile-nav-icon">⌂</span>
-      <span class="mobile-nav-text">Home</span>
+  <div class="bottom-nav">
+    <button class="bottom-btn active" data-view="dashboard">
+      <span>⌂</span><span>Home</span>
     </button>
-
-    <button class="mobile-nav-btn" data-go="practice">
-      <span class="mobile-nav-icon">369</span>
-      <span class="mobile-nav-text">Practice</span>
+    <button class="bottom-btn" data-view="practice">
+      <span>✍</span><span>Practice</span>
     </button>
-
-    <button class="mobile-nav-btn" data-go="notes">
-      <span class="mobile-nav-icon">✎</span>
-      <span class="mobile-nav-text">Notes</span>
+    <button class="bottom-btn" data-view="notes">
+      <span>📝</span><span>Notes</span>
     </button>
-
-    <button class="mobile-nav-btn" data-go="goals">
-      <span class="mobile-nav-icon">◎</span>
-      <span class="mobile-nav-text">Goals</span>
+    <button class="bottom-btn" data-view="guide">
+      <span>✨</span><span>Guide</span>
     </button>
-
-    <button class="mobile-nav-btn" data-go="settings">
-      <span class="mobile-nav-icon">⚙</span>
-      <span class="mobile-nav-text">More</span>
+    <button class="bottom-btn" data-view="settings">
+      <span>⚙</span><span>Settings</span>
     </button>
-
-  </nav>
-
-</div>
-
-<!-- ================= NOTE MODAL ================= -->
-
-<div class="modal-backdrop" id="noteModal">
-
-  <div class="modal">
-
-    <div class="modal-head">
-
-      <div>
-        <div class="modal-title" id="noteModalTitle">
-          Create 369 Note
-        </div>
-
-        <div class="modal-sub">
-          Save the exact sentence you want to practice
-        </div>
-      </div>
-
-      <button class="icon-btn" data-close="noteModal">×</button>
-
-    </div>
-
-    <div class="field">
-      <label>NOTE TITLE</label>
-      <input
-        class="input"
-        id="noteTitleInput"
-        placeholder="Example: Business Success"
-      >
-    </div>
-
-    <div class="field">
-      <label>369 SENTENCE</label>
-      <textarea
-        class="textarea"
-        id="noteTextInput"
-        placeholder="Write the sentence you want to repeat..."
-        style="min-height:145px;"
-      ></textarea>
-    </div>
-
-    <div class="modal-actions">
-
-      <button class="ghost-btn" data-close="noteModal">
-        Cancel
-      </button>
-
-      <button class="gold-btn" id="saveNoteBtn">
-        Save Note
-      </button>
-
-    </div>
-
   </div>
-
 </div>
 
-<!-- ================= GOAL MODAL ================= -->
-
-<div class="modal-backdrop" id="goalModal">
-
+<!-- NOTE MODAL -->
+<div class="modal-backdrop" id="noteModal">
   <div class="modal">
-
     <div class="modal-head">
-
       <div>
-        <div class="modal-title">Create Goal</div>
-
-        <div class="modal-sub">
-          Add a measurable target for your journey
-        </div>
+        <div class="eyebrow">369 sentence</div>
+        <h2 id="noteModalTitle">Create New Note</h2>
       </div>
-
-      <button class="icon-btn" data-close="goalModal">×</button>
-
+      <button class="close-btn" data-close-modal="noteModal">×</button>
     </div>
 
     <div class="form-grid">
-
-      <div class="field">
-        <label>GOAL NAME</label>
-        <input
-          class="input"
-          id="goalNameInput"
-          placeholder="Example: Business Revenue"
-        >
+      <div class="field full-width">
+        <label>Note Title</label>
+        <input class="input" id="noteTitleInput" placeholder="ဥပမာ — My Business Success">
       </div>
 
-      <div class="field">
-        <label>CATEGORY</label>
-
-        <select class="select" id="goalCategoryInput">
-          <option value="Business">Business</option>
-          <option value="Money">Money</option>
-          <option value="Career">Career</option>
-          <option value="Personal">Personal</option>
-          <option value="Health">Health</option>
-          <option value="Learning">Learning</option>
-        </select>
-
+      <div class="field full-width">
+        <label>Manifestation Sentence</label>
+        <textarea class="textarea" id="noteTextInput" style="min-height:150px" placeholder="ကျွန်တော့်လုပ်ငန်းက တနေ့ထက်တနေ့ ပိုမိုတိုးတက်အောင်မြင်လာနေပါတယ်"></textarea>
       </div>
-
-      <div class="field form-full">
-        <label>TARGET</label>
-        <input
-          class="input"
-          id="goalTargetInput"
-          type="number"
-          min="1"
-          placeholder="100"
-        >
-      </div>
-
     </div>
 
-    <div class="modal-actions">
-
-      <button class="ghost-btn" data-close="goalModal">
-        Cancel
-      </button>
-
-      <button class="gold-btn" id="saveGoalBtn">
-        Save Goal
-      </button>
-
+    <div class="notice" style="margin-top:15px;margin-bottom:0">
+      <strong>Tip</strong><br>
+      တစ်ကြောင်းတည်း၊ အပြုသဘောဆောင်ပြီး ကိုယ်လိုချင်တဲ့ result ကို ရှင်းလင်းစွာရေးပါ
     </div>
 
+    <div class="form-actions">
+      <button class="btn" data-close-modal="noteModal">Cancel</button>
+      <button class="btn primary" id="saveNoteBtn">Save Note</button>
+    </div>
   </div>
-
 </div>
 
-<!-- ================= WRITING MODE ================= -->
-
-<div class="modal-backdrop" id="writingModal">
-
-  <div class="modal writing-modal">
-
+<!-- GOAL MODAL -->
+<div class="modal-backdrop" id="goalModal">
+  <div class="modal">
     <div class="modal-head">
+      <div>
+        <div class="eyebrow">Goal setting</div>
+        <h2>Add Goal</h2>
+      </div>
+      <button class="close-btn" data-close-modal="goalModal">×</button>
+    </div>
 
-      <div style="width:100%;">
-
-        <div class="writing-mode-header">
-
-          <div>
-            <div class="writing-step" id="writingSessionLabel">
-              MORNING 3
-            </div>
-          </div>
-
-          <div class="writing-progress-text" id="writingProgressText">
-            1 / 3
-          </div>
-
-        </div>
-
-        <div class="modal-title" id="writingNoteTitle" style="margin-top:6px;">
-          Your 369 Sentence
-        </div>
-
+    <div class="form-grid">
+      <div class="field">
+        <label>Goal Name</label>
+        <input class="input" id="goalTitleInput" placeholder="ဥပမာ — Monthly Income">
       </div>
 
-      <button class="icon-btn" data-close="writingModal">×</button>
+      <div class="field">
+        <label>Category</label>
+        <select class="select" id="goalCategoryInput">
+          <option>Money</option>
+          <option>Business</option>
+          <option>Career</option>
+          <option>Relationship</option>
+          <option>Health</option>
+          <option>Personal</option>
+        </select>
+      </div>
 
+      <div class="field">
+        <label>Target Value</label>
+        <input class="input" id="goalTargetInput" type="number" min="1" placeholder="100">
+      </div>
+
+      <div class="field">
+        <label>Current Value</label>
+        <input class="input" id="goalCurrentInput" type="number" min="0" placeholder="0">
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn" data-close-modal="goalModal">Cancel</button>
+      <button class="btn primary" id="saveGoalBtn">Save Goal</button>
+    </div>
+  </div>
+</div>
+
+<!-- WRITING MODAL -->
+<div class="modal-backdrop" id="writingModal">
+  <div class="modal writing">
+    <div class="modal-head">
+      <div>
+        <div class="eyebrow">Distraction-free writing</div>
+        <h2 id="writingModalTitle">Morning Writing</h2>
+      </div>
+      <button class="close-btn" id="closeWritingBtn">×</button>
+    </div>
+
+    <div class="writing-session">
+      <div>
+        <strong id="writingSessionName">Morning</strong>
+        <span id="writingSessionSub">Write this sentence 3 times</span>
+      </div>
+      <strong id="writingCounter">1 / 3</strong>
     </div>
 
     <div class="writing-progress">
-      <div class="writing-progress-fill" id="writingProgressFill"></div>
+      <div class="progress-row">
+        <span>Session Progress</span>
+        <strong id="writingProgressText">0%</strong>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="writingProgressFill" style="width:0%"></div>
+      </div>
     </div>
 
-    <div class="writing-sentence-box">
+    <div class="saved-reference">
+      <small>WRITE THIS SENTENCE</small>
+      <p id="writingReference"></p>
+    </div>
 
-      <div class="writing-sentence-label">
-        WRITE THIS SENTENCE
-      </div>
+    <button class="btn small" id="useSavedTextBtn" style="margin-bottom:12px">
+      Use Saved Text
+    </button>
 
-      <div class="writing-sentence" id="writingSentence">
-        —
-      </div>
-
+    <div class="warning" id="writingWarning">
+      သင်ရေးထားတဲ့စာသားက သိမ်းထားတဲ့ Manifestation sentence နဲ့ မတူပါ
+      တကယ်ရေးထားတာကို ပြန်စစ်ပါ
+      ဆက်လက်ပြီး Complete လုပ်လိုပါက <b>Complete Anyway</b> ကိုနှိပ်နိုင်ပါတယ်
     </div>
 
     <div class="field">
-
-      <label id="writingInputLabel">
-        WRITE REPETITION 1
-      </label>
-
-      <textarea
-        class="textarea writing-input"
-        id="writingInput"
-        placeholder="Type the sentence here..."
-        autocomplete="off"
-        autocorrect="off"
-        spellcheck="false"
-      ></textarea>
-
-      <div class="match-hint">
-        For accurate tracking, enter the same sentence shown above
-      </div>
-
-      <div class="modal-error" id="writingError"></div>
-
+      <label id="writingLabel">Your Writing</label>
+      <textarea class="textarea" id="writingInput" style="min-height:220px" placeholder="ဒီနေရာမှာ ကိုယ်တိုင်ရေးပါ..."></textarea>
     </div>
 
-    <div class="modal-actions">
-
-      <button class="ghost-btn" id="useSavedTextBtn">
-        Use Saved Text
-      </button>
-
-      <button class="gold-btn" id="completeWritingBtn">
-        Complete This Writing
-      </button>
-
+    <div class="form-actions">
+      <button class="btn" id="clearWritingBtn">Clear</button>
+      <button class="btn primary" id="completeWritingBtn">Complete Writing</button>
     </div>
-
   </div>
-
 </div>
 
-<!-- ================= SELECT NOTE MODAL ================= -->
-
-<div class="modal-backdrop" id="selectNoteModal">
-
-  <div class="modal">
-
-    <div class="modal-head">
-
-      <div>
-        <div class="modal-title">Choose Today's Sentence</div>
-        <div class="modal-sub">
-          Select one saved 369 note to practice today
-        </div>
-      </div>
-
-      <button class="icon-btn" data-close="selectNoteModal">×</button>
-
-    </div>
-
-    <div id="selectNoteList"></div>
-
-  </div>
-
-</div>
-
-<div class="toast-wrap" id="toastWrap"></div>
+<div class="toast" id="toast"></div>
 
 <script>
+(function(){
+
 "use strict";
 
-/* =========================================================
-   369 V4 — LOCAL DATA APP
-========================================================= */
+var STORAGE_KEY = "369_manifest_app_v4";
+var editingNoteId = null;
+var writingSession = null;
+var historyDate = new Date();
+var favoriteSort = false;
+var toastTimer = null;
 
-const STORAGE_KEY = "three_six_nine_manifest_v4";
-
-const DEFAULT_STATE = {
-  version: 4,
-  selectedNoteId: null,
-  notes: [],
-  goals: [],
-  practice: {},
-  journal: {},
-  vision: "",
-  settings: {
-    reminder: false
+var EXAMPLES = [
+  {
+    category:"Money & Wealth",
+    title:"Financial Growth",
+    text:"ကျွန်တော့်ဝင်ငွေက တနေ့ထက်တနေ့ တိုးတက်လာပြီး ငွေကြေးအရ ပိုမိုလွတ်လပ်ချမ်းသာလာနေပါတယ်"
+  },
+  {
+    category:"Business",
+    title:"Business Success",
+    text:"ကျွန်တော့်လုပ်ငန်းက တနေ့ထက်တနေ့ ပိုမိုတိုးတက်အောင်မြင်လာပြီး ဖောက်သည်ကောင်းများနဲ့ အမြတ်အစွန်းကောင်းများ ရရှိနေပါတယ်"
+  },
+  {
+    category:"Career",
+    title:"Career Growth",
+    text:"ကျွန်တော့်အလုပ်အကိုင်မှာ တန်ဖိုးရှိတဲ့အခွင့်အရေးကောင်းများ ရရှိပြီး ဝင်ငွေနဲ့အောင်မြင်မှု တိုးတက်လာနေပါတယ်"
+  },
+  {
+    category:"Sales",
+    title:"Sales Achievement",
+    text:"ကျွန်တော့်ရောင်းအားက တနေ့ထက်တနေ့ တိုးတက်လာပြီး သတ်မှတ်ထားတဲ့ Sales Target တွေကို အောင်မြင်စွာ ပြည့်မီနေပါတယ်"
+  },
+  {
+    category:"Customers",
+    title:"Great Customers",
+    text:"ကျွန်တော့်လုပ်ငန်းမှာ ယုံကြည်အားကိုးရတဲ့ ဖောက်သည်ကောင်းများ ပိုမိုများပြားလာနေပါတယ်"
+  },
+  {
+    category:"Relationship",
+    title:"Healthy Relationship",
+    text:"ကျွန်တော့်ဘဝထဲမှာ ချစ်ခြင်းမေတ္တာ၊ နားလည်မှုနဲ့ လေးစားမှုရှိတဲ့ ကောင်းမွန်တဲ့ဆက်ဆံရေးတွေ တိုးပွားလာနေပါတယ်"
+  },
+  {
+    category:"Personal",
+    title:"Confidence",
+    text:"ကျွန်တော့်ကိုယ်ကို ယုံကြည်မှု တနေ့ထက်တနေ့ ပိုမိုတိုးတက်လာပြီး အခွင့်အရေးကောင်းတွေကို ရဲရဲဝံ့ဝံ့ အသုံးချနေပါတယ်"
+  },
+  {
+    category:"Dream Life",
+    title:"My Ideal Life",
+    text:"ကျွန်တော်လိုချင်တဲ့ဘဝကို တဖြည်းဖြည်းတည်ဆောက်နိုင်ပြီး အေးချမ်းပျော်ရွှင်တဲ့ဘဝကို ပိုင်ဆိုင်လာနေပါတယ်"
+  },
+  {
+    category:"Discipline",
+    title:"Daily Discipline",
+    text:"ကျွန်တော်ဟာ နေ့စဉ်အရေးကြီးတဲ့အလုပ်တွေကို စနစ်တကျလုပ်ဆောင်ပြီး ကိုယ့်ရည်မှန်းချက်တွေဆီ တိုးတက်နေပါတယ်"
+  },
+  {
+    category:"Opportunity",
+    title:"New Opportunities",
+    text:"ကျွန်တော့်ဘဝထဲကို တန်ဖိုးရှိတဲ့ အခွင့်အရေးကောင်းများ ဝင်ရောက်လာနေပြီး မှန်ကန်တဲ့အခွင့်အရေးတွေကို အသုံးချနိုင်နေပါတယ်"
+  },
+  {
+    category:"Success",
+    title:"Success Mindset",
+    text:"ကျွန်တော့်အတွေးအခေါ်၊ လုပ်ဆောင်ချက်နဲ့ ဆုံးဖြတ်ချက်တွေက ကျွန်တော့်အောင်မြင်မှုကို နေ့စဉ်တည်ဆောက်ပေးနေပါတယ်"
+  },
+  {
+    category:"Savings",
+    title:"Financial Security",
+    text:"ကျွန်တော်ဟာ ငွေကိုစနစ်တကျစီမံပြီး စုဆောင်းငွေနဲ့ ငွေကြေးလုံခြုံမှုကို တနေ့ထက်တနေ့ တိုးတက်အောင်တည်ဆောက်နေပါတယ်"
   }
-};
+];
 
-let state = loadState();
+var state = loadState();
 
-let currentView = "dashboard";
-let editingNoteId = null;
-let currentWriting = null;
-let calendarDate = new Date();
-let favoriteOnly = false;
+function localDateKey(date){
+  var d = date instanceof Date ? date : new Date(date);
+  var y = d.getFullYear();
+  var m = String(d.getMonth()+1);
+  var day = String(d.getDate());
 
-/* =========================================================
-   UTILITIES
-========================================================= */
+  if(m.length < 2) m = "0" + m;
+  if(day.length < 2) day = "0" + day;
 
-function cloneDefault(){
-  return JSON.parse(JSON.stringify(DEFAULT_STATE));
+  return y + "-" + m + "-" + day;
 }
 
-function safeString(value){
-  return typeof value === "string" ? value : "";
+function dateFromKey(key){
+  var parts = String(key).split("-");
+  if(parts.length !== 3) return new Date();
+  return new Date(Number(parts[0]),Number(parts[1])-1,Number(parts[2]));
+}
+
+function uid(prefix){
+  return prefix + "_" + Date.now().toString(36) + "_" +
+    Math.random().toString(36).slice(2,8);
+}
+
+function defaultState(){
+  return {
+    version:4,
+    selectedNoteId:null,
+    notes:[],
+    goals:[],
+    journals:{},
+    vision:{
+      vision:"",
+      futureSelf:""
+    },
+    practices:{},
+    settings:{
+      reminder:false,
+      language:"en"
+    }
+  };
 }
 
 function normalizeState(raw){
-
-  const base = cloneDefault();
+  var base = defaultState();
 
   if(!raw || typeof raw !== "object"){
     return base;
   }
 
-  base.version = 4;
-
-  base.selectedNoteId =
-    raw.selectedNoteId ? String(raw.selectedNoteId) : null;
-
   if(Array.isArray(raw.notes)){
-    base.notes = raw.notes
-      .filter(Boolean)
-      .map(function(note){
-        return {
-          id: String(note.id || uid()),
-          title: safeString(note.title) || "Untitled Note",
-          text: safeString(note.text),
-          createdAt: safeString(note.createdAt) || nowISO(),
-          updatedAt: safeString(note.updatedAt) || nowISO(),
-          favorite: Boolean(note.favorite)
-        };
-      })
-      .filter(function(note){
-        return note.text.trim().length > 0;
-      });
+    base.notes = raw.notes.map(function(n){
+      return {
+        id:typeof n.id === "string" ? n.id : uid("note"),
+        title:typeof n.title === "string" ? n.title : "Untitled Note",
+        text:typeof n.text === "string" ? n.text : "",
+        createdAt:typeof n.createdAt === "string" ? n.createdAt : new Date().toISOString(),
+        updatedAt:typeof n.updatedAt === "string" ? n.updatedAt : new Date().toISOString(),
+        favorite:n.favorite === true
+      };
+    }).filter(function(n){
+      return n.text.trim().length > 0;
+    });
   }
 
   if(Array.isArray(raw.goals)){
-    base.goals = raw.goals
-      .filter(Boolean)
-      .map(function(goal){
-        return {
-          id: String(goal.id || uid()),
-          name: safeString(goal.name) || "Untitled Goal",
-          category: safeString(goal.category) || "Personal",
-          target: Math.max(1, Number(goal.target) || 1),
-          progress: Math.max(0, Number(goal.progress) || 0),
-          createdAt: safeString(goal.createdAt) || nowISO()
-        };
-      });
-  }
-
-  if(raw.practice && typeof raw.practice === "object"){
-    Object.keys(raw.practice).forEach(function(dateKey){
-
-      const item = raw.practice[dateKey];
-
-      if(!item || typeof item !== "object"){
-        return;
-      }
-
-      base.practice[dateKey] = {
-        noteId: item.noteId ? String(item.noteId) : null,
-        morning: clamp(Number(item.morning) || 0,0,3),
-        afternoon: clamp(Number(item.afternoon) || 0,0,6),
-        evening: clamp(Number(item.evening) || 0,0,9)
+    base.goals = raw.goals.map(function(g){
+      return {
+        id:typeof g.id === "string" ? g.id : uid("goal"),
+        title:typeof g.title === "string" ? g.title : "Goal",
+        category:typeof g.category === "string" ? g.category : "Personal",
+        target:Number(g.target) > 0 ? Number(g.target) : 100,
+        current:Number(g.current) >= 0 ? Number(g.current) : 0
       };
     });
   }
 
-  if(raw.journal && typeof raw.journal === "object"){
-    Object.keys(raw.journal).forEach(function(dateKey){
+  if(raw.journals && typeof raw.journals === "object"){
+    base.journals = raw.journals;
+  }
 
-      const item = raw.journal[dateKey];
+  if(raw.vision && typeof raw.vision === "object"){
+    base.vision.vision = typeof raw.vision.vision === "string" ? raw.vision.vision : "";
+    base.vision.futureSelf = typeof raw.vision.futureSelf === "string" ? raw.vision.futureSelf : "";
+  }
 
-      if(!item || typeof item !== "object"){
-        return;
-      }
+  if(raw.practices && typeof raw.practices === "object"){
+    Object.keys(raw.practices).forEach(function(key){
+      var p = raw.practices[key] || {};
 
-      base.journal[dateKey] = {
-        gratitude: safeString(item.gratitude),
-        reflection: safeString(item.reflection),
-        updatedAt: safeString(item.updatedAt) || nowISO()
+      base.practices[key] = {
+        noteId:typeof p.noteId === "string" ? p.noteId : null,
+        morning:clamp(Number(p.morning) || 0,0,3),
+        afternoon:clamp(Number(p.afternoon) || 0,0,6),
+        evening:clamp(Number(p.evening) || 0,0,9),
+        updatedAt:typeof p.updatedAt === "string" ? p.updatedAt : new Date().toISOString()
       };
     });
   }
-
-  base.vision = safeString(raw.vision);
 
   if(raw.settings && typeof raw.settings === "object"){
-    base.settings.reminder = Boolean(raw.settings.reminder);
+    base.settings.reminder = raw.settings.reminder === true;
+    base.settings.language = raw.settings.language === "mm" ? "mm" : "en";
   }
 
-  if(
-    base.selectedNoteId &&
-    !base.notes.some(function(note){
-      return note.id === base.selectedNoteId;
-    })
-  ){
-    base.selectedNoteId = base.notes.length
-      ? base.notes[0].id
-      : null;
+  if(typeof raw.selectedNoteId === "string"){
+    base.selectedNoteId = raw.selectedNoteId;
+  }
+
+  if(base.selectedNoteId && !findNote(base.selectedNoteId)){
+    base.selectedNoteId = null;
   }
 
   return base;
 }
 
 function loadState(){
-
   try{
-
-    const raw = localStorage.getItem(STORAGE_KEY);
+    var raw = localStorage.getItem(STORAGE_KEY);
 
     if(!raw){
-      return cloneDefault();
+      return defaultState();
     }
 
     return normalizeState(JSON.parse(raw));
-
   }catch(error){
-
-    console.warn("Could not load local data", error);
-
-    return cloneDefault();
+    return defaultState();
   }
 }
 
 function saveState(){
-
   try{
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(state)
-    );
-
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
   }catch(error){
-
-    showToast("Could not save data on this device");
+    showToast("Data save မအောင်မြင်ပါ");
   }
-}
-
-function uid(){
-  return Date.now().toString(36) +
-    Math.random().toString(36).slice(2,8);
-}
-
-function nowISO(){
-  return new Date().toISOString();
 }
 
 function clamp(value,min,max){
-  return Math.min(max,Math.max(min,value));
+  return Math.max(min,Math.min(max,value));
 }
 
-function pad(number){
-  return String(number).padStart(2,"0");
-}
-
-function dateKey(date){
-
-  const d = date instanceof Date
-    ? date
-    : new Date(date);
-
-  return (
-    d.getFullYear() +
-    "-" +
-    pad(d.getMonth()+1) +
-    "-" +
-    pad(d.getDate())
-  );
-}
-
-function todayKey(){
-  return dateKey(new Date());
-}
-
-function formatDate(iso){
-
-  const d = new Date(iso);
-
-  if(Number.isNaN(d.getTime())){
-    return "";
-  }
-
-  return d.toLocaleDateString(
-    undefined,
-    {
-      day:"numeric",
-      month:"short",
-      year:"numeric"
-    }
-  );
-}
-
-function escapeHTML(value){
-
-  return safeString(value)
+function escapeHtml(value){
+  return String(value == null ? "" : value)
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
@@ -2998,2264 +2382,1390 @@ function escapeHTML(value){
     .replace(/'/g,"&#039;");
 }
 
-function selectedNote(){
-
-  return state.notes.find(function(note){
-    return note.id === state.selectedNoteId;
-  }) || null;
+function normalizeForCompare(value){
+  return String(value || "")
+    .replace(/\s+/g," ")
+    .trim();
 }
 
-function getPractice(key){
+function findNote(id){
+  for(var i=0;i<state.notes.length;i++){
+    if(state.notes[i].id === id) return state.notes[i];
+  }
+  return null;
+}
 
-  if(!state.practice[key]){
+function todayPractice(){
+  var key = localDateKey();
 
-    state.practice[key] = {
-      noteId: state.selectedNoteId,
+  if(!state.practices[key]){
+    state.practices[key] = {
+      noteId:null,
       morning:0,
       afternoon:0,
-      evening:0
+      evening:0,
+      updatedAt:new Date().toISOString()
     };
-
-    saveState();
   }
 
-  return state.practice[key];
+  return state.practices[key];
 }
 
-function totalForDay(key){
+function selectedPracticeNote(){
+  var p = state.practices[localDateKey()];
 
-  const item = state.practice[key];
-
-  if(!item){
-    return 0;
+  if(p && p.noteId){
+    return findNote(p.noteId);
   }
 
-  return (
-    clamp(Number(item.morning)||0,0,3) +
-    clamp(Number(item.afternoon)||0,0,6) +
-    clamp(Number(item.evening)||0,0,9)
-  );
+  return findNote(state.selectedNoteId);
 }
 
-function isCompleteDay(key){
-  return totalForDay(key) >= 18;
+function dailyTotal(p){
+  if(!p) return 0;
+
+  return clamp(Number(p.morning)||0,0,3) +
+    clamp(Number(p.afternoon)||0,0,6) +
+    clamp(Number(p.evening)||0,0,9);
+}
+
+function isComplete(p){
+  return !!p &&
+    Number(p.morning) === 3 &&
+    Number(p.afternoon) === 6 &&
+    Number(p.evening) === 9;
 }
 
 function totalWritings(){
+  var total = 0;
 
-  return Object.keys(state.practice)
-    .reduce(function(sum,key){
-      return sum + totalForDay(key);
-    },0);
+  Object.keys(state.practices).forEach(function(key){
+    total += dailyTotal(state.practices[key]);
+  });
+
+  return total;
 }
 
 function completedDays(){
+  var total = 0;
 
-  return Object.keys(state.practice)
-    .filter(isCompleteDay)
-    .length;
+  Object.keys(state.practices).forEach(function(key){
+    if(isComplete(state.practices[key])) total++;
+  });
+
+  return total;
 }
 
 function currentStreak(){
+  var today = dateFromKey(localDateKey());
+  var todayKey = localDateKey(today);
+  var yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate()-1);
+  var yesterdayKey = localDateKey(yesterday);
 
-  let streak = 0;
-  const d = new Date();
+  var start = null;
+
+  if(state.practices[todayKey] && isComplete(state.practices[todayKey])){
+    start = today;
+  }else if(state.practices[yesterdayKey] && isComplete(state.practices[yesterdayKey])){
+    start = yesterday;
+  }else{
+    return 0;
+  }
+
+  var streak = 0;
+  var d = new Date(start);
 
   while(true){
-
-    const key = dateKey(d);
-
-    if(!isCompleteDay(key)){
+    var key = localDateKey(d);
+    if(state.practices[key] && isComplete(state.practices[key])){
+      streak++;
+      d.setDate(d.getDate()-1);
+    }else{
       break;
     }
 
-    streak++;
-
-    d.setDate(d.getDate()-1);
+    if(streak > 10000) break;
   }
 
   return streak;
 }
 
-/* =========================================================
-   TOAST
-========================================================= */
-
 function showToast(message){
+  var el = document.getElementById("toast");
 
-  const wrap = document.getElementById("toastWrap");
+  if(!el) return;
 
-  if(!wrap){
-    return;
-  }
+  el.textContent = message;
+  el.classList.add("show");
 
-  const toast = document.createElement("div");
+  clearTimeout(toastTimer);
 
-  toast.className = "toast";
-  toast.textContent = message;
-
-  wrap.appendChild(toast);
-
-  setTimeout(function(){
-
-    toast.style.opacity = "0";
-    toast.style.transform = "translateY(7px)";
-
-    setTimeout(function(){
-      toast.remove();
-    },200);
-
-  },2500);
+  toastTimer = setTimeout(function(){
+    el.classList.remove("show");
+  },2600);
 }
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+function openModal(id){
+  var el = document.getElementById(id);
+  if(el) el.classList.add("open");
+}
 
-const VIEW_META = {
+function closeModal(id){
+  var el = document.getElementById(id);
+  if(el) el.classList.remove("open");
+}
 
-  dashboard:{
-    title:"Dashboard",
-    subtitle:"Your daily manifestation practice"
-  },
-
-  practice:{
-    title:"369 Practice",
-    subtitle:"3 in the morning · 6 in the afternoon · 9 in the evening"
-  },
-
-  notes:{
-    title:"My 369 Notes",
-    subtitle:"Save and manage your personal 369 sentences"
-  },
-
-  goals:{
-    title:"My Goals",
-    subtitle:"Turn intentions into measurable targets"
-  },
-
-  journal:{
-    title:"Journal",
-    subtitle:"Reflect, appreciate and reset"
-  },
-
-  vision:{
-    title:"My Vision",
-    subtitle:"Build a clear picture of your future"
-  },
-
-  history:{
-    title:"History",
-    subtitle:"Track your consistency over time"
-  },
-
-  achievements:{
-    title:"Achievements",
-    subtitle:"Milestones from your daily practice"
-  },
-
-  settings:{
-    title:"Settings",
-    subtitle:"Preferences and data management"
-  }
-};
-
-function openView(view){
-
-  if(!VIEW_META[view]){
-    view = "dashboard";
-  }
-
-  currentView = view;
-
-  document.querySelectorAll(".view").forEach(function(el){
-
-    el.classList.toggle(
-      "active",
-      el.id === "view-" + view
-    );
-
+function navigate(view){
+  document.querySelectorAll(".view").forEach(function(v){
+    v.classList.remove("active");
   });
 
-  document.querySelectorAll("[data-go]").forEach(function(btn){
+  var target = document.getElementById("view-" + view);
 
-    btn.classList.toggle(
-      "active",
-      btn.dataset.go === view
-    );
+  if(target){
+    target.classList.add("active");
+  }
 
+  document.querySelectorAll(".nav-btn,.bottom-btn").forEach(function(btn){
+    btn.classList.toggle("active",btn.getAttribute("data-view") === view);
   });
-
-  const meta = VIEW_META[view];
-
-  document.getElementById("pageTitle").textContent =
-    meta.title;
-
-  document.getElementById("pageSubtitle").textContent =
-    meta.subtitle;
 
   document.getElementById("sidebar").classList.remove("open");
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+  if(view === "dashboard") renderDashboard();
+  if(view === "practice") renderPractice();
+  if(view === "notes") renderNotes();
+  if(view === "guide") renderGuide();
+  if(view === "goals") renderGoals();
+  if(view === "journal") renderJournal();
+  if(view === "vision") renderVision();
+  if(view === "history") renderHistory();
+  if(view === "achievements") renderAchievements();
+  if(view === "settings") renderSettings();
 
-  renderCurrentView();
+  window.scrollTo({top:0,behavior:"smooth"});
 }
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
 
 function renderDashboard(){
+  var p = state.practices[localDateKey()] || {
+    morning:0,
+    afternoon:0,
+    evening:0
+  };
 
-  const today = getPractice(todayKey());
-  const total = totalForDay(todayKey());
-  const percent = Math.round((total / 18) * 100);
+  var total = dailyTotal(p);
+  var percent = Math.round((total/18)*100);
+  var note = selectedPracticeNote();
 
-  document.getElementById("statStreak").textContent =
-    currentStreak();
+  document.getElementById("statStreak").textContent = currentStreak();
+  document.getElementById("statCompleted").textContent = completedDays();
+  document.getElementById("statWritings").textContent = totalWritings();
+  document.getElementById("statNotes").textContent = state.notes.length;
+  document.getElementById("statGoals").textContent = state.goals.length;
 
-  document.getElementById("statCompleteDays").textContent =
-    completedDays();
+  document.getElementById("dashboardProgress").textContent = total + "/18";
+  document.getElementById("dashboardPercent").textContent = percent + "%";
+  document.getElementById("dashboardCircle").style.setProperty("--progress",percent + "%");
 
-  document.getElementById("statWritings").textContent =
-    totalWritings();
+  document.getElementById("dashboardSentence").textContent =
+    note ? note.text : "Manifestation sentence မရွေးထားသေးပါ";
 
-  document.getElementById("statNotes").textContent =
-    state.notes.length;
+  document.getElementById("dashMorningCount").textContent = p.morning + "/3";
+  document.getElementById("dashAfternoonCount").textContent = p.afternoon + "/6";
+  document.getElementById("dashEveningCount").textContent = p.evening + "/9";
 
-  document.getElementById("statGoals").textContent =
-    state.goals.length;
+  updateDashSession("dashMorning",p.morning === 3);
+  updateDashSession("dashAfternoon",p.afternoon === 6);
+  updateDashSession("dashEvening",p.evening === 9);
 
-  document.getElementById("todayBadge").textContent =
-    total + " / 18";
-
-  document.getElementById("dashboardPercent").textContent =
-    percent + "%";
-
-  document.getElementById("dashboardRing")
-    .style.setProperty(
-      "--progress",
-      percent + "%"
-    );
-
-  updateDashboardSession(
-    "dashMorning",
-    "dashMorningCount",
-    today.morning,
-    3
-  );
-
-  updateDashboardSession(
-    "dashAfternoon",
-    "dashAfternoonCount",
-    today.afternoon,
-    6
-  );
-
-  updateDashboardSession(
-    "dashEvening",
-    "dashEveningCount",
-    today.evening,
-    9
-  );
-
-  const note = selectedNote();
-
-  document.getElementById("dashboardNoteTitle").textContent =
-    note ? note.title : "No sentence selected";
-
-  document.getElementById("dashboardNoteText").textContent =
-    note
-      ? note.text
-      : "Create a note and set it as Today's 369 sentence";
-
-  renderDashboardAchievements();
+  document.getElementById("sideProgress").textContent =
+    total + " / 18 writings";
 }
 
-function updateDashboardSession(
-  itemId,
-  countId,
-  count,
-  target
-){
+function updateDashSession(id,done){
+  var el = document.getElementById(id);
+  if(!el) return;
 
-  const item = document.getElementById(itemId);
+  el.classList.toggle("completed",done);
 
-  item.classList.toggle(
-    "complete",
-    count >= target
-  );
+  var status = el.querySelector(".session-status");
 
-  document.getElementById(countId).textContent =
-    count + " / " + target;
-}
-
-/* =========================================================
-   NOTES
-========================================================= */
-
-function renderNotes(){
-
-  const grid = document.getElementById("notesGrid");
-  const query =
-    safeString(document.getElementById("noteSearch").value)
-      .trim()
-      .toLowerCase();
-
-  let notes = state.notes.filter(function(note){
-
-    const matchesSearch =
-      !query ||
-      note.title.toLowerCase().includes(query) ||
-      note.text.toLowerCase().includes(query);
-
-    const matchesFavorite =
-      !favoriteOnly || note.favorite;
-
-    return matchesSearch && matchesFavorite;
-  });
-
-  notes.sort(function(a,b){
-
-    if(a.favorite !== b.favorite){
-      return a.favorite ? -1 : 1;
-    }
-
-    return new Date(b.updatedAt) - new Date(a.updatedAt);
-  });
-
-  if(!notes.length){
-
-    grid.innerHTML = `
-      <div class="empty-state" style="grid-column:1/-1;">
-        <div class="empty-icon">✎</div>
-        <div class="empty-title">No 369 notes yet</div>
-        <div class="empty-text">
-          Create your first sentence and save it here
-        </div>
-      </div>
-    `;
-
-    return;
+  if(status){
+    status.textContent = done ? "✓ Complete" : "Not started";
   }
-
-  grid.innerHTML = notes.map(function(note){
-
-    const today =
-      note.id === state.selectedNoteId;
-
-    return `
-      <article class="card note-card ${today ? "today" : ""}">
-
-        <div class="note-top">
-
-          <div>
-            <div class="note-title">
-              ${escapeHTML(note.title)}
-            </div>
-
-            ${
-              today
-                ? `<span class="badge gold-badge"
-                    style="margin-top:7px;">TODAY'S 369</span>`
-                : ""
-            }
-          </div>
-
-          <button
-            class="favorite-btn ${note.favorite ? "active" : ""}"
-            data-action="favorite-note"
-            data-id="${escapeHTML(note.id)}"
-            aria-label="Favorite"
-          >
-            ${note.favorite ? "★" : "☆"}
-          </button>
-
-        </div>
-
-        <div class="note-text">
-          ${escapeHTML(note.text)}
-        </div>
-
-        <div class="note-meta">
-          Updated ${escapeHTML(formatDate(note.updatedAt))}
-        </div>
-
-        <div class="note-actions">
-
-          <button
-            class="small-btn gold"
-            data-action="use-note"
-            data-id="${escapeHTML(note.id)}"
-          >
-            ${today ? "Today's 369" : "Use Today"}
-          </button>
-
-          <button
-            class="small-btn"
-            data-action="edit-note"
-            data-id="${escapeHTML(note.id)}"
-          >
-            Edit
-          </button>
-
-          <button
-            class="small-btn"
-            data-action="delete-note"
-            data-id="${escapeHTML(note.id)}"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      </article>
-    `;
-
-  }).join("");
 }
-
-/* =========================================================
-   GOALS
-========================================================= */
-
-function renderGoals(){
-
-  const grid = document.getElementById("goalsGrid");
-
-  if(!state.goals.length){
-
-    grid.innerHTML = `
-      <div class="empty-state" style="grid-column:1/-1;">
-        <div class="empty-icon">◎</div>
-        <div class="empty-title">No goals yet</div>
-        <div class="empty-text">
-          Add a measurable goal to track your progress
-        </div>
-      </div>
-    `;
-
-    return;
-  }
-
-  grid.innerHTML = state.goals.map(function(goal){
-
-    const percent = clamp(
-      Math.round((goal.progress / goal.target) * 100),
-      0,
-      100
-    );
-
-    return `
-      <article class="card goal-card">
-
-        <div class="goal-head">
-
-          <div>
-            <div class="goal-name">
-              ${escapeHTML(goal.name)}
-            </div>
-
-            <div class="goal-category">
-              ${escapeHTML(goal.category)}
-            </div>
-          </div>
-
-          <span class="badge">${percent}%</span>
-
-        </div>
-
-        <div class="goal-target">
-          ${escapeHTML(String(goal.progress))}
-          <span style="color:var(--muted2);font-size:13px;">
-            / ${escapeHTML(String(goal.target))}
-          </span>
-        </div>
-
-        <div class="goal-bar">
-          <div
-            class="goal-fill"
-            style="width:${percent}%"
-          ></div>
-        </div>
-
-        <div class="goal-bottom">
-          <span>${percent}% complete</span>
-          <span>Target ${escapeHTML(String(goal.target))}</span>
-        </div>
-
-        <div class="goal-actions">
-
-          <button
-            class="small-btn primary"
-            data-action="goal-add"
-            data-id="${escapeHTML(goal.id)}"
-          >
-            +10%
-          </button>
-
-          <button
-            class="small-btn"
-            data-action="delete-goal"
-            data-id="${escapeHTML(goal.id)}"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      </article>
-    `;
-
-  }).join("");
-}
-
-/* =========================================================
-   PRACTICE
-========================================================= */
 
 function renderPractice(){
+  var p = todayPractice();
+  var note = selectedPracticeNote();
+  var total = dailyTotal(p);
+  var percent = Math.round((total/18)*100);
 
-  const note = selectedNote();
+  document.getElementById("practiceNoteTitle").textContent =
+    note ? note.title : "No sentence selected";
 
   document.getElementById("practiceSentence").textContent =
-    note
-      ? note.text
-      : "No sentence selected";
+    note ? note.text : "My 369 Notes ထဲက စာကြောင်းတစ်ကြောင်းကို ရွေးပါ";
 
-  const item = getPractice(todayKey());
+  document.getElementById("practiceProgressText").textContent =
+    total + " / 18";
 
-  updateSessionUI(
-    "morning",
-    item.morning,
+  document.getElementById("practiceProgressFill").style.width =
+    percent + "%";
+
+  updatePracticeSession(
+    "practiceMorning",
+    p.morning,
     3
   );
 
-  updateSessionUI(
-    "afternoon",
-    item.afternoon,
+  updatePracticeSession(
+    "practiceAfternoon",
+    p.afternoon,
     6
   );
 
-  updateSessionUI(
-    "evening",
-    item.evening,
+  updatePracticeSession(
+    "practiceEvening",
+    p.evening,
     9
   );
+
+  document.querySelectorAll(".session-start").forEach(function(btn){
+    var session = btn.getAttribute("data-session");
+    var value = p[session];
+    var target = targetFor(session);
+
+    btn.disabled = !note || value >= target;
+    btn.textContent = value >= target ? "Complete" : "Write";
+  });
 }
 
-function updateSessionUI(session,count,target){
+function updatePracticeSession(id,count,target){
+  var el = document.getElementById(id);
+  if(!el) return;
 
-  document.getElementById(
-    session + "Count"
-  ).textContent = count;
+  el.classList.toggle("done",count >= target);
 
-  document.getElementById(
-    session + "Progress"
-  ).style.width =
-    ((count / target) * 100) + "%";
-
-  const card = document.getElementById(
-    "session" +
-    session.charAt(0).toUpperCase() +
-    session.slice(1)
-  );
-
-  card.classList.toggle(
-    "complete",
-    count >= target
-  );
-
-  const button =
-    card.querySelector("[data-session]");
-
-  if(count >= target){
-
-    button.textContent = "Completed ✓";
-    button.classList.remove("gold-btn","primary-btn");
-    button.classList.add("ghost-btn");
-
-  }else{
-
-    button.textContent = "Start Writing";
-
-    button.classList.remove("ghost-btn");
-
-    if(session === "afternoon"){
-      button.classList.add("primary-btn");
-    }else{
-      button.classList.add("gold-btn");
-    }
+  var countEl = el.querySelector(".ps-count");
+  if(countEl){
+    countEl.textContent = count + "/" + target;
   }
 }
 
-/* =========================================================
-   WRITING MODE
-========================================================= */
-
-function openWriting(session){
-
-  const note = selectedNote();
-
-  if(!note){
-
-    showToast(
-      "Please create or select a 369 note first"
-    );
-
-    openView("notes");
-
-    return;
-  }
-
-  const targets = {
-    morning:3,
-    afternoon:6,
-    evening:9
-  };
-
-  const labels = {
-    morning:"MORNING 3",
-    afternoon:"AFTERNOON 6",
-    evening:"EVENING 9"
-  };
-
-  const current =
-    getPractice(todayKey())[session] || 0;
-
-  const target = targets[session];
-
-  if(current >= target){
-
-    showToast(
-      labels[session] + " is already complete"
-    );
-
-    return;
-  }
-
-  currentWriting = {
-    session:session,
-    target:target
-  };
-
-  document.getElementById("writingSessionLabel").textContent =
-    labels[session];
-
-  document.getElementById("writingNoteTitle").textContent =
-    note.title;
-
-  document.getElementById("writingSentence").textContent =
-    note.text;
-
-  prepareWritingStep();
-
-  document.getElementById("writingModal")
-    .classList.add("show");
-
-  setTimeout(function(){
-
-    document.getElementById("writingInput").focus();
-
-  },100);
-}
-
-function prepareWritingStep(){
-
-  if(!currentWriting){
-    return;
-  }
-
-  const practice = getPractice(todayKey());
-
-  const count = practice[currentWriting.session] || 0;
-  const repetition = count + 1;
-  const target = currentWriting.target;
-
-  document.getElementById("writingProgressText").textContent =
-    repetition + " / " + target;
-
-  document.getElementById("writingInputLabel").textContent =
-    "WRITE REPETITION " + repetition;
-
-  document.getElementById("writingProgressFill").style.width =
-    ((count / target) * 100) + "%";
-
-  document.getElementById("writingInput").value = "";
-
-  clearWritingError();
-}
-
-function completeWriting(){
-
-  if(!currentWriting){
-    return;
-  }
-
-  const note = selectedNote();
-
-  if(!note){
-
-    showWritingError(
-      "No 369 sentence is selected"
-    );
-
-    return;
-  }
-
-  const input =
-    document.getElementById("writingInput").value.trim();
-
-  if(!input){
-
-    showWritingError(
-      "Please write the sentence before completing this repetition"
-    );
-
-    return;
-  }
-
-  if(normalizeCompare(input) !== normalizeCompare(note.text)){
-
-    showWritingError(
-      "The sentence does not match your saved 369 sentence"
-    );
-
-    return;
-  }
-
-  const key = todayKey();
-  const practice = getPractice(key);
-
-  const session = currentWriting.session;
-  const target = currentWriting.target;
-
-  practice[session] =
-    clamp(
-      Number(practice[session] || 0) + 1,
-      0,
-      target
-    );
-
-  practice.noteId = note.id;
-
-  saveState();
-
-  const newCount = practice[session];
-
-  if(newCount >= target){
-
-    showToast(
-      sessionLabel(session) +
-      " complete ✓"
-    );
-
-  }else{
-
-    showToast(
-      "Writing " +
-      newCount +
-      " / " +
-      target +
-      " complete"
-    );
-  }
-
-  renderPractice();
-  renderDashboard();
-
-  if(newCount >= target){
-
-    closeModal("writingModal");
-
-    currentWriting = null;
-
-    if(
-      practice.morning >= 3 &&
-      practice.afternoon >= 6 &&
-      practice.evening >= 9
-    ){
-
-      showToast(
-        "🎉 Your complete 369 day is finished"
-      );
-    }
-
-  }else{
-
-    prepareWritingStep();
-
-    setTimeout(function(){
-
-      document.getElementById("writingInput").focus();
-
-    },80);
-  }
-}
-
-function normalizeCompare(text){
-
-  return safeString(text)
-    .replace(/\s+/g," ")
-    .trim()
-    .toLowerCase();
+function targetFor(session){
+  if(session === "morning") return 3;
+  if(session === "afternoon") return 6;
+  return 9;
 }
 
 function sessionLabel(session){
-
-  const labels = {
-    morning:"Morning 3",
-    afternoon:"Afternoon 6",
-    evening:"Evening 9"
-  };
-
-  return labels[session] || session;
+  if(session === "morning") return "Morning";
+  if(session === "afternoon") return "Afternoon";
+  return "Evening";
 }
 
-function showWritingError(message){
+function renderNotes(){
+  var list = document.getElementById("noteList");
+  var search = document.getElementById("noteSearch").value
+    .toLowerCase()
+    .trim();
 
-  const box =
-    document.getElementById("writingError");
+  var notes = state.notes.filter(function(note){
+    if(!search) return true;
 
-  box.textContent = message;
-  box.classList.add("show");
-}
+    return note.title.toLowerCase().indexOf(search) !== -1 ||
+      note.text.toLowerCase().indexOf(search) !== -1;
+  });
 
-function clearWritingError(){
-
-  const box =
-    document.getElementById("writingError");
-
-  box.textContent = "";
-  box.classList.remove("show");
-}
-
-/* =========================================================
-   SELECT NOTE
-========================================================= */
-
-function openSelectNoteModal(){
-
-  const list =
-    document.getElementById("selectNoteList");
-
-  if(!state.notes.length){
-
-    list.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon">✎</div>
-        <div class="empty-title">No saved notes</div>
-        <div class="empty-text">
-          Create your first 369 sentence first
-        </div>
-        <button
-          class="gold-btn"
-          id="emptyCreateNoteBtn"
-          style="margin-top:15px;"
-        >
-          ＋ Create Note
-        </button>
-      </div>
-    `;
-
-    document.getElementById("selectNoteModal")
-      .classList.add("show");
-
-    document.getElementById("emptyCreateNoteBtn")
-      .addEventListener("click",function(){
-
-        closeModal("selectNoteModal");
-        openNoteModal();
-
-      });
-
-    return;
-  }
-
-  const notes = [...state.notes].sort(function(a,b){
-
-    if(a.favorite !== b.favorite){
+  notes.sort(function(a,b){
+    if(favoriteSort && a.favorite !== b.favorite){
       return a.favorite ? -1 : 1;
     }
 
-    return new Date(b.updatedAt) - new Date(a.updatedAt);
+    return new Date(b.updatedAt).getTime() -
+      new Date(a.updatedAt).getTime();
   });
 
+  if(notes.length === 0){
+    list.innerHTML =
+      '<div class="empty" style="grid-column:1/-1">' +
+        '<div class="empty-icon">📝</div>' +
+        '<strong>No manifestation notes yet</strong>' +
+        '<p style="margin-top:7px">Add your first 369 sentence</p>' +
+      '</div>';
+
+    return;
+  }
+
+  var todayP = state.practices[localDateKey()];
+
   list.innerHTML = notes.map(function(note){
+    var selected = state.selectedNoteId === note.id;
+    var todaySelected = todayP && todayP.noteId === note.id;
 
-    const selected =
-      note.id === state.selectedNoteId;
+    return (
+      '<article class="note ' + (selected ? "selected" : "") + '">' +
+        '<div class="note-top">' +
+          '<div>' +
+            '<div class="note-title">' + escapeHtml(note.title) + '</div>' +
+            (todaySelected
+              ? '<div style="margin-top:5px;color:var(--success);font-size:10px;font-weight:800">✓ TODAY</div>'
+              : '') +
+          '</div>' +
+          '<button class="favorite ' + (note.favorite ? "on" : "") +
+            '" data-action="favorite" data-id="' + escapeHtml(note.id) + '">' +
+            (note.favorite ? "★" : "☆") +
+          '</button>' +
+        '</div>' +
 
-    return `
-      <button
-        class="card"
-        data-action="select-note-modal"
-        data-id="${escapeHTML(note.id)}"
-        style="
-          width:100%;
-          border:1px solid ${selected
-            ? "rgba(229,184,107,.25)"
-            : "var(--border)"};
-          background:${selected
-            ? "rgba(229,184,107,.07)"
-            : "rgba(255,255,255,.018)"};
-          color:var(--text);
-          padding:16px;
-          margin-bottom:9px;
-          text-align:left;
-          border-radius:15px;
-        "
-      >
+        '<div class="note-text">' + escapeHtml(note.text) + '</div>' +
 
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          gap:10px;
-          align-items:flex-start;
-        ">
+        '<div class="note-meta">Updated ' +
+          escapeHtml(formatDate(note.updatedAt)) +
+        '</div>' +
 
-          <div>
-            <div style="
-              font-size:13px;
-              font-weight:900;
-            ">
-              ${escapeHTML(note.title)}
-            </div>
+        '<div class="note-actions">' +
+          '<button class="btn small primary" data-action="use-today" data-id="' +
+            escapeHtml(note.id) + '">Use for Today</button>' +
 
-            <div style="
-              color:var(--muted);
-              font-size:10px;
-              line-height:1.6;
-              margin-top:5px;
-            ">
-              ${escapeHTML(note.text)}
-            </div>
-          </div>
+          '<button class="btn small" data-action="edit-note" data-id="' +
+            escapeHtml(note.id) + '">Edit</button>' +
 
-          <span style="
-            color:${selected
-              ? "var(--gold)"
-              : "var(--muted2)"};
-            font-size:16px;
-          ">
-            ${selected ? "✓" : ""}
-          </span>
-
-        </div>
-
-      </button>
-    `;
-
+          '<button class="btn small danger" data-action="delete-note" data-id="' +
+            escapeHtml(note.id) + '">Delete</button>' +
+        '</div>' +
+      '</article>'
+    );
   }).join("");
-
-  document.getElementById("selectNoteModal")
-    .classList.add("show");
 }
 
-/* =========================================================
-   ACHIEVEMENTS
-========================================================= */
+function renderGuide(){
+  var list = document.getElementById("exampleList");
 
-function getAchievements(){
+  list.innerHTML = EXAMPLES.map(function(item,index){
+    return (
+      '<div class="example">' +
+        '<div class="example-top">' +
+          '<div>' +
+            '<div class="example-category">' +
+              escapeHtml(item.category) +
+            '</div>' +
+            '<strong>' + escapeHtml(item.title) + '</strong>' +
+          '</div>' +
+          '<button class="btn small primary" data-example-index="' +
+            index + '">Use This</button>' +
+        '</div>' +
+        '<div class="example-text">' +
+          escapeHtml(item.text) +
+        '</div>' +
+      '</div>'
+    );
+  }).join("");
+}
 
-  const writings = totalWritings();
-  const days = completedDays();
-  const streak = currentStreak();
+function renderGoals(){
+  var list = document.getElementById("goalList");
 
-  return [
+  if(state.goals.length === 0){
+    list.innerHTML =
+      '<div class="empty">' +
+        '<div class="empty-icon">🎯</div>' +
+        '<strong>No goals yet</strong>' +
+        '<p style="margin-top:7px">Create a goal and track your progress</p>' +
+      '</div>';
+    return;
+  }
 
-    {
-      id:"first-writing",
-      icon:"✎",
-      title:"First Writing",
-      desc:"Complete your first repetition",
-      unlocked:writings >= 1
-    },
+  list.innerHTML = state.goals.map(function(goal){
+    var percent = Math.round(
+      Math.min(100,Math.max(0,(goal.current/goal.target)*100))
+    );
 
-    {
-      id:"first-day",
-      icon:"✓",
-      title:"First Complete Day",
-      desc:"Finish all 18 writings in one day",
-      unlocked:days >= 1
-    },
+    return (
+      '<div class="goal">' +
+        '<div class="goal-top">' +
+          '<div>' +
+            '<div class="goal-title">' + escapeHtml(goal.title) + '</div>' +
+            '<div class="goal-category">' + escapeHtml(goal.category) + '</div>' +
+          '</div>' +
+          '<strong>' + percent + '%</strong>' +
+        '</div>' +
 
-    {
-      id:"three-streak",
-      icon:"🔥",
-      title:"3 Day Streak",
-      desc:"Complete 3 consecutive days",
-      unlocked:streak >= 3
-    },
+        '<div class="goal-progress">' +
+          '<div class="progress-track">' +
+            '<div class="progress-fill" style="width:' + percent + '%"></div>' +
+          '</div>' +
+        '</div>' +
 
-    {
-      id:"seven-streak",
-      icon:"⚡",
-      title:"7 Day Streak",
-      desc:"Complete 7 consecutive days",
-      unlocked:streak >= 7
-    },
+        '<div style="margin-top:8px;color:var(--muted);font-size:11px">' +
+          escapeHtml(String(goal.current)) + " / " +
+          escapeHtml(String(goal.target)) +
+        '</div>' +
 
-    {
-      id:"fourteen-streak",
-      icon:"◆",
-      title:"14 Day Streak",
-      desc:"Complete 14 consecutive days",
-      unlocked:streak >= 14
-    },
+        '<div class="goal-actions">' +
+          '<button class="btn small" data-goal-action="add" data-id="' +
+            escapeHtml(goal.id) + '">+10%</button>' +
+          '<button class="btn small danger" data-goal-action="delete" data-id="' +
+            escapeHtml(goal.id) + '">Delete</button>' +
+        '</div>' +
+      '</div>'
+    );
+  }).join("");
+}
 
-    {
-      id:"thirty-streak",
-      icon:"♛",
-      title:"30 Day Streak",
-      desc:"Complete 30 consecutive days",
-      unlocked:streak >= 30
-    },
+function renderJournal(){
+  var entry = state.journals[localDateKey()] || {};
 
-    {
-      id:"hundred-writing",
-      icon:"100",
-      title:"100 Writings",
-      desc:"Complete 100 total repetitions",
-      unlocked:writings >= 100
-    },
+  document.getElementById("journalGratitude").value =
+    typeof entry.gratitude === "string" ? entry.gratitude : "";
 
-    {
-      id:"three-hundred",
-      icon:"369",
-      title:"369 Master",
-      desc:"Complete 369 total repetitions",
-      unlocked:writings >= 369
+  document.getElementById("journalReflection").value =
+    typeof entry.reflection === "string" ? entry.reflection : "";
+}
+
+function renderVision(){
+  document.getElementById("visionText").value =
+    state.vision.vision || "";
+
+  document.getElementById("futureSelfText").value =
+    state.vision.futureSelf || "";
+}
+
+function renderHistory(){
+  document.getElementById("historyCompleted").textContent =
+    completedDays();
+
+  document.getElementById("historyWritings").textContent =
+    totalWritings();
+
+  document.getElementById("historyPercent").textContent =
+    monthCompletionPercent(historyDate) + "%";
+
+  renderCalendar();
+}
+
+function monthCompletionPercent(date){
+  var y = date.getFullYear();
+  var m = date.getMonth();
+
+  var daysInMonth = new Date(y,m+1,0).getDate();
+  var denominator = daysInMonth;
+
+  var now = new Date();
+
+  if(y === now.getFullYear() && m === now.getMonth()){
+    denominator = now.getDate();
+  }
+
+  if(denominator <= 0) return 0;
+
+  var complete = 0;
+
+  for(var d=1;d<=denominator;d++){
+    var key = localDateKey(new Date(y,m,d));
+
+    if(state.practices[key] && isComplete(state.practices[key])){
+      complete++;
+    }
+  }
+
+  return Math.round((complete/denominator)*100);
+}
+
+function renderCalendar(){
+  var calendar = document.getElementById("calendar");
+  var year = historyDate.getFullYear();
+  var month = historyDate.getMonth();
+
+  var first = new Date(year,month,1);
+  var startDay = first.getDay();
+  var days = new Date(year,month+1,0).getDate();
+
+  document.getElementById("monthTitle").textContent =
+    historyDate.toLocaleDateString("en-US",{
+      month:"long",
+      year:"numeric"
+    });
+
+  var html = "";
+
+  ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(function(day){
+    html += '<div class="weekday">' + day + '</div>';
+  });
+
+  for(var i=0;i<startDay;i++){
+    html += '<div class="day empty-day"></div>';
+  }
+
+  var todayKey = localDateKey();
+
+  for(var d=1;d<=days;d++){
+    var date = new Date(year,month,d);
+    var key = localDateKey(date);
+    var p = state.practices[key];
+    var count = p ? dailyTotal(p) : 0;
+
+    var classes = "day";
+
+    if(count > 0 && count < 18){
+      classes += " partial";
     }
 
-  ];
+    if(count === 18){
+      classes += " complete";
+    }
+
+    if(key === todayKey){
+      classes += " today";
+    }
+
+    html +=
+      '<div class="' + classes + '" title="' +
+        escapeHtml(String(count) + " / 18 writings") + '">' +
+        '<div class="day-number">' + d + '</div>' +
+        '<div class="day-count">' +
+          (count > 0 ? count + "/18" : "") +
+        '</div>' +
+      '</div>';
+  }
+
+  calendar.innerHTML = html;
 }
 
 function renderAchievements(){
+  var total = totalWritings();
+  var complete = completedDays();
+  var streak = currentStreak();
 
-  const grid =
-    document.getElementById("achievementsGrid");
-
-  const list = getAchievements();
-
-  const unlocked =
-    list.filter(function(item){
-      return item.unlocked;
-    }).length;
-
-  document.getElementById("achievementCount").textContent =
-    unlocked + " / " + list.length;
-
-  grid.innerHTML = list.map(function(item){
-
-    return `
-      <article
-        class="card achievement ${item.unlocked ? "unlocked" : ""}"
-      >
-
-        <div class="achievement-icon">
-          ${escapeHTML(item.icon)}
-        </div>
-
-        <div class="achievement-title">
-          ${escapeHTML(item.title)}
-        </div>
-
-        <div class="achievement-desc">
-          ${escapeHTML(item.desc)}
-        </div>
-
-        ${
-          item.unlocked
-            ? `<span class="green-badge badge"
-                 style="margin-top:9px;">UNLOCKED</span>`
-            : `<span class="badge"
-                 style="margin-top:9px;">LOCKED</span>`
-        }
-
-      </article>
-    `;
-
-  }).join("");
-}
-
-function renderDashboardAchievements(){
-
-  const grid =
-    document.getElementById("dashboardAchievements");
-
-  const list = getAchievements()
-    .filter(function(item){
-      return item.unlocked;
-    })
-    .slice(-4)
-    .reverse();
-
-  if(!list.length){
-
-    grid.innerHTML = `
-      <div class="empty-state"
-           style="grid-column:1/-1;padding:25px 8px;">
-        <div class="empty-icon">★</div>
-        <div class="empty-title">Your first badge is waiting</div>
-        <div class="empty-text">
-          Complete your first writing to unlock it
-        </div>
-      </div>
-    `;
-
-    return;
-  }
-
-  grid.innerHTML = list.map(function(item){
-
-    return `
-      <div class="card achievement unlocked"
-           style="min-height:145px;padding:13px;">
-
-        <div class="achievement-icon"
-             style="width:44px;height:44px;font-size:19px;">
-          ${escapeHTML(item.icon)}
-        </div>
-
-        <div class="achievement-title"
-             style="font-size:10px;">
-          ${escapeHTML(item.title)}
-        </div>
-
-      </div>
-    `;
-
-  }).join("");
-}
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-function renderHistory(){
-
-  const year = calendarDate.getFullYear();
-  const month = calendarDate.getMonth();
-
-  document.getElementById("calendarMonth").textContent =
-    calendarDate.toLocaleDateString(
-      undefined,
-      {
-        month:"long",
-        year:"numeric"
-      }
-    );
-
-  const daysEl =
-    document.getElementById("calendarDays");
-
-  const first = new Date(year,month,1);
-  const last = new Date(year,month+1,0);
-
-  const startDay = first.getDay();
-  const totalDays = last.getDate();
-
-  let html = "";
-
-  for(let i=0;i<startDay;i++){
-
-    html += `<div class="day empty"></div>`;
-  }
-
-  for(let day=1;day<=totalDays;day++){
-
-    const d = new Date(year,month,day);
-    const key = dateKey(d);
-
-    const count = totalForDay(key);
-
-    const complete = count >= 18;
-    const today = key === todayKey();
-
-    html += `
-      <div class="day
-        ${complete ? "complete" : ""}
-        ${today ? "today" : ""}
-      ">
-
-        <div class="day-number">
-          ${day}
-        </div>
-
-        <div class="day-count">
-          ${count > 0 ? count : ""}
-        </div>
-
-      </div>
-    `;
-  }
-
-  daysEl.innerHTML = html;
-
-  const completed =
-    completedDays();
-
-  const writings =
-    totalWritings();
-
-  const streak =
-    currentStreak();
-
-  let monthCompleted = 0;
-
-  Object.keys(state.practice).forEach(function(key){
-
-    const parts = key.split("-");
-
-    if(
-      Number(parts[0]) === year &&
-      Number(parts[1]) === month + 1 &&
-      isCompleteDay(key)
-    ){
-      monthCompleted++;
+  var badges = [
+    {
+      icon:"✍",
+      title:"First Writing",
+      desc:"Complete your first writing",
+      unlocked:total >= 1
+    },
+    {
+      icon:"✨",
+      title:"First Complete Day",
+      desc:"Complete one full 18-writing day",
+      unlocked:complete >= 1
+    },
+    {
+      icon:"🔥",
+      title:"3 Day Streak",
+      desc:"Complete 3 days in a row",
+      unlocked:streak >= 3
+    },
+    {
+      icon:"🌟",
+      title:"7 Day Streak",
+      desc:"Complete 7 days in a row",
+      unlocked:streak >= 7
+    },
+    {
+      icon:"💎",
+      title:"14 Day Streak",
+      desc:"Complete 14 days in a row",
+      unlocked:streak >= 14
+    },
+    {
+      icon:"👑",
+      title:"30 Day Streak",
+      desc:"Complete 30 days in a row",
+      unlocked:streak >= 30
+    },
+    {
+      icon:"📝",
+      title:"100 Writings",
+      desc:"Complete 100 writings",
+      unlocked:total >= 100
+    },
+    {
+      icon:"🏆",
+      title:"300 Writings",
+      desc:"Complete 300 writings",
+      unlocked:total >= 300
     }
-  });
+  ];
 
-  const now = new Date();
-
-  let denominator;
-
-  if(
-    year === now.getFullYear() &&
-    month === now.getMonth()
-  ){
-    denominator = now.getDate();
-  }else if(
-    dIsPastMonth(year,month)
-  ){
-    denominator = totalDays;
-  }else{
-    denominator = 0;
-  }
-
-  const monthPercent =
-    denominator > 0
-      ? Math.round(
-          (monthCompleted / denominator) * 100
-        )
-      : 0;
-
-  document.getElementById("historyCompletedDays").textContent =
-    completed;
-
-  document.getElementById("historyTotalWritings").textContent =
-    writings;
-
-  document.getElementById("historyStreak").textContent =
-    streak;
-
-  document.getElementById("historyMonthPercent").textContent =
-    monthPercent + "%";
+  document.getElementById("achievementList").innerHTML =
+    badges.map(function(b){
+      return (
+        '<div class="badge ' + (b.unlocked ? "unlocked" : "") + '">' +
+          '<div class="badge-icon">' + b.icon + '</div>' +
+          '<h3>' + escapeHtml(b.title) + '</h3>' +
+          '<p>' + escapeHtml(b.desc) + '</p>' +
+          '<div style="margin-top:9px;color:' +
+            (b.unlocked ? "var(--success)" : "#665d70") +
+            ';font-size:10px;font-weight:800">' +
+            (b.unlocked ? "UNLOCKED" : "LOCKED") +
+          '</div>' +
+        '</div>'
+      );
+    }).join("");
 }
-
-function dIsPastMonth(year,month){
-
-  const now = new Date();
-
-  if(year < now.getFullYear()){
-    return true;
-  }
-
-  if(
-    year === now.getFullYear() &&
-    month < now.getMonth()
-  ){
-    return true;
-  }
-
-  return false;
-}
-
-/* =========================================================
-   JOURNAL
-========================================================= */
-
-function renderJournal(){
-
-  const item =
-    state.journal[todayKey()] || {
-      gratitude:"",
-      reflection:""
-    };
-
-  document.getElementById("gratitudeInput").value =
-    item.gratitude || "";
-
-  document.getElementById("reflectionInput").value =
-    item.reflection || "";
-}
-
-/* =========================================================
-   VISION
-========================================================= */
-
-function renderVision(){
-
-  document.getElementById("visionInput").value =
-    state.vision || "";
-
-  document.getElementById("visionDisplay").textContent =
-    state.vision ||
-    "Your vision will appear here";
-}
-
-/* =========================================================
-   SETTINGS
-========================================================= */
 
 function renderSettings(){
+  var btn = document.getElementById("reminderToggle");
 
-  document.getElementById("reminderToggle")
-    .classList.toggle(
-      "on",
-      Boolean(state.settings.reminder)
-    );
+  btn.classList.toggle("on",state.settings.reminder);
 }
 
-/* =========================================================
-   CURRENT VIEW
-========================================================= */
-
-function renderCurrentView(){
-
-  if(currentView === "dashboard"){
-    renderDashboard();
-  }
-
-  if(currentView === "practice"){
-    renderPractice();
-  }
-
-  if(currentView === "notes"){
-    renderNotes();
-  }
-
-  if(currentView === "goals"){
-    renderGoals();
-  }
-
-  if(currentView === "journal"){
-    renderJournal();
-  }
-
-  if(currentView === "vision"){
-    renderVision();
-  }
-
-  if(currentView === "history"){
-    renderHistory();
-  }
-
-  if(currentView === "achievements"){
-    renderAchievements();
-  }
-
-  if(currentView === "settings"){
-    renderSettings();
+function formatDate(value){
+  try{
+    return new Date(value).toLocaleDateString("en-US",{
+      year:"numeric",
+      month:"short",
+      day:"numeric"
+    });
+  }catch(error){
+    return "";
   }
 }
 
-/* =========================================================
-   NOTE CRUD
-========================================================= */
-
-function openNoteModal(noteId){
-
-  editingNoteId = noteId || null;
+function openNewNote(){
+  editingNoteId = null;
 
   document.getElementById("noteModalTitle").textContent =
-    noteId
-      ? "Edit 369 Note"
-      : "Create 369 Note";
+    "Create New Note";
 
-  if(noteId){
+  document.getElementById("noteTitleInput").value = "";
+  document.getElementById("noteTextInput").value = "";
 
-    const note = state.notes.find(function(item){
-      return item.id === noteId;
-    });
+  openModal("noteModal");
+}
 
-    if(!note){
-      return;
-    }
+function openEditNote(id){
+  var note = findNote(id);
 
-    document.getElementById("noteTitleInput").value =
-      note.title;
+  if(!note) return;
 
-    document.getElementById("noteTextInput").value =
-      note.text;
+  editingNoteId = id;
 
-  }else{
+  document.getElementById("noteModalTitle").textContent =
+    "Edit Note";
 
-    document.getElementById("noteTitleInput").value = "";
-    document.getElementById("noteTextInput").value = "";
-  }
+  document.getElementById("noteTitleInput").value =
+    note.title;
 
-  document.getElementById("noteModal")
-    .classList.add("show");
+  document.getElementById("noteTextInput").value =
+    note.text;
 
-  setTimeout(function(){
-
-    document.getElementById("noteTitleInput").focus();
-
-  },100);
+  openModal("noteModal");
 }
 
 function saveNote(){
+  var title = document.getElementById("noteTitleInput").value.trim();
+  var text = document.getElementById("noteTextInput").value.trim();
 
-  const title =
-    document.getElementById("noteTitleInput")
-      .value.trim();
-
-  const textValue =
-    document.getElementById("noteTextInput")
-      .value.trim();
+  if(!text){
+    showToast("Manifestation sentence ထည့်ပါ");
+    return;
+  }
 
   if(!title){
-
-    showToast("Please enter a note title");
-
-    return;
+    title = "My 369 Manifestation";
   }
 
-  if(!textValue){
-
-    showToast("Please enter your 369 sentence");
-
-    return;
-  }
+  var now = new Date().toISOString();
 
   if(editingNoteId){
+    var existing = findNote(editingNoteId);
 
-    const note =
-      state.notes.find(function(item){
-        return item.id === editingNoteId;
-      });
-
-    if(note){
-
-      note.title = title;
-      note.text = textValue;
-      note.updatedAt = nowISO();
-
-      showToast("369 note updated ✓");
+    if(existing){
+      existing.title = title;
+      existing.text = text;
+      existing.updatedAt = now;
     }
-
   }else{
-
-    const note = {
-      id:uid(),
+    var note = {
+      id:uid("note"),
       title:title,
-      text:textValue,
-      createdAt:nowISO(),
-      updatedAt:nowISO(),
+      text:text,
+      createdAt:now,
+      updatedAt:now,
       favorite:false
     };
 
     state.notes.unshift(note);
 
     if(!state.selectedNoteId){
-
       state.selectedNoteId = note.id;
     }
-
-    showToast("369 note saved ✓");
   }
 
   saveState();
-
   closeModal("noteModal");
-
-  editingNoteId = null;
-
-  renderCurrentView();
+  renderNotes();
   renderDashboard();
+
+  showToast("369 Note သိမ်းပြီးပါပြီ");
 }
 
-function useNote(id){
+function useNoteForToday(id){
+  var note = findNote(id);
 
-  const note =
-    state.notes.find(function(item){
-      return item.id === id;
-    });
+  if(!note) return;
 
-  if(!note){
-    return;
+  var p = state.practices[localDateKey()];
+
+  if(p && dailyTotal(p) > 0 && p.noteId !== id){
+    var change = window.confirm(
+      "ဒီနေ့ writing စပြီးသားဖြစ်ပါတယ်\n" +
+      "Manifestation sentence ပြောင်းရင် ဒီနေ့ progress ကို reset လုပ်မယ်\n\n" +
+      "ဆက်လုပ်မလား?"
+    );
+
+    if(!change) return;
+
+    state.practices[localDateKey()] = {
+      noteId:id,
+      morning:0,
+      afternoon:0,
+      evening:0,
+      updatedAt:new Date().toISOString()
+    };
+  }else{
+    if(!state.practices[localDateKey()]){
+      state.practices[localDateKey()] = {
+        noteId:id,
+        morning:0,
+        afternoon:0,
+        evening:0,
+        updatedAt:new Date().toISOString()
+      };
+    }else{
+      state.practices[localDateKey()].noteId = id;
+      state.practices[localDateKey()].updatedAt = new Date().toISOString();
+    }
   }
 
   state.selectedNoteId = id;
 
-  const practice = getPractice(todayKey());
-
-  practice.noteId = id;
-
   saveState();
-
-  renderCurrentView();
+  renderNotes();
+  renderPractice();
   renderDashboard();
 
-  showToast(
-    '"' + note.title + '" is now Today's 369 sentence ✓"
-  );
+  showToast("ဒီနေ့ 369 Sentence အဖြစ် သတ်မှတ်ပြီးပါပြီ");
 }
 
 function deleteNote(id){
+  var note = findNote(id);
 
-  const note =
-    state.notes.find(function(item){
-      return item.id === id;
-    });
+  if(!note) return;
 
-  if(!note){
+  if(!window.confirm("ဒီ Manifestation Note ကို ဖျက်မှာသေချာပါသလား?")){
     return;
   }
 
-  const ok = window.confirm(
-    "Delete this 369 note?\n\n" +
-    note.title
-  );
-
-  if(!ok){
-    return;
-  }
-
-  state.notes =
-    state.notes.filter(function(item){
-      return item.id !== id;
-    });
+  state.notes = state.notes.filter(function(n){
+    return n.id !== id;
+  });
 
   if(state.selectedNoteId === id){
-
     state.selectedNoteId =
-      state.notes.length
-        ? state.notes[0].id
-        : null;
+      state.notes.length ? state.notes[0].id : null;
   }
 
+  Object.keys(state.practices).forEach(function(key){
+    if(state.practices[key].noteId === id){
+      state.practices[key].noteId = null;
+    }
+  });
+
   saveState();
-
-  renderCurrentView();
+  renderNotes();
   renderDashboard();
+  renderPractice();
 
-  showToast("Note deleted");
+  showToast("Note ဖျက်ပြီးပါပြီ");
 }
 
 function toggleFavorite(id){
+  var note = findNote(id);
 
-  const note =
-    state.notes.find(function(item){
-      return item.id === id;
-    });
-
-  if(!note){
-    return;
-  }
+  if(!note) return;
 
   note.favorite = !note.favorite;
-  note.updatedAt = nowISO();
+  note.updatedAt = new Date().toISOString();
 
   saveState();
-
   renderNotes();
 }
 
-/* =========================================================
-   GOAL CRUD
-========================================================= */
+function useExample(index){
+  var item = EXAMPLES[index];
+
+  if(!item) return;
+
+  document.getElementById("noteModalTitle").textContent =
+    "Save Example";
+
+  document.getElementById("noteTitleInput").value =
+    item.title;
+
+  document.getElementById("noteTextInput").value =
+    item.text;
+
+  editingNoteId = null;
+
+  openModal("noteModal");
+}
 
 function openGoalModal(){
-
-  document.getElementById("goalNameInput").value = "";
+  document.getElementById("goalTitleInput").value = "";
   document.getElementById("goalTargetInput").value = "";
+  document.getElementById("goalCurrentInput").value = "0";
 
-  document.getElementById("goalCategoryInput").value =
-    "Business";
-
-  document.getElementById("goalModal")
-    .classList.add("show");
-
-  setTimeout(function(){
-
-    document.getElementById("goalNameInput").focus();
-
-  },100);
+  openModal("goalModal");
 }
 
 function saveGoal(){
+  var title = document.getElementById("goalTitleInput").value.trim();
+  var category = document.getElementById("goalCategoryInput").value;
+  var target = Number(document.getElementById("goalTargetInput").value);
+  var current = Number(document.getElementById("goalCurrentInput").value);
 
-  const name =
-    document.getElementById("goalNameInput")
-      .value.trim();
-
-  const category =
-    document.getElementById("goalCategoryInput")
-      .value;
-
-  const target =
-    Number(
-      document.getElementById("goalTargetInput")
-        .value
-    );
-
-  if(!name){
-
-    showToast("Please enter a goal name");
-
+  if(!title){
+    showToast("Goal name ထည့်ပါ");
     return;
   }
 
-  if(!target || target < 1){
-
-    showToast("Please enter a valid target");
-
+  if(!target || target <= 0){
+    showToast("Target value မှန်ကန်စွာထည့်ပါ");
     return;
+  }
+
+  if(current < 0 || isNaN(current)){
+    current = 0;
   }
 
   state.goals.unshift({
-    id:uid(),
-    name:name,
+    id:uid("goal"),
+    title:title,
     category:category,
     target:target,
-    progress:0,
-    createdAt:nowISO()
+    current:Math.min(current,target)
   });
 
   saveState();
-
   closeModal("goalModal");
-
   renderGoals();
   renderDashboard();
 
-  showToast("Goal created ✓");
+  showToast("Goal သိမ်းပြီးပါပြီ");
 }
 
-function addGoalProgress(id){
+function goalAction(action,id){
+  var goal = null;
 
-  const goal =
-    state.goals.find(function(item){
-      return item.id === id;
-    });
-
-  if(!goal){
-    return;
+  for(var i=0;i<state.goals.length;i++){
+    if(state.goals[i].id === id){
+      goal = state.goals[i];
+      break;
+    }
   }
 
-  const increment =
-    Math.max(1, Math.ceil(goal.target * .1));
+  if(!goal) return;
 
-  goal.progress =
-    Math.min(
+  if(action === "add"){
+    goal.current = Math.min(
       goal.target,
-      goal.progress + increment
+      goal.current + goal.target * .1
     );
 
-  saveState();
+    saveState();
+    renderGoals();
+    renderDashboard();
 
-  renderGoals();
-  renderDashboard();
-
-  if(goal.progress >= goal.target){
-
-    showToast(
-      "🎉 Goal completed: " + goal.name
-    );
-
-  }else{
-
-    showToast("Goal progress updated ✓");
+    showToast("Goal progress တိုးပြီးပါပြီ");
   }
-}
 
-function deleteGoal(id){
+  if(action === "delete"){
+    if(!window.confirm("ဒီ Goal ကိုဖျက်မှာသေချာပါသလား?")){
+      return;
+    }
 
-  const goal =
-    state.goals.find(function(item){
-      return item.id === id;
+    state.goals = state.goals.filter(function(g){
+      return g.id !== id;
     });
 
-  if(!goal){
-    return;
+    saveState();
+    renderGoals();
+    renderDashboard();
+
+    showToast("Goal ဖျက်ပြီးပါပြီ");
   }
-
-  if(!window.confirm(
-    "Delete this goal?\n\n" + goal.name
-  )){
-    return;
-  }
-
-  state.goals =
-    state.goals.filter(function(item){
-      return item.id !== id;
-    });
-
-  saveState();
-
-  renderGoals();
-  renderDashboard();
-
-  showToast("Goal deleted");
 }
-
-/* =========================================================
-   JOURNAL / VISION SAVE
-========================================================= */
 
 function saveJournal(){
-
-  state.journal[todayKey()] = {
-    gratitude:
-      document.getElementById("gratitudeInput")
-        .value.trim(),
-
-    reflection:
-      document.getElementById("reflectionInput")
-        .value.trim(),
-
-    updatedAt:nowISO()
+  state.journals[localDateKey()] = {
+    gratitude:document.getElementById("journalGratitude").value,
+    reflection:document.getElementById("journalReflection").value,
+    updatedAt:new Date().toISOString()
   };
 
   saveState();
-
-  showToast("Journal saved ✓");
+  showToast("Journal သိမ်းပြီးပါပြီ");
 }
 
 function saveVision(){
+  state.vision.vision =
+    document.getElementById("visionText").value;
 
-  state.vision =
-    document.getElementById("visionInput")
-      .value.trim();
+  state.vision.futureSelf =
+    document.getElementById("futureSelfText").value;
+
+  saveState();
+  showToast("Vision သိမ်းပြီးပါပြီ");
+}
+
+function openWriting(session){
+  var note = selectedPracticeNote();
+
+  if(!note){
+    showToast("အရင်ဆုံး My 369 Notes ထဲက sentence တစ်ခုကို Use for Today လုပ်ပါ");
+    navigate("notes");
+    return;
+  }
+
+  var p = todayPractice();
+  var target = targetFor(session);
+  var count = p[session];
+
+  if(count >= target){
+    showToast(sessionLabel(session) + " session ပြီးပါပြီ");
+    return;
+  }
+
+  writingSession = {
+    session:session,
+    target:target
+  };
+
+  document.getElementById("writingModalTitle").textContent =
+    sessionLabel(session) + " Writing";
+
+  document.getElementById("writingSessionName").textContent =
+    sessionLabel(session);
+
+  document.getElementById("writingSessionSub").textContent =
+    "Write this sentence " + target + " times";
+
+  document.getElementById("writingCounter").textContent =
+    (count + 1) + " / " + target;
+
+  document.getElementById("writingReference").textContent =
+    note.text;
+
+  document.getElementById("writingInput").value = "";
+  document.getElementById("writingWarning").classList.remove("show");
+
+  updateWritingProgress(count,target);
+
+  openModal("writingModal");
+
+  setTimeout(function(){
+    document.getElementById("writingInput").focus();
+  },100);
+}
+
+function updateWritingProgress(count,target){
+  var percent = Math.round((count/target)*100);
+
+  document.getElementById("writingProgressText").textContent =
+    percent + "%";
+
+  document.getElementById("writingProgressFill").style.width =
+    percent + "%";
+
+  document.getElementById("writingCounter").textContent =
+    (count + 1) + " / " + target;
+}
+
+function completeWriting(force){
+  if(!writingSession) return;
+
+  var note = selectedPracticeNote();
+
+  if(!note){
+    closeModal("writingModal");
+    return;
+  }
+
+  var input = document.getElementById("writingInput").value;
+  var warning = document.getElementById("writingWarning");
+
+  var exact = normalizeForCompare(input) ===
+    normalizeForCompare(note.text);
+
+  if(!exact && !force){
+    warning.classList.add("show");
+
+    document.getElementById("completeWritingBtn").textContent =
+      "Complete Anyway";
+
+    return;
+  }
+
+  warning.classList.remove("show");
+  document.getElementById("completeWritingBtn").textContent =
+    "Complete Writing";
+
+  var p = todayPractice();
+
+  if(!p.noteId){
+    p.noteId = note.id;
+  }
+
+  if(p.noteId !== note.id){
+    showToast("Today's sentence မကိုက်ညီပါ");
+    return;
+  }
+
+  var target = writingSession.target;
+
+  if(p[writingSession.session] >= target){
+    closeModal("writingModal");
+    return;
+  }
+
+  p[writingSession.session] =
+    clamp(p[writingSession.session] + 1,0,target);
+
+  p.updatedAt = new Date().toISOString();
 
   saveState();
 
-  renderVision();
+  var newCount = p[writingSession.session];
 
-  showToast("Vision saved ✓");
-}
-
-/* =========================================================
-   MODALS
-========================================================= */
-
-function closeModal(id){
-
-  const el =
-    document.getElementById(id);
-
-  if(el){
-    el.classList.remove("show");
-  }
-
-  if(id === "writingModal"){
-    currentWriting = null;
-  }
-}
-
-document.querySelectorAll("[data-close]").forEach(function(btn){
-
-  btn.addEventListener("click",function(){
-
-    closeModal(btn.dataset.close);
-
-  });
-
-});
-
-document.querySelectorAll(".modal-backdrop").forEach(function(backdrop){
-
-  backdrop.addEventListener("click",function(event){
-
-    if(event.target === backdrop){
-
-      closeModal(backdrop.id);
-
-    }
-
-  });
-
-});
-
-document.addEventListener("keydown",function(event){
-
-  if(event.key === "Escape"){
-
-    document.querySelectorAll(".modal-backdrop.show")
-      .forEach(function(modal){
-
-        closeModal(modal.id);
-
-      });
-  }
-
-});
-
-/* =========================================================
-   EVENT DELEGATION
-========================================================= */
-
-document.addEventListener("click",function(event){
-
-  const navButton =
-    event.target.closest("[data-go]");
-
-  if(navButton){
-
-    event.preventDefault();
-
-    openView(navButton.dataset.go);
-
-    return;
-  }
-
-  const actionButton =
-    event.target.closest("[data-action]");
-
-  if(!actionButton){
-    return;
-  }
-
-  const action =
-    actionButton.dataset.action;
-
-  const id =
-    actionButton.dataset.id;
-
-  if(action === "favorite-note"){
-    toggleFavorite(id);
-  }
-
-  if(action === "use-note"){
-    useNote(id);
-  }
-
-  if(action === "edit-note"){
-    openNoteModal(id);
-  }
-
-  if(action === "delete-note"){
-    deleteNote(id);
-  }
-
-  if(action === "goal-add"){
-    addGoalProgress(id);
-  }
-
-  if(action === "delete-goal"){
-    deleteGoal(id);
-  }
-
-  if(action === "select-note-modal"){
-
-    useNote(id);
-    closeModal("selectNoteModal");
-    renderPractice();
-  }
-
-});
-
-/* =========================================================
-   BASIC BUTTONS
-========================================================= */
-
-document.getElementById("menuBtn")
-  .addEventListener("click",function(){
-
-    document.getElementById("sidebar")
-      .classList.toggle("open");
-
-  });
-
-document.getElementById("quickNoteBtn")
-  .addEventListener("click",function(){
-
-    openNoteModal();
-
-  });
-
-document.getElementById("newNoteBtn")
-  .addEventListener("click",function(){
-
-    openNoteModal();
-
-  });
-
-document.getElementById("practiceCreateNoteBtn")
-  .addEventListener("click",function(){
-
-    openNoteModal();
-
-  });
-
-document.getElementById("practiceSelectNoteBtn")
-  .addEventListener("click",function(){
-
-    openSelectNoteModal();
-
-  });
-
-document.getElementById("newGoalBtn")
-  .addEventListener("click",function(){
-
-    openGoalModal();
-
-  });
-
-document.getElementById("saveNoteBtn")
-  .addEventListener("click",function(){
-
-    saveNote();
-
-  });
-
-document.getElementById("saveGoalBtn")
-  .addEventListener("click",function(){
-
-    saveGoal();
-
-  });
-
-document.getElementById("saveJournalBtn")
-  .addEventListener("click",function(){
-
-    saveJournal();
-
-  });
-
-document.getElementById("saveVisionBtn")
-  .addEventListener("click",function(){
-
-    saveVision();
-
-  });
-
-/* =========================================================
-   SESSION BUTTONS
-========================================================= */
-
-document.querySelectorAll("[data-session]").forEach(function(btn){
-
-  btn.addEventListener("click",function(){
-
-    openWriting(btn.dataset.session);
-
-  });
-
-});
-
-/* =========================================================
-   WRITING
-========================================================= */
-
-document.getElementById("completeWritingBtn")
-  .addEventListener("click",function(){
-
-    completeWriting();
-
-  });
-
-document.getElementById("useSavedTextBtn")
-  .addEventListener("click",function(){
-
-    const note = selectedNote();
-
-    if(!note){
-      return;
-    }
-
-    document.getElementById("writingInput").value =
-      note.text;
-
-    clearWritingError();
-
-  });
-
-document.getElementById("writingInput")
-  .addEventListener("input",function(){
-
-    clearWritingError();
-
-  });
-
-/* =========================================================
-   NOTES SEARCH
-========================================================= */
-
-document.getElementById("noteSearch")
-  .addEventListener("input",function(){
-
-    renderNotes();
-
-  });
-
-document.getElementById("favoritesOnlyBtn")
-  .addEventListener("click",function(){
-
-    favoriteOnly = !favoriteOnly;
-
-    this.classList.toggle(
-      "gold-btn",
-      favoriteOnly
-    );
-
-    this.classList.toggle(
-      "ghost-btn",
-      !favoriteOnly
-    );
-
-    this.textContent =
-      favoriteOnly
-        ? "★ Favorites"
-        : "☆ Favorites";
-
-    renderNotes();
-
-  });
-
-/* =========================================================
-   CALENDAR
-========================================================= */
-
-document.getElementById("prevMonthBtn")
-  .addEventListener("click",function(){
-
-    calendarDate.setMonth(
-      calendarDate.getMonth()-1
-    );
-
-    renderHistory();
-
-  });
-
-document.getElementById("nextMonthBtn")
-  .addEventListener("click",function(){
-
-    calendarDate.setMonth(
-      calendarDate.getMonth()+1
-    );
-
-    renderHistory();
-
-  });
-
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-document.getElementById("reminderToggle")
-  .addEventListener("click",function(){
-
-    state.settings.reminder =
-      !state.settings.reminder;
-
-    saveState();
-    renderSettings();
-
+  if(newCount >= target){
     showToast(
-      state.settings.reminder
-        ? "Reminder preference enabled"
-        : "Reminder preference disabled"
+      sessionLabel(writingSession.session) +
+      "  session complete ✓"
     );
 
-  });
-
-/* =========================================================
-   EXPORT
-========================================================= */
-
-document.getElementById("exportBtn")
-  .addEventListener("click",function(){
-
-    try{
-
-      const data =
-        JSON.stringify(state,null,2);
-
-      const blob =
-        new Blob(
-          [data],
-          {type:"application/json"}
-        );
-
-      const url =
-        URL.createObjectURL(blob);
-
-      const a =
-        document.createElement("a");
-
-      a.href = url;
-
-      a.download =
-        "369-backup-" +
-        todayKey() +
-        ".json";
-
-      document.body.appendChild(a);
-
-      a.click();
-
-      a.remove();
-
-      setTimeout(function(){
-        URL.revokeObjectURL(url);
-      },1000);
-
-      showToast("Backup exported ✓");
-
-    }catch(error){
-
-      showToast("Could not export backup");
-
+    if(isComplete(p)){
+      showToast("🎉 18 / 18 — Daily 369 Complete!");
     }
 
-  });
+    closeModal("writingModal");
+    writingSession = null;
+  }else{
+    document.getElementById("writingInput").value = "";
+    updateWritingProgress(newCount,target);
+    document.getElementById("writingWarning").classList.remove("show");
+    document.getElementById("writingInput").focus();
 
-/* =========================================================
-   IMPORT
-========================================================= */
-
-document.getElementById("importBtn")
-  .addEventListener("click",function(){
-
-    document.getElementById("importFile").click();
-
-  });
-
-document.getElementById("importFile")
-  .addEventListener("change",function(event){
-
-    const file =
-      event.target.files &&
-      event.target.files[0];
-
-    if(!file){
-      return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = function(){
-
-      try{
-
-        const imported =
-          JSON.parse(reader.result);
-
-        state =
-          normalizeState(imported);
-
-        saveState();
-
-        renderCurrentView();
-        renderDashboard();
-
-        showToast("Backup imported ✓");
-
-      }catch(error){
-
-        showToast("Invalid backup file");
-
-      }
-
-      event.target.value = "";
-
-    };
-
-    reader.readAsText(file);
-
-  });
-
-/* =========================================================
-   RESET
-========================================================= */
-
-document.getElementById("resetBtn")
-  .addEventListener("click",function(){
-
-    const first =
-      window.confirm(
-        "Reset ALL 369 data?\n\n" +
-        "Notes, practice history, goals, journal and vision will be deleted"
-      );
-
-    if(!first){
-      return;
-    }
-
-    const second =
-      window.confirm(
-        "Are you absolutely sure?"
-      );
-
-    if(!second){
-      return;
-    }
-
-    state = cloneDefault();
-
-    saveState();
-
-    favoriteOnly = false;
-
-    renderCurrentView();
-    renderDashboard();
-
-    showToast("All data has been reset");
-
-  });
-
-/* =========================================================
-   INIT
-========================================================= */
-
-function init(){
-
-  if(state.notes.length && !state.selectedNoteId){
-
-    state.selectedNoteId =
-      state.notes[0].id;
-
-    saveState();
-  }
-
-  const practice =
-    state.practice[todayKey()];
-
-  if(
-    practice &&
-    !practice.noteId &&
-    state.selectedNoteId
-  ){
-
-    practice.noteId =
-      state.selectedNoteId;
-
-    saveState();
+    showToast("Writing saved ✓");
   }
 
   renderDashboard();
   renderPractice();
+  renderAchievements();
+  renderHistory();
+}
+
+function closeWriting(){
+  writingSession = null;
+  closeModal("writingModal");
+
+  document.getElementById("completeWritingBtn").textContent =
+    "Complete Writing";
+
+  document.getElementById("writingWarning").classList.remove("show");
+}
+
+function exportData(){
+  try{
+    var data = JSON.stringify(state,null,2);
+    var blob = new Blob([data],{type:"application/json"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+
+    a.href = url;
+    a.download = "369-manifest-backup-" + localDateKey() + ".json";
+
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    setTimeout(function(){
+      URL.revokeObjectURL(url);
+    },1000);
+
+    showToast("Backup file export လုပ်ပြီးပါပြီ");
+  }catch(error){
+    showToast("Export မအောင်မြင်ပါ");
+  }
+}
+
+function importData(file){
+  if(!file) return;
+
+  var reader = new FileReader();
+
+  reader.onload = function(){
+    try{
+      var imported = JSON.parse(reader.result);
+      var normalized = normalizeState(imported);
+
+      if(!window.confirm(
+        "Import လုပ်လိုက်ရင် လက်ရှိ data ကို imported data နဲ့ အစားထိုးမယ်\n\n" +
+        "ဆက်လုပ်မလား?"
+      )){
+        return;
+      }
+
+      state = normalized;
+      saveState();
+
+      renderAll();
+
+      showToast("Data import အောင်မြင်ပါပြီ");
+    }catch(error){
+      showToast("Invalid backup file");
+    }
+  };
+
+  reader.onerror = function(){
+    showToast("File ဖတ်မရပါ");
+  };
+
+  reader.readAsText(file);
+}
+
+function resetAll(){
+  if(!window.confirm(
+    "369 App ထဲက Notes, Goals, Practice, Journal, Vision အားလုံးဖျက်သွားမယ်\n\n" +
+    "တကယ် Reset လုပ်မှာသေချာပါသလား?"
+  )){
+    return;
+  }
+
+  state = defaultState();
+  saveState();
+
+  renderAll();
+
+  showToast("App data အားလုံး reset လုပ်ပြီးပါပြီ");
+}
+
+function renderAll(){
+  renderDashboard();
+  renderPractice();
   renderNotes();
+  renderGuide();
   renderGoals();
   renderJournal();
   renderVision();
   renderHistory();
   renderAchievements();
   renderSettings();
-
-  openView("dashboard");
 }
 
-init();
+document.querySelectorAll(".nav-btn,.bottom-btn").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    navigate(btn.getAttribute("data-view"));
+  });
+});
 
+document.getElementById("menuBtn").addEventListener("click",function(){
+  document.getElementById("sidebar").classList.toggle("open");
+});
+
+document.getElementById("dashboardPracticeBtn").addEventListener("click",function(){
+  navigate("practice");
+});
+
+document.getElementById("dashboardNotesBtn").addEventListener("click",function(){
+  navigate("notes");
+});
+
+document.getElementById("dashboardGuideBtn").addEventListener("click",function(){
+  navigate("guide");
+});
+
+document.getElementById("addNoteBtn").addEventListener("click",function(){
+  openNewNote();
+});
+
+document.getElementById("saveNoteBtn").addEventListener("click",function(){
+  saveNote();
+});
+
+document.getElementById("noteSearch").addEventListener("input",function(){
+  renderNotes();
+});
+
+document.getElementById("sortFavoriteBtn").addEventListener("click",function(){
+  favoriteSort = !favoriteSort;
+  this.classList.toggle("primary",favoriteSort);
+  renderNotes();
+});
+
+document.getElementById("noteList").addEventListener("click",function(event){
+  var btn = event.target.closest("[data-action]");
+
+  if(!btn) return;
+
+  var action = btn.getAttribute("data-action");
+  var id = btn.getAttribute("data-id");
+
+  if(action === "favorite") toggleFavorite(id);
+  if(action === "use-today") useNoteForToday(id);
+  if(action === "edit-note") openEditNote(id);
+  if(action === "delete-note") deleteNote(id);
+});
+
+document.getElementById("exampleList").addEventListener("click",function(event){
+  var btn = event.target.closest("[data-example-index]");
+
+  if(!btn) return;
+
+  useExample(Number(btn.getAttribute("data-example-index")));
+});
+
+document.getElementById("changeTodayNoteBtn").addEventListener("click",function(){
+  navigate("notes");
+});
+
+document.querySelectorAll(".session-start").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    openWriting(btn.getAttribute("data-session"));
+  });
+});
+
+document.getElementById("closeWritingBtn").addEventListener("click",function(){
+  closeWriting();
+});
+
+document.getElementById("clearWritingBtn").addEventListener("click",function(){
+  document.getElementById("writingInput").value = "";
+  document.getElementById("writingWarning").classList.remove("show");
+  document.getElementById("completeWritingBtn").textContent =
+    "Complete Writing";
+});
+
+document.getElementById("useSavedTextBtn").addEventListener("click",function(){
+  var note = selectedPracticeNote();
+
+  if(!note) return;
+
+  document.getElementById("writingInput").value = note.text;
+  document.getElementById("writingInput").focus();
+
+  showToast("Saved sentence ကို ထည့်ပေးထားပါတယ် — Complete Writing နှိပ်ပါ");
+});
+
+document.getElementById("completeWritingBtn").addEventListener("click",function(){
+  var force =
+    this.textContent === "Complete Anyway";
+
+  completeWriting(force);
+});
+
+document.getElementById("addGoalBtn").addEventListener("click",function(){
+  openGoalModal();
+});
+
+document.getElementById("saveGoalBtn").addEventListener("click",function(){
+  saveGoal();
+});
+
+document.getElementById("goalList").addEventListener("click",function(event){
+  var btn = event.target.closest("[data-goal-action]");
+
+  if(!btn) return;
+
+  goalAction(
+    btn.getAttribute("data-goal-action"),
+    btn.getAttribute("data-id")
+  );
+});
+
+document.getElementById("saveJournalBtn").addEventListener("click",function(){
+  saveJournal();
+});
+
+document.getElementById("saveVisionBtn").addEventListener("click",function(){
+  saveVision();
+});
+
+document.getElementById("prevMonthBtn").addEventListener("click",function(){
+  historyDate.setMonth(historyDate.getMonth()-1);
+  renderHistory();
+});
+
+document.getElementById("nextMonthBtn").addEventListener("click",function(){
+  historyDate.setMonth(historyDate.getMonth()+1);
+  renderHistory();
+});
+
+document.getElementById("reminderToggle").addEventListener("click",function(){
+  state.settings.reminder = !state.settings.reminder;
+  saveState();
+  renderSettings();
+
+  showToast(
+    state.settings.reminder
+      ? "Reminder preference ON"
+      : "Reminder preference OFF"
+  );
+});
+
+document.getElementById("exportBtn").addEventListener("click",function(){
+  exportData();
+});
+
+document.getElementById("importBtn").addEventListener("click",function(){
+  document.getElementById("importFile").click();
+});
+
+document.getElementById("importFile").addEventListener("change",function(){
+  importData(this.files && this.files[0]);
+  this.value = "";
+});
+
+document.getElementById("resetBtn").addEventListener("click",function(){
+  resetAll();
+});
+
+document.querySelectorAll("[data-close-modal]").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    closeModal(btn.getAttribute("data-close-modal"));
+  });
+});
+
+document.querySelectorAll(".modal-backdrop").forEach(function(backdrop){
+  backdrop.addEventListener("click",function(event){
+    if(event.target === backdrop){
+      if(backdrop.id === "writingModal"){
+        closeWriting();
+      }else{
+        backdrop.classList.remove("open");
+      }
+    }
+  });
+});
+
+document.addEventListener("keydown",function(event){
+  if(event.key === "Escape"){
+    closeModal("noteModal");
+    closeModal("goalModal");
+
+    if(document.getElementById("writingModal").classList.contains("open")){
+      closeWriting();
+    }
+  }
+});
+
+renderAll();
+
+})();
 </script>
-
 </body>
 </html>
