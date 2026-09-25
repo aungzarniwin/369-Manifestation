@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#09070f">
-<title>369 — Write It • Feel It • Believe It • Build It</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>369 — Manifest & Build</title>
 
 <style>
 :root{
@@ -23,9 +24,8 @@
   --green:#57d69a;
   --red:#ff6d7f;
   --border:rgba(255,255,255,.08);
-  --shadow:0 24px 70px rgba(0,0,0,.38);
+  --shadow:0 25px 70px rgba(0,0,0,.35);
   --radius:22px;
-  --sidebar:268px;
 }
 
 *{
@@ -44,14 +44,14 @@ body{
     BlinkMacSystemFont,
     "Noto Sans Myanmar",
     "Myanmar Text",
-    "Segoe UI",
     sans-serif;
   background:
-    radial-gradient(circle at 80% -10%,rgba(157,122,255,.14),transparent 32%),
-    radial-gradient(circle at 10% 20%,rgba(229,184,107,.07),transparent 28%),
+    radial-gradient(circle at 80% -10%,rgba(157,122,255,.14),transparent 30%),
+    radial-gradient(circle at 10% 20%,rgba(229,184,107,.08),transparent 25%),
     var(--bg);
   color:var(--text);
   min-height:100vh;
+  overflow-x:hidden;
 }
 
 button,
@@ -62,48 +62,16 @@ select{
 }
 
 button{
-  border:0;
   cursor:pointer;
-}
-
-button:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-input,
-textarea,
-select{
-  width:100%;
-  border:1px solid var(--border);
-  outline:none;
-  background:#0f0b17;
-  color:var(--text);
-  border-radius:15px;
-  padding:14px 15px;
-  transition:.2s ease;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-  border-color:rgba(229,184,107,.55);
-  box-shadow:0 0 0 4px rgba(229,184,107,.07);
-}
-
-textarea{
-  min-height:130px;
-  resize:vertical;
-  line-height:1.7;
-}
-
-select option{
-  background:#15101f;
 }
 
 a{
   color:inherit;
   text-decoration:none;
+}
+
+.hidden{
+  display:none!important;
 }
 
 /* =========================
@@ -119,12 +87,12 @@ a{
   left:0;
   top:0;
   bottom:0;
-  width:var(--sidebar);
-  padding:22px 15px;
-  background:
-    linear-gradient(180deg,#110d19 0%,#0d0a14 100%);
+  width:270px;
+  padding:24px 16px;
+  background:rgba(12,9,18,.92);
+  backdrop-filter:blur(24px);
   border-right:1px solid var(--border);
-  z-index:100;
+  z-index:50;
   display:flex;
   flex-direction:column;
 }
@@ -133,7 +101,7 @@ a{
   display:flex;
   align-items:center;
   gap:12px;
-  padding:5px 9px 25px;
+  padding:4px 10px 26px;
 }
 
 .brand-mark{
@@ -142,51 +110,56 @@ a{
   border-radius:15px;
   display:grid;
   place-items:center;
-  color:#17100a;
-  font-weight:900;
-  font-size:17px;
   background:
     linear-gradient(145deg,var(--gold2),var(--gold));
+  color:#17100a;
+  font-size:20px;
+  font-weight:900;
   box-shadow:
-    0 10px 30px rgba(229,184,107,.16);
+    0 8px 30px rgba(229,184,107,.2);
 }
 
-.brand-title{
-  font-size:20px;
-  font-weight:850;
-  letter-spacing:.2px;
+.brand-name{
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:.5px;
 }
 
 .brand-sub{
+  color:var(--muted2);
   font-size:10px;
-  color:var(--muted);
   margin-top:2px;
-  letter-spacing:1.2px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
 }
 
 .nav{
   display:flex;
   flex-direction:column;
   gap:5px;
+  overflow:auto;
 }
 
 .nav-label{
-  font-size:10px;
   color:var(--muted2);
-  text-transform:uppercase;
+  font-size:10px;
+  font-weight:800;
   letter-spacing:1.5px;
+  text-transform:uppercase;
   padding:16px 12px 7px;
 }
 
 .nav-btn{
+  border:0;
+  background:transparent;
+  color:var(--muted);
   width:100%;
+  min-height:45px;
+  padding:0 12px;
+  border-radius:13px;
   display:flex;
   align-items:center;
-  gap:12px;
-  padding:12px 13px;
-  color:var(--muted);
-  background:transparent;
-  border-radius:14px;
+  gap:11px;
   text-align:left;
   transition:.2s ease;
 }
@@ -199,130 +172,167 @@ a{
 .nav-btn.active{
   color:var(--text);
   background:
-    linear-gradient(90deg,rgba(157,122,255,.18),rgba(229,184,107,.06));
-  border:1px solid rgba(157,122,255,.16);
+    linear-gradient(90deg,rgba(157,122,255,.18),rgba(157,122,255,.05));
+  box-shadow:inset 3px 0 0 var(--purple);
 }
 
 .nav-icon{
-  width:28px;
+  width:24px;
   text-align:center;
-  font-size:17px;
+  font-size:16px;
+}
+
+.nav-text{
+  font-size:13px;
+  font-weight:700;
 }
 
 .sidebar-bottom{
   margin-top:auto;
-  padding:13px 8px 5px;
+  padding:15px 8px 2px;
+  border-top:1px solid var(--border);
 }
 
-.profile{
+.mini-profile{
   display:flex;
   align-items:center;
   gap:10px;
-  padding:11px;
-  border:1px solid var(--border);
-  border-radius:16px;
-  background:rgba(255,255,255,.025);
 }
 
 .avatar{
-  width:36px;
-  height:36px;
-  border-radius:12px;
+  width:38px;
+  height:38px;
+  border-radius:13px;
   display:grid;
   place-items:center;
-  background:#251b35;
+  background:linear-gradient(145deg,#292038,#171122);
+  border:1px solid var(--border);
   color:var(--gold2);
-  font-weight:800;
+  font-weight:900;
 }
 
 .profile-name{
-  font-size:13px;
-  font-weight:750;
+  font-size:12px;
+  font-weight:800;
 }
 
-.profile-role{
+.profile-sub{
   font-size:10px;
   color:var(--muted2);
   margin-top:2px;
 }
 
 .main{
-  margin-left:var(--sidebar);
+  margin-left:270px;
   min-height:100vh;
+  padding:28px 30px 50px;
 }
 
 .topbar{
-  height:74px;
-  padding:0 28px;
-  border-bottom:1px solid var(--border);
-  background:rgba(9,7,15,.74);
-  backdrop-filter:blur(18px);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  position:sticky;
-  top:0;
-  z-index:50;
-}
-
-.top-left{
-  display:flex;
-  align-items:center;
-  gap:13px;
+  gap:15px;
+  margin-bottom:28px;
 }
 
 .page-title{
-  font-size:17px;
-  font-weight:800;
+  font-size:29px;
+  font-weight:900;
+  letter-spacing:-.7px;
 }
 
-.page-sub{
+.page-subtitle{
   color:var(--muted);
-  font-size:11px;
-  margin-top:2px;
+  font-size:13px;
+  margin-top:5px;
 }
 
 .top-actions{
   display:flex;
+  align-items:center;
   gap:9px;
 }
 
-.icon-btn{
-  width:40px;
-  height:40px;
+.icon-btn,
+.ghost-btn,
+.primary-btn,
+.gold-btn,
+.danger-btn{
   border:1px solid var(--border);
   border-radius:13px;
+  min-height:42px;
+  padding:0 15px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
   color:var(--text);
-  background:#15101f;
+  transition:.2s ease;
+}
+
+.icon-btn{
+  width:42px;
+  padding:0;
+  background:var(--panel);
+}
+
+.icon-btn:hover,
+.ghost-btn:hover{
+  background:var(--panel2);
+  transform:translateY(-1px);
+}
+
+.ghost-btn{
+  background:transparent;
+}
+
+.primary-btn{
+  background:linear-gradient(135deg,var(--purple),var(--purple2));
+  border-color:transparent;
+  font-weight:800;
+  box-shadow:0 8px 25px rgba(118,84,217,.25);
+}
+
+.primary-btn:hover{
+  transform:translateY(-1px);
+  filter:brightness(1.06);
+}
+
+.gold-btn{
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  color:#1a1209;
+  border-color:transparent;
+  font-weight:900;
+  box-shadow:0 8px 25px rgba(229,184,107,.18);
+}
+
+.danger-btn{
+  color:#ff9aa8;
+  background:rgba(255,109,127,.06);
 }
 
 .mobile-menu{
   display:none;
 }
 
-.content{
-  width:min(1180px,100%);
-  margin:auto;
-  padding:30px 28px 80px;
-}
-
 /* =========================
-   COMMON
+   VIEWS
 ========================= */
 
 .view{
   display:none;
+  animation:fadeIn .22s ease;
 }
 
 .view.active{
   display:block;
-  animation:fadeUp .25s ease;
 }
 
-@keyframes fadeUp{
+@keyframes fadeIn{
   from{
     opacity:0;
-    transform:translateY(6px);
+    transform:translateY(5px);
   }
   to{
     opacity:1;
@@ -330,692 +340,643 @@ a{
   }
 }
 
-.hero{
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--border);
-  border-radius:28px;
-  padding:30px;
-  background:
-    radial-gradient(circle at 90% 10%,rgba(157,122,255,.2),transparent 32%),
-    radial-gradient(circle at 10% 100%,rgba(229,184,107,.08),transparent 30%),
-    linear-gradient(145deg,#191226,#110d18);
-  box-shadow:var(--shadow);
-}
-
-.hero:after{
-  content:"369";
-  position:absolute;
-  right:25px;
-  bottom:-35px;
-  font-size:145px;
-  font-weight:900;
-  color:rgba(255,255,255,.025);
-  pointer-events:none;
-}
-
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  color:var(--gold2);
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-bottom:12px;
-}
-
-.eyebrow-dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--gold);
-  box-shadow:0 0 14px var(--gold);
-}
-
-.hero h1{
-  font-size:clamp(28px,4vw,45px);
-  line-height:1.08;
-  letter-spacing:-1px;
-  max-width:700px;
-}
-
-.hero h1 span{
-  color:var(--gold2);
-}
-
-.hero p{
-  max-width:680px;
-  color:var(--muted);
-  line-height:1.65;
-  margin-top:13px;
-  font-size:13px;
-}
-
-.section-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:15px;
-  margin:28px 0 14px;
-}
-
-.section-title{
-  font-size:18px;
-  font-weight:850;
-}
-
-.section-desc{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:4px;
-}
-
-.grid{
-  display:grid;
-  gap:14px;
-}
-
-.grid-4{
-  grid-template-columns:repeat(4,1fr);
-}
-
-.grid-3{
-  grid-template-columns:repeat(3,1fr);
-}
-
-.grid-2{
-  grid-template-columns:repeat(2,1fr);
-}
+/* =========================
+   COMMON CARDS
+========================= */
 
 .card{
   background:
     linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.015));
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:19px;
+  box-shadow:var(--shadow);
 }
 
-.card:hover{
-  border-color:rgba(255,255,255,.12);
+.card-pad{
+  padding:21px;
 }
 
-.stat-card{
-  position:relative;
-  overflow:hidden;
-}
-
-.stat-icon{
-  width:36px;
-  height:36px;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-  background:#21182f;
-  color:var(--gold2);
-  margin-bottom:14px;
-}
-
-.stat-value{
-  font-size:27px;
-  font-weight:900;
-  letter-spacing:-.5px;
-}
-
-.stat-label{
-  font-size:11px;
-  color:var(--muted);
-  margin-top:4px;
-}
-
-.stat-note{
-  font-size:10px;
-  color:var(--muted2);
-  margin-top:10px;
-}
-
-.btn{
-  min-height:42px;
-  padding:0 17px;
-  border-radius:13px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  font-weight:750;
-  font-size:12px;
-  transition:.2s ease;
-}
-
-.btn-primary{
-  color:#1b1208;
-  background:linear-gradient(135deg,var(--gold2),var(--gold));
-  box-shadow:0 10px 28px rgba(229,184,107,.13);
-}
-
-.btn-primary:hover{
-  transform:translateY(-1px);
-  box-shadow:0 14px 34px rgba(229,184,107,.2);
-}
-
-.btn-secondary{
-  color:var(--text);
-  background:#1c1628;
-  border:1px solid var(--border);
-}
-
-.btn-danger{
-  color:#ffd9de;
-  background:rgba(255,109,127,.09);
-  border:1px solid rgba(255,109,127,.18);
-}
-
-.btn-small{
-  min-height:35px;
-  padding:0 12px;
-  font-size:11px;
-}
-
-.row{
+.section-head{
   display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.row-between{
-  display:flex;
-  align-items:center;
+  align-items:flex-start;
   justify-content:space-between;
   gap:15px;
+  margin-bottom:16px;
+}
+
+.section-title{
+  font-size:16px;
+  font-weight:900;
+}
+
+.section-sub{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+  line-height:1.55;
 }
 
 .badge{
   display:inline-flex;
   align-items:center;
-  gap:5px;
+  justify-content:center;
+  min-height:26px;
+  padding:0 10px;
   border-radius:999px;
-  padding:6px 9px;
-  font-size:9px;
-  font-weight:800;
+  background:rgba(157,122,255,.12);
+  border:1px solid rgba(157,122,255,.18);
+  color:#cdbfff;
+  font-size:10px;
+  font-weight:900;
   letter-spacing:.5px;
 }
 
-.badge-gold{
-  background:rgba(229,184,107,.1);
+.gold-badge{
+  background:rgba(229,184,107,.11);
+  border-color:rgba(229,184,107,.18);
   color:var(--gold2);
-  border:1px solid rgba(229,184,107,.14);
 }
 
-.badge-green{
-  background:rgba(87,214,154,.09);
-  color:#8ae8bb;
-  border:1px solid rgba(87,214,154,.14);
+.green-badge{
+  background:rgba(87,214,154,.1);
+  border-color:rgba(87,214,154,.16);
+  color:#8be7bb;
 }
 
 /* =========================
    DASHBOARD
 ========================= */
 
-.dashboard-actions{
-  display:flex;
-  gap:9px;
-  margin-top:21px;
+.hero{
   position:relative;
-  z-index:2;
-}
-
-.progress-card{
-  margin-top:14px;
-}
-
-.progress-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.progress-percent{
-  color:var(--gold2);
-  font-size:21px;
-  font-weight:900;
-}
-
-.progress-track{
-  height:9px;
-  border-radius:99px;
-  background:#0d0a14;
   overflow:hidden;
-  margin-top:14px;
-}
-
-.progress-fill{
-  height:100%;
-  width:0;
-  border-radius:inherit;
-  background:linear-gradient(90deg,var(--purple),var(--gold));
-  transition:width .45s ease;
-}
-
-.daily-mini{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  margin-top:15px;
-}
-
-.daily-mini-item{
-  padding:13px;
-  background:#100c18;
-  border:1px solid var(--border);
-  border-radius:15px;
-}
-
-.daily-mini-item.done{
-  border-color:rgba(87,214,154,.25);
-  background:rgba(87,214,154,.045);
-}
-
-.daily-mini-num{
-  font-size:17px;
-  font-weight:900;
-}
-
-.daily-mini-label{
-  font-size:10px;
-  color:var(--muted);
-  margin-top:3px;
-}
-
-/* =========================
-   369 PRACTICE
-========================= */
-
-.practice-header{
-  margin-bottom:20px;
-}
-
-.saved-note-selector{
-  margin-top:15px;
-  padding:15px;
-  border-radius:17px;
-  background:#100c18;
-  border:1px solid var(--border);
-}
-
-.saved-note-selector label,
-.form-label{
-  display:block;
-  font-size:10px;
-  color:var(--muted);
-  font-weight:700;
-  margin-bottom:7px;
-}
-
-.practice-note{
-  margin-top:15px;
-  padding:18px;
-  border-radius:19px;
-  border:1px solid rgba(229,184,107,.17);
+  padding:28px;
+  border-radius:28px;
   background:
-    linear-gradient(145deg,rgba(229,184,107,.07),rgba(157,122,255,.035));
+    radial-gradient(circle at 85% 20%,rgba(157,122,255,.2),transparent 30%),
+    radial-gradient(circle at 15% 100%,rgba(229,184,107,.1),transparent 30%),
+    linear-gradient(145deg,#171126,#0f0b17);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  margin-bottom:18px;
 }
 
-.practice-note-title{
-  color:var(--gold2);
+.hero::after{
+  content:"369";
+  position:absolute;
+  right:-15px;
+  bottom:-45px;
+  font-size:180px;
+  font-weight:1000;
+  line-height:1;
+  color:rgba(255,255,255,.025);
+  pointer-events:none;
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
+  max-width:690px;
+}
+
+.eyebrow{
+  color:var(--gold);
   font-size:10px;
-  font-weight:850;
-  letter-spacing:1px;
+  font-weight:900;
+  letter-spacing:2px;
   text-transform:uppercase;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
-.practice-note-text{
-  font-size:15px;
-  line-height:1.75;
-  font-weight:650;
+.hero h2{
+  font-size:32px;
+  line-height:1.15;
+  letter-spacing:-1px;
+  margin-bottom:10px;
 }
 
-.session-grid{
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+  font-size:13px;
+  max-width:590px;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:20px;
+}
+
+.stats-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  margin-top:18px;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+  margin-bottom:18px;
 }
 
-.session{
-  padding:20px;
-  border-radius:22px;
-  background:#120e1a;
-  border:1px solid var(--border);
+.stat-card{
+  padding:17px;
+  min-height:120px;
   position:relative;
   overflow:hidden;
 }
 
-.session.done{
-  border-color:rgba(87,214,154,.25);
-  background:
-    linear-gradient(145deg,rgba(87,214,154,.07),#120e1a);
+.stat-icon{
+  width:34px;
+  height:34px;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  background:rgba(157,122,255,.1);
+  color:#cdbfff;
+  margin-bottom:14px;
 }
 
-.session-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.session-time{
-  font-size:10px;
+.stat-label{
   color:var(--muted);
-  margin-bottom:3px;
+  font-size:11px;
+}
+
+.stat-value{
+  font-size:24px;
+  font-weight:950;
+  margin-top:3px;
+  letter-spacing:-.5px;
+}
+
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:18px;
+}
+
+.progress-ring-wrap{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.progress-ring{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:
+    conic-gradient(var(--gold) var(--progress,0%),rgba(255,255,255,.06) 0);
+  display:grid;
+  place-items:center;
+  flex:none;
+  position:relative;
+}
+
+.progress-ring::before{
+  content:"";
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  background:var(--panel);
+  position:absolute;
+}
+
+.progress-ring-content{
+  position:relative;
+  text-align:center;
+}
+
+.progress-ring-number{
+  font-size:25px;
+  font-weight:950;
+}
+
+.progress-ring-small{
+  color:var(--muted);
+  font-size:9px;
+  margin-top:2px;
+}
+
+.session-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  width:100%;
+}
+
+.session-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 13px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:rgba(255,255,255,.018);
+}
+
+.session-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.session-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--muted2);
+}
+
+.session-item.complete .session-dot{
+  background:var(--green);
+  box-shadow:0 0 14px rgba(87,214,154,.45);
 }
 
 .session-name{
-  font-size:18px;
-  font-weight:850;
+  font-size:12px;
+  font-weight:800;
 }
 
 .session-count{
-  margin-top:18px;
-  display:flex;
-  align-items:baseline;
-  gap:5px;
-}
-
-.session-count strong{
-  font-size:36px;
-  font-weight:950;
-}
-
-.session-count span{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.write-launch{
-  width:100%;
-  margin-top:18px;
-}
-
-.session.done .write-launch{
-  color:#0c1711;
-  background:linear-gradient(135deg,#89eec0,#4bc98d);
-}
-
-.practice-tip{
-  margin-top:14px;
-  color:var(--muted);
   font-size:11px;
-  line-height:1.6;
+  color:var(--muted);
 }
 
-/* =========================
-   WRITING MODAL
-========================= */
-
-.modal-wrap{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(12px);
-  z-index:500;
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-  padding:18px;
-}
-
-.modal-wrap.show{
-  display:flex;
-}
-
-.modal{
-  width:min(650px,100%);
-  max-height:92vh;
-  overflow:auto;
+.selected-note{
+  margin-top:16px;
+  padding:16px;
+  border-radius:17px;
   background:
-    linear-gradient(145deg,#1b1427,#110d18);
-  border:1px solid var(--border);
-  border-radius:27px;
-  padding:22px;
-  box-shadow:0 35px 100px rgba(0,0,0,.6);
-  animation:modalUp .25s ease;
+    linear-gradient(135deg,rgba(229,184,107,.08),rgba(157,122,255,.06));
+  border:1px solid rgba(229,184,107,.12);
 }
 
-@keyframes modalUp{
-  from{
-    opacity:0;
-    transform:translateY(25px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
+.selected-note-label{
+  color:var(--gold);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:7px;
 }
 
-.modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:17px;
-}
-
-.modal-title{
-  font-size:20px;
+.selected-note-title{
+  font-size:15px;
   font-weight:900;
 }
 
-.close-btn{
-  width:36px;
-  height:36px;
-  border-radius:12px;
+.selected-note-text{
   color:var(--muted);
-  background:#211a2e;
-}
-
-.writing-progress{
-  padding:15px;
-  border:1px solid var(--border);
-  border-radius:17px;
-  background:#0e0b15;
-}
-
-.writing-progress-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.writing-progress-number{
-  font-size:24px;
-  font-weight:950;
-}
-
-.writing-progress-label{
-  color:var(--muted);
-  font-size:10px;
-}
-
-.writing-bar{
-  height:7px;
-  margin-top:10px;
-  border-radius:99px;
-  background:#211a2d;
-  overflow:hidden;
-}
-
-.writing-bar-fill{
-  width:0;
-  height:100%;
-  border-radius:inherit;
-  background:linear-gradient(90deg,var(--purple),var(--gold));
-  transition:.3s ease;
-}
-
-.current-writing{
-  margin-top:14px;
-}
-
-.current-writing textarea{
-  min-height:90px;
-  font-size:14px;
-}
-
-.write-status{
-  min-height:35px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:var(--muted);
-  font-size:11px;
-  margin-top:8px;
-}
-
-.write-actions{
-  display:flex;
-  gap:8px;
-  margin-top:10px;
-}
-
-.write-actions .btn{
-  flex:1;
+  font-size:12px;
+  line-height:1.65;
+  margin-top:7px;
 }
 
 /* =========================
    NOTES
 ========================= */
 
-.note-editor{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:14px;
-}
-
-.note-form{
-  padding:21px;
-}
-
-.notes-list{
+.note-toolbar{
   display:flex;
-  flex-direction:column;
-  gap:11px;
-}
-
-.note-item{
-  padding:17px;
-  border-radius:18px;
-  border:1px solid var(--border);
-  background:#120e1a;
-  cursor:pointer;
-  transition:.2s ease;
-}
-
-.note-item:hover{
-  border-color:rgba(229,184,107,.25);
-  transform:translateY(-1px);
-}
-
-.note-item.active{
-  border-color:rgba(229,184,107,.38);
-  background:rgba(229,184,107,.055);
-}
-
-.note-item-title{
-  font-size:14px;
-  font-weight:850;
-}
-
-.note-item-text{
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.6;
-  margin-top:6px;
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-}
-
-.note-meta{
-  display:flex;
-  justify-content:space-between;
   gap:10px;
-  color:var(--muted2);
-  font-size:9px;
-  margin-top:11px;
+  margin-bottom:16px;
 }
 
-.empty{
-  padding:30px 15px;
-  text-align:center;
-  color:var(--muted);
-  border:1px dashed var(--border);
-  border-radius:17px;
-}
-
-.empty-icon{
-  font-size:27px;
-  margin-bottom:9px;
-}
-
-.empty-title{
-  color:var(--text);
-  font-weight:800;
-  font-size:13px;
-}
-
-.empty-text{
-  font-size:10px;
-  margin-top:5px;
-  line-height:1.5;
-}
-
-/* =========================
-   GOALS
-========================= */
-
-.goal-card{
+.search-box{
+  flex:1;
   position:relative;
 }
 
-.goal-top{
+.search-box span{
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--muted2);
+}
+
+.input,
+.select,
+.textarea{
+  width:100%;
+  background:#0f0b16;
+  color:var(--text);
+  border:1px solid var(--border);
+  outline:none;
+  border-radius:14px;
+  transition:.2s ease;
+}
+
+.input,
+.select{
+  height:46px;
+  padding:0 14px;
+}
+
+.search-box .input{
+  padding-left:40px;
+}
+
+.textarea{
+  padding:13px 14px;
+  min-height:120px;
+  resize:vertical;
+  line-height:1.7;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus{
+  border-color:rgba(157,122,255,.55);
+  box-shadow:0 0 0 3px rgba(157,122,255,.08);
+}
+
+.notes-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+}
+
+.note-card{
+  padding:18px;
+  position:relative;
+  min-height:205px;
+  display:flex;
+  flex-direction:column;
+}
+
+.note-card.today{
+  border-color:rgba(229,184,107,.28);
+  box-shadow:0 12px 40px rgba(229,184,107,.06);
+}
+
+.note-top{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
   gap:10px;
 }
 
-.goal-title{
+.note-title{
   font-size:15px;
-  font-weight:850;
+  font-weight:900;
+  line-height:1.35;
+}
+
+.favorite-btn{
+  border:0;
+  background:transparent;
+  color:var(--muted2);
+  font-size:18px;
+  padding:0;
+}
+
+.favorite-btn.active{
+  color:var(--gold);
+}
+
+.note-text{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+  margin-top:13px;
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.note-meta{
+  color:var(--muted2);
+  font-size:9px;
+  margin-top:auto;
+  padding-top:14px;
+}
+
+.note-actions{
+  display:flex;
+  gap:7px;
+  margin-top:13px;
+}
+
+.small-btn{
+  flex:1;
+  min-height:34px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.025);
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+}
+
+.small-btn:hover{
+  color:var(--text);
+  background:rgba(255,255,255,.05);
+}
+
+.small-btn.primary{
+  background:rgba(157,122,255,.1);
+  color:#cdbfff;
+  border-color:rgba(157,122,255,.17);
+}
+
+.small-btn.gold{
+  background:rgba(229,184,107,.09);
+  color:var(--gold2);
+  border-color:rgba(229,184,107,.15);
+}
+
+.empty-state{
+  text-align:center;
+  padding:45px 20px;
+  color:var(--muted);
+}
+
+.empty-icon{
+  width:58px;
+  height:58px;
+  margin:0 auto 12px;
+  border-radius:19px;
+  display:grid;
+  place-items:center;
+  background:rgba(157,122,255,.08);
+  color:#cdbfff;
+  font-size:24px;
+}
+
+.empty-title{
+  color:var(--text);
+  font-size:15px;
+  font-weight:900;
+}
+
+.empty-text{
+  font-size:11px;
+  margin-top:5px;
+  line-height:1.6;
+}
+
+/* =========================
+   PRACTICE
+========================= */
+
+.practice-top{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-bottom:18px;
+}
+
+.selected-practice{
+  padding:21px;
+}
+
+.practice-sentence{
+  margin-top:15px;
+  padding:18px;
+  border-radius:17px;
+  background:rgba(229,184,107,.055);
+  border:1px solid rgba(229,184,107,.12);
+  color:var(--gold2);
+  font-size:15px;
+  font-weight:800;
+  line-height:1.8;
+}
+
+.practice-controls{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.sessions-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.session-card{
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+}
+
+.session-card.complete{
+  border-color:rgba(87,214,154,.2);
+}
+
+.session-number{
+  font-size:38px;
+  line-height:1;
+  font-weight:1000;
+  color:rgba(255,255,255,.12);
+  position:absolute;
+  right:15px;
+  top:13px;
+}
+
+.session-card h3{
+  font-size:17px;
+  font-weight:900;
+}
+
+.session-card p{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:5px;
+}
+
+.session-progress{
+  height:7px;
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  overflow:hidden;
+  margin:18px 0 10px;
+}
+
+.session-progress-fill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--purple),var(--gold));
+  transition:.3s ease;
+}
+
+.session-count-big{
+  font-size:28px;
+  font-weight:950;
+}
+
+.session-count-big span{
+  color:var(--muted2);
+  font-size:14px;
+}
+
+.session-card .primary-btn,
+.session-card .gold-btn{
+  width:100%;
+  margin-top:14px;
+}
+
+/* =========================
+   GOALS
+========================= */
+
+.goals-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+}
+
+.goal-card{
+  padding:19px;
+}
+
+.goal-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.goal-name{
+  font-size:15px;
+  font-weight:900;
 }
 
 .goal-category{
-  color:var(--muted);
+  color:var(--muted2);
   font-size:10px;
   margin-top:4px;
 }
 
-.goal-percent{
-  color:var(--gold2);
-  font-size:20px;
-  font-weight:900;
+.goal-target{
+  margin-top:17px;
+  font-size:27px;
+  font-weight:950;
 }
 
 .goal-bar{
   height:7px;
-  margin-top:15px;
-  border-radius:99px;
+  background:rgba(255,255,255,.06);
+  border-radius:999px;
+  margin-top:11px;
   overflow:hidden;
-  background:#0d0a14;
 }
 
-.goal-bar div{
+.goal-fill{
   height:100%;
-  border-radius:inherit;
+  width:0;
   background:linear-gradient(90deg,var(--purple),var(--gold));
+  border-radius:999px;
+}
+
+.goal-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:9px;
+  color:var(--muted);
+  font-size:10px;
 }
 
 .goal-actions{
@@ -1025,156 +986,468 @@ a{
 }
 
 /* =========================
-   JOURNAL
+   JOURNAL / VISION
 ========================= */
 
-.journal-grid{
+.two-col{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:14px;
+  gap:16px;
 }
 
-.journal-box{
+.field{
+  margin-bottom:14px;
+}
+
+.field:last-child{
+  margin-bottom:0;
+}
+
+.field label{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+.vision-card{
   min-height:220px;
 }
 
-.journal-date{
-  color:var(--gold2);
-  font-size:11px;
-  font-weight:800;
-  margin-bottom:10px;
+.big-quote{
+  font-size:24px;
+  color:var(--gold);
+  margin-bottom:9px;
 }
 
-/* =========================
-   VISION
-========================= */
-
-.vision-card{
-  min-height:190px;
-}
-
-.vision-icon{
-  font-size:25px;
-  margin-bottom:11px;
-}
-
-.vision-title{
-  font-size:16px;
-  font-weight:850;
-}
-
-.vision-text{
+.vision-display{
   color:var(--muted);
-  line-height:1.7;
-  font-size:12px;
-  margin-top:8px;
+  line-height:1.8;
+  font-size:13px;
+  white-space:pre-wrap;
 }
 
 /* =========================
    HISTORY
 ========================= */
 
-.calendar{
+.history-grid{
   display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:7px;
-  margin-top:14px;
+  grid-template-columns:1fr .85fr;
+  gap:17px;
+}
+
+.calendar{
+  padding:20px;
 }
 
 .calendar-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:16px;
+}
+
+.month-title{
+  font-size:15px;
+  font-weight:900;
+}
+
+.calendar-weekdays,
+.calendar-days{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+}
+
+.calendar-weekdays div{
+  text-align:center;
   color:var(--muted2);
   font-size:9px;
-  text-align:center;
-  padding:5px;
+  padding-bottom:4px;
 }
 
 .day{
-  min-height:48px;
-  border:1px solid var(--border);
-  background:#110d18;
+  min-height:49px;
   border-radius:11px;
-  padding:7px;
-  font-size:10px;
+  border:1px solid transparent;
+  background:rgba(255,255,255,.018);
+  padding:6px;
   position:relative;
 }
 
+.day.empty{
+  background:transparent;
+}
+
 .day.today{
-  border-color:rgba(229,184,107,.55);
+  border-color:rgba(229,184,107,.4);
 }
 
 .day.complete{
   background:rgba(87,214,154,.08);
-  border-color:rgba(87,214,154,.2);
+  border-color:rgba(87,214,154,.13);
 }
 
 .day-number{
+  font-size:10px;
   font-weight:800;
 }
 
-.day-dot{
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:var(--green);
+.day-count{
   position:absolute;
-  right:7px;
-  bottom:7px;
+  right:6px;
+  bottom:5px;
+  color:var(--muted2);
+  font-size:8px;
+}
+
+.history-stats{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.history-stat{
+  padding:16px;
+}
+
+.history-stat-label{
+  color:var(--muted);
+  font-size:10px;
+}
+
+.history-stat-value{
+  font-size:25px;
+  font-weight:950;
+  margin-top:4px;
+}
+
+.month-nav{
+  display:flex;
+  gap:5px;
+}
+
+/* =========================
+   ACHIEVEMENTS
+========================= */
+
+.achievements-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+}
+
+.achievement{
+  padding:20px;
+  text-align:center;
+  min-height:175px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  opacity:.48;
+  filter:grayscale(.6);
+}
+
+.achievement.unlocked{
+  opacity:1;
+  filter:none;
+  border-color:rgba(229,184,107,.18);
+}
+
+.achievement-icon{
+  width:58px;
+  height:58px;
+  border-radius:20px;
+  display:grid;
+  place-items:center;
+  font-size:25px;
+  background:rgba(229,184,107,.08);
+  border:1px solid rgba(229,184,107,.1);
+}
+
+.achievement-title{
+  margin-top:11px;
+  font-size:13px;
+  font-weight:900;
+}
+
+.achievement-desc{
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.5;
+  margin-top:4px;
 }
 
 /* =========================
    SETTINGS
 ========================= */
 
+.settings-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
 .setting-row{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:15px;
-  padding:16px 0;
-  border-bottom:1px solid var(--border);
+  padding:17px;
+  border:1px solid var(--border);
+  border-radius:15px;
+  background:rgba(255,255,255,.018);
 }
 
-.setting-row:last-child{
-  border-bottom:0;
-}
-
-.setting-name{
+.setting-info strong{
+  display:block;
   font-size:13px;
-  font-weight:750;
 }
 
-.setting-desc{
-  font-size:10px;
+.setting-info span{
+  display:block;
   color:var(--muted);
-  margin-top:4px;
-  line-height:1.5;
+  font-size:10px;
+  margin-top:3px;
 }
 
 .toggle{
-  width:47px;
+  width:48px;
   height:27px;
-  border-radius:99px;
+  border-radius:999px;
+  border:0;
+  background:#30283b;
   padding:3px;
-  background:#292133;
-  border:1px solid var(--border);
+  flex:none;
 }
 
 .toggle span{
   display:block;
-  width:19px;
-  height:19px;
+  width:21px;
+  height:21px;
   border-radius:50%;
-  background:#8d859b;
+  background:#8c8398;
   transition:.2s ease;
 }
 
 .toggle.on{
-  background:rgba(87,214,154,.2);
+  background:rgba(157,122,255,.45);
 }
 
 .toggle.on span{
-  transform:translateX(19px);
-  background:var(--green);
+  transform:translateX(21px);
+  background:#fff;
+}
+
+/* =========================
+   MODALS
+========================= */
+
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(12px);
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modal-backdrop.show{
+  display:flex;
+}
+
+.modal{
+  width:min(560px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:25px;
+  background:#120e1a;
+  border:1px solid var(--border);
+  box-shadow:0 40px 100px rgba(0,0,0,.6);
+  padding:22px;
+  animation:modalIn .2s ease;
+}
+
+@keyframes modalIn{
+  from{
+    opacity:0;
+    transform:translateY(10px) scale(.98);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+.modal-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.modal-title{
+  font-size:19px;
+  font-weight:950;
+}
+
+.modal-sub{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.6;
+  margin-top:4px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:11px;
+}
+
+.form-full{
+  grid-column:1/-1;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:17px;
+}
+
+.writing-modal{
+  width:min(680px,100%);
+}
+
+.writing-mode-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.writing-step{
+  color:var(--gold);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.writing-progress-text{
+  color:var(--muted);
+  font-size:10px;
+}
+
+.writing-progress{
+  height:8px;
+  background:rgba(255,255,255,.06);
+  border-radius:999px;
+  overflow:hidden;
+  margin:16px 0;
+}
+
+.writing-progress-fill{
+  width:0;
+  height:100%;
+  background:linear-gradient(90deg,var(--purple),var(--gold));
+  transition:.25s ease;
+}
+
+.writing-sentence-box{
+  padding:19px;
+  border-radius:18px;
+  background:
+    linear-gradient(135deg,rgba(229,184,107,.08),rgba(157,122,255,.07));
+  border:1px solid rgba(229,184,107,.13);
+  margin-bottom:14px;
+}
+
+.writing-sentence-label{
+  color:var(--gold);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1px;
+  margin-bottom:7px;
+}
+
+.writing-sentence{
+  color:var(--gold2);
+  font-size:16px;
+  font-weight:800;
+  line-height:1.8;
+}
+
+.writing-input{
+  min-height:145px;
+  font-size:15px;
+}
+
+.match-hint{
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.5;
+  margin-top:8px;
+}
+
+.modal-error{
+  display:none;
+  color:#ff9aa8;
+  background:rgba(255,109,127,.07);
+  border:1px solid rgba(255,109,127,.12);
+  padding:10px 12px;
+  border-radius:12px;
+  font-size:10px;
+  margin-top:10px;
+}
+
+.modal-error.show{
+  display:block;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast-wrap{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:200;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  pointer-events:none;
+}
+
+.toast{
+  max-width:330px;
+  padding:12px 15px;
+  border-radius:13px;
+  background:#211a2e;
+  border:1px solid var(--border);
+  box-shadow:0 15px 45px rgba(0,0,0,.4);
+  color:var(--text);
+  font-size:11px;
+  animation:toastIn .2s ease;
+}
+
+@keyframes toastIn{
+  from{
+    opacity:0;
+    transform:translateY(7px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
 }
 
 /* =========================
@@ -1185,50 +1458,47 @@ a{
   display:none;
 }
 
-.overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  z-index:90;
-}
-
-@media(max-width:900px){
-
-  :root{
-    --sidebar:260px;
+@media(max-width:1100px){
+  .stats-grid{
+    grid-template-columns:repeat(3,1fr);
   }
 
+  .notes-grid,
+  .goals-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .achievements-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:800px){
   .sidebar{
     transform:translateX(-100%);
     transition:.25s ease;
-    box-shadow:30px 0 80px rgba(0,0,0,.4);
+    box-shadow:30px 0 80px rgba(0,0,0,.5);
   }
 
   .sidebar.open{
-    transform:none;
-  }
-
-  .overlay.show{
-    display:block;
+    transform:translateX(0);
   }
 
   .main{
     margin-left:0;
-    padding-bottom:76px;
-  }
-
-  .topbar{
-    height:65px;
-    padding:0 15px;
+    padding:18px 15px 100px;
   }
 
   .mobile-menu{
-    display:block;
+    display:inline-flex;
   }
 
-  .content{
-    padding:18px 15px 35px;
+  .page-title{
+    font-size:24px;
+  }
+
+  .topbar{
+    margin-bottom:20px;
   }
 
   .hero{
@@ -1236,57 +1506,54 @@ a{
     border-radius:23px;
   }
 
-  .hero:after{
-    font-size:90px;
-    right:10px;
+  .hero h2{
+    font-size:26px;
   }
 
-  .grid-4{
+  .stats-grid{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .grid-3{
+  .dashboard-grid,
+  .practice-top,
+  .two-col,
+  .history-grid{
     grid-template-columns:1fr;
   }
 
-  .grid-2{
+  .sessions-grid{
     grid-template-columns:1fr;
   }
 
-  .session-grid{
-    grid-template-columns:1fr;
-  }
-
-  .note-editor{
-    grid-template-columns:1fr;
-  }
-
-  .journal-grid{
+  .notes-grid,
+  .goals-grid{
     grid-template-columns:1fr;
   }
 
   .mobile-bottom{
+    display:flex;
     position:fixed;
     left:10px;
     right:10px;
     bottom:10px;
-    height:62px;
+    height:65px;
+    z-index:60;
+    background:rgba(18,14,26,.92);
+    backdrop-filter:blur(20px);
     border:1px solid var(--border);
     border-radius:20px;
-    background:rgba(19,14,27,.94);
-    backdrop-filter:blur(20px);
-    z-index:80;
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    padding:5px;
-    box-shadow:0 15px 45px rgba(0,0,0,.4);
+    box-shadow:0 18px 50px rgba(0,0,0,.5);
+    align-items:center;
+    justify-content:space-around;
   }
 
   .mobile-nav-btn{
-    color:var(--muted);
+    border:0;
     background:transparent;
-    border-radius:15px;
-    font-size:9px;
+    color:var(--muted2);
+    min-width:58px;
+    height:55px;
+    border-radius:14px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -1294,117 +1561,76 @@ a{
     gap:3px;
   }
 
-  .mobile-nav-btn strong{
-    font-size:16px;
-    line-height:1;
-  }
-
   .mobile-nav-btn.active{
     color:var(--gold2);
-    background:rgba(229,184,107,.08);
+    background:rgba(229,184,107,.07);
+  }
+
+  .mobile-nav-icon{
+    font-size:16px;
+  }
+
+  .mobile-nav-text{
+    font-size:8px;
+    font-weight:800;
   }
 }
 
-@media(max-width:520px){
+@media(max-width:480px){
+  .stats-grid{
+    gap:8px;
+  }
 
-  .grid-4{
-    grid-template-columns:1fr 1fr;
+  .stat-card{
+    padding:14px;
+    min-height:108px;
   }
 
   .stat-value{
-    font-size:23px;
+    font-size:21px;
   }
 
-  .section-head{
-    margin-top:23px;
+  .hero-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
   }
 
-  .dashboard-actions{
-    flex-direction:column;
-  }
-
-  .dashboard-actions .btn{
+  .hero-actions button{
     width:100%;
   }
 
-  .calendar{
+  .note-toolbar{
+    flex-direction:column;
+  }
+
+  .progress-ring-wrap{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .progress-ring{
+    margin:auto;
+  }
+
+  .calendar-days,
+  .calendar-weekdays{
     gap:4px;
   }
 
   .day{
-    min-height:40px;
-    padding:5px;
+    min-height:43px;
   }
 
-  .day-dot{
-    right:5px;
-    bottom:5px;
+  .day-count{
+    display:none;
   }
 
-  .modal-wrap{
-    padding:8px;
+  .form-grid{
+    grid-template-columns:1fr;
   }
 
-  .modal{
-    border-radius:23px;
-    padding:17px;
-  }
-}
-
-/* =========================
-   TOAST
-========================= */
-
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:90px;
-  transform:translate(-50%,20px);
-  opacity:0;
-  pointer-events:none;
-  z-index:700;
-  min-width:230px;
-  max-width:calc(100% - 30px);
-  text-align:center;
-  padding:12px 16px;
-  border-radius:14px;
-  background:#21192d;
-  border:1px solid var(--border);
-  box-shadow:0 18px 50px rgba(0,0,0,.4);
-  font-size:11px;
-  transition:.25s ease;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
-}
-
-.toast.success{
-  border-color:rgba(87,214,154,.25);
-}
-
-.toast.error{
-  border-color:rgba(255,109,127,.25);
-}
-
-/* =========================
-   COMPLETION EFFECT
-========================= */
-
-.complete-flash{
-  animation:completeFlash .55s ease;
-}
-
-@keyframes completeFlash{
-  0%{
-    transform:scale(1);
-  }
-  45%{
-    transform:scale(1.025);
-  }
-  100%{
-    transform:scale(1);
+  .form-full{
+    grid-column:auto;
   }
 }
 </style>
@@ -1420,755 +1646,830 @@ a{
     <div class="brand">
       <div class="brand-mark">369</div>
       <div>
-        <div class="brand-title">369</div>
-        <div class="brand-sub">FOCUS • WRITE • GROW</div>
+        <div class="brand-name">369</div>
+        <div class="brand-sub">Manifest & Build</div>
       </div>
     </div>
 
     <nav class="nav">
 
-      <div class="nav-label">Workspace</div>
+      <div class="nav-label">Main</div>
 
-      <button class="nav-btn active" data-view="dashboard">
+      <button class="nav-btn active" data-go="dashboard">
         <span class="nav-icon">⌂</span>
-        <span>Dashboard</span>
+        <span class="nav-text">Dashboard</span>
       </button>
 
-      <button class="nav-btn" data-view="practice">
-        <span class="nav-icon">✍</span>
-        <span>369 Practice</span>
+      <button class="nav-btn" data-go="practice">
+        <span class="nav-icon">369</span>
+        <span class="nav-text">369 Practice</span>
       </button>
 
-      <button class="nav-btn" data-view="notes">
-        <span class="nav-icon">📝</span>
-        <span>My 369 Notes</span>
+      <button class="nav-btn" data-go="notes">
+        <span class="nav-icon">✎</span>
+        <span class="nav-text">My 369 Notes</span>
       </button>
 
-      <button class="nav-btn" data-view="goals">
+      <div class="nav-label">Growth</div>
+
+      <button class="nav-btn" data-go="goals">
         <span class="nav-icon">◎</span>
-        <span>My Goals</span>
+        <span class="nav-text">My Goals</span>
       </button>
 
-      <button class="nav-btn" data-view="journal">
+      <button class="nav-btn" data-go="journal">
         <span class="nav-icon">☷</span>
-        <span>Journal</span>
+        <span class="nav-text">Journal</span>
       </button>
 
-      <div class="nav-label">Personal</div>
-
-      <button class="nav-btn" data-view="vision">
-        <span class="nav-icon">◇</span>
-        <span>My Vision</span>
+      <button class="nav-btn" data-go="vision">
+        <span class="nav-icon">◈</span>
+        <span class="nav-text">My Vision</span>
       </button>
 
-      <button class="nav-btn" data-view="history">
-        <span class="nav-icon">◷</span>
-        <span>History</span>
+      <div class="nav-label">Progress</div>
+
+      <button class="nav-btn" data-go="history">
+        <span class="nav-icon">▦</span>
+        <span class="nav-text">History</span>
       </button>
 
-      <button class="nav-btn" data-view="settings">
+      <button class="nav-btn" data-go="achievements">
+        <span class="nav-icon">★</span>
+        <span class="nav-text">Achievements</span>
+      </button>
+
+      <div class="nav-label">System</div>
+
+      <button class="nav-btn" data-go="settings">
         <span class="nav-icon">⚙</span>
-        <span>Settings</span>
+        <span class="nav-text">Settings</span>
       </button>
 
     </nav>
 
     <div class="sidebar-bottom">
-      <div class="profile">
+      <div class="mini-profile">
         <div class="avatar">3</div>
         <div>
-          <div class="profile-name">My 369 Journey</div>
-          <div class="profile-role">Personal Focus Space</div>
+          <div class="profile-name">369 Journey</div>
+          <div class="profile-sub">Write • Feel • Believe • Build</div>
         </div>
       </div>
     </div>
 
   </aside>
 
-  <div class="overlay" id="overlay"></div>
-
   <!-- MAIN -->
   <main class="main">
 
     <header class="topbar">
 
-      <div class="top-left">
-
-        <button class="icon-btn mobile-menu" id="menuBtn">☰</button>
-
-        <div>
-          <div class="page-title" id="pageTitle">Dashboard</div>
-          <div class="page-sub" id="pageSub">
-            Your daily 369 consistency space
-          </div>
+      <div>
+        <div class="page-title" id="pageTitle">Dashboard</div>
+        <div class="page-subtitle" id="pageSubtitle">
+          Your daily manifestation practice
         </div>
-
       </div>
 
       <div class="top-actions">
-        <button class="btn btn-primary btn-small" id="quickNoteBtn">
-          + New Note
-        </button>
+        <button class="icon-btn mobile-menu" id="menuBtn">☰</button>
+        <button class="gold-btn" id="quickNoteBtn">＋ New Note</button>
       </div>
 
     </header>
 
-    <section class="content">
+    <!-- ================= DASHBOARD ================= -->
 
-      <!-- ================= DASHBOARD ================= -->
-      <div class="view active" id="view-dashboard">
+    <section class="view active" id="view-dashboard">
 
-        <div class="hero">
+      <div class="hero">
 
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            DAILY 369 PRACTICE
-          </div>
+        <div class="hero-content">
 
-          <h1>
-            Write your intention.
-            <span>Build your consistency.</span>
-          </h1>
+          <div class="eyebrow">Daily 369 Practice</div>
+
+          <h2>Write it. Feel it. Believe it. Build it.</h2>
 
           <p>
-            Save the sentence you want to practice first, then return here
-            each day and write it 3 times in the morning, 6 times in the
-            afternoon and 9 times in the evening
+            Create one powerful sentence, save it in your 369 Notes,
+            then practice it manually 3 times in the morning,
+            6 times in the afternoon and 9 times in the evening
           </p>
 
-          <div class="dashboard-actions">
-            <button class="btn btn-primary" data-go="notes">
-              📝 Create 369 Note
+          <div class="hero-actions">
+            <button class="gold-btn" data-go="practice">
+              Start Today's 369
             </button>
 
-            <button class="btn btn-secondary" data-go="practice">
-              ✍ Start Today's 369
+            <button class="ghost-btn" data-go="notes">
+              Manage Notes
             </button>
           </div>
 
         </div>
 
-        <div class="grid grid-4" style="margin-top:14px">
+      </div>
 
-          <div class="card stat-card">
-            <div class="stat-icon">🔥</div>
-            <div class="stat-value" id="statStreak">0</div>
-            <div class="stat-label">Current Streak</div>
-            <div class="stat-note">Consecutive completed days</div>
-          </div>
+      <div class="stats-grid">
 
-          <div class="card stat-card">
-            <div class="stat-icon">✓</div>
-            <div class="stat-value" id="statToday">0/18</div>
-            <div class="stat-label">Today's Writing</div>
-            <div class="stat-note">3 + 6 + 9 repetitions</div>
-          </div>
-
-          <div class="card stat-card">
-            <div class="stat-icon">📝</div>
-            <div class="stat-value" id="statNotes">0</div>
-            <div class="stat-label">Saved Notes</div>
-            <div class="stat-note">Your saved intentions</div>
-          </div>
-
-          <div class="card stat-card">
-            <div class="stat-icon">🎯</div>
-            <div class="stat-value" id="statGoals">0</div>
-            <div class="stat-label">Active Goals</div>
-            <div class="stat-note">Personal progress</div>
-          </div>
-
+        <div class="card stat-card">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-label">Current Streak</div>
+          <div class="stat-value" id="statStreak">0</div>
         </div>
 
-        <div class="section-head">
-          <div>
-            <div class="section-title">Today's Progress</div>
-            <div class="section-desc">Complete all 18 writings to finish today</div>
-          </div>
-          <div class="badge badge-gold" id="todayBadge">0%</div>
+        <div class="card stat-card">
+          <div class="stat-icon">✓</div>
+          <div class="stat-label">Complete Days</div>
+          <div class="stat-value" id="statCompleteDays">0</div>
         </div>
 
-        <div class="card progress-card">
+        <div class="card stat-card">
+          <div class="stat-icon">✎</div>
+          <div class="stat-label">Total Writings</div>
+          <div class="stat-value" id="statWritings">0</div>
+        </div>
 
-          <div class="progress-top">
+        <div class="card stat-card">
+          <div class="stat-icon">☆</div>
+          <div class="stat-label">Saved Notes</div>
+          <div class="stat-value" id="statNotes">0</div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon">◎</div>
+          <div class="stat-label">Active Goals</div>
+          <div class="stat-value" id="statGoals">0</div>
+        </div>
+
+      </div>
+
+      <div class="dashboard-grid">
+
+        <div class="card card-pad">
+
+          <div class="section-head">
             <div>
-              <div class="section-title" style="font-size:15px">Daily 369</div>
-              <div class="section-desc" id="todayProgressText">
-                0 of 18 writings completed
+              <div class="section-title">Today's Progress</div>
+              <div class="section-sub">
+                Complete all 18 writings to complete your day
               </div>
             </div>
 
-            <div class="progress-percent" id="todayPercent">0%</div>
+            <span class="badge gold-badge" id="todayBadge">
+              0 / 18
+            </span>
           </div>
 
-          <div class="progress-track">
-            <div class="progress-fill" id="todayProgressFill"></div>
-          </div>
+          <div class="progress-ring-wrap">
 
-          <div class="daily-mini">
-
-            <div class="daily-mini-item" id="miniMorning">
-              <div class="daily-mini-num">0 / 3</div>
-              <div class="daily-mini-label">🌅 Morning</div>
-            </div>
-
-            <div class="daily-mini-item" id="miniAfternoon">
-              <div class="daily-mini-num">0 / 6</div>
-              <div class="daily-mini-label">☀️ Afternoon</div>
-            </div>
-
-            <div class="daily-mini-item" id="miniEvening">
-              <div class="daily-mini-num">0 / 9</div>
-              <div class="daily-mini-label">🌙 Evening</div>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="section-head">
-          <div>
-            <div class="section-title">Saved 369 Intention</div>
-            <div class="section-desc">The sentence you are currently practicing</div>
-          </div>
-        </div>
-
-        <div class="card" id="dashboardNoteCard">
-          <div class="empty">
-            <div class="empty-icon">📝</div>
-            <div class="empty-title">No 369 note selected</div>
-            <div class="empty-text">
-              Create and save your first intention before starting today's practice
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-
-      <!-- ================= PRACTICE ================= -->
-      <div class="view" id="view-practice">
-
-        <div class="practice-header">
-
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            369 WRITING
-          </div>
-
-          <div class="section-title" style="font-size:28px">
-            Today's Practice
-          </div>
-
-          <div class="section-desc" style="font-size:12px;margin-top:6px">
-            Choose your saved note, then write the same sentence 3, 6 and 9 times
-          </div>
-
-          <div class="saved-note-selector">
-
-            <label for="practiceNoteSelect">SELECT SAVED NOTE</label>
-
-            <select id="practiceNoteSelect">
-              <option value="">No saved note</option>
-            </select>
-
-          </div>
-
-          <div class="practice-note" id="practiceNoteBox">
-
-            <div class="practice-note-title">Your 369 Sentence</div>
-
-            <div class="practice-note-text" id="practiceNoteText">
-              Create a note first
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="session-grid">
-
-          <div class="session" id="sessionMorning">
-
-            <div class="session-head">
-              <div>
-                <div class="session-time">MORNING</div>
-                <div class="session-name">3 Times</div>
+            <div class="progress-ring" id="dashboardRing">
+              <div class="progress-ring-content">
+                <div class="progress-ring-number" id="dashboardPercent">0%</div>
+                <div class="progress-ring-small">TODAY</div>
               </div>
-
-              <span class="badge badge-gold">3×</span>
             </div>
 
-            <div class="session-count">
-              <strong id="morningCount">0</strong>
-              <span>/ 3</span>
-            </div>
+            <div class="session-list">
 
-            <button class="btn btn-primary write-launch" data-session="morning">
-              Start Writing
-            </button>
-
-            <div class="practice-tip">
-              Write the selected sentence three times
-            </div>
-
-          </div>
-
-
-          <div class="session" id="sessionAfternoon">
-
-            <div class="session-head">
-              <div>
-                <div class="session-time">AFTERNOON</div>
-                <div class="session-name">6 Times</div>
-              </div>
-
-              <span class="badge badge-gold">6×</span>
-            </div>
-
-            <div class="session-count">
-              <strong id="afternoonCount">0</strong>
-              <span>/ 6</span>
-            </div>
-
-            <button class="btn btn-primary write-launch" data-session="afternoon">
-              Start Writing
-            </button>
-
-            <div class="practice-tip">
-              Write the selected sentence six times
-            </div>
-
-          </div>
-
-
-          <div class="session" id="sessionEvening">
-
-            <div class="session-head">
-              <div>
-                <div class="session-time">EVENING</div>
-                <div class="session-name">9 Times</div>
-              </div>
-
-              <span class="badge badge-gold">9×</span>
-            </div>
-
-            <div class="session-count">
-              <strong id="eveningCount">0</strong>
-              <span>/ 9</span>
-            </div>
-
-            <button class="btn btn-primary write-launch" data-session="evening">
-              Start Writing
-            </button>
-
-            <div class="practice-tip">
-              Write the selected sentence nine times
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ================= NOTES ================= -->
-      <div class="view" id="view-notes">
-
-        <div class="section-head" style="margin-top:0">
-
-          <div>
-            <div class="eyebrow">
-              <span class="eyebrow-dot"></span>
-              MY 369 NOTES
-            </div>
-
-            <div class="section-title" style="font-size:28px">
-              Save Before You Write
-            </div>
-
-            <div class="section-desc" style="font-size:12px">
-              Create the sentence first, save it, then use it for your 3 / 6 / 9 practice
-            </div>
-          </div>
-
-        </div>
-
-        <div class="note-editor">
-
-          <div class="card note-form">
-
-            <div class="row-between" style="margin-bottom:16px">
-              <div>
-                <div class="section-title" style="font-size:16px" id="noteFormTitle">
-                  New 369 Note
+              <div class="session-item" id="dashMorning">
+                <div class="session-left">
+                  <span class="session-dot"></span>
+                  <span class="session-name">Morning</span>
                 </div>
-                <div class="section-desc">
-                  Save your personal practice sentence
-                </div>
+                <span class="session-count" id="dashMorningCount">0 / 3</span>
               </div>
 
-              <span class="badge badge-gold">369</span>
+              <div class="session-item" id="dashAfternoon">
+                <div class="session-left">
+                  <span class="session-dot"></span>
+                  <span class="session-name">Afternoon</span>
+                </div>
+                <span class="session-count" id="dashAfternoonCount">0 / 6</span>
+              </div>
+
+              <div class="session-item" id="dashEvening">
+                <div class="session-left">
+                  <span class="session-dot"></span>
+                  <span class="session-name">Evening</span>
+                </div>
+                <span class="session-count" id="dashEveningCount">0 / 9</span>
+              </div>
+
             </div>
 
-            <div style="margin-bottom:12px">
-              <label class="form-label">NOTE TITLE</label>
-              <input id="noteTitle" type="text" placeholder="e.g. Business Success">
+          </div>
+
+          <div class="selected-note">
+
+            <div class="selected-note-label">
+              Today's 369 Sentence
             </div>
+
+            <div class="selected-note-title" id="dashboardNoteTitle">
+              No sentence selected
+            </div>
+
+            <div class="selected-note-text" id="dashboardNoteText">
+              Create a note and set it as Today's 369 sentence
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="card card-pad">
+
+          <div class="section-head">
 
             <div>
-              <label class="form-label">369 SENTENCE</label>
-              <textarea
-                id="noteText"
-                placeholder="Write the sentence you want to repeat 3, 6 and 9 times..."
-              ></textarea>
+              <div class="section-title">Achievements</div>
+              <div class="section-sub">
+                Build your consistency
+              </div>
             </div>
 
-            <div class="row" style="margin-top:12px">
-              <button class="btn btn-primary" id="saveNoteBtn">
-                💾 Save Note
-              </button>
-
-              <button class="btn btn-secondary" id="clearNoteBtn">
-                Clear
-              </button>
-            </div>
+            <button class="ghost-btn" data-go="achievements">
+              View All
+            </button>
 
           </div>
 
-
-          <div class="card">
-
-            <div class="row-between" style="margin-bottom:13px">
-              <div>
-                <div class="section-title" style="font-size:16px">
-                  Saved Notes
-                </div>
-                <div class="section-desc">
-                  Select one to use in today's practice
-                </div>
-              </div>
-
-              <span class="badge badge-green" id="noteCountBadge">0</span>
-            </div>
-
-            <div class="notes-list" id="notesList"></div>
-
+          <div class="achievements-grid" id="dashboardAchievements"
+               style="grid-template-columns:repeat(2,1fr);">
           </div>
 
         </div>
 
       </div>
 
+    </section>
 
-      <!-- ================= GOALS ================= -->
-      <div class="view" id="view-goals">
+    <!-- ================= PRACTICE ================= -->
 
-        <div class="section-head" style="margin-top:0">
+    <section class="view" id="view-practice">
 
-          <div>
-            <div class="eyebrow">
-              <span class="eyebrow-dot"></span>
-              GOALS
+      <div class="practice-top">
+
+        <div class="card selected-practice">
+
+          <div class="section-head">
+            <div>
+              <div class="section-title">Today's 369 Sentence</div>
+              <div class="section-sub">
+                Choose the sentence you want to practice today
+              </div>
             </div>
 
-            <div class="section-title" style="font-size:28px">
-              My Goals
-            </div>
+            <span class="badge gold-badge">TODAY</span>
+          </div>
 
-            <div class="section-desc" style="font-size:12px">
-              Turn your intentions into measurable actions
+          <div class="practice-sentence" id="practiceSentence">
+            No sentence selected
+          </div>
+
+          <div class="practice-controls">
+            <button class="gold-btn" id="practiceSelectNoteBtn">
+              Choose Note
+            </button>
+
+            <button class="ghost-btn" id="practiceCreateNoteBtn">
+              ＋ New
+            </button>
+          </div>
+
+        </div>
+
+        <div class="card card-pad">
+
+          <div class="section-head">
+            <div>
+              <div class="section-title">Daily Rule</div>
+              <div class="section-sub">
+                One sentence · 18 total writings
+              </div>
             </div>
           </div>
 
-          <button class="btn btn-primary" id="newGoalBtn">
-            + Add Goal
+          <div class="selected-note">
+            <div class="selected-note-label">369 Method</div>
+
+            <div class="selected-note-title">
+              3 → Morning
+            </div>
+
+            <div class="selected-note-text">
+              Write the same sentence 3 times in the morning,
+              6 times in the afternoon and 9 times in the evening
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="sessions-grid">
+
+        <div class="card session-card" id="sessionMorning">
+
+          <div class="session-number">3</div>
+
+          <span class="badge">MORNING</span>
+
+          <h3 style="margin-top:14px;">Morning 3</h3>
+
+          <p>Write your sentence 3 times</p>
+
+          <div class="session-progress">
+            <div class="session-progress-fill" id="morningProgress"></div>
+          </div>
+
+          <div class="session-count-big">
+            <span id="morningCount">0</span>
+            <span>/ 3</span>
+          </div>
+
+          <button class="gold-btn" data-session="morning">
+            Start Writing
           </button>
 
         </div>
 
-        <div class="grid grid-2" id="goalsList"></div>
+        <div class="card session-card" id="sessionAfternoon">
 
-      </div>
+          <div class="session-number">6</div>
 
+          <span class="badge">AFTERNOON</span>
 
-      <!-- ================= JOURNAL ================= -->
-      <div class="view" id="view-journal">
+          <h3 style="margin-top:14px;">Afternoon 6</h3>
 
-        <div class="section-head" style="margin-top:0">
+          <p>Write your sentence 6 times</p>
 
-          <div>
-            <div class="eyebrow">
-              <span class="eyebrow-dot"></span>
-              DAILY JOURNAL
-            </div>
-
-            <div class="section-title" style="font-size:28px">
-              Reflection Space
-            </div>
-
-            <div class="section-desc" style="font-size:12px">
-              Capture gratitude and today's reflection
-            </div>
+          <div class="session-progress">
+            <div class="session-progress-fill" id="afternoonProgress"></div>
           </div>
 
-          <button class="btn btn-primary" id="saveJournalBtn">
-            💾 Save Journal
+          <div class="session-count-big">
+            <span id="afternoonCount">0</span>
+            <span>/ 6</span>
+          </div>
+
+          <button class="primary-btn" data-session="afternoon">
+            Start Writing
           </button>
 
         </div>
 
-        <div class="journal-grid">
+        <div class="card session-card" id="sessionEvening">
 
-          <div class="card journal-box">
+          <div class="session-number">9</div>
 
-            <div class="journal-date" id="journalDate"></div>
+          <span class="badge">EVENING</span>
 
-            <label class="form-label">GRATITUDE</label>
+          <h3 style="margin-top:14px;">Evening 9</h3>
 
+          <p>Write your sentence 9 times</p>
+
+          <div class="session-progress">
+            <div class="session-progress-fill" id="eveningProgress"></div>
+          </div>
+
+          <div class="session-count-big">
+            <span id="eveningCount">0</span>
+            <span>/ 9</span>
+          </div>
+
+          <button class="gold-btn" data-session="evening">
+            Start Writing
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="card card-pad" style="margin-top:16px;">
+
+        <div class="section-head">
+
+          <div>
+            <div class="section-title">How to Practice</div>
+            <div class="section-sub">
+              Keep the process simple and consistent
+            </div>
+          </div>
+
+        </div>
+
+        <div class="two-col">
+
+          <div class="selected-note">
+            <div class="selected-note-label">STEP 01</div>
+            <div class="selected-note-title">Choose one sentence</div>
+            <div class="selected-note-text">
+              Save a meaningful sentence in My 369 Notes and set it as Today's sentence
+            </div>
+          </div>
+
+          <div class="selected-note">
+            <div class="selected-note-label">STEP 02</div>
+            <div class="selected-note-title">Write manually</div>
+            <div class="selected-note-text">
+              Type your sentence for each repetition and complete it one by one
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= NOTES ================= -->
+
+    <section class="view" id="view-notes">
+
+      <div class="card card-pad">
+
+        <div class="section-head">
+
+          <div>
+            <div class="section-title">My 369 Notes</div>
+            <div class="section-sub">
+              Save the sentences you want to practice
+            </div>
+          </div>
+
+          <button class="gold-btn" id="newNoteBtn">
+            ＋ Create Note
+          </button>
+
+        </div>
+
+        <div class="note-toolbar">
+
+          <div class="search-box">
+            <span>⌕</span>
+            <input
+              class="input"
+              id="noteSearch"
+              placeholder="Search your 369 notes..."
+            >
+          </div>
+
+          <button class="ghost-btn" id="favoritesOnlyBtn">
+            ☆ Favorites
+          </button>
+
+        </div>
+
+        <div class="notes-grid" id="notesGrid"></div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= GOALS ================= -->
+
+    <section class="view" id="view-goals">
+
+      <div class="card card-pad">
+
+        <div class="section-head">
+
+          <div>
+            <div class="section-title">My Goals</div>
+            <div class="section-sub">
+              Turn your intention into measurable targets
+            </div>
+          </div>
+
+          <button class="gold-btn" id="newGoalBtn">
+            ＋ Add Goal
+          </button>
+
+        </div>
+
+        <div class="goals-grid" id="goalsGrid"></div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= JOURNAL ================= -->
+
+    <section class="view" id="view-journal">
+
+      <div class="two-col">
+
+        <div class="card card-pad">
+
+          <div class="section-head">
+            <div>
+              <div class="section-title">Today's Journal</div>
+              <div class="section-sub">
+                Record what you are grateful for
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>GRATITUDE</label>
             <textarea
-              id="gratitude"
+              class="textarea"
+              id="gratitudeInput"
               placeholder="What are you grateful for today?"
             ></textarea>
-
           </div>
 
-          <div class="card journal-box">
-
-            <div class="journal-date">&nbsp;</div>
-
-            <label class="form-label">TODAY'S REFLECTION</label>
-
+          <div class="field">
+            <label>REFLECTION</label>
             <textarea
-              id="reflection"
-              placeholder="What did you learn, notice or accomplish today?"
+              class="textarea"
+              id="reflectionInput"
+              placeholder="What did you learn or notice today?"
             ></textarea>
-
           </div>
 
-        </div>
-
-      </div>
-
-
-      <!-- ================= VISION ================= -->
-      <div class="view" id="view-vision">
-
-        <div class="section-head" style="margin-top:0">
-
-          <div>
-            <div class="eyebrow">
-              <span class="eyebrow-dot"></span>
-              VISION
-            </div>
-
-            <div class="section-title" style="font-size:28px">
-              My Vision
-            </div>
-
-            <div class="section-desc" style="font-size:12px">
-              Keep your future direction visible
-            </div>
-          </div>
-
-        </div>
-
-        <div class="grid grid-2">
-
-          <div class="card vision-card">
-
-            <div class="vision-icon">🎯</div>
-
-            <div class="vision-title">My Vision</div>
-
-            <textarea
-              id="visionText"
-              style="margin-top:13px;min-height:120px"
-              placeholder="Describe the life or future you are building..."
-            ></textarea>
-
-          </div>
-
-          <div class="card vision-card">
-
-            <div class="vision-icon">✨</div>
-
-            <div class="vision-title">Future Me</div>
-
-            <textarea
-              id="futureText"
-              style="margin-top:13px;min-height:120px"
-              placeholder="Write a short description of your future self..."
-            ></textarea>
-
-          </div>
-
-        </div>
-
-        <div style="margin-top:14px">
-          <button class="btn btn-primary" id="saveVisionBtn">
-            💾 Save Vision
+          <button class="gold-btn" id="saveJournalBtn">
+            Save Journal
           </button>
-        </div>
-
-      </div>
-
-
-      <!-- ================= HISTORY ================= -->
-      <div class="view" id="view-history">
-
-        <div class="section-head" style="margin-top:0">
-
-          <div>
-            <div class="eyebrow">
-              <span class="eyebrow-dot"></span>
-              HISTORY
-            </div>
-
-            <div class="section-title" style="font-size:28px">
-              Practice History
-            </div>
-
-            <div class="section-desc" style="font-size:12px">
-              See your completed 369 days
-            </div>
-          </div>
-
-          <div class="badge badge-green" id="historyCompleteCount">
-            0 completed
-          </div>
 
         </div>
 
-        <div class="card">
+        <div class="card card-pad">
 
-          <div class="row-between">
-
-            <button class="btn btn-secondary btn-small" id="prevMonth">
-              ‹ Previous
-            </button>
-
-            <div style="font-weight:850" id="calendarMonth">
-              Month
+          <div class="section-head">
+            <div>
+              <div class="section-title">Daily Reminder</div>
+              <div class="section-sub">
+                Keep your practice visible in your routine
+              </div>
             </div>
-
-            <button class="btn btn-secondary btn-small" id="nextMonth">
-              Next ›
-            </button>
-
           </div>
 
-          <div class="calendar" id="calendar"></div>
+          <div class="selected-note">
+            <div class="selected-note-label">MORNING</div>
+            <div class="selected-note-title">Write 3 times</div>
+            <div class="selected-note-text">
+              Start your day by focusing on your selected sentence
+            </div>
+          </div>
+
+          <div class="selected-note">
+            <div class="selected-note-label">AFTERNOON</div>
+            <div class="selected-note-title">Write 6 times</div>
+            <div class="selected-note-text">
+              Reconnect with the intention during the day
+            </div>
+          </div>
+
+          <div class="selected-note">
+            <div class="selected-note-label">EVENING</div>
+            <div class="selected-note-title">Write 9 times</div>
+            <div class="selected-note-text">
+              Finish the day with your complete 369 practice
+            </div>
+          </div>
 
         </div>
 
       </div>
 
+    </section>
 
-      <!-- ================= SETTINGS ================= -->
-      <div class="view" id="view-settings">
+    <!-- ================= VISION ================= -->
 
-        <div class="section-head" style="margin-top:0">
+    <section class="view" id="view-vision">
+
+      <div class="two-col">
+
+        <div class="card card-pad vision-card">
+
+          <div class="section-head">
+            <div>
+              <div class="section-title">My Vision</div>
+              <div class="section-sub">
+                Describe the life you are building
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>VISION</label>
+            <textarea
+              class="textarea"
+              id="visionInput"
+              placeholder="Write your future vision..."
+              style="min-height:180px;"
+            ></textarea>
+          </div>
+
+          <button class="gold-btn" id="saveVisionBtn">
+            Save Vision
+          </button>
+
+        </div>
+
+        <div class="card card-pad vision-card">
+
+          <div class="big-quote">“</div>
+
+          <div class="section-title">Future Me</div>
+
+          <div
+            class="vision-display"
+            id="visionDisplay"
+            style="margin-top:13px;"
+          >
+            Your vision will appear here
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= HISTORY ================= -->
+
+    <section class="view" id="view-history">
+
+      <div class="history-grid">
+
+        <div class="card calendar">
+
+          <div class="calendar-head">
+
+            <div class="month-title" id="calendarMonth">
+              September 2026
+            </div>
+
+            <div class="month-nav">
+
+              <button class="icon-btn" id="prevMonthBtn">‹</button>
+              <button class="icon-btn" id="nextMonthBtn">›</button>
+
+            </div>
+
+          </div>
+
+          <div class="calendar-weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+          </div>
+
+          <div class="calendar-days" id="calendarDays"></div>
+
+        </div>
+
+        <div class="history-stats">
+
+          <div class="card history-stat">
+            <div class="history-stat-label">COMPLETED DAYS</div>
+            <div class="history-stat-value" id="historyCompletedDays">0</div>
+          </div>
+
+          <div class="card history-stat">
+            <div class="history-stat-label">TOTAL WRITINGS</div>
+            <div class="history-stat-value" id="historyTotalWritings">0</div>
+          </div>
+
+          <div class="card history-stat">
+            <div class="history-stat-label">CURRENT STREAK</div>
+            <div class="history-stat-value" id="historyStreak">0</div>
+          </div>
+
+          <div class="card history-stat">
+            <div class="history-stat-label">MONTH COMPLETION</div>
+            <div class="history-stat-value" id="historyMonthPercent">0%</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= ACHIEVEMENTS ================= -->
+
+    <section class="view" id="view-achievements">
+
+      <div class="card card-pad">
+
+        <div class="section-head">
 
           <div>
-            <div class="eyebrow">
-              <span class="eyebrow-dot"></span>
-              SETTINGS
-            </div>
-
-            <div class="section-title" style="font-size:28px">
-              Preferences
-            </div>
-
-            <div class="section-desc" style="font-size:12px">
-              Manage your 369 app data and preferences
+            <div class="section-title">Achievements</div>
+            <div class="section-sub">
+              Milestones unlocked through consistent practice
             </div>
           </div>
+
+          <span class="badge gold-badge" id="achievementCount">
+            0 / 8
+          </span>
 
         </div>
 
-        <div class="card">
+        <div class="achievements-grid" id="achievementsGrid"></div>
 
-          <div class="setting-row">
+      </div>
 
+    </section>
+
+    <!-- ================= SETTINGS ================= -->
+
+    <section class="view" id="view-settings">
+
+      <div class="two-col">
+
+        <div class="card card-pad">
+
+          <div class="section-head">
             <div>
-              <div class="setting-name">Daily Reminder</div>
-              <div class="setting-desc">
-                Keep a reminder preference for your daily practice
+              <div class="section-title">Preferences</div>
+              <div class="section-sub">
+                Control how the app behaves
               </div>
             </div>
-
-            <button class="toggle" id="reminderToggle">
-              <span></span>
-            </button>
-
           </div>
 
-          <div class="setting-row">
+          <div class="settings-list">
 
-            <div>
-              <div class="setting-name">Language</div>
-              <div class="setting-desc">
-                Interface language preference
+            <div class="setting-row">
+
+              <div class="setting-info">
+                <strong>Daily Reminder</strong>
+                <span>Enable your practice reminder preference</span>
               </div>
+
+              <button class="toggle" id="reminderToggle">
+                <span></span>
+              </button>
+
             </div>
-
-            <select id="languageSelect" style="width:150px">
-              <option value="en">English</option>
-              <option value="my">မြန်မာ</option>
-            </select>
-
-          </div>
-
-          <div class="setting-row">
-
-            <div>
-              <div class="setting-name">Backup Data</div>
-              <div class="setting-desc">
-                Export your notes, goals, journal and practice history
-              </div>
-            </div>
-
-            <button class="btn btn-secondary btn-small" id="exportBtn">
-              Export
-            </button>
-
-          </div>
-
-          <div class="setting-row">
-
-            <div>
-              <div class="setting-name">Restore Data</div>
-              <div class="setting-desc">
-                Restore a previously exported 369 backup
-              </div>
-            </div>
-
-            <button class="btn btn-secondary btn-small" id="importBtn">
-              Import
-            </button>
-
-          </div>
-
-          <div class="setting-row">
-
-            <div>
-              <div class="setting-name">Reset App</div>
-              <div class="setting-desc">
-                Delete all locally saved 369 data
-              </div>
-            </div>
-
-            <button class="btn btn-danger btn-small" id="resetBtn">
-              Reset
-            </button>
 
           </div>
 
         </div>
 
-        <input type="file" id="importFile" accept=".json" hidden>
+        <div class="card card-pad">
+
+          <div class="section-head">
+            <div>
+              <div class="section-title">Data</div>
+              <div class="section-sub">
+                Your data is stored locally on this device
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:9px;">
+
+            <button class="ghost-btn" id="exportBtn">
+              ↓ Export Backup
+            </button>
+
+            <button class="ghost-btn" id="importBtn">
+              ↑ Import Backup
+            </button>
+
+            <button class="danger-btn" id="resetBtn">
+              Reset All Data
+            </button>
+
+            <input
+              type="file"
+              id="importFile"
+              accept=".json,application/json"
+              class="hidden"
+            >
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card card-pad" style="margin-top:16px;">
+
+        <div class="section-title">About 369</div>
+
+        <div class="section-sub" style="max-width:700px;line-height:1.8;margin-top:9px;">
+          The app is designed as a personal writing and reflection tracker.
+          Use one meaningful sentence and practice it consistently using the
+          3 / 6 / 9 daily structure
+        </div>
+
+        <div style="margin-top:15px;">
+          <span class="badge">VERSION 4.0 PREMIUM</span>
+        </div>
 
       </div>
 
@@ -2176,116 +2477,251 @@ a{
 
   </main>
 
-
-  <!-- MOBILE NAV -->
+  <!-- MOBILE BOTTOM -->
   <nav class="mobile-bottom">
 
-    <button class="mobile-nav-btn active" data-mobile-view="dashboard">
-      <strong>⌂</strong>
-      Home
+    <button class="mobile-nav-btn active" data-go="dashboard">
+      <span class="mobile-nav-icon">⌂</span>
+      <span class="mobile-nav-text">Home</span>
     </button>
 
-    <button class="mobile-nav-btn" data-mobile-view="practice">
-      <strong>✍</strong>
-      369
+    <button class="mobile-nav-btn" data-go="practice">
+      <span class="mobile-nav-icon">369</span>
+      <span class="mobile-nav-text">Practice</span>
     </button>
 
-    <button class="mobile-nav-btn" data-mobile-view="notes">
-      <strong>📝</strong>
-      Notes
+    <button class="mobile-nav-btn" data-go="notes">
+      <span class="mobile-nav-icon">✎</span>
+      <span class="mobile-nav-text">Notes</span>
     </button>
 
-    <button class="mobile-nav-btn" data-mobile-view="goals">
-      <strong>◎</strong>
-      Goals
+    <button class="mobile-nav-btn" data-go="goals">
+      <span class="mobile-nav-icon">◎</span>
+      <span class="mobile-nav-text">Goals</span>
     </button>
 
-    <button class="mobile-nav-btn" id="mobileMoreBtn">
-      <strong>☰</strong>
-      More
+    <button class="mobile-nav-btn" data-go="settings">
+      <span class="mobile-nav-icon">⚙</span>
+      <span class="mobile-nav-text">More</span>
     </button>
 
   </nav>
 
 </div>
 
+<!-- ================= NOTE MODAL ================= -->
 
-<!-- WRITING MODAL -->
-<div class="modal-wrap" id="writingModal">
+<div class="modal-backdrop" id="noteModal">
 
   <div class="modal">
 
     <div class="modal-head">
 
       <div>
-        <div class="eyebrow" style="margin-bottom:5px">
-          369 WRITING
+        <div class="modal-title" id="noteModalTitle">
+          Create 369 Note
         </div>
 
-        <div class="modal-title" id="writingModalTitle">
-          Morning — 3 Times
+        <div class="modal-sub">
+          Save the exact sentence you want to practice
         </div>
       </div>
 
-      <button class="close-btn" id="closeWritingModal">×</button>
+      <button class="icon-btn" data-close="noteModal">×</button>
+
+    </div>
+
+    <div class="field">
+      <label>NOTE TITLE</label>
+      <input
+        class="input"
+        id="noteTitleInput"
+        placeholder="Example: Business Success"
+      >
+    </div>
+
+    <div class="field">
+      <label>369 SENTENCE</label>
+      <textarea
+        class="textarea"
+        id="noteTextInput"
+        placeholder="Write the sentence you want to repeat..."
+        style="min-height:145px;"
+      ></textarea>
+    </div>
+
+    <div class="modal-actions">
+
+      <button class="ghost-btn" data-close="noteModal">
+        Cancel
+      </button>
+
+      <button class="gold-btn" id="saveNoteBtn">
+        Save Note
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= GOAL MODAL ================= -->
+
+<div class="modal-backdrop" id="goalModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <div>
+        <div class="modal-title">Create Goal</div>
+
+        <div class="modal-sub">
+          Add a measurable target for your journey
+        </div>
+      </div>
+
+      <button class="icon-btn" data-close="goalModal">×</button>
+
+    </div>
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>GOAL NAME</label>
+        <input
+          class="input"
+          id="goalNameInput"
+          placeholder="Example: Business Revenue"
+        >
+      </div>
+
+      <div class="field">
+        <label>CATEGORY</label>
+
+        <select class="select" id="goalCategoryInput">
+          <option value="Business">Business</option>
+          <option value="Money">Money</option>
+          <option value="Career">Career</option>
+          <option value="Personal">Personal</option>
+          <option value="Health">Health</option>
+          <option value="Learning">Learning</option>
+        </select>
+
+      </div>
+
+      <div class="field form-full">
+        <label>TARGET</label>
+        <input
+          class="input"
+          id="goalTargetInput"
+          type="number"
+          min="1"
+          placeholder="100"
+        >
+      </div>
+
+    </div>
+
+    <div class="modal-actions">
+
+      <button class="ghost-btn" data-close="goalModal">
+        Cancel
+      </button>
+
+      <button class="gold-btn" id="saveGoalBtn">
+        Save Goal
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= WRITING MODE ================= -->
+
+<div class="modal-backdrop" id="writingModal">
+
+  <div class="modal writing-modal">
+
+    <div class="modal-head">
+
+      <div style="width:100%;">
+
+        <div class="writing-mode-header">
+
+          <div>
+            <div class="writing-step" id="writingSessionLabel">
+              MORNING 3
+            </div>
+          </div>
+
+          <div class="writing-progress-text" id="writingProgressText">
+            1 / 3
+          </div>
+
+        </div>
+
+        <div class="modal-title" id="writingNoteTitle" style="margin-top:6px;">
+          Your 369 Sentence
+        </div>
+
+      </div>
+
+      <button class="icon-btn" data-close="writingModal">×</button>
 
     </div>
 
     <div class="writing-progress">
+      <div class="writing-progress-fill" id="writingProgressFill"></div>
+    </div>
 
-      <div class="writing-progress-top">
+    <div class="writing-sentence-box">
 
-        <div>
-          <div class="writing-progress-label">
-            CURRENT SESSION
-          </div>
-          <div class="writing-progress-number">
-            <span id="writingCurrent">0</span>
-            <span style="font-size:13px;color:var(--muted)">
-              / <span id="writingTarget">3</span>
-            </span>
-          </div>
-        </div>
-
-        <span class="badge badge-gold" id="writingBadge">
-          0%
-        </span>
-
+      <div class="writing-sentence-label">
+        WRITE THIS SENTENCE
       </div>
 
-      <div class="writing-bar">
-        <div class="writing-bar-fill" id="writingBarFill"></div>
+      <div class="writing-sentence" id="writingSentence">
+        —
       </div>
 
     </div>
 
+    <div class="field">
 
-    <div class="current-writing">
-
-      <label class="form-label">
-        WRITE THE SAME SENTENCE
+      <label id="writingInputLabel">
+        WRITE REPETITION 1
       </label>
 
       <textarea
+        class="textarea writing-input"
         id="writingInput"
-        placeholder="Type the sentence from your saved note..."
+        placeholder="Type the sentence here..."
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
       ></textarea>
 
-      <div class="write-status" id="writeStatus">
-        Type the sentence and press “Complete This Writing”
+      <div class="match-hint">
+        For accurate tracking, enter the same sentence shown above
       </div>
 
-      <div class="write-actions">
+      <div class="modal-error" id="writingError"></div>
 
-        <button class="btn btn-secondary" id="copyOriginalBtn">
-          Use Saved Text
-        </button>
+    </div>
 
-        <button class="btn btn-primary" id="completeWritingBtn">
-          Complete This Writing
-        </button>
+    <div class="modal-actions">
 
-      </div>
+      <button class="ghost-btn" id="useSavedTextBtn">
+        Use Saved Text
+      </button>
+
+      <button class="gold-btn" id="completeWritingBtn">
+        Complete This Writing
+      </button>
 
     </div>
 
@@ -2293,2152 +2729,2365 @@ a{
 
 </div>
 
+<!-- ================= SELECT NOTE MODAL ================= -->
 
-<!-- GOAL MODAL -->
-<div class="modal-wrap" id="goalModal">
+<div class="modal-backdrop" id="selectNoteModal">
 
   <div class="modal">
 
     <div class="modal-head">
 
       <div>
-        <div class="eyebrow" style="margin-bottom:5px">
-          GOAL
-        </div>
-
-        <div class="modal-title">
-          Create New Goal
+        <div class="modal-title">Choose Today's Sentence</div>
+        <div class="modal-sub">
+          Select one saved 369 note to practice today
         </div>
       </div>
 
-      <button class="close-btn" id="closeGoalModal">×</button>
+      <button class="icon-btn" data-close="selectNoteModal">×</button>
 
     </div>
 
-    <label class="form-label">GOAL NAME</label>
-    <input
-      id="goalName"
-      type="text"
-      placeholder="e.g. Grow my business"
-    >
-
-    <div style="margin-top:12px">
-      <label class="form-label">CATEGORY</label>
-      <select id="goalCategory">
-        <option>Business</option>
-        <option>Money</option>
-        <option>Career</option>
-        <option>Personal</option>
-        <option>Family</option>
-        <option>Health</option>
-        <option>Other</option>
-      </select>
-    </div>
-
-    <div style="margin-top:12px">
-      <label class="form-label">TARGET</label>
-      <input
-        id="goalTarget"
-        type="number"
-        min="1"
-        max="100"
-        value="100"
-      >
-    </div>
-
-    <button
-      class="btn btn-primary"
-      id="saveGoalBtn"
-      style="width:100%;margin-top:16px"
-    >
-      Create Goal
-    </button>
+    <div id="selectNoteList"></div>
 
   </div>
 
 </div>
 
-
-<div class="toast" id="toast"></div>
-
+<div class="toast-wrap" id="toastWrap"></div>
 
 <script>
-(function(){
+"use strict";
 
-  "use strict";
+/* =========================================================
+   369 V4 — LOCAL DATA APP
+========================================================= */
 
-  /* =========================================
-     STORAGE
-  ========================================= */
+const STORAGE_KEY = "three_six_nine_manifest_v4";
 
-  var STORAGE_KEY = "369_PREMIUM_V3";
+const DEFAULT_STATE = {
+  version: 4,
+  selectedNoteId: null,
+  notes: [],
+  goals: [],
+  practice: {},
+  journal: {},
+  vision: "",
+  settings: {
+    reminder: false
+  }
+};
 
-  var defaultState = {
-    notes: [],
-    selectedNoteId: "",
-    goals: [],
-    journal: {},
-    vision: {
-      vision: "",
-      future: ""
-    },
-    practice: {},
-    settings: {
-      reminder: false,
-      language: "en"
-    }
-  };
+let state = loadState();
 
-  var state = loadState();
+let currentView = "dashboard";
+let editingNoteId = null;
+let currentWriting = null;
+let calendarDate = new Date();
+let favoriteOnly = false;
 
-  function clone(obj){
-    return JSON.parse(JSON.stringify(obj));
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+function cloneDefault(){
+  return JSON.parse(JSON.stringify(DEFAULT_STATE));
+}
+
+function safeString(value){
+  return typeof value === "string" ? value : "";
+}
+
+function normalizeState(raw){
+
+  const base = cloneDefault();
+
+  if(!raw || typeof raw !== "object"){
+    return base;
   }
 
-  function loadState(){
+  base.version = 4;
 
-    try{
+  base.selectedNoteId =
+    raw.selectedNoteId ? String(raw.selectedNoteId) : null;
 
-      var raw = localStorage.getItem(STORAGE_KEY);
-
-      if(!raw){
-        return clone(defaultState);
-      }
-
-      var parsed = JSON.parse(raw);
-
-      return normalizeState(parsed);
-
-    }catch(error){
-
-      console.error(error);
-
-      return clone(defaultState);
-    }
-  }
-
-  function normalizeState(data){
-
-    var result = clone(defaultState);
-
-    if(data && typeof data === "object"){
-
-      if(Array.isArray(data.notes)){
-        result.notes = data.notes;
-      }
-
-      if(typeof data.selectedNoteId === "string"){
-        result.selectedNoteId = data.selectedNoteId;
-      }
-
-      if(Array.isArray(data.goals)){
-        result.goals = data.goals;
-      }
-
-      if(data.journal && typeof data.journal === "object"){
-        result.journal = data.journal;
-      }
-
-      if(data.vision && typeof data.vision === "object"){
-        result.vision = {
-          vision: String(data.vision.vision || ""),
-          future: String(data.vision.future || "")
+  if(Array.isArray(raw.notes)){
+    base.notes = raw.notes
+      .filter(Boolean)
+      .map(function(note){
+        return {
+          id: String(note.id || uid()),
+          title: safeString(note.title) || "Untitled Note",
+          text: safeString(note.text),
+          createdAt: safeString(note.createdAt) || nowISO(),
+          updatedAt: safeString(note.updatedAt) || nowISO(),
+          favorite: Boolean(note.favorite)
         };
-      }
+      })
+      .filter(function(note){
+        return note.text.trim().length > 0;
+      });
+  }
 
-      if(data.practice && typeof data.practice === "object"){
-        result.practice = data.practice;
-      }
-
-      if(data.settings && typeof data.settings === "object"){
-        result.settings = {
-          reminder: !!data.settings.reminder,
-          language: data.settings.language === "my" ? "my" : "en"
+  if(Array.isArray(raw.goals)){
+    base.goals = raw.goals
+      .filter(Boolean)
+      .map(function(goal){
+        return {
+          id: String(goal.id || uid()),
+          name: safeString(goal.name) || "Untitled Goal",
+          category: safeString(goal.category) || "Personal",
+          target: Math.max(1, Number(goal.target) || 1),
+          progress: Math.max(0, Number(goal.progress) || 0),
+          createdAt: safeString(goal.createdAt) || nowISO()
         };
+      });
+  }
+
+  if(raw.practice && typeof raw.practice === "object"){
+    Object.keys(raw.practice).forEach(function(dateKey){
+
+      const item = raw.practice[dateKey];
+
+      if(!item || typeof item !== "object"){
+        return;
       }
-    }
 
-    return result;
+      base.practice[dateKey] = {
+        noteId: item.noteId ? String(item.noteId) : null,
+        morning: clamp(Number(item.morning) || 0,0,3),
+        afternoon: clamp(Number(item.afternoon) || 0,0,6),
+        evening: clamp(Number(item.evening) || 0,0,9)
+      };
+    });
   }
 
-  function saveState(){
+  if(raw.journal && typeof raw.journal === "object"){
+    Object.keys(raw.journal).forEach(function(dateKey){
 
-    try{
+      const item = raw.journal[dateKey];
 
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(state)
-      );
-
-      return true;
-
-    }catch(error){
-
-      console.error(error);
-
-      showToast(
-        "Could not save data in this browser",
-        "error"
-      );
-
-      return false;
-    }
-  }
-
-
-  /* =========================================
-     HELPERS
-  ========================================= */
-
-  function $(id){
-    return document.getElementById(id);
-  }
-
-  function todayKey(date){
-
-    var d = date || new Date();
-
-    var year = d.getFullYear();
-    var month = String(d.getMonth()+1).padStart(2,"0");
-    var day = String(d.getDate()).padStart(2,"0");
-
-    return year + "-" + month + "-" + day;
-  }
-
-  function escapeHTML(value){
-
-    return String(value == null ? "" : value)
-      .replace(/&/g,"&amp;")
-      .replace(/</g,"&lt;")
-      .replace(/>/g,"&gt;")
-      .replace(/"/g,"&quot;")
-      .replace(/'/g,"&#039;");
-  }
-
-  function uid(prefix){
-
-    return (
-      prefix +
-      "_" +
-      Date.now().toString(36) +
-      "_" +
-      Math.random().toString(36).slice(2,8)
-    );
-  }
-
-  function formatDate(dateString){
-
-    if(!dateString) return "";
-
-    var d = new Date(dateString);
-
-    if(isNaN(d.getTime())){
-      return "";
-    }
-
-    return d.toLocaleDateString(
-      undefined,
-      {
-        year:"numeric",
-        month:"short",
-        day:"numeric"
+      if(!item || typeof item !== "object"){
+        return;
       }
-    );
-  }
 
-  function showToast(message,type){
-
-    var toast = $("toast");
-
-    toast.textContent = message;
-
-    toast.className = "toast show " + (type || "");
-
-    clearTimeout(window.__toastTimer);
-
-    window.__toastTimer = setTimeout(function(){
-
-      toast.className = "toast";
-
-    },2200);
-  }
-
-
-  /* =========================================
-     NAVIGATION
-  ========================================= */
-
-  var viewNames = {
-    dashboard: "Dashboard",
-    practice: "369 Practice",
-    notes: "My 369 Notes",
-    goals: "My Goals",
-    journal: "Journal",
-    vision: "My Vision",
-    history: "History",
-    settings: "Settings"
-  };
-
-  var viewSubs = {
-    dashboard: "Your daily 369 consistency space",
-    practice: "Write your saved intention 3, 6 and 9 times",
-    notes: "Create and save your 369 writing sentences",
-    goals: "Track the goals you are building",
-    journal: "Capture gratitude and reflection",
-    vision: "Keep your future direction visible",
-    history: "Review your completed practice days",
-    settings: "Manage your preferences and data"
-  };
-
-  function openView(name){
-
-    var views = document.querySelectorAll(".view");
-
-    views.forEach(function(view){
-
-      view.classList.remove("active");
-
+      base.journal[dateKey] = {
+        gratitude: safeString(item.gratitude),
+        reflection: safeString(item.reflection),
+        updatedAt: safeString(item.updatedAt) || nowISO()
+      };
     });
+  }
 
-    var target = $("view-" + name);
+  base.vision = safeString(raw.vision);
 
-    if(target){
-      target.classList.add("active");
+  if(raw.settings && typeof raw.settings === "object"){
+    base.settings.reminder = Boolean(raw.settings.reminder);
+  }
+
+  if(
+    base.selectedNoteId &&
+    !base.notes.some(function(note){
+      return note.id === base.selectedNoteId;
+    })
+  ){
+    base.selectedNoteId = base.notes.length
+      ? base.notes[0].id
+      : null;
+  }
+
+  return base;
+}
+
+function loadState(){
+
+  try{
+
+    const raw = localStorage.getItem(STORAGE_KEY);
+
+    if(!raw){
+      return cloneDefault();
     }
 
-    var navs = document.querySelectorAll(".nav-btn");
+    return normalizeState(JSON.parse(raw));
 
-    navs.forEach(function(btn){
+  }catch(error){
 
-      btn.classList.toggle(
-        "active",
-        btn.getAttribute("data-view") === name
-      );
+    console.warn("Could not load local data", error);
 
-    });
+    return cloneDefault();
+  }
+}
 
-    var mobileNavs = document.querySelectorAll(
-      ".mobile-nav-btn[data-mobile-view]"
+function saveState(){
+
+  try{
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(state)
     );
 
-    mobileNavs.forEach(function(btn){
+  }catch(error){
 
-      btn.classList.toggle(
-        "active",
-        btn.getAttribute("data-mobile-view") === name
-      );
+    showToast("Could not save data on this device");
+  }
+}
 
-    });
+function uid(){
+  return Date.now().toString(36) +
+    Math.random().toString(36).slice(2,8);
+}
 
-    $("pageTitle").textContent =
-      viewNames[name] || "369";
+function nowISO(){
+  return new Date().toISOString();
+}
 
-    $("pageSub").textContent =
-      viewSubs[name] || "";
+function clamp(value,min,max){
+  return Math.min(max,Math.max(min,value));
+}
 
-    closeSidebar();
+function pad(number){
+  return String(number).padStart(2,"0");
+}
 
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
+function dateKey(date){
 
-    if(name === "dashboard"){
-      renderDashboard();
-    }
+  const d = date instanceof Date
+    ? date
+    : new Date(date);
 
-    if(name === "practice"){
-      renderPractice();
-    }
+  return (
+    d.getFullYear() +
+    "-" +
+    pad(d.getMonth()+1) +
+    "-" +
+    pad(d.getDate())
+  );
+}
 
-    if(name === "notes"){
-      renderNotes();
-    }
+function todayKey(){
+  return dateKey(new Date());
+}
 
-    if(name === "goals"){
-      renderGoals();
-    }
+function formatDate(iso){
 
-    if(name === "journal"){
-      renderJournal();
-    }
+  const d = new Date(iso);
 
-    if(name === "vision"){
-      renderVision();
-    }
-
-    if(name === "history"){
-      renderHistory();
-    }
-
-    if(name === "settings"){
-      renderSettings();
-    }
+  if(Number.isNaN(d.getTime())){
+    return "";
   }
 
-  document.querySelectorAll(".nav-btn").forEach(function(btn){
+  return d.toLocaleDateString(
+    undefined,
+    {
+      day:"numeric",
+      month:"short",
+      year:"numeric"
+    }
+  );
+}
 
-    btn.addEventListener("click",function(){
+function escapeHTML(value){
 
-      openView(btn.getAttribute("data-view"));
+  return safeString(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
 
-    });
+function selectedNote(){
+
+  return state.notes.find(function(note){
+    return note.id === state.selectedNoteId;
+  }) || null;
+}
+
+function getPractice(key){
+
+  if(!state.practice[key]){
+
+    state.practice[key] = {
+      noteId: state.selectedNoteId,
+      morning:0,
+      afternoon:0,
+      evening:0
+    };
+
+    saveState();
+  }
+
+  return state.practice[key];
+}
+
+function totalForDay(key){
+
+  const item = state.practice[key];
+
+  if(!item){
+    return 0;
+  }
+
+  return (
+    clamp(Number(item.morning)||0,0,3) +
+    clamp(Number(item.afternoon)||0,0,6) +
+    clamp(Number(item.evening)||0,0,9)
+  );
+}
+
+function isCompleteDay(key){
+  return totalForDay(key) >= 18;
+}
+
+function totalWritings(){
+
+  return Object.keys(state.practice)
+    .reduce(function(sum,key){
+      return sum + totalForDay(key);
+    },0);
+}
+
+function completedDays(){
+
+  return Object.keys(state.practice)
+    .filter(isCompleteDay)
+    .length;
+}
+
+function currentStreak(){
+
+  let streak = 0;
+  const d = new Date();
+
+  while(true){
+
+    const key = dateKey(d);
+
+    if(!isCompleteDay(key)){
+      break;
+    }
+
+    streak++;
+
+    d.setDate(d.getDate()-1);
+  }
+
+  return streak;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message){
+
+  const wrap = document.getElementById("toastWrap");
+
+  if(!wrap){
+    return;
+  }
+
+  const toast = document.createElement("div");
+
+  toast.className = "toast";
+  toast.textContent = message;
+
+  wrap.appendChild(toast);
+
+  setTimeout(function(){
+
+    toast.style.opacity = "0";
+    toast.style.transform = "translateY(7px)";
+
+    setTimeout(function(){
+      toast.remove();
+    },200);
+
+  },2500);
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const VIEW_META = {
+
+  dashboard:{
+    title:"Dashboard",
+    subtitle:"Your daily manifestation practice"
+  },
+
+  practice:{
+    title:"369 Practice",
+    subtitle:"3 in the morning · 6 in the afternoon · 9 in the evening"
+  },
+
+  notes:{
+    title:"My 369 Notes",
+    subtitle:"Save and manage your personal 369 sentences"
+  },
+
+  goals:{
+    title:"My Goals",
+    subtitle:"Turn intentions into measurable targets"
+  },
+
+  journal:{
+    title:"Journal",
+    subtitle:"Reflect, appreciate and reset"
+  },
+
+  vision:{
+    title:"My Vision",
+    subtitle:"Build a clear picture of your future"
+  },
+
+  history:{
+    title:"History",
+    subtitle:"Track your consistency over time"
+  },
+
+  achievements:{
+    title:"Achievements",
+    subtitle:"Milestones from your daily practice"
+  },
+
+  settings:{
+    title:"Settings",
+    subtitle:"Preferences and data management"
+  }
+};
+
+function openView(view){
+
+  if(!VIEW_META[view]){
+    view = "dashboard";
+  }
+
+  currentView = view;
+
+  document.querySelectorAll(".view").forEach(function(el){
+
+    el.classList.toggle(
+      "active",
+      el.id === "view-" + view
+    );
 
   });
 
   document.querySelectorAll("[data-go]").forEach(function(btn){
 
-    btn.addEventListener("click",function(){
-
-      openView(btn.getAttribute("data-go"));
-
-    });
-
-  });
-
-
-  /* =========================================
-     SIDEBAR MOBILE
-  ========================================= */
-
-  function openSidebar(){
-
-    $("sidebar").classList.add("open");
-    $("overlay").classList.add("show");
-
-  }
-
-  function closeSidebar(){
-
-    $("sidebar").classList.remove("open");
-    $("overlay").classList.remove("show");
-
-  }
-
-  $("menuBtn").addEventListener("click",openSidebar);
-
-  $("overlay").addEventListener("click",closeSidebar);
-
-  $("mobileMoreBtn").addEventListener("click",function(){
-
-    openSidebar();
+    btn.classList.toggle(
+      "active",
+      btn.dataset.go === view
+    );
 
   });
 
-  document.querySelectorAll(
-    ".mobile-nav-btn[data-mobile-view]"
-  ).forEach(function(btn){
+  const meta = VIEW_META[view];
 
-    btn.addEventListener("click",function(){
+  document.getElementById("pageTitle").textContent =
+    meta.title;
 
-      openView(btn.getAttribute("data-mobile-view"));
+  document.getElementById("pageSubtitle").textContent =
+    meta.subtitle;
 
-    });
+  document.getElementById("sidebar").classList.remove("open");
 
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
   });
 
+  renderCurrentView();
+}
 
-  /* =========================================
-     NOTES
-  ========================================= */
+/* =========================================================
+   DASHBOARD
+========================================================= */
 
-  var editingNoteId = "";
+function renderDashboard(){
 
-  function getSelectedNote(){
+  const today = getPractice(todayKey());
+  const total = totalForDay(todayKey());
+  const percent = Math.round((total / 18) * 100);
 
-    if(!state.selectedNoteId){
-      return null;
+  document.getElementById("statStreak").textContent =
+    currentStreak();
+
+  document.getElementById("statCompleteDays").textContent =
+    completedDays();
+
+  document.getElementById("statWritings").textContent =
+    totalWritings();
+
+  document.getElementById("statNotes").textContent =
+    state.notes.length;
+
+  document.getElementById("statGoals").textContent =
+    state.goals.length;
+
+  document.getElementById("todayBadge").textContent =
+    total + " / 18";
+
+  document.getElementById("dashboardPercent").textContent =
+    percent + "%";
+
+  document.getElementById("dashboardRing")
+    .style.setProperty(
+      "--progress",
+      percent + "%"
+    );
+
+  updateDashboardSession(
+    "dashMorning",
+    "dashMorningCount",
+    today.morning,
+    3
+  );
+
+  updateDashboardSession(
+    "dashAfternoon",
+    "dashAfternoonCount",
+    today.afternoon,
+    6
+  );
+
+  updateDashboardSession(
+    "dashEvening",
+    "dashEveningCount",
+    today.evening,
+    9
+  );
+
+  const note = selectedNote();
+
+  document.getElementById("dashboardNoteTitle").textContent =
+    note ? note.title : "No sentence selected";
+
+  document.getElementById("dashboardNoteText").textContent =
+    note
+      ? note.text
+      : "Create a note and set it as Today's 369 sentence";
+
+  renderDashboardAchievements();
+}
+
+function updateDashboardSession(
+  itemId,
+  countId,
+  count,
+  target
+){
+
+  const item = document.getElementById(itemId);
+
+  item.classList.toggle(
+    "complete",
+    count >= target
+  );
+
+  document.getElementById(countId).textContent =
+    count + " / " + target;
+}
+
+/* =========================================================
+   NOTES
+========================================================= */
+
+function renderNotes(){
+
+  const grid = document.getElementById("notesGrid");
+  const query =
+    safeString(document.getElementById("noteSearch").value)
+      .trim()
+      .toLowerCase();
+
+  let notes = state.notes.filter(function(note){
+
+    const matchesSearch =
+      !query ||
+      note.title.toLowerCase().includes(query) ||
+      note.text.toLowerCase().includes(query);
+
+    const matchesFavorite =
+      !favoriteOnly || note.favorite;
+
+    return matchesSearch && matchesFavorite;
+  });
+
+  notes.sort(function(a,b){
+
+    if(a.favorite !== b.favorite){
+      return a.favorite ? -1 : 1;
     }
 
-    return state.notes.find(function(note){
+    return new Date(b.updatedAt) - new Date(a.updatedAt);
+  });
 
-      return note.id === state.selectedNoteId;
+  if(!notes.length){
 
-    }) || null;
+    grid.innerHTML = `
+      <div class="empty-state" style="grid-column:1/-1;">
+        <div class="empty-icon">✎</div>
+        <div class="empty-title">No 369 notes yet</div>
+        <div class="empty-text">
+          Create your first sentence and save it here
+        </div>
+      </div>
+    `;
+
+    return;
   }
 
-  function selectNote(id){
+  grid.innerHTML = notes.map(function(note){
 
-    var exists = state.notes.some(function(note){
+    const today =
+      note.id === state.selectedNoteId;
 
-      return note.id === id;
+    return `
+      <article class="card note-card ${today ? "today" : ""}">
 
-    });
+        <div class="note-top">
 
-    if(!exists){
+          <div>
+            <div class="note-title">
+              ${escapeHTML(note.title)}
+            </div>
 
-      state.selectedNoteId =
-        state.notes.length
-          ? state.notes[0].id
-          : "";
+            ${
+              today
+                ? `<span class="badge gold-badge"
+                    style="margin-top:7px;">TODAY'S 369</span>`
+                : ""
+            }
+          </div>
 
+          <button
+            class="favorite-btn ${note.favorite ? "active" : ""}"
+            data-action="favorite-note"
+            data-id="${escapeHTML(note.id)}"
+            aria-label="Favorite"
+          >
+            ${note.favorite ? "★" : "☆"}
+          </button>
+
+        </div>
+
+        <div class="note-text">
+          ${escapeHTML(note.text)}
+        </div>
+
+        <div class="note-meta">
+          Updated ${escapeHTML(formatDate(note.updatedAt))}
+        </div>
+
+        <div class="note-actions">
+
+          <button
+            class="small-btn gold"
+            data-action="use-note"
+            data-id="${escapeHTML(note.id)}"
+          >
+            ${today ? "Today's 369" : "Use Today"}
+          </button>
+
+          <button
+            class="small-btn"
+            data-action="edit-note"
+            data-id="${escapeHTML(note.id)}"
+          >
+            Edit
+          </button>
+
+          <button
+            class="small-btn"
+            data-action="delete-note"
+            data-id="${escapeHTML(note.id)}"
+          >
+            Delete
+          </button>
+
+        </div>
+
+      </article>
+    `;
+
+  }).join("");
+}
+
+/* =========================================================
+   GOALS
+========================================================= */
+
+function renderGoals(){
+
+  const grid = document.getElementById("goalsGrid");
+
+  if(!state.goals.length){
+
+    grid.innerHTML = `
+      <div class="empty-state" style="grid-column:1/-1;">
+        <div class="empty-icon">◎</div>
+        <div class="empty-title">No goals yet</div>
+        <div class="empty-text">
+          Add a measurable goal to track your progress
+        </div>
+      </div>
+    `;
+
+    return;
+  }
+
+  grid.innerHTML = state.goals.map(function(goal){
+
+    const percent = clamp(
+      Math.round((goal.progress / goal.target) * 100),
+      0,
+      100
+    );
+
+    return `
+      <article class="card goal-card">
+
+        <div class="goal-head">
+
+          <div>
+            <div class="goal-name">
+              ${escapeHTML(goal.name)}
+            </div>
+
+            <div class="goal-category">
+              ${escapeHTML(goal.category)}
+            </div>
+          </div>
+
+          <span class="badge">${percent}%</span>
+
+        </div>
+
+        <div class="goal-target">
+          ${escapeHTML(String(goal.progress))}
+          <span style="color:var(--muted2);font-size:13px;">
+            / ${escapeHTML(String(goal.target))}
+          </span>
+        </div>
+
+        <div class="goal-bar">
+          <div
+            class="goal-fill"
+            style="width:${percent}%"
+          ></div>
+        </div>
+
+        <div class="goal-bottom">
+          <span>${percent}% complete</span>
+          <span>Target ${escapeHTML(String(goal.target))}</span>
+        </div>
+
+        <div class="goal-actions">
+
+          <button
+            class="small-btn primary"
+            data-action="goal-add"
+            data-id="${escapeHTML(goal.id)}"
+          >
+            +10%
+          </button>
+
+          <button
+            class="small-btn"
+            data-action="delete-goal"
+            data-id="${escapeHTML(goal.id)}"
+          >
+            Delete
+          </button>
+
+        </div>
+
+      </article>
+    `;
+
+  }).join("");
+}
+
+/* =========================================================
+   PRACTICE
+========================================================= */
+
+function renderPractice(){
+
+  const note = selectedNote();
+
+  document.getElementById("practiceSentence").textContent =
+    note
+      ? note.text
+      : "No sentence selected";
+
+  const item = getPractice(todayKey());
+
+  updateSessionUI(
+    "morning",
+    item.morning,
+    3
+  );
+
+  updateSessionUI(
+    "afternoon",
+    item.afternoon,
+    6
+  );
+
+  updateSessionUI(
+    "evening",
+    item.evening,
+    9
+  );
+}
+
+function updateSessionUI(session,count,target){
+
+  document.getElementById(
+    session + "Count"
+  ).textContent = count;
+
+  document.getElementById(
+    session + "Progress"
+  ).style.width =
+    ((count / target) * 100) + "%";
+
+  const card = document.getElementById(
+    "session" +
+    session.charAt(0).toUpperCase() +
+    session.slice(1)
+  );
+
+  card.classList.toggle(
+    "complete",
+    count >= target
+  );
+
+  const button =
+    card.querySelector("[data-session]");
+
+  if(count >= target){
+
+    button.textContent = "Completed ✓";
+    button.classList.remove("gold-btn","primary-btn");
+    button.classList.add("ghost-btn");
+
+  }else{
+
+    button.textContent = "Start Writing";
+
+    button.classList.remove("ghost-btn");
+
+    if(session === "afternoon"){
+      button.classList.add("primary-btn");
     }else{
-
-      state.selectedNoteId = id;
-
+      button.classList.add("gold-btn");
     }
+  }
+}
 
-    saveState();
+/* =========================================================
+   WRITING MODE
+========================================================= */
 
-    renderAll();
+function openWriting(session){
+
+  const note = selectedNote();
+
+  if(!note){
 
     showToast(
-      "369 note selected",
-      "success"
-    );
-  }
-
-  function renderNotes(){
-
-    var list = $("notesList");
-
-    $("noteCountBadge").textContent =
-      String(state.notes.length);
-
-    if(!state.notes.length){
-
-      list.innerHTML =
-        '<div class="empty">' +
-          '<div class="empty-icon">📝</div>' +
-          '<div class="empty-title">No saved notes yet</div>' +
-          '<div class="empty-text">Write your first 369 sentence and save it here</div>' +
-        '</div>';
-
-      return;
-    }
-
-    var sorted = state.notes.slice().sort(function(a,b){
-
-      return String(b.updatedAt || "").localeCompare(
-        String(a.updatedAt || "")
-      );
-
-    });
-
-    list.innerHTML = sorted.map(function(note){
-
-      var active =
-        note.id === state.selectedNoteId;
-
-      return (
-        '<div class="note-item ' +
-          (active ? "active" : "") +
-          '" data-note-id="' +
-          escapeHTML(note.id) +
-          '">' +
-
-          '<div class="row-between">' +
-
-            '<div class="note-item-title">' +
-              escapeHTML(note.title || "Untitled") +
-            '</div>' +
-
-            (active
-              ? '<span class="badge badge-green">Selected</span>'
-              : ''
-            ) +
-
-          '</div>' +
-
-          '<div class="note-item-text">' +
-            escapeHTML(note.text) +
-          '</div>' +
-
-          '<div class="note-meta">' +
-
-            '<span>' +
-              escapeHTML(formatDate(note.updatedAt)) +
-            '</span>' +
-
-            '<span>369 Sentence</span>' +
-
-          '</div>' +
-
-          '<div class="row" style="margin-top:11px">' +
-
-            '<button class="btn btn-secondary btn-small note-use" data-id="' +
-              escapeHTML(note.id) +
-            '">Use</button>' +
-
-            '<button class="btn btn-secondary btn-small note-edit" data-id="' +
-              escapeHTML(note.id) +
-            '">Edit</button>' +
-
-            '<button class="btn btn-danger btn-small note-delete" data-id="' +
-              escapeHTML(note.id) +
-            '">Delete</button>' +
-
-          '</div>' +
-
-        '</div>'
-      );
-
-    }).join("");
-
-    list.querySelectorAll(".note-use").forEach(function(btn){
-
-      btn.addEventListener("click",function(event){
-
-        event.stopPropagation();
-
-        selectNote(btn.getAttribute("data-id"));
-
-      });
-
-    });
-
-    list.querySelectorAll(".note-edit").forEach(function(btn){
-
-      btn.addEventListener("click",function(event){
-
-        event.stopPropagation();
-
-        editNote(btn.getAttribute("data-id"));
-
-      });
-
-    });
-
-    list.querySelectorAll(".note-delete").forEach(function(btn){
-
-      btn.addEventListener("click",function(event){
-
-        event.stopPropagation();
-
-        deleteNote(btn.getAttribute("data-id"));
-
-      });
-
-    });
-
-    list.querySelectorAll(".note-item").forEach(function(item){
-
-      item.addEventListener("click",function(){
-
-        selectNote(
-          item.getAttribute("data-note-id")
-        );
-
-      });
-
-    });
-  }
-
-  function editNote(id){
-
-    var note = state.notes.find(function(item){
-
-      return item.id === id;
-
-    });
-
-    if(!note) return;
-
-    editingNoteId = id;
-
-    $("noteFormTitle").textContent = "Edit 369 Note";
-
-    $("noteTitle").value = note.title || "";
-
-    $("noteText").value = note.text || "";
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-
-    showToast("Editing note");
-
-  }
-
-  function deleteNote(id){
-
-    var note = state.notes.find(function(item){
-
-      return item.id === id;
-
-    });
-
-    if(!note) return;
-
-    var yes = confirm(
-      "Delete this 369 note?"
+      "Please create or select a 369 note first"
     );
 
-    if(!yes) return;
+    openView("notes");
 
-    state.notes = state.notes.filter(function(item){
-
-      return item.id !== id;
-
-    });
-
-    if(state.selectedNoteId === id){
-
-      state.selectedNoteId =
-        state.notes.length
-          ? state.notes[0].id
-          : "";
-
-    }
-
-    if(editingNoteId === id){
-
-      editingNoteId = "";
-
-      clearNoteForm();
-
-    }
-
-    saveState();
-
-    renderAll();
-
-    showToast(
-      "Note deleted",
-      "success"
-    );
+    return;
   }
 
-  function clearNoteForm(){
-
-    editingNoteId = "";
-
-    $("noteFormTitle").textContent =
-      "New 369 Note";
-
-    $("noteTitle").value = "";
-
-    $("noteText").value = "";
-
-  }
-
-  function saveNote(){
-
-    var title =
-      $("noteTitle").value.trim();
-
-    var text =
-      $("noteText").value.trim();
-
-    if(!text){
-
-      showToast(
-        "Please write your 369 sentence first",
-        "error"
-      );
-
-      $("noteText").focus();
-
-      return;
-    }
-
-    if(!title){
-
-      title = "My 369 Intention";
-
-    }
-
-    if(editingNoteId){
-
-      var existing =
-        state.notes.find(function(note){
-
-          return note.id === editingNoteId;
-
-        });
-
-      if(existing){
-
-        existing.title = title;
-        existing.text = text;
-        existing.updatedAt = new Date().toISOString();
-
-        state.selectedNoteId =
-          existing.id;
-      }
-
-    }else{
-
-      var note = {
-        id:uid("note"),
-        title:title,
-        text:text,
-        createdAt:new Date().toISOString(),
-        updatedAt:new Date().toISOString()
-      };
-
-      state.notes.unshift(note);
-
-      state.selectedNoteId = note.id;
-
-    }
-
-    saveState();
-
-    clearNoteForm();
-
-    renderAll();
-
-    showToast(
-      "369 note saved successfully",
-      "success"
-    );
-  }
-
-  $("saveNoteBtn").addEventListener(
-    "click",
-    saveNote
-  );
-
-  $("clearNoteBtn").addEventListener(
-    "click",
-    clearNoteForm
-  );
-
-  $("quickNoteBtn").addEventListener(
-    "click",
-    function(){
-
-      openView("notes");
-
-      setTimeout(function(){
-
-        $("noteTitle").focus();
-
-      },100);
-
-    }
-  );
-
-
-  /* =========================================
-     PRACTICE DATA
-  ========================================= */
-
-  var sessionTargets = {
+  const targets = {
     morning:3,
     afternoon:6,
     evening:9
   };
 
-  function getTodayPractice(){
+  const labels = {
+    morning:"MORNING 3",
+    afternoon:"AFTERNOON 6",
+    evening:"EVENING 9"
+  };
 
-    var key = todayKey();
+  const current =
+    getPractice(todayKey())[session] || 0;
 
-    if(!state.practice[key]){
+  const target = targets[session];
 
-      state.practice[key] = {
-        noteId:state.selectedNoteId || "",
-        morning:0,
-        afternoon:0,
-        evening:0,
-        completed:false
-      };
+  if(current >= target){
 
-    }
+    showToast(
+      labels[session] + " is already complete"
+    );
 
-    return state.practice[key];
-
+    return;
   }
 
-  function ensurePractice(){
+  currentWriting = {
+    session:session,
+    target:target
+  };
 
-    var practice = getTodayPractice();
+  document.getElementById("writingSessionLabel").textContent =
+    labels[session];
+
+  document.getElementById("writingNoteTitle").textContent =
+    note.title;
+
+  document.getElementById("writingSentence").textContent =
+    note.text;
+
+  prepareWritingStep();
+
+  document.getElementById("writingModal")
+    .classList.add("show");
+
+  setTimeout(function(){
+
+    document.getElementById("writingInput").focus();
+
+  },100);
+}
+
+function prepareWritingStep(){
+
+  if(!currentWriting){
+    return;
+  }
+
+  const practice = getPractice(todayKey());
+
+  const count = practice[currentWriting.session] || 0;
+  const repetition = count + 1;
+  const target = currentWriting.target;
+
+  document.getElementById("writingProgressText").textContent =
+    repetition + " / " + target;
+
+  document.getElementById("writingInputLabel").textContent =
+    "WRITE REPETITION " + repetition;
+
+  document.getElementById("writingProgressFill").style.width =
+    ((count / target) * 100) + "%";
+
+  document.getElementById("writingInput").value = "";
+
+  clearWritingError();
+}
+
+function completeWriting(){
+
+  if(!currentWriting){
+    return;
+  }
+
+  const note = selectedNote();
+
+  if(!note){
+
+    showWritingError(
+      "No 369 sentence is selected"
+    );
+
+    return;
+  }
+
+  const input =
+    document.getElementById("writingInput").value.trim();
+
+  if(!input){
+
+    showWritingError(
+      "Please write the sentence before completing this repetition"
+    );
+
+    return;
+  }
+
+  if(normalizeCompare(input) !== normalizeCompare(note.text)){
+
+    showWritingError(
+      "The sentence does not match your saved 369 sentence"
+    );
+
+    return;
+  }
+
+  const key = todayKey();
+  const practice = getPractice(key);
+
+  const session = currentWriting.session;
+  const target = currentWriting.target;
+
+  practice[session] =
+    clamp(
+      Number(practice[session] || 0) + 1,
+      0,
+      target
+    );
+
+  practice.noteId = note.id;
+
+  saveState();
+
+  const newCount = practice[session];
+
+  if(newCount >= target){
+
+    showToast(
+      sessionLabel(session) +
+      " complete ✓"
+    );
+
+  }else{
+
+    showToast(
+      "Writing " +
+      newCount +
+      " / " +
+      target +
+      " complete"
+    );
+  }
+
+  renderPractice();
+  renderDashboard();
+
+  if(newCount >= target){
+
+    closeModal("writingModal");
+
+    currentWriting = null;
 
     if(
-      !practice.noteId &&
-      state.selectedNoteId
+      practice.morning >= 3 &&
+      practice.afternoon >= 6 &&
+      practice.evening >= 9
     ){
 
-      practice.noteId =
-        state.selectedNoteId;
-
-      saveState();
-
-    }
-
-    return practice;
-
-  }
-
-  function totalToday(){
-
-    var p = ensurePractice();
-
-    return (
-      Number(p.morning || 0) +
-      Number(p.afternoon || 0) +
-      Number(p.evening || 0)
-    );
-
-  }
-
-  function isDayComplete(key){
-
-    var p = state.practice[key];
-
-    if(!p) return false;
-
-    return (
-      Number(p.morning || 0) >= 3 &&
-      Number(p.afternoon || 0) >= 6 &&
-      Number(p.evening || 0) >= 9
-    );
-  }
-
-  function renderPractice(){
-
-    var practice = ensurePractice();
-
-    var select = $("practiceNoteSelect");
-
-    select.innerHTML =
-      '<option value="">Select a saved note</option>' +
-      state.notes.map(function(note){
-
-        return (
-          '<option value="' +
-          escapeHTML(note.id) +
-          '">' +
-          escapeHTML(note.title) +
-          '</option>'
-        );
-
-      }).join("");
-
-    if(practice.noteId){
-
-      select.value = practice.noteId;
-
-    }else if(state.selectedNoteId){
-
-      select.value =
-        state.selectedNoteId;
-
-    }
-
-    var note = state.notes.find(function(item){
-
-      return item.id === (
-        practice.noteId ||
-        state.selectedNoteId
-      );
-
-    });
-
-    $("practiceNoteText").textContent =
-      note
-        ? note.text
-        : "Create and select a saved note first";
-
-    updateSessionUI("morning");
-    updateSessionUI("afternoon");
-    updateSessionUI("evening");
-
-  }
-
-  function updateSessionUI(session){
-
-    var practice = ensurePractice();
-
-    var count =
-      Number(practice[session] || 0);
-
-    var target =
-      sessionTargets[session];
-
-    var countEl =
-      $(session + "Count");
-
-    if(countEl){
-
-      countEl.textContent =
-        String(Math.min(count,target));
-
-    }
-
-    var card =
-      $("session" +
-        session.charAt(0).toUpperCase() +
-        session.slice(1)
-      );
-
-    if(card){
-
-      card.classList.toggle(
-        "done",
-        count >= target
-      );
-
-      var btn =
-        card.querySelector(".write-launch");
-
-      if(btn){
-
-        btn.textContent =
-          count >= target
-            ? "✓ Completed"
-            : "Start Writing";
-
-      }
-
-    }
-
-  }
-
-  $("practiceNoteSelect").addEventListener(
-    "change",
-    function(){
-
-      var id =
-        $("practiceNoteSelect").value;
-
-      state.selectedNoteId = id;
-
-      var p = ensurePractice();
-
-      p.noteId = id;
-
-      saveState();
-
-      renderPractice();
-
-      renderDashboard();
-
-      if(id){
-
-        showToast(
-          "369 note selected",
-          "success"
-        );
-
-      }
-
-    }
-  );
-
-
-  /* =========================================
-     WRITING MODAL
-  ========================================= */
-
-  var activeSession = "";
-
-  function openWriting(session){
-
-    var practice = ensurePractice();
-
-    if(!practice.noteId){
-
-      if(!state.selectedNoteId){
-
-        showToast(
-          "Create and select a 369 note first",
-          "error"
-        );
-
-        openView("notes");
-
-        return;
-      }
-
-      practice.noteId =
-        state.selectedNoteId;
-
-    }
-
-    var note = state.notes.find(function(item){
-
-      return item.id === practice.noteId;
-
-    });
-
-    if(!note){
-
       showToast(
-        "Selected note was not found",
-        "error"
+        "🎉 Your complete 369 day is finished"
       );
-
-      return;
     }
 
-    activeSession = session;
+  }else{
 
-    var target =
-      sessionTargets[session];
-
-    var count =
-      Number(practice[session] || 0);
-
-    var names = {
-      morning:"Morning — 3 Times",
-      afternoon:"Afternoon — 6 Times",
-      evening:"Evening — 9 Times"
-    };
-
-    $("writingModalTitle").textContent =
-      names[session];
-
-    $("writingTarget").textContent =
-      String(target);
-
-    $("writingCurrent").textContent =
-      String(Math.min(count,target));
-
-    $("writingBadge").textContent =
-      Math.round((count/target)*100) + "%";
-
-    $("writingBarFill").style.width =
-      Math.min(100,(count/target)*100) + "%";
-
-    $("writingInput").value = "";
-
-    if(count >= target){
-
-      $("writeStatus").textContent =
-        "This session is already complete ✓";
-
-      $("completeWritingBtn").disabled = true;
-
-    }else{
-
-      $("writeStatus").textContent =
-        "Type the sentence and press “Complete This Writing”";
-
-      $("completeWritingBtn").disabled = false;
-
-    }
-
-    $("writingModal").classList.add("show");
+    prepareWritingStep();
 
     setTimeout(function(){
 
-      $("writingInput").focus();
+      document.getElementById("writingInput").focus();
 
-    },120);
-
+    },80);
   }
+}
 
-  function closeWriting(){
+function normalizeCompare(text){
 
-    $("writingModal").classList.remove("show");
+  return safeString(text)
+    .replace(/\s+/g," ")
+    .trim()
+    .toLowerCase();
+}
 
-    activeSession = "";
+function sessionLabel(session){
 
-  }
+  const labels = {
+    morning:"Morning 3",
+    afternoon:"Afternoon 6",
+    evening:"Evening 9"
+  };
 
-  document.querySelectorAll(".write-launch").forEach(function(btn){
+  return labels[session] || session;
+}
 
-    btn.addEventListener("click",function(){
+function showWritingError(message){
 
-      openWriting(
-        btn.getAttribute("data-session")
-      );
+  const box =
+    document.getElementById("writingError");
 
-    });
+  box.textContent = message;
+  box.classList.add("show");
+}
 
-  });
+function clearWritingError(){
 
-  $("closeWritingModal").addEventListener(
-    "click",
-    closeWriting
-  );
+  const box =
+    document.getElementById("writingError");
 
-  $("writingModal").addEventListener(
-    "click",
-    function(event){
+  box.textContent = "";
+  box.classList.remove("show");
+}
 
-      if(event.target === $("writingModal")){
+/* =========================================================
+   SELECT NOTE
+========================================================= */
 
-        closeWriting();
+function openSelectNoteModal(){
 
-      }
+  const list =
+    document.getElementById("selectNoteList");
 
-    }
-  );
+  if(!state.notes.length){
 
-  $("copyOriginalBtn").addEventListener(
-    "click",
-    function(){
+    list.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">✎</div>
+        <div class="empty-title">No saved notes</div>
+        <div class="empty-text">
+          Create your first 369 sentence first
+        </div>
+        <button
+          class="gold-btn"
+          id="emptyCreateNoteBtn"
+          style="margin-top:15px;"
+        >
+          ＋ Create Note
+        </button>
+      </div>
+    `;
 
-      var practice = ensurePractice();
+    document.getElementById("selectNoteModal")
+      .classList.add("show");
 
-      var note = state.notes.find(function(item){
+    document.getElementById("emptyCreateNoteBtn")
+      .addEventListener("click",function(){
 
-        return item.id === practice.noteId;
+        closeModal("selectNoteModal");
+        openNoteModal();
 
       });
 
-      if(note){
+    return;
+  }
 
-        $("writingInput").value =
-          note.text;
+  const notes = [...state.notes].sort(function(a,b){
 
-        $("writingInput").focus();
+    if(a.favorite !== b.favorite){
+      return a.favorite ? -1 : 1;
+    }
 
+    return new Date(b.updatedAt) - new Date(a.updatedAt);
+  });
+
+  list.innerHTML = notes.map(function(note){
+
+    const selected =
+      note.id === state.selectedNoteId;
+
+    return `
+      <button
+        class="card"
+        data-action="select-note-modal"
+        data-id="${escapeHTML(note.id)}"
+        style="
+          width:100%;
+          border:1px solid ${selected
+            ? "rgba(229,184,107,.25)"
+            : "var(--border)"};
+          background:${selected
+            ? "rgba(229,184,107,.07)"
+            : "rgba(255,255,255,.018)"};
+          color:var(--text);
+          padding:16px;
+          margin-bottom:9px;
+          text-align:left;
+          border-radius:15px;
+        "
+      >
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:10px;
+          align-items:flex-start;
+        ">
+
+          <div>
+            <div style="
+              font-size:13px;
+              font-weight:900;
+            ">
+              ${escapeHTML(note.title)}
+            </div>
+
+            <div style="
+              color:var(--muted);
+              font-size:10px;
+              line-height:1.6;
+              margin-top:5px;
+            ">
+              ${escapeHTML(note.text)}
+            </div>
+          </div>
+
+          <span style="
+            color:${selected
+              ? "var(--gold)"
+              : "var(--muted2)"};
+            font-size:16px;
+          ">
+            ${selected ? "✓" : ""}
+          </span>
+
+        </div>
+
+      </button>
+    `;
+
+  }).join("");
+
+  document.getElementById("selectNoteModal")
+    .classList.add("show");
+}
+
+/* =========================================================
+   ACHIEVEMENTS
+========================================================= */
+
+function getAchievements(){
+
+  const writings = totalWritings();
+  const days = completedDays();
+  const streak = currentStreak();
+
+  return [
+
+    {
+      id:"first-writing",
+      icon:"✎",
+      title:"First Writing",
+      desc:"Complete your first repetition",
+      unlocked:writings >= 1
+    },
+
+    {
+      id:"first-day",
+      icon:"✓",
+      title:"First Complete Day",
+      desc:"Finish all 18 writings in one day",
+      unlocked:days >= 1
+    },
+
+    {
+      id:"three-streak",
+      icon:"🔥",
+      title:"3 Day Streak",
+      desc:"Complete 3 consecutive days",
+      unlocked:streak >= 3
+    },
+
+    {
+      id:"seven-streak",
+      icon:"⚡",
+      title:"7 Day Streak",
+      desc:"Complete 7 consecutive days",
+      unlocked:streak >= 7
+    },
+
+    {
+      id:"fourteen-streak",
+      icon:"◆",
+      title:"14 Day Streak",
+      desc:"Complete 14 consecutive days",
+      unlocked:streak >= 14
+    },
+
+    {
+      id:"thirty-streak",
+      icon:"♛",
+      title:"30 Day Streak",
+      desc:"Complete 30 consecutive days",
+      unlocked:streak >= 30
+    },
+
+    {
+      id:"hundred-writing",
+      icon:"100",
+      title:"100 Writings",
+      desc:"Complete 100 total repetitions",
+      unlocked:writings >= 100
+    },
+
+    {
+      id:"three-hundred",
+      icon:"369",
+      title:"369 Master",
+      desc:"Complete 369 total repetitions",
+      unlocked:writings >= 369
+    }
+
+  ];
+}
+
+function renderAchievements(){
+
+  const grid =
+    document.getElementById("achievementsGrid");
+
+  const list = getAchievements();
+
+  const unlocked =
+    list.filter(function(item){
+      return item.unlocked;
+    }).length;
+
+  document.getElementById("achievementCount").textContent =
+    unlocked + " / " + list.length;
+
+  grid.innerHTML = list.map(function(item){
+
+    return `
+      <article
+        class="card achievement ${item.unlocked ? "unlocked" : ""}"
+      >
+
+        <div class="achievement-icon">
+          ${escapeHTML(item.icon)}
+        </div>
+
+        <div class="achievement-title">
+          ${escapeHTML(item.title)}
+        </div>
+
+        <div class="achievement-desc">
+          ${escapeHTML(item.desc)}
+        </div>
+
+        ${
+          item.unlocked
+            ? `<span class="green-badge badge"
+                 style="margin-top:9px;">UNLOCKED</span>`
+            : `<span class="badge"
+                 style="margin-top:9px;">LOCKED</span>`
+        }
+
+      </article>
+    `;
+
+  }).join("");
+}
+
+function renderDashboardAchievements(){
+
+  const grid =
+    document.getElementById("dashboardAchievements");
+
+  const list = getAchievements()
+    .filter(function(item){
+      return item.unlocked;
+    })
+    .slice(-4)
+    .reverse();
+
+  if(!list.length){
+
+    grid.innerHTML = `
+      <div class="empty-state"
+           style="grid-column:1/-1;padding:25px 8px;">
+        <div class="empty-icon">★</div>
+        <div class="empty-title">Your first badge is waiting</div>
+        <div class="empty-text">
+          Complete your first writing to unlock it
+        </div>
+      </div>
+    `;
+
+    return;
+  }
+
+  grid.innerHTML = list.map(function(item){
+
+    return `
+      <div class="card achievement unlocked"
+           style="min-height:145px;padding:13px;">
+
+        <div class="achievement-icon"
+             style="width:44px;height:44px;font-size:19px;">
+          ${escapeHTML(item.icon)}
+        </div>
+
+        <div class="achievement-title"
+             style="font-size:10px;">
+          ${escapeHTML(item.title)}
+        </div>
+
+      </div>
+    `;
+
+  }).join("");
+}
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+function renderHistory(){
+
+  const year = calendarDate.getFullYear();
+  const month = calendarDate.getMonth();
+
+  document.getElementById("calendarMonth").textContent =
+    calendarDate.toLocaleDateString(
+      undefined,
+      {
+        month:"long",
+        year:"numeric"
       }
+    );
 
+  const daysEl =
+    document.getElementById("calendarDays");
+
+  const first = new Date(year,month,1);
+  const last = new Date(year,month+1,0);
+
+  const startDay = first.getDay();
+  const totalDays = last.getDate();
+
+  let html = "";
+
+  for(let i=0;i<startDay;i++){
+
+    html += `<div class="day empty"></div>`;
+  }
+
+  for(let day=1;day<=totalDays;day++){
+
+    const d = new Date(year,month,day);
+    const key = dateKey(d);
+
+    const count = totalForDay(key);
+
+    const complete = count >= 18;
+    const today = key === todayKey();
+
+    html += `
+      <div class="day
+        ${complete ? "complete" : ""}
+        ${today ? "today" : ""}
+      ">
+
+        <div class="day-number">
+          ${day}
+        </div>
+
+        <div class="day-count">
+          ${count > 0 ? count : ""}
+        </div>
+
+      </div>
+    `;
+  }
+
+  daysEl.innerHTML = html;
+
+  const completed =
+    completedDays();
+
+  const writings =
+    totalWritings();
+
+  const streak =
+    currentStreak();
+
+  let monthCompleted = 0;
+
+  Object.keys(state.practice).forEach(function(key){
+
+    const parts = key.split("-");
+
+    if(
+      Number(parts[0]) === year &&
+      Number(parts[1]) === month + 1 &&
+      isCompleteDay(key)
+    ){
+      monthCompleted++;
     }
-  );
+  });
 
-  $("completeWritingBtn").addEventListener(
-    "click",
-    completeCurrentWriting
-  );
+  const now = new Date();
 
-  $("writingInput").addEventListener(
-    "keydown",
-    function(event){
+  let denominator;
 
-      if(
-        event.ctrlKey &&
-        event.key === "Enter"
-      ){
+  if(
+    year === now.getFullYear() &&
+    month === now.getMonth()
+  ){
+    denominator = now.getDate();
+  }else if(
+    dIsPastMonth(year,month)
+  ){
+    denominator = totalDays;
+  }else{
+    denominator = 0;
+  }
 
-        completeCurrentWriting();
+  const monthPercent =
+    denominator > 0
+      ? Math.round(
+          (monthCompleted / denominator) * 100
+        )
+      : 0;
 
-      }
+  document.getElementById("historyCompletedDays").textContent =
+    completed;
 
-    }
-  );
+  document.getElementById("historyTotalWritings").textContent =
+    writings;
 
-  function completeCurrentWriting(){
+  document.getElementById("historyStreak").textContent =
+    streak;
 
-    if(!activeSession) return;
+  document.getElementById("historyMonthPercent").textContent =
+    monthPercent + "%";
+}
 
-    var practice = ensurePractice();
+function dIsPastMonth(year,month){
 
-    var target =
-      sessionTargets[activeSession];
+  const now = new Date();
 
-    var count =
-      Number(practice[activeSession] || 0);
+  if(year < now.getFullYear()){
+    return true;
+  }
 
-    if(count >= target){
+  if(
+    year === now.getFullYear() &&
+    month < now.getMonth()
+  ){
+    return true;
+  }
 
-      showToast(
-        "This session is already complete",
-        "success"
-      );
+  return false;
+}
 
-      return;
-    }
+/* =========================================================
+   JOURNAL
+========================================================= */
 
-    var typed =
-      $("writingInput").value.trim();
+function renderJournal(){
 
-    if(!typed){
+  const item =
+    state.journal[todayKey()] || {
+      gratitude:"",
+      reflection:""
+    };
 
-      showToast(
-        "Write the sentence first",
-        "error"
-      );
+  document.getElementById("gratitudeInput").value =
+    item.gratitude || "";
 
-      $("writingInput").focus();
+  document.getElementById("reflectionInput").value =
+    item.reflection || "";
+}
 
-      return;
-    }
+/* =========================================================
+   VISION
+========================================================= */
 
-    var note = state.notes.find(function(item){
+function renderVision(){
 
-      return item.id === practice.noteId;
+  document.getElementById("visionInput").value =
+    state.vision || "";
 
+  document.getElementById("visionDisplay").textContent =
+    state.vision ||
+    "Your vision will appear here";
+}
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+function renderSettings(){
+
+  document.getElementById("reminderToggle")
+    .classList.toggle(
+      "on",
+      Boolean(state.settings.reminder)
+    );
+}
+
+/* =========================================================
+   CURRENT VIEW
+========================================================= */
+
+function renderCurrentView(){
+
+  if(currentView === "dashboard"){
+    renderDashboard();
+  }
+
+  if(currentView === "practice"){
+    renderPractice();
+  }
+
+  if(currentView === "notes"){
+    renderNotes();
+  }
+
+  if(currentView === "goals"){
+    renderGoals();
+  }
+
+  if(currentView === "journal"){
+    renderJournal();
+  }
+
+  if(currentView === "vision"){
+    renderVision();
+  }
+
+  if(currentView === "history"){
+    renderHistory();
+  }
+
+  if(currentView === "achievements"){
+    renderAchievements();
+  }
+
+  if(currentView === "settings"){
+    renderSettings();
+  }
+}
+
+/* =========================================================
+   NOTE CRUD
+========================================================= */
+
+function openNoteModal(noteId){
+
+  editingNoteId = noteId || null;
+
+  document.getElementById("noteModalTitle").textContent =
+    noteId
+      ? "Edit 369 Note"
+      : "Create 369 Note";
+
+  if(noteId){
+
+    const note = state.notes.find(function(item){
+      return item.id === noteId;
     });
+
+    if(!note){
+      return;
+    }
+
+    document.getElementById("noteTitleInput").value =
+      note.title;
+
+    document.getElementById("noteTextInput").value =
+      note.text;
+
+  }else{
+
+    document.getElementById("noteTitleInput").value = "";
+    document.getElementById("noteTextInput").value = "";
+  }
+
+  document.getElementById("noteModal")
+    .classList.add("show");
+
+  setTimeout(function(){
+
+    document.getElementById("noteTitleInput").focus();
+
+  },100);
+}
+
+function saveNote(){
+
+  const title =
+    document.getElementById("noteTitleInput")
+      .value.trim();
+
+  const textValue =
+    document.getElementById("noteTextInput")
+      .value.trim();
+
+  if(!title){
+
+    showToast("Please enter a note title");
+
+    return;
+  }
+
+  if(!textValue){
+
+    showToast("Please enter your 369 sentence");
+
+    return;
+  }
+
+  if(editingNoteId){
+
+    const note =
+      state.notes.find(function(item){
+        return item.id === editingNoteId;
+      });
 
     if(note){
 
-      var expected =
-        note.text.trim();
+      note.title = title;
+      note.text = textValue;
+      note.updatedAt = nowISO();
 
-      if(
-        typed.replace(/\s+/g," ") !==
-        expected.replace(/\s+/g," ")
-      ){
+      showToast("369 note updated ✓");
+    }
 
-        var proceed = confirm(
-          "The text does not exactly match your saved 369 sentence. Complete this writing anyway?"
-        );
+  }else{
 
-        if(!proceed){
+    const note = {
+      id:uid(),
+      title:title,
+      text:textValue,
+      createdAt:nowISO(),
+      updatedAt:nowISO(),
+      favorite:false
+    };
 
-          return;
-        }
+    state.notes.unshift(note);
 
-      }
+    if(!state.selectedNoteId){
+
+      state.selectedNoteId = note.id;
+    }
+
+    showToast("369 note saved ✓");
+  }
+
+  saveState();
+
+  closeModal("noteModal");
+
+  editingNoteId = null;
+
+  renderCurrentView();
+  renderDashboard();
+}
+
+function useNote(id){
+
+  const note =
+    state.notes.find(function(item){
+      return item.id === id;
+    });
+
+  if(!note){
+    return;
+  }
+
+  state.selectedNoteId = id;
+
+  const practice = getPractice(todayKey());
+
+  practice.noteId = id;
+
+  saveState();
+
+  renderCurrentView();
+  renderDashboard();
+
+  showToast(
+    '"' + note.title + '" is now Today's 369 sentence ✓"
+  );
+}
+
+function deleteNote(id){
+
+  const note =
+    state.notes.find(function(item){
+      return item.id === id;
+    });
+
+  if(!note){
+    return;
+  }
+
+  const ok = window.confirm(
+    "Delete this 369 note?\n\n" +
+    note.title
+  );
+
+  if(!ok){
+    return;
+  }
+
+  state.notes =
+    state.notes.filter(function(item){
+      return item.id !== id;
+    });
+
+  if(state.selectedNoteId === id){
+
+    state.selectedNoteId =
+      state.notes.length
+        ? state.notes[0].id
+        : null;
+  }
+
+  saveState();
+
+  renderCurrentView();
+  renderDashboard();
+
+  showToast("Note deleted");
+}
+
+function toggleFavorite(id){
+
+  const note =
+    state.notes.find(function(item){
+      return item.id === id;
+    });
+
+  if(!note){
+    return;
+  }
+
+  note.favorite = !note.favorite;
+  note.updatedAt = nowISO();
+
+  saveState();
+
+  renderNotes();
+}
+
+/* =========================================================
+   GOAL CRUD
+========================================================= */
+
+function openGoalModal(){
+
+  document.getElementById("goalNameInput").value = "";
+  document.getElementById("goalTargetInput").value = "";
+
+  document.getElementById("goalCategoryInput").value =
+    "Business";
+
+  document.getElementById("goalModal")
+    .classList.add("show");
+
+  setTimeout(function(){
+
+    document.getElementById("goalNameInput").focus();
+
+  },100);
+}
+
+function saveGoal(){
+
+  const name =
+    document.getElementById("goalNameInput")
+      .value.trim();
+
+  const category =
+    document.getElementById("goalCategoryInput")
+      .value;
+
+  const target =
+    Number(
+      document.getElementById("goalTargetInput")
+        .value
+    );
+
+  if(!name){
+
+    showToast("Please enter a goal name");
+
+    return;
+  }
+
+  if(!target || target < 1){
+
+    showToast("Please enter a valid target");
+
+    return;
+  }
+
+  state.goals.unshift({
+    id:uid(),
+    name:name,
+    category:category,
+    target:target,
+    progress:0,
+    createdAt:nowISO()
+  });
+
+  saveState();
+
+  closeModal("goalModal");
+
+  renderGoals();
+  renderDashboard();
+
+  showToast("Goal created ✓");
+}
+
+function addGoalProgress(id){
+
+  const goal =
+    state.goals.find(function(item){
+      return item.id === id;
+    });
+
+  if(!goal){
+    return;
+  }
+
+  const increment =
+    Math.max(1, Math.ceil(goal.target * .1));
+
+  goal.progress =
+    Math.min(
+      goal.target,
+      goal.progress + increment
+    );
+
+  saveState();
+
+  renderGoals();
+  renderDashboard();
+
+  if(goal.progress >= goal.target){
+
+    showToast(
+      "🎉 Goal completed: " + goal.name
+    );
+
+  }else{
+
+    showToast("Goal progress updated ✓");
+  }
+}
+
+function deleteGoal(id){
+
+  const goal =
+    state.goals.find(function(item){
+      return item.id === id;
+    });
+
+  if(!goal){
+    return;
+  }
+
+  if(!window.confirm(
+    "Delete this goal?\n\n" + goal.name
+  )){
+    return;
+  }
+
+  state.goals =
+    state.goals.filter(function(item){
+      return item.id !== id;
+    });
+
+  saveState();
+
+  renderGoals();
+  renderDashboard();
+
+  showToast("Goal deleted");
+}
+
+/* =========================================================
+   JOURNAL / VISION SAVE
+========================================================= */
+
+function saveJournal(){
+
+  state.journal[todayKey()] = {
+    gratitude:
+      document.getElementById("gratitudeInput")
+        .value.trim(),
+
+    reflection:
+      document.getElementById("reflectionInput")
+        .value.trim(),
+
+    updatedAt:nowISO()
+  };
+
+  saveState();
+
+  showToast("Journal saved ✓");
+}
+
+function saveVision(){
+
+  state.vision =
+    document.getElementById("visionInput")
+      .value.trim();
+
+  saveState();
+
+  renderVision();
+
+  showToast("Vision saved ✓");
+}
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+function closeModal(id){
+
+  const el =
+    document.getElementById(id);
+
+  if(el){
+    el.classList.remove("show");
+  }
+
+  if(id === "writingModal"){
+    currentWriting = null;
+  }
+}
+
+document.querySelectorAll("[data-close]").forEach(function(btn){
+
+  btn.addEventListener("click",function(){
+
+    closeModal(btn.dataset.close);
+
+  });
+
+});
+
+document.querySelectorAll(".modal-backdrop").forEach(function(backdrop){
+
+  backdrop.addEventListener("click",function(event){
+
+    if(event.target === backdrop){
+
+      closeModal(backdrop.id);
 
     }
 
-    practice[activeSession] =
-      Math.min(
-        target,
-        count + 1
-      );
+  });
 
-    practice.noteId =
-      practice.noteId ||
-      state.selectedNoteId;
+});
 
-    var complete =
-      isDayComplete(todayKey());
+document.addEventListener("keydown",function(event){
 
-    practice.completed =
-      complete;
+  if(event.key === "Escape"){
+
+    document.querySelectorAll(".modal-backdrop.show")
+      .forEach(function(modal){
+
+        closeModal(modal.id);
+
+      });
+  }
+
+});
+
+/* =========================================================
+   EVENT DELEGATION
+========================================================= */
+
+document.addEventListener("click",function(event){
+
+  const navButton =
+    event.target.closest("[data-go]");
+
+  if(navButton){
+
+    event.preventDefault();
+
+    openView(navButton.dataset.go);
+
+    return;
+  }
+
+  const actionButton =
+    event.target.closest("[data-action]");
+
+  if(!actionButton){
+    return;
+  }
+
+  const action =
+    actionButton.dataset.action;
+
+  const id =
+    actionButton.dataset.id;
+
+  if(action === "favorite-note"){
+    toggleFavorite(id);
+  }
+
+  if(action === "use-note"){
+    useNote(id);
+  }
+
+  if(action === "edit-note"){
+    openNoteModal(id);
+  }
+
+  if(action === "delete-note"){
+    deleteNote(id);
+  }
+
+  if(action === "goal-add"){
+    addGoalProgress(id);
+  }
+
+  if(action === "delete-goal"){
+    deleteGoal(id);
+  }
+
+  if(action === "select-note-modal"){
+
+    useNote(id);
+    closeModal("selectNoteModal");
+    renderPractice();
+  }
+
+});
+
+/* =========================================================
+   BASIC BUTTONS
+========================================================= */
+
+document.getElementById("menuBtn")
+  .addEventListener("click",function(){
+
+    document.getElementById("sidebar")
+      .classList.toggle("open");
+
+  });
+
+document.getElementById("quickNoteBtn")
+  .addEventListener("click",function(){
+
+    openNoteModal();
+
+  });
+
+document.getElementById("newNoteBtn")
+  .addEventListener("click",function(){
+
+    openNoteModal();
+
+  });
+
+document.getElementById("practiceCreateNoteBtn")
+  .addEventListener("click",function(){
+
+    openNoteModal();
+
+  });
+
+document.getElementById("practiceSelectNoteBtn")
+  .addEventListener("click",function(){
+
+    openSelectNoteModal();
+
+  });
+
+document.getElementById("newGoalBtn")
+  .addEventListener("click",function(){
+
+    openGoalModal();
+
+  });
+
+document.getElementById("saveNoteBtn")
+  .addEventListener("click",function(){
+
+    saveNote();
+
+  });
+
+document.getElementById("saveGoalBtn")
+  .addEventListener("click",function(){
+
+    saveGoal();
+
+  });
+
+document.getElementById("saveJournalBtn")
+  .addEventListener("click",function(){
+
+    saveJournal();
+
+  });
+
+document.getElementById("saveVisionBtn")
+  .addEventListener("click",function(){
+
+    saveVision();
+
+  });
+
+/* =========================================================
+   SESSION BUTTONS
+========================================================= */
+
+document.querySelectorAll("[data-session]").forEach(function(btn){
+
+  btn.addEventListener("click",function(){
+
+    openWriting(btn.dataset.session);
+
+  });
+
+});
+
+/* =========================================================
+   WRITING
+========================================================= */
+
+document.getElementById("completeWritingBtn")
+  .addEventListener("click",function(){
+
+    completeWriting();
+
+  });
+
+document.getElementById("useSavedTextBtn")
+  .addEventListener("click",function(){
+
+    const note = selectedNote();
+
+    if(!note){
+      return;
+    }
+
+    document.getElementById("writingInput").value =
+      note.text;
+
+    clearWritingError();
+
+  });
+
+document.getElementById("writingInput")
+  .addEventListener("input",function(){
+
+    clearWritingError();
+
+  });
+
+/* =========================================================
+   NOTES SEARCH
+========================================================= */
+
+document.getElementById("noteSearch")
+  .addEventListener("input",function(){
+
+    renderNotes();
+
+  });
+
+document.getElementById("favoritesOnlyBtn")
+  .addEventListener("click",function(){
+
+    favoriteOnly = !favoriteOnly;
+
+    this.classList.toggle(
+      "gold-btn",
+      favoriteOnly
+    );
+
+    this.classList.toggle(
+      "ghost-btn",
+      !favoriteOnly
+    );
+
+    this.textContent =
+      favoriteOnly
+        ? "★ Favorites"
+        : "☆ Favorites";
+
+    renderNotes();
+
+  });
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+document.getElementById("prevMonthBtn")
+  .addEventListener("click",function(){
+
+    calendarDate.setMonth(
+      calendarDate.getMonth()-1
+    );
+
+    renderHistory();
+
+  });
+
+document.getElementById("nextMonthBtn")
+  .addEventListener("click",function(){
+
+    calendarDate.setMonth(
+      calendarDate.getMonth()+1
+    );
+
+    renderHistory();
+
+  });
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+document.getElementById("reminderToggle")
+  .addEventListener("click",function(){
+
+    state.settings.reminder =
+      !state.settings.reminder;
 
     saveState();
+    renderSettings();
 
-    var newCount =
-      practice[activeSession];
-
-    $("writingCurrent").textContent =
-      String(newCount);
-
-    var percent =
-      Math.round(
-        (newCount / target) * 100
-      );
-
-    $("writingBadge").textContent =
-      percent + "%";
-
-    $("writingBarFill").style.width =
-      percent + "%";
-
-    $("writingInput").value = "";
-
-    if(newCount >= target){
-
-      $("writeStatus").textContent =
-        "Session complete ✓";
-
-      $("completeWritingBtn").disabled =
-        true;
-
-      showToast(
-        activeSession === "morning"
-          ? "Morning 3 completed ✓"
-          : activeSession === "afternoon"
-            ? "Afternoon 6 completed ✓"
-            : "Evening 9 completed ✓",
-        "success"
-      );
-
-    }else{
-
-      $("writeStatus").textContent =
-        "Writing " +
-        newCount +
-        " of " +
-        target +
-        " completed";
-
-      $("writingInput").focus();
-
-    }
-
-    renderAll();
-
-    if(complete){
-
-      $("writingModal").querySelector(
-        ".modal"
-      ).classList.add("complete-flash");
-
-      setTimeout(function(){
-
-        $("writingModal").querySelector(
-          ".modal"
-        ).classList.remove("complete-flash");
-
-      },600);
-
-      showToast(
-        "🎉 Today's 369 practice is complete",
-        "success"
-      );
-
-    }
-
-  }
-
-
-  /* =========================================
-     DASHBOARD
-  ========================================= */
-
-  function renderDashboard(){
-
-    var p = ensurePractice();
-
-    var total =
-      totalToday();
-
-    var percent =
-      Math.round(
-        (total / 18) * 100
-      );
-
-    $("statStreak").textContent =
-      String(calculateStreak());
-
-    $("statToday").textContent =
-      total + "/18";
-
-    $("statNotes").textContent =
-      String(state.notes.length);
-
-    $("statGoals").textContent =
-      String(
-        state.goals.filter(function(goal){
-
-          return Number(goal.progress || 0) < 100;
-
-        }).length
-      );
-
-    $("todayBadge").textContent =
-      percent + "%";
-
-    $("todayPercent").textContent =
-      percent + "%";
-
-    $("todayProgressText").textContent =
-      total +
-      " of 18 writings completed";
-
-    $("todayProgressFill").style.width =
-      Math.min(100,percent) + "%";
-
-    updateMini(
-      "miniMorning",
-      Number(p.morning || 0),
-      3
+    showToast(
+      state.settings.reminder
+        ? "Reminder preference enabled"
+        : "Reminder preference disabled"
     );
 
-    updateMini(
-      "miniAfternoon",
-      Number(p.afternoon || 0),
-      6
-    );
+  });
 
-    updateMini(
-      "miniEvening",
-      Number(p.evening || 0),
-      9
-    );
+/* =========================================================
+   EXPORT
+========================================================= */
 
-    var note =
-      getSelectedNote();
+document.getElementById("exportBtn")
+  .addEventListener("click",function(){
 
-    var card =
-      $("dashboardNoteCard");
+    try{
 
-    if(note){
+      const data =
+        JSON.stringify(state,null,2);
 
-      card.innerHTML =
-        '<div class="practice-note" style="margin:0">' +
-          '<div class="practice-note-title">' +
-            'SELECTED 369 NOTE' +
-          '</div>' +
-          '<div class="practice-note-text">' +
-            escapeHTML(note.text) +
-          '</div>' +
-          '<div class="row" style="margin-top:14px">' +
-            '<span class="badge badge-green">' +
-              escapeHTML(note.title) +
-            '</span>' +
-            '<button class="btn btn-secondary btn-small" data-go="practice">' +
-              'Practice →' +
-            '</button>' +
-          '</div>' +
-        '</div>';
-
-      var goBtn =
-        card.querySelector("[data-go]");
-
-      goBtn.addEventListener(
-        "click",
-        function(){
-
-          openView("practice");
-
-        }
-      );
-
-    }else{
-
-      card.innerHTML =
-        '<div class="empty">' +
-          '<div class="empty-icon">📝</div>' +
-          '<div class="empty-title">No 369 note selected</div>' +
-          '<div class="empty-text">Create and save your first intention before starting today\'s practice</div>' +
-        '</div>';
-
-    }
-
-  }
-
-  function updateMini(id,count,target){
-
-    var el = $(id);
-
-    el.querySelector(
-      ".daily-mini-num"
-    ).textContent =
-      Math.min(count,target) +
-      " / " +
-      target;
-
-    el.classList.toggle(
-      "done",
-      count >= target
-    );
-
-  }
-
-
-  /* =========================================
-     STREAK
-  ========================================= */
-
-  function calculateStreak(){
-
-    var streak = 0;
-
-    var d = new Date();
-
-    while(true){
-
-      var key =
-        todayKey(d);
-
-      if(isDayComplete(key)){
-
-        streak++;
-
-        d.setDate(
-          d.getDate() - 1
-        );
-
-      }else{
-
-        break;
-
-      }
-
-      if(streak > 3650){
-
-        break;
-
-      }
-
-    }
-
-    return streak;
-
-  }
-
-
-  /* =========================================
-     GOALS
-  ========================================= */
-
-  function renderGoals(){
-
-    var list = $("goalsList");
-
-    if(!state.goals.length){
-
-      list.innerHTML =
-        '<div class="card empty" style="grid-column:1/-1">' +
-          '<div class="empty-icon">🎯</div>' +
-          '<div class="empty-title">No goals yet</div>' +
-          '<div class="empty-text">Create a goal and track your progress alongside your 369 practice</div>' +
-        '</div>';
-
-      return;
-    }
-
-    list.innerHTML =
-      state.goals.map(function(goal){
-
-        var progress =
-          Math.max(
-            0,
-            Math.min(
-              100,
-              Number(goal.progress || 0)
-            )
-          );
-
-        return (
-          '<div class="card goal-card">' +
-
-            '<div class="goal-top">' +
-
-              '<div>' +
-
-                '<div class="goal-title">' +
-                  escapeHTML(goal.name) +
-                '</div>' +
-
-                '<div class="goal-category">' +
-                  escapeHTML(goal.category || "Other") +
-                '</div>' +
-
-              '</div>' +
-
-              '<div class="goal-percent">' +
-                progress +
-                '%' +
-              '</div>' +
-
-            '</div>' +
-
-            '<div class="goal-bar">' +
-              '<div style="width:' +
-                progress +
-              '%"></div>' +
-            '</div>' +
-
-            '<div class="goal-actions">' +
-
-              '<button class="btn btn-secondary btn-small goal-plus" data-id="' +
-                escapeHTML(goal.id) +
-              '">' +
-                '+10%' +
-              '</button>' +
-
-              '<button class="btn btn-danger btn-small goal-delete" data-id="' +
-                escapeHTML(goal.id) +
-              '">' +
-                'Delete' +
-              '</button>' +
-
-            '</div>' +
-
-          '</div>'
-        );
-
-      }).join("");
-
-    list.querySelectorAll(".goal-plus").forEach(function(btn){
-
-      btn.addEventListener(
-        "click",
-        function(){
-
-          var goal =
-            state.goals.find(function(item){
-
-              return item.id ===
-                btn.getAttribute("data-id");
-
-            });
-
-          if(!goal) return;
-
-          goal.progress =
-            Math.min(
-              100,
-              Number(goal.progress || 0) + 10
-            );
-
-          saveState();
-
-          renderAll();
-
-          showToast(
-            goal.progress >= 100
-              ? "Goal completed 🎉"
-              : "Goal progress updated",
-            "success"
-          );
-
-        }
-      );
-
-    });
-
-    list.querySelectorAll(".goal-delete").forEach(function(btn){
-
-      btn.addEventListener(
-        "click",
-        function(){
-
-          var id =
-            btn.getAttribute("data-id");
-
-          var yes = confirm(
-            "Delete this goal?"
-          );
-
-          if(!yes) return;
-
-          state.goals =
-            state.goals.filter(function(goal){
-
-              return goal.id !== id;
-
-            });
-
-          saveState();
-
-          renderAll();
-
-          showToast(
-            "Goal deleted",
-            "success"
-          );
-
-        }
-      );
-
-    });
-
-  }
-
-  function openGoalModal(){
-
-    $("goalModal").classList.add("show");
-
-    $("goalName").value = "";
-
-    $("goalCategory").value =
-      "Business";
-
-    $("goalTarget").value =
-      "100";
-
-    setTimeout(function(){
-
-      $("goalName").focus();
-
-    },100);
-
-  }
-
-  function closeGoalModal(){
-
-    $("goalModal").classList.remove("show");
-
-  }
-
-  $("newGoalBtn").addEventListener(
-    "click",
-    openGoalModal
-  );
-
-  $("closeGoalModal").addEventListener(
-    "click",
-    closeGoalModal
-  );
-
-  $("goalModal").addEventListener(
-    "click",
-    function(event){
-
-      if(event.target === $("goalModal")){
-
-        closeGoalModal();
-
-      }
-
-    }
-  );
-
-  $("saveGoalBtn").addEventListener(
-    "click",
-    function(){
-
-      var name =
-        $("goalName").value.trim();
-
-      var category =
-        $("goalCategory").value;
-
-      var target =
-        Number(
-          $("goalTarget").value
-        );
-
-      if(!name){
-
-        showToast(
-          "Enter a goal name",
-          "error"
-        );
-
-        return;
-      }
-
-      var goal = {
-        id:uid("goal"),
-        name:name,
-        category:category,
-        target:
-          target > 0 ? target : 100,
-        progress:0,
-        createdAt:new Date().toISOString()
-      };
-
-      state.goals.unshift(goal);
-
-      saveState();
-
-      closeGoalModal();
-
-      renderAll();
-
-      showToast(
-        "Goal created successfully",
-        "success"
-      );
-
-    }
-  );
-
-
-  /* =========================================
-     JOURNAL
-  ========================================= */
-
-  function renderJournal(){
-
-    var key =
-      todayKey();
-
-    var entry =
-      state.journal[key] || {
-        gratitude:"",
-        reflection:""
-      };
-
-    $("gratitude").value =
-      entry.gratitude || "";
-
-    $("reflection").value =
-      entry.reflection || "";
-
-    $("journalDate").textContent =
-      new Date().toLocaleDateString(
-        undefined,
-        {
-          weekday:"long",
-          year:"numeric",
-          month:"long",
-          day:"numeric"
-        }
-      );
-
-  }
-
-  $("saveJournalBtn").addEventListener(
-    "click",
-    function(){
-
-      var key =
-        todayKey();
-
-      state.journal[key] = {
-        gratitude:
-          $("gratitude").value.trim(),
-        reflection:
-          $("reflection").value.trim(),
-        updatedAt:
-          new Date().toISOString()
-      };
-
-      saveState();
-
-      showToast(
-        "Journal saved",
-        "success"
-      );
-
-    }
-  );
-
-
-  /* =========================================
-     VISION
-  ========================================= */
-
-  function renderVision(){
-
-    $("visionText").value =
-      state.vision.vision || "";
-
-    $("futureText").value =
-      state.vision.future || "";
-
-  }
-
-  $("saveVisionBtn").addEventListener(
-    "click",
-    function(){
-
-      state.vision.vision =
-        $("visionText").value.trim();
-
-      state.vision.future =
-        $("futureText").value.trim();
-
-      saveState();
-
-      showToast(
-        "Vision saved",
-        "success"
-      );
-
-    }
-  );
-
-
-  /* =========================================
-     HISTORY / CALENDAR
-  ========================================= */
-
-  var calendarDate =
-    new Date();
-
-  function renderHistory(){
-
-    var year =
-      calendarDate.getFullYear();
-
-    var month =
-      calendarDate.getMonth();
-
-    $("calendarMonth").textContent =
-      calendarDate.toLocaleDateString(
-        undefined,
-        {
-          month:"long",
-          year:"numeric"
-        }
-      );
-
-    var completedCount = 0;
-
-    Object.keys(state.practice).forEach(function(key){
-
-      if(isDayComplete(key)){
-        completedCount++;
-      }
-
-    });
-
-    $("historyCompleteCount").textContent =
-      completedCount + " completed";
-
-    var first =
-      new Date(year,month,1);
-
-    var last =
-      new Date(year,month+1,0);
-
-    var firstDay =
-      first.getDay();
-
-    var days =
-      last.getDate();
-
-    var html =
-      [
-        "Sun",
-        "Mon",
-        "Tue",
-        "Wed",
-        "Thu",
-        "Fri",
-        "Sat"
-      ].map(function(day){
-
-        return (
-          '<div class="calendar-head">' +
-            day +
-          '</div>'
-        );
-
-      }).join("");
-
-    for(
-      var i=0;
-      i<firstDay;
-      i++
-    ){
-
-      html +=
-        '<div></div>';
-
-    }
-
-    for(
-      var day=1;
-      day<=days;
-      day++
-    ){
-
-      var date =
-        new Date(
-          year,
-          month,
-          day
-        );
-
-      var key =
-        todayKey(date);
-
-      var complete =
-        isDayComplete(key);
-
-      var today =
-        key === todayKey();
-
-      html +=
-        '<div class="day ' +
-          (complete ? "complete " : "") +
-          (today ? "today" : "") +
-        '">' +
-
-          '<div class="day-number">' +
-            day +
-          '</div>' +
-
-          (complete
-            ? '<div class="day-dot"></div>'
-            : ''
-          ) +
-
-        '</div>';
-
-    }
-
-    $("calendar").innerHTML =
-      html;
-
-  }
-
-  $("prevMonth").addEventListener(
-    "click",
-    function(){
-
-      calendarDate.setMonth(
-        calendarDate.getMonth() - 1
-      );
-
-      renderHistory();
-
-    }
-  );
-
-  $("nextMonth").addEventListener(
-    "click",
-    function(){
-
-      calendarDate.setMonth(
-        calendarDate.getMonth() + 1
-      );
-
-      renderHistory();
-
-    }
-  );
-
-
-  /* =========================================
-     SETTINGS
-  ========================================= */
-
-  function renderSettings(){
-
-    var toggle =
-      $("reminderToggle");
-
-    toggle.classList.toggle(
-      "on",
-      !!state.settings.reminder
-    );
-
-    $("languageSelect").value =
-      state.settings.language || "en";
-
-  }
-
-  $("reminderToggle").addEventListener(
-    "click",
-    function(){
-
-      state.settings.reminder =
-        !state.settings.reminder;
-
-      saveState();
-
-      renderSettings();
-
-      showToast(
-        state.settings.reminder
-          ? "Reminder preference enabled"
-          : "Reminder preference disabled",
-        "success"
-      );
-
-    }
-  );
-
-  $("languageSelect").addEventListener(
-    "change",
-    function(){
-
-      state.settings.language =
-        $("languageSelect").value;
-
-      saveState();
-
-      showToast(
-        "Language preference saved"
-      );
-
-    }
-  );
-
-
-  /* =========================================
-     EXPORT / IMPORT
-  ========================================= */
-
-  $("exportBtn").addEventListener(
-    "click",
-    function(){
-
-      var backup = {
-        app:"369",
-        version:"3.0",
-        exportedAt:
-          new Date().toISOString(),
-        data:state
-      };
-
-      var blob =
+      const blob =
         new Blob(
-          [
-            JSON.stringify(
-              backup,
-              null,
-              2
-            )
-          ],
-          {
-            type:"application/json"
-          }
+          [data],
+          {type:"application/json"}
         );
 
-      var url =
+      const url =
         URL.createObjectURL(blob);
 
-      var a =
+      const a =
         document.createElement("a");
 
       a.href = url;
@@ -4454,141 +5103,158 @@ a{
 
       a.remove();
 
-      URL.revokeObjectURL(url);
+      setTimeout(function(){
+        URL.revokeObjectURL(url);
+      },1000);
 
-      showToast(
-        "Backup exported",
-        "success"
+      showToast("Backup exported ✓");
+
+    }catch(error){
+
+      showToast("Could not export backup");
+
+    }
+
+  });
+
+/* =========================================================
+   IMPORT
+========================================================= */
+
+document.getElementById("importBtn")
+  .addEventListener("click",function(){
+
+    document.getElementById("importFile").click();
+
+  });
+
+document.getElementById("importFile")
+  .addEventListener("change",function(event){
+
+    const file =
+      event.target.files &&
+      event.target.files[0];
+
+    if(!file){
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(){
+
+      try{
+
+        const imported =
+          JSON.parse(reader.result);
+
+        state =
+          normalizeState(imported);
+
+        saveState();
+
+        renderCurrentView();
+        renderDashboard();
+
+        showToast("Backup imported ✓");
+
+      }catch(error){
+
+        showToast("Invalid backup file");
+
+      }
+
+      event.target.value = "";
+
+    };
+
+    reader.readAsText(file);
+
+  });
+
+/* =========================================================
+   RESET
+========================================================= */
+
+document.getElementById("resetBtn")
+  .addEventListener("click",function(){
+
+    const first =
+      window.confirm(
+        "Reset ALL 369 data?\n\n" +
+        "Notes, practice history, goals, journal and vision will be deleted"
       );
 
+    if(!first){
+      return;
     }
-  );
 
-  $("importBtn").addEventListener(
-    "click",
-    function(){
-
-      $("importFile").click();
-
-    }
-  );
-
-  $("importFile").addEventListener(
-    "change",
-    function(){
-
-      var file =
-        $("importFile").files[0];
-
-      if(!file) return;
-
-      var reader =
-        new FileReader();
-
-      reader.onload =
-        function(){
-
-          try{
-
-            var imported =
-              JSON.parse(
-                reader.result
-              );
-
-            var data =
-              imported.data ||
-              imported;
-
-            state =
-              normalizeState(data);
-
-            saveState();
-
-            renderAll();
-
-            showToast(
-              "Backup restored successfully",
-              "success"
-            );
-
-          }catch(error){
-
-            console.error(error);
-
-            showToast(
-              "Invalid backup file",
-              "error"
-            );
-
-          }
-
-          $("importFile").value = "";
-
-        };
-
-      reader.readAsText(file);
-
-    }
-  );
-
-
-  /* =========================================
-     RESET
-  ========================================= */
-
-  $("resetBtn").addEventListener(
-    "click",
-    function(){
-
-      var yes = confirm(
-        "This will delete all 369 notes, practice history, goals, journal and vision data. Continue?"
+    const second =
+      window.confirm(
+        "Are you absolutely sure?"
       );
 
-      if(!yes) return;
-
-      state =
-        clone(defaultState);
-
-      saveState();
-
-      clearNoteForm();
-
-      renderAll();
-
-      showToast(
-        "App data has been reset",
-        "success"
-      );
-
+    if(!second){
+      return;
     }
-  );
 
+    state = cloneDefault();
 
-  /* =========================================
-     RENDER ALL
-  ========================================= */
+    saveState();
 
-  function renderAll(){
+    favoriteOnly = false;
 
+    renderCurrentView();
     renderDashboard();
-    renderPractice();
-    renderNotes();
-    renderGoals();
-    renderJournal();
-    renderVision();
-    renderHistory();
-    renderSettings();
 
+    showToast("All data has been reset");
+
+  });
+
+/* =========================================================
+   INIT
+========================================================= */
+
+function init(){
+
+  if(state.notes.length && !state.selectedNoteId){
+
+    state.selectedNoteId =
+      state.notes[0].id;
+
+    saveState();
   }
 
+  const practice =
+    state.practice[todayKey()];
 
-  /* =========================================
-     INITIALIZE
-  ========================================= */
+  if(
+    practice &&
+    !practice.noteId &&
+    state.selectedNoteId
+  ){
 
-  renderAll();
+    practice.noteId =
+      state.selectedNoteId;
 
-})();
+    saveState();
+  }
+
+  renderDashboard();
+  renderPractice();
+  renderNotes();
+  renderGoals();
+  renderJournal();
+  renderVision();
+  renderHistory();
+  renderAchievements();
+  renderSettings();
+
+  openView("dashboard");
+}
+
+init();
+
 </script>
 
 </body>
