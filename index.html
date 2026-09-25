@@ -1,259 +1,965 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>369 App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0d0a12">
+<title>369 — Manifest & Build</title>
 
 <style>
+:root{
+  --bg:#0d0a12;
+  --panel:#17121e;
+  --panel2:#211a2a;
+  --line:#30283a;
+  --text:#f7f3fa;
+  --muted:#aaa0b3;
+  --gold:#d9ad63;
+  --gold2:#f0cf8b;
+  --green:#5dd39e;
+  --red:#ef7777;
+  --purple:#9a7bea;
+  --shadow:0 18px 50px rgba(0,0,0,.28);
+}
+
 *{
   box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  margin:0;
-  font-family:Arial,"Noto Sans Myanmar",sans-serif;
-  background:#100d16;
-  color:white;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 80% 0%,rgba(154,123,234,.12),transparent 28%),
+    radial-gradient(circle at 0% 50%,rgba(217,173,99,.07),transparent 25%),
+    var(--bg);
+  color:var(--text);
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Noto Sans Myanmar",
+    "Myanmar Text",
+    Arial,
+    sans-serif;
 }
 
-header{
-  padding:20px;
-  text-align:center;
-  background:#1c1725;
-  border-bottom:1px solid #332b3d;
+button,
+input,
+textarea,
+select{
+  font:inherit;
 }
 
-header h1{
-  margin:0;
-  font-size:32px;
-}
-
-header p{
-  margin:6px 0 0;
-  color:#aaa;
-}
-
-nav{
-  display:flex;
-  overflow:auto;
-  gap:8px;
-  padding:12px;
-  background:#15111c;
-}
-
-nav button{
-  flex:0 0 auto;
-  padding:12px 16px;
-  border:0;
-  border-radius:10px;
-  background:#282131;
-  color:white;
+button{
   cursor:pointer;
 }
 
-nav button.active{
-  background:#d4aa62;
-  color:#171017;
+.app{
+  min-height:100vh;
 }
 
-main{
-  max-width:900px;
-  margin:auto;
-  padding:20px;
+/* SIDEBAR */
+
+.sidebar{
+  position:fixed;
+  top:0;
+  left:0;
+  bottom:0;
+  width:250px;
+  padding:22px 16px;
+  background:rgba(17,13,23,.97);
+  border-right:1px solid var(--line);
+  z-index:100;
+  overflow-y:auto;
 }
 
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-.card{
-  background:#1c1725;
-  border:1px solid #332b3d;
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:16px;
-}
-
-.card h2{
-  margin-top:0;
-}
-
-.hero{
-  text-align:center;
-  padding:35px 20px;
-}
-
-.big369{
-  font-size:72px;
-  font-weight:bold;
-  color:#d4aa62;
-  letter-spacing:5px;
-}
-
-.stat{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-
-.stat div{
-  text-align:center;
-  padding:20px 10px;
-  background:#282131;
-  border-radius:14px;
-}
-
-.stat strong{
-  display:block;
-  font-size:28px;
-  color:#d4aa62;
-}
-
-.practice{
+.brand{
   display:flex;
   align-items:center;
   gap:12px;
-  margin:10px 0;
-  padding:15px;
-  background:#282131;
-  border-radius:14px;
+  padding:8px 8px 25px;
 }
 
-.practice-number{
-  width:45px;
-  height:45px;
-  border-radius:12px;
+.brand-mark{
+  width:46px;
+  height:46px;
+  border-radius:14px;
   display:grid;
   place-items:center;
-  background:#3a2e43;
-  color:#d4aa62;
+  background:linear-gradient(135deg,var(--gold),#9e7030);
+  color:#18100a;
+  font-size:18px;
+  font-weight:900;
+  box-shadow:0 8px 25px rgba(217,173,99,.18);
+}
+
+.brand h2{
   font-size:20px;
-  font-weight:bold;
+  letter-spacing:.5px;
 }
 
-.practice-text{
-  flex:1;
+.brand small{
+  display:block;
+  color:var(--muted);
+  margin-top:2px;
+  font-size:11px;
 }
 
-.practice-text strong{
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.nav-btn{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#aaa1b2;
+  border-radius:12px;
+  padding:12px 13px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-align:left;
+  transition:.2s;
+}
+
+.nav-btn:hover{
+  background:var(--panel2);
+  color:white;
+}
+
+.nav-btn.active{
+  background:linear-gradient(
+    90deg,
+    rgba(217,173,99,.18),
+    rgba(154,123,234,.10)
+  );
+  color:var(--gold2);
+}
+
+.nav-icon{
+  width:25px;
+  text-align:center;
+}
+
+.sidebar-footer{
+  margin-top:30px;
+  padding:15px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:15px;
+}
+
+.sidebar-footer small{
+  color:var(--muted);
+}
+
+.premium{
+  margin-top:10px;
+  display:block;
+  color:var(--gold2);
+  font-weight:700;
+}
+
+/* MAIN */
+
+.main{
+  margin-left:250px;
+  min-height:100vh;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 30px;
+  background:rgba(13,10,18,.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(48,40,58,.8);
+}
+
+.page-title h1{
+  font-size:24px;
+}
+
+.page-title p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.icon-btn{
+  width:42px;
+  height:42px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--panel);
+  color:white;
+}
+
+.mobile-menu{
+  display:none;
+}
+
+.content{
+  max-width:1400px;
+  margin:auto;
+  padding:28px;
+}
+
+.view{
+  display:none;
+}
+
+.view.active{
   display:block;
 }
 
-.practice-text small{
-  color:#aaa;
+/* COMMON */
+
+.card{
+  background:linear-gradient(
+    145deg,
+    rgba(33,26,42,.96),
+    rgba(23,18,30,.96)
+  );
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:22px;
+  box-shadow:var(--shadow);
 }
 
-button.action{
+.card h2{
+  font-size:18px;
+  margin-bottom:7px;
+}
+
+.card-subtitle{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:18px;
+}
+
+.grid{
+  display:grid;
+  gap:16px;
+}
+
+.grid-2{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.grid-3{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.grid-4{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+
+.mt{
+  margin-top:16px;
+}
+
+.mb{
+  margin-bottom:16px;
+}
+
+.btn{
   border:0;
-  border-radius:10px;
-  padding:11px 15px;
-  background:#d4aa62;
-  color:#171017;
-  font-weight:bold;
-  cursor:pointer;
+  border-radius:11px;
+  padding:11px 16px;
+  font-weight:700;
+  transition:.18s;
 }
 
-button.secondary{
-  border:1px solid #51465c;
-  border-radius:10px;
-  padding:11px 15px;
-  background:#282131;
+.btn:active{
+  transform:scale(.97);
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  color:#1b130b;
+}
+
+.btn-secondary{
+  background:var(--panel2);
   color:white;
-  cursor:pointer;
+  border:1px solid var(--line);
 }
 
-button.done{
-  background:#4caf7d;
-  color:#07150e;
+.btn-danger{
+  background:rgba(239,119,119,.12);
+  color:#ff9a9a;
+  border:1px solid rgba(239,119,119,.2);
+}
+
+.btn-success{
+  background:rgba(93,211,158,.12);
+  color:var(--green);
+  border:1px solid rgba(93,211,158,.2);
+}
+
+.btn-block{
+  width:100%;
+}
+
+label{
+  display:block;
+  color:#d6cfda;
+  font-size:13px;
+  margin-bottom:7px;
 }
 
 input,
 textarea,
 select{
   width:100%;
-  padding:13px;
-  margin:7px 0 14px;
-  border-radius:10px;
-  border:1px solid #44394e;
-  background:#110e16;
+  background:#0f0c14;
+  border:1px solid var(--line);
   color:white;
+  border-radius:12px;
+  padding:13px 14px;
   outline:none;
 }
 
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:rgba(217,173,99,.7);
+  box-shadow:0 0 0 3px rgba(217,173,99,.08);
+}
+
 textarea{
-  min-height:140px;
+  min-height:130px;
   resize:vertical;
 }
 
-.goal{
-  padding:16px;
-  background:#282131;
-  border-radius:14px;
+.form-group{
+  margin-bottom:15px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  border-radius:20px;
+  background:rgba(217,173,99,.10);
+  color:var(--gold2);
+  font-size:11px;
+  font-weight:700;
+}
+
+/* DASHBOARD */
+
+.hero{
+  min-height:285px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+  background:
+    radial-gradient(circle at 80% 20%,rgba(154,123,234,.25),transparent 30%),
+    radial-gradient(circle at 70% 100%,rgba(217,173,99,.15),transparent 35%),
+    var(--panel);
+}
+
+.hero-copy{
+  max-width:650px;
+}
+
+.eyebrow{
+  color:var(--gold2);
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1.6px;
   margin-bottom:10px;
 }
 
+.hero h2{
+  font-size:38px;
+  line-height:1.12;
+  margin-bottom:12px;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+  max-width:560px;
+}
+
+.hero-number{
+  min-width:190px;
+  text-align:center;
+}
+
+.number369{
+  font-size:76px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:5px;
+  background:linear-gradient(
+    135deg,
+    #fff,
+    var(--gold2),
+    var(--gold)
+  );
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero-number small{
+  color:var(--muted);
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-top:16px;
+}
+
+.stat-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:18px;
+}
+
+.stat-icon{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.stat-value{
+  font-size:27px;
+  font-weight:800;
+  margin-top:4px;
+}
+
+.stat-note{
+  color:#817789;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.intention-box{
+  padding:18px;
+  border-radius:15px;
+  background:#0f0c14;
+  border:1px solid var(--line);
+  color:#e9e2ec;
+  line-height:1.7;
+}
+
+.intention-empty{
+  color:#766d7c;
+}
+
+.progress-wrap{
+  margin-top:15px;
+}
+
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:7px;
+}
+
 .progress{
-  height:8px;
-  background:#15111c;
-  border-radius:20px;
+  height:9px;
+  background:#0e0b12;
+  border-radius:30px;
   overflow:hidden;
-  margin-top:10px;
 }
 
 .progress span{
   display:block;
   height:100%;
-  background:#d4aa62;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  border-radius:30px;
+  transition:.35s;
 }
 
-.message{
-  padding:13px;
-  margin-top:10px;
-  border-radius:10px;
-  background:#263c31;
-  color:#9be0b8;
+/* PRACTICE */
+
+.practice-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.practice-list{
+  display:grid;
+  gap:12px;
+}
+
+.session{
+  display:grid;
+  grid-template-columns:58px 1fr auto;
+  align-items:center;
+  gap:15px;
+  padding:16px;
+  border-radius:16px;
+  background:#100d15;
+  border:1px solid var(--line);
+}
+
+.session-number{
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:linear-gradient(
+    135deg,
+    rgba(217,173,99,.2),
+    rgba(154,123,234,.15)
+  );
+  color:var(--gold2);
+  font-size:21px;
+  font-weight:900;
+}
+
+.session h3{
+  font-size:15px;
+  margin-bottom:4px;
+}
+
+.session p{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.session.done{
+  border-color:rgba(93,211,158,.28);
+}
+
+.session.done .session-number{
+  background:rgba(93,211,158,.13);
+  color:var(--green);
+}
+
+/* GOALS */
+
+.goal-list{
+  display:grid;
+  gap:12px;
+}
+
+.goal-card{
+  background:#100d15;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:17px;
+}
+
+.goal-head{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.goal-name{
+  font-weight:800;
+}
+
+.goal-category{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+.goal-percent{
+  color:var(--gold2);
+  font-weight:800;
+}
+
+.goal-actions{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+/* JOURNAL */
+
+.journal-entry{
+  padding:17px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:#100d15;
+  margin-bottom:10px;
+}
+
+.journal-date{
+  color:var(--gold2);
+  font-size:11px;
+  margin-bottom:7px;
+}
+
+.journal-entry p{
+  color:#ddd5e2;
+  line-height:1.7;
+  white-space:pre-wrap;
+}
+
+/* VISION */
+
+.vision-hero{
+  text-align:center;
+  padding:35px;
+}
+
+.vision-icon{
+  font-size:48px;
+  margin-bottom:12px;
+}
+
+.vision-hero h2{
+  font-size:30px;
+}
+
+/* HISTORY */
+
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:7px;
+  margin-top:16px;
+}
+
+.calendar-day{
+  min-height:43px;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  background:#100d15;
+  border:1px solid var(--line);
+  color:#82798b;
+  font-size:12px;
+}
+
+.calendar-day.completed{
+  background:rgba(93,211,158,.14);
+  color:var(--green);
+  border-color:rgba(93,211,158,.2);
+}
+
+.calendar-day.today{
+  outline:2px solid var(--gold);
+  color:white;
+}
+
+/* SETTINGS */
+
+.setting-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.setting-row:last-child{
+  border-bottom:0;
+}
+
+.setting-info strong{
+  display:block;
+  font-size:14px;
+}
+
+.setting-info small{
+  color:var(--muted);
+  display:block;
+  margin-top:4px;
+}
+
+.switch{
+  position:relative;
+  width:49px;
+  height:27px;
+  flex:0 0 auto;
+}
+
+.switch input{
   display:none;
 }
 
-.empty{
-  text-align:center;
-  padding:30px;
-  color:#999;
+.slider{
+  position:absolute;
+  inset:0;
+  background:#332b3a;
+  border-radius:30px;
+  cursor:pointer;
+  transition:.2s;
 }
 
-footer{
-  text-align:center;
-  padding:30px;
-  color:#777;
+.slider:before{
+  content:"";
+  position:absolute;
+  width:21px;
+  height:21px;
+  left:3px;
+  top:3px;
+  border-radius:50%;
+  background:white;
+  transition:.2s;
 }
 
-@media(max-width:600px){
+.switch input:checked + .slider{
+  background:var(--gold);
+}
 
-  main{
-    padding:14px;
+.switch input:checked + .slider:before{
+  transform:translateX(22px);
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(8px);
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(520px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#19131f;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 25px 80px rgba(0,0,0,.45);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.modal-close{
+  width:36px;
+  height:36px;
+  border:0;
+  border-radius:10px;
+  background:var(--panel2);
+  color:white;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,20px);
+  opacity:0;
+  pointer-events:none;
+  z-index:1000;
+  padding:12px 17px;
+  border-radius:12px;
+  background:#27202e;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  transition:.25s;
+  font-size:13px;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* OVERLAY */
+
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:90;
+  background:rgba(0,0,0,.6);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s;
   }
 
-  .big369{
-    font-size:58px;
+  .sidebar.open{
+    transform:translateX(0);
   }
 
-  .stat strong{
-    font-size:22px;
+  .main{
+    margin-left:0;
   }
 
-  .practice{
+  .mobile-menu{
+    display:block;
+  }
+
+  .topbar{
+    padding:12px 16px;
+  }
+
+  .content{
+    padding:18px;
+  }
+
+  .overlay.show{
+    display:block;
+  }
+
+  .hero h2{
+    font-size:30px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid-4{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:620px){
+
+  .content{
     padding:12px;
   }
 
-  .practice button{
-    padding:9px;
+  .topbar{
+    min-height:68px;
+  }
+
+  .page-title h1{
+    font-size:19px;
+  }
+
+  .page-title p{
+    display:none;
+  }
+
+  .hero{
+    min-height:auto;
+    flex-direction:column;
+    text-align:center;
+    padding:28px 18px;
+  }
+
+  .hero-number{
+    min-width:0;
+  }
+
+  .number369{
+    font-size:60px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+
+  .stat-card{
+    padding:14px;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    padding:17px;
+    border-radius:17px;
+  }
+
+  .session{
+    grid-template-columns:46px 1fr;
+  }
+
+  .session-number{
+    width:46px;
+    height:46px;
+    border-radius:13px;
+  }
+
+  .session .btn{
+    grid-column:1 / -1;
+    width:100%;
+  }
+
+  .practice-header{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .vision-hero{
+    padding:25px 12px;
+  }
+
+  .vision-hero h2{
+    font-size:25px;
+  }
+
+  .calendar{
+    gap:4px;
+  }
+
+  .calendar-day{
+    min-height:38px;
   }
 
 }
@@ -262,1243 +968,3041 @@ footer{
 
 <body>
 
-<header>
-  <h1>369</h1>
-  <p>Manifest Your Goals</p>
-</header>
+<div class="app">
 
-<nav>
+  <!-- SIDEBAR -->
 
-  <button class="nav active" data-page="home">
-    🏠 Home
-  </button>
+  <aside class="sidebar" id="sidebar">
 
-  <button class="nav" data-page="practice">
-    🔢 369
-  </button>
+    <div class="brand">
 
-  <button class="nav" data-page="goals">
-    🎯 Goals
-  </button>
-
-  <button class="nav" data-page="journal">
-    ✍️ Journal
-  </button>
-
-  <button class="nav" data-page="history">
-    📅 History
-  </button>
-
-  <button class="nav" data-page="settings">
-    ⚙️ Settings
-  </button>
-
-</nav>
-
-<main>
-
-<!-- HOME -->
-
-<section id="home" class="page active">
-
-  <div class="card hero">
-
-    <div class="big369">369</div>
-
-    <h2>Focus. Believe. Act.</h2>
-
-    <p>
-      Build a daily practice around one clear intention
-    </p>
-
-    <button class="action" onclick="openPage('practice')">
-      Start Today's Practice
-    </button>
-
-  </div>
-
-  <div class="stat">
-
-    <div>
-      <small>🔥 Streak</small>
-      <strong id="homeStreak">0</strong>
-      <small>days</small>
-    </div>
-
-    <div>
-      <small>✓ Sessions</small>
-      <strong id="homeSessions">0</strong>
-      <small>completed</small>
-    </div>
-
-    <div>
-      <small>🎯 Goals</small>
-      <strong id="homeGoals">0</strong>
-      <small>active</small>
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <h2>Today's 369</h2>
-
-    <div id="homePractice"></div>
-
-  </div>
-
-  <div class="card">
-
-    <h2>💭 Daily Affirmation</h2>
-
-    <p id="affirmation">
-      I am creating the life I truly want
-    </p>
-
-    <button class="secondary" onclick="newAffirmation()">
-      New Affirmation
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- PRACTICE -->
-
-<section id="practice" class="page">
-
-  <div class="card">
-
-    <h2>🔢 369 Practice</h2>
-
-    <p>
-      Write one clear intention and return to it throughout the day
-    </p>
-
-    <label>Your Intention</label>
-
-    <textarea
-      id="intention"
-      placeholder="Example: I am building a successful and meaningful life"
-    ></textarea>
-
-    <button class="action" onclick="saveIntention()">
-      Save Intention
-    </button>
-
-    <div id="intentionMessage" class="message"></div>
-
-  </div>
-
-  <div class="card">
-
-    <h2>Today's Sessions</h2>
-
-    <div id="practiceList"></div>
-
-  </div>
-
-</section>
-
-
-<!-- GOALS -->
-
-<section id="goals" class="page">
-
-  <div class="card">
-
-    <h2>🎯 My Goals</h2>
-
-    <label>Goal Name</label>
-
-    <input
-      id="goalName"
-      placeholder="Example: Grow my business"
-    >
-
-    <label>Category</label>
-
-    <select id="goalCategory">
-      <option>Money</option>
-      <option>Career</option>
-      <option>Business</option>
-      <option>Personal Growth</option>
-      <option>Relationship</option>
-      <option>Lifestyle</option>
-    </select>
-
-    <label>Progress %</label>
-
-    <input
-      id="goalProgress"
-      type="number"
-      min="0"
-      max="100"
-      value="0"
-    >
-
-    <button class="action" onclick="addGoal()">
-      + Add Goal
-    </button>
-
-  </div>
-
-  <div class="card">
-
-    <h2>My Goals</h2>
-
-    <div id="goalList"></div>
-
-  </div>
-
-</section>
-
-
-<!-- JOURNAL -->
-
-<section id="journal" class="page">
-
-  <div class="card">
-
-    <h2>✍️ Daily Journal</h2>
-
-    <textarea
-      id="journalText"
-      placeholder="What are you grateful for today? What did you learn? What action will you take?"
-    ></textarea>
-
-    <button class="action" onclick="saveJournal()">
-      Save Journal
-    </button>
-
-  </div>
-
-  <div class="card">
-
-    <h2>📖 Journal History</h2>
-
-    <div id="journalList"></div>
-
-  </div>
-
-</section>
-
-
-<!-- HISTORY -->
-
-<section id="history" class="page">
-
-  <div class="card">
-
-    <h2>📅 Practice History</h2>
-
-    <div class="stat">
+      <div class="brand-mark">369</div>
 
       <div>
-        <small>Current</small>
-        <strong id="historyCurrent">0</strong>
-        <small>days</small>
-      </div>
-
-      <div>
-        <small>Best</small>
-        <strong id="historyBest">0</strong>
-        <small>days</small>
-      </div>
-
-      <div>
-        <small>Days</small>
-        <strong id="historyDays">0</strong>
-        <small>completed</small>
+        <h2>369</h2>
+        <small>Manifest & Build</small>
       </div>
 
     </div>
 
-  </div>
+    <nav class="nav">
 
-  <div class="card">
+      <button class="nav-btn active" data-view="dashboard">
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
+      </button>
 
-    <h2>Recent Activity</h2>
+      <button class="nav-btn" data-view="practice">
+        <span class="nav-icon">369</span>
+        <span>369 Practice</span>
+      </button>
 
-    <div id="historyList"></div>
+      <button class="nav-btn" data-view="goals">
+        <span class="nav-icon">◎</span>
+        <span>My Goals</span>
+      </button>
 
-  </div>
+      <button class="nav-btn" data-view="journal">
+        <span class="nav-icon">✎</span>
+        <span>Journal</span>
+      </button>
 
-</section>
+      <button class="nav-btn" data-view="vision">
+        <span class="nav-icon">◇</span>
+        <span>My Vision</span>
+      </button>
 
+      <button class="nav-btn" data-view="history">
+        <span class="nav-icon">▣</span>
+        <span>History</span>
+      </button>
 
-<!-- SETTINGS -->
+      <button class="nav-btn" data-view="settings">
+        <span class="nav-icon">⚙</span>
+        <span>Settings</span>
+      </button>
 
-<section id="settings" class="page">
+    </nav>
 
-  <div class="card">
+    <div class="sidebar-footer">
+      <small>Daily practice</small>
+      <strong class="premium">Focus • Believe • Act</strong>
+    </div>
 
-    <h2>⚙️ Settings</h2>
+  </aside>
 
-    <label>Language</label>
+  <div class="overlay" id="overlay"></div>
 
-    <select id="language">
+  <!-- MAIN -->
 
-      <option value="en">
-        English
-      </option>
+  <main class="main">
 
-      <option value="my">
-        မြန်မာ
-      </option>
+    <header class="topbar">
 
-    </select>
-
-    <button class="secondary" onclick="saveSettings()">
-      Save Settings
-    </button>
-
-  </div>
-
-  <div class="card">
-
-    <h2>💾 App Data</h2>
-
-    <p>
-      Your data is currently stored on this device
-    </p>
-
-    <br>
-
-    <button class="secondary" onclick="exportData()">
-      Export Data
-    </button>
-
-    <br><br>
-
-    <button class="secondary" onclick="resetData()">
-      Reset App Data
-    </button>
-
-  </div>
-
-</section>
-
-</main>
-
-<footer>
-  369 • Manifest Your Goals
-</footer>
-
-
-<script>
-
-/* =====================================
-   DATA
-===================================== */
-
-const KEY = "APP_369_DATA";
-
-let appData = {
-
-  intention:"",
-
-  practices:{},
-
-  goals:[],
-
-  journals:[],
-
-  language:"en"
-
-};
-
-
-/* =====================================
-   LOAD
-===================================== */
-
-function loadData(){
-
-  try{
-
-    const saved =
-      localStorage.getItem(KEY);
-
-    if(saved){
-
-      appData = JSON.parse(saved);
-
-    }
-
-  }catch(error){
-
-    console.log(error);
-
-  }
-
-}
-
-
-/* =====================================
-   SAVE
-===================================== */
-
-function saveData(){
-
-  localStorage.setItem(
-    KEY,
-    JSON.stringify(appData)
-  );
-
-}
-
-
-/* =====================================
-   DATE
-===================================== */
-
-function today(){
-
-  const d = new Date();
-
-  const y = d.getFullYear();
-
-  const m =
-    String(d.getMonth()+1).padStart(2,"0");
-
-  const day =
-    String(d.getDate()).padStart(2,"0");
-
-  return y+"-"+m+"-"+day;
-
-}
-
-
-/* =====================================
-   OPEN PAGE
-===================================== */
-
-function openPage(page){
-
-  document
-    .querySelectorAll(".page")
-    .forEach(x=>{
-      x.classList.remove("active");
-    });
-
-  document
-    .querySelectorAll(".nav")
-    .forEach(x=>{
-      x.classList.remove("active");
-    });
-
-  const target =
-    document.getElementById(page);
-
-  if(target){
-
-    target.classList.add("active");
-
-  }
-
-  const button =
-    document.querySelector(
-      '.nav[data-page="'+page+'"]'
-    );
-
-  if(button){
-
-    button.classList.add("active");
-
-  }
-
-  renderAll();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-/* =====================================
-   NAV BUTTONS
-===================================== */
-
-document
-  .querySelectorAll(".nav")
-  .forEach(button=>{
-
-    button.addEventListener(
-      "click",
-      function(){
-
-        openPage(
-          this.dataset.page
-        );
-
-      }
-    );
-
-  });
-
-
-/* =====================================
-   PRACTICE
-===================================== */
-
-function getTodayPractice(){
-
-  const key = today();
-
-  if(!appData.practices[key]){
-
-    appData.practices[key] = {
-
-      morning:false,
-
-      afternoon:false,
-
-      evening:false
-
-    };
-
-  }
-
-  return appData.practices[key];
-
-}
-
-
-function togglePractice(type){
-
-  if(!appData.intention){
-
-    alert(
-      "Please save your intention first"
-    );
-
-    openPage("practice");
-
-    return;
-
-  }
-
-  const day =
-    getTodayPractice();
-
-  day[type] =
-    !day[type];
-
-  saveData();
-
-  renderAll();
-
-}
-
-
-function practiceHTML(){
-
-  const day =
-    getTodayPractice();
-
-  const items = [
-
-    ["morning",3,"Morning"],
-
-    ["afternoon",6,"Afternoon"],
-
-    ["evening",9,"Evening"]
-
-  ];
-
-  let html="";
-
-  items.forEach(item=>{
-
-    const type=item[0];
-
-    const number=item[1];
-
-    const title=item[2];
-
-    const done=day[type];
-
-    html+=`
-
-      <div class="practice">
-
-        <div class="practice-number">
-          ${done ? "✓" : number}
-        </div>
-
-        <div class="practice-text">
-
-          <strong>
-            ${title}
-          </strong>
-
-          <small>
-            Write ${number} times
-          </small>
-
-        </div>
+      <div class="top-actions">
 
         <button
-          class="${done ? "secondary done":"action"}"
-          onclick="togglePractice('${type}')"
+          class="icon-btn mobile-menu"
+          id="menuBtn"
+          type="button"
         >
-          ${done ? "Done":"Start"}
+          ☰
+        </button>
+
+        <div class="page-title">
+
+          <h1 id="pageTitle">
+            Dashboard
+          </h1>
+
+          <p id="pageSubtitle">
+            Build your daily practice
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="top-actions">
+
+        <button
+          class="icon-btn"
+          id="quickBtn"
+          type="button"
+          title="Quick Add"
+        >
+          +
         </button>
 
       </div>
 
-    `;
-
-  });
-
-  return html;
-
-}
+    </header>
 
 
-/* =====================================
-   INTENTION
-===================================== */
+    <div class="content">
 
-function saveIntention(){
 
-  const value =
-    document
-      .getElementById("intention")
-      .value
-      .trim();
+      <!-- DASHBOARD -->
 
-  if(!value){
+      <section
+        class="view active"
+        id="view-dashboard"
+      >
 
-    alert(
-      "Please enter your intention"
-    );
+        <div class="card hero">
 
-    return;
+          <div class="hero-copy">
+
+            <div class="eyebrow">
+              YOUR DAILY PRACTICE
+            </div>
+
+            <h2>
+              Write it.<br>
+              Feel it.<br>
+              Build it.
+            </h2>
+
+            <p>
+              Use the 369 method as a daily focus ritual,
+              then connect your intention with real actions
+              and measurable goals
+            </p>
+
+            <div style="margin-top:20px">
+
+              <button
+                class="btn btn-primary"
+                data-open-view="practice"
+              >
+                Start Today's 369
+              </button>
+
+            </div>
+
+          </div>
+
+          <div class="hero-number">
+
+            <div class="number369">
+              369
+            </div>
+
+            <small>
+              3 × Morning · 6 × Afternoon · 9 × Evening
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <div class="stats">
+
+          <div class="stat-card">
+
+            <div class="stat-icon">🔥</div>
+
+            <div class="stat-label">
+              Current Streak
+            </div>
+
+            <div
+              class="stat-value"
+              id="statStreak"
+            >
+              0
+            </div>
+
+            <div class="stat-note">
+              days
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-icon">✓</div>
+
+            <div class="stat-label">
+              Sessions
+            </div>
+
+            <div
+              class="stat-value"
+              id="statSessions"
+            >
+              0
+            </div>
+
+            <div class="stat-note">
+              completed
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-icon">◎</div>
+
+            <div class="stat-label">
+              Active Goals
+            </div>
+
+            <div
+              class="stat-value"
+              id="statGoals"
+            >
+              0
+            </div>
+
+            <div class="stat-note">
+              goals
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-icon">✦</div>
+
+            <div class="stat-label">
+              Best Streak
+            </div>
+
+            <div
+              class="stat-value"
+              id="statBest"
+            >
+              0
+            </div>
+
+            <div class="stat-note">
+              days
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="grid grid-2 mt">
+
+          <div class="card">
+
+            <h2>Today's Intention</h2>
+
+            <div class="card-subtitle">
+              Keep one clear statement in focus
+            </div>
+
+            <div
+              class="intention-box"
+              id="dashboardIntention"
+            >
+              <span class="intention-empty">
+                No intention saved yet
+              </span>
+            </div>
+
+            <div style="margin-top:14px">
+
+              <button
+                class="btn btn-secondary"
+                data-open-view="practice"
+              >
+                Edit Intention
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <h2>Today's Progress</h2>
+
+            <div class="card-subtitle">
+              Complete all three sessions
+            </div>
+
+            <div
+              id="dashboardProgress"
+            >
+            </div>
+
+            <div style="margin-top:17px">
+
+              <button
+                class="btn btn-primary"
+                data-open-view="practice"
+              >
+                Continue Practice
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card mt">
+
+          <h2>💭 Daily Affirmation</h2>
+
+          <div class="card-subtitle">
+            A positive statement for today's focus
+          </div>
+
+          <div
+            class="intention-box"
+            id="dashboardAffirmation"
+          >
+            I am building the life I want through focused action
+          </div>
+
+          <div style="margin-top:14px">
+
+            <button
+              class="btn btn-secondary"
+              id="affirmationBtn"
+            >
+              New Affirmation
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- PRACTICE -->
+
+      <section
+        class="view"
+        id="view-practice"
+      >
+
+        <div class="grid grid-2">
+
+          <div class="card">
+
+            <div class="practice-header">
+
+              <div>
+
+                <h2>Today's Intention</h2>
+
+                <div class="card-subtitle">
+                  One intention for all three sessions
+                </div>
+
+              </div>
+
+              <span class="badge">
+                3 • 6 • 9
+              </span>
+
+            </div>
+
+            <div class="form-group">
+
+              <label>
+                What are you focusing on?
+              </label>
+
+              <textarea
+                id="intentionInput"
+                placeholder="Example: I am growing my business to the next level through consistent action"
+              ></textarea>
+
+            </div>
+
+            <button
+              class="btn btn-primary btn-block"
+              id="saveIntentionBtn"
+            >
+              Save Intention
+            </button>
+
+          </div>
+
+
+          <div class="card">
+
+            <h2>How it works</h2>
+
+            <div class="card-subtitle">
+              A simple daily routine
+            </div>
+
+            <div class="intention-box">
+
+              <p>
+                <strong>Morning — 3 times</strong>
+              </p>
+
+              <p style="color:var(--muted);margin-top:5px">
+                Start the day with your intention
+              </p>
+
+              <br>
+
+              <p>
+                <strong>Afternoon — 6 times</strong>
+              </p>
+
+              <p style="color:var(--muted);margin-top:5px">
+                Reconnect with your focus
+              </p>
+
+              <br>
+
+              <p>
+                <strong>Evening — 9 times</strong>
+              </p>
+
+              <p style="color:var(--muted);margin-top:5px">
+                Finish the day with reflection
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card mt">
+
+          <div class="practice-header">
+
+            <div>
+
+              <h2>Today's Sessions</h2>
+
+              <div class="card-subtitle">
+                Complete each session to build your daily record
+              </div>
+
+            </div>
+
+            <div
+              class="badge"
+              id="practiceCounter"
+            >
+              0 / 3
+            </div>
+
+          </div>
+
+          <div
+            class="practice-list"
+            id="practiceList"
+          >
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- GOALS -->
+
+      <section
+        class="view"
+        id="view-goals"
+      >
+
+        <div class="grid grid-2">
+
+          <div class="card">
+
+            <h2>Create a Goal</h2>
+
+            <div class="card-subtitle">
+              Turn your intention into a measurable target
+            </div>
+
+            <div class="form-group">
+
+              <label>Goal Name</label>
+
+              <input
+                id="goalName"
+                placeholder="Example: Increase monthly income"
+              >
+
+            </div>
+
+            <div class="form-group">
+
+              <label>Category</label>
+
+              <select id="goalCategory">
+
+                <option>Money</option>
+                <option>Business</option>
+                <option>Career</option>
+                <option>Personal Growth</option>
+                <option>Relationship</option>
+                <option>Lifestyle</option>
+
+              </select>
+
+            </div>
+
+            <div class="form-group">
+
+              <label>Target</label>
+
+              <input
+                id="goalTarget"
+                placeholder="Example: 50 lakh / month"
+              >
+
+            </div>
+
+            <div class="form-group">
+
+              <label>Starting Progress (%)</label>
+
+              <input
+                id="goalProgress"
+                type="number"
+                min="0"
+                max="100"
+                value="0"
+              >
+
+            </div>
+
+            <button
+              class="btn btn-primary btn-block"
+              id="addGoalBtn"
+            >
+              + Create Goal
+            </button>
+
+          </div>
+
+
+          <div class="card">
+
+            <h2>Goal Focus</h2>
+
+            <div class="card-subtitle">
+              Your goals work best when paired with daily action
+            </div>
+
+            <div class="intention-box">
+
+              <p>
+                <strong>1 — Define</strong>
+              </p>
+
+              <p style="color:var(--muted);margin-top:4px">
+                Make the target specific
+              </p>
+
+              <br>
+
+              <p>
+                <strong>2 — Track</strong>
+              </p>
+
+              <p style="color:var(--muted);margin-top:4px">
+                Update progress regularly
+              </p>
+
+              <br>
+
+              <p>
+                <strong>3 — Act</strong>
+              </p>
+
+              <p style="color:var(--muted);margin-top:4px">
+                Take one concrete action every day
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card mt">
+
+          <h2>My Goals</h2>
+
+          <div class="card-subtitle">
+            Your active goals
+          </div>
+
+          <div
+            class="goal-list"
+            id="goalList"
+          >
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- JOURNAL -->
+
+      <section
+        class="view"
+        id="view-journal"
+      >
+
+        <div class="grid grid-2">
+
+          <div class="card">
+
+            <h2>✍ Today's Journal</h2>
+
+            <div class="card-subtitle">
+              Write honestly about your day
+            </div>
+
+            <div class="form-group">
+
+              <label>
+                What are you grateful for?
+              </label>
+
+              <textarea
+                id="gratitudeInput"
+                placeholder="Write 1–3 things you appreciate today"
+              ></textarea>
+
+            </div>
+
+            <div class="form-group">
+
+              <label>
+                Today's Reflection
+              </label>
+
+              <textarea
+                id="journalInput"
+                placeholder="What happened today? What did you learn? What action will you take next?"
+              ></textarea>
+
+            </div>
+
+            <button
+              class="btn btn-primary btn-block"
+              id="saveJournalBtn"
+            >
+              Save Today's Journal
+            </button>
+
+          </div>
+
+
+          <div class="card">
+
+            <h2>Daily Reflection</h2>
+
+            <div class="card-subtitle">
+              Keep your focus grounded in action
+            </div>
+
+            <div class="intention-box">
+
+              <p>
+                <strong>What went well?</strong>
+              </p>
+
+              <p style="color:var(--muted);margin-top:5px">
+                Identify progress, even if it was small
+              </p>
+
+              <br>
+
+              <p>
+                <strong>What can improve?</strong>
+              </p>
+
+              <p style="color:var(--muted);margin-top:5px">
+                Look for one practical adjustment
+              </p>
+
+              <br>
+
+              <p>
+                <strong>What's tomorrow's action?</strong>
+              </p>
+
+              <p style="color:var(--muted);margin-top:5px">
+                Choose one action you can actually complete
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card mt">
+
+          <h2>Journal History</h2>
+
+          <div class="card-subtitle">
+            Previous reflections
+          </div>
+
+          <div id="journalList"></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- VISION -->
+
+      <section
+        class="view"
+        id="view-vision"
+      >
+
+        <div class="card vision-hero">
+
+          <div class="vision-icon">
+            ◇
+          </div>
+
+          <h2>My Future Self</h2>
+
+          <p style="color:var(--muted);margin-top:9px">
+            Describe the person and life you are building
+          </p>
+
+        </div>
+
+
+        <div class="grid grid-2 mt">
+
+          <div class="card">
+
+            <h2>My Vision</h2>
+
+            <div class="card-subtitle">
+              Where do you want to be?
+            </div>
+
+            <textarea
+              id="visionInput"
+              placeholder="Describe your future life, work, business, relationships, lifestyle and personal growth"
+            ></textarea>
+
+            <button
+              class="btn btn-primary btn-block"
+              id="saveVisionBtn"
+            >
+              Save Vision
+            </button>
+
+          </div>
+
+
+          <div class="card">
+
+            <h2>Future Self Statement</h2>
+
+            <div class="card-subtitle">
+              Write as if you are already becoming that person
+            </div>
+
+            <textarea
+              id="futureSelfInput"
+              placeholder="I am becoming a disciplined, successful and confident person who..."
+            ></textarea>
+
+            <button
+              class="btn btn-primary btn-block"
+              id="saveFutureBtn"
+            >
+              Save Statement
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="card mt">
+
+          <h2>Your Saved Vision</h2>
+
+          <div
+            class="intention-box"
+            id="savedVision"
+          >
+            No vision saved yet
+          </div>
+
+        </div>
+
+
+        <div class="card mt">
+
+          <h2>Your Future Self</h2>
+
+          <div
+            class="intention-box"
+            id="savedFuture"
+          >
+            No future-self statement saved yet
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- HISTORY -->
+
+      <section
+        class="view"
+        id="view-history"
+      >
+
+        <div class="stats">
+
+          <div class="stat-card">
+
+            <div class="stat-icon">🔥</div>
+
+            <div class="stat-label">
+              Current Streak
+            </div>
+
+            <div
+              class="stat-value"
+              id="historyCurrent"
+            >
+              0
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-icon">🏆</div>
+
+            <div class="stat-label">
+              Best Streak
+            </div>
+
+            <div
+              class="stat-value"
+              id="historyBest"
+            >
+              0
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-icon">✓</div>
+
+            <div class="stat-label">
+              Completed Days
+            </div>
+
+            <div
+              class="stat-value"
+              id="historyDays"
+            >
+              0
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-icon">✦</div>
+
+            <div class="stat-label">
+              Total Sessions
+            </div>
+
+            <div
+              class="stat-value"
+              id="historySessions"
+            >
+              0
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card mt">
+
+          <h2>Activity Calendar</h2>
+
+          <div class="card-subtitle">
+            Completed 369 days
+          </div>
+
+          <div
+            class="calendar"
+            id="calendar"
+          >
+          </div>
+
+        </div>
+
+
+        <div class="card mt">
+
+          <h2>Recent Activity</h2>
+
+          <div id="activityList"></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- SETTINGS -->
+
+      <section
+        class="view"
+        id="view-settings"
+      >
+
+        <div class="grid grid-2">
+
+          <div class="card">
+
+            <h2>⚙ Settings</h2>
+
+            <div class="card-subtitle">
+              Customize your app
+            </div>
+
+            <div class="setting-row">
+
+              <div class="setting-info">
+
+                <strong>Daily Reminder</strong>
+
+                <small>
+                  Enable your daily practice reminder
+                </small>
+
+              </div>
+
+              <label class="switch">
+
+                <input
+                  type="checkbox"
+                  id="reminderToggle"
+                >
+
+                <span class="slider"></span>
+
+              </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+              <div class="setting-info">
+
+                <strong>Language</strong>
+
+                <small>
+                  Interface language preference
+                </small>
+
+              </div>
+
+              <select
+                id="languageSelect"
+                style="width:130px"
+              >
+
+                <option value="en">
+                  English
+                </option>
+
+                <option value="my">
+                  မြန်မာ
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <h2>💾 Data</h2>
+
+            <div class="card-subtitle">
+              Your data is stored locally in this browser
+            </div>
+
+            <div class="grid">
+
+              <button
+                class="btn btn-secondary btn-block"
+                id="exportBtn"
+              >
+                Export Backup
+              </button>
+
+              <button
+                class="btn btn-secondary btn-block"
+                id="importBtn"
+              >
+                Restore Backup
+              </button>
+
+              <input
+                type="file"
+                id="importFile"
+                accept=".json"
+                hidden
+              >
+
+              <button
+                class="btn btn-danger btn-block"
+                id="resetBtn"
+              >
+                Reset All Data
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card mt">
+
+          <h2>About 369</h2>
+
+          <div class="card-subtitle">
+            369 Manifest & Build
+          </div>
+
+          <div class="intention-box">
+
+            <p>
+              This app is designed as a structured
+              reflection and goal-setting tool
+            </p>
+
+            <br>
+
+            <p style="color:var(--muted)">
+              Use the practice to focus your attention,
+              then connect that focus to concrete actions
+            </p>
+
+            <br>
+
+            <strong style="color:var(--gold2)">
+              Version 2.0
+            </strong>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<!-- QUICK MODAL -->
+
+<div
+  class="modal"
+  id="quickModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h2>Quick Add</h2>
+
+      <button
+        class="modal-close"
+        id="quickClose"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="grid">
+
+      <button
+        class="btn btn-primary btn-block"
+        data-quick="goal"
+      >
+        ◎ Add Goal
+      </button>
+
+      <button
+        class="btn btn-secondary btn-block"
+        data-quick="journal"
+      >
+        ✎ Write Journal
+      </button>
+
+      <button
+        class="btn btn-secondary btn-block"
+        data-quick="practice"
+      >
+        369 Start Practice
+      </button>
+
+      <button
+        class="btn btn-secondary btn-block"
+        data-quick="vision"
+      >
+        ◇ Edit Vision
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast"
+>
+</div>
+
+
+<script>
+"use strict";
+
+/* =========================================
+   369 APP V2
+========================================= */
+
+(function(){
+
+  const STORAGE_KEY = "369_MANIFEST_BUILD_V2";
+
+  const DEFAULT_DATA = {
+    intention:"",
+    practices:{},
+    goals:[],
+    journals:[],
+    vision:"",
+    futureSelf:"",
+    reminder:false,
+    language:"en",
+    affirmationIndex:0
+  };
+
+  let data = loadData();
+
+
+  /* =========================================
+     BASIC HELPERS
+  ========================================= */
+
+  function $(id){
+    return document.getElementById(id);
+  }
+
+  function todayKey(date){
+
+    const d = date || new Date();
+
+    return d.getFullYear()
+      + "-"
+      + String(d.getMonth()+1).padStart(2,"0")
+      + "-"
+      + String(d.getDate()).padStart(2,"0");
 
   }
 
-  appData.intention=value;
+  function save(){
 
-  saveData();
+    try{
 
-  const msg =
-    document.getElementById(
-      "intentionMessage"
-    );
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(data)
+      );
 
-  msg.textContent =
-    "Intention saved successfully ✓";
+    }catch(error){
 
-  msg.style.display="block";
-
-  renderAll();
-
-}
-
-
-/* =====================================
-   GOALS
-===================================== */
-
-function addGoal(){
-
-  const name =
-    document
-      .getElementById("goalName")
-      .value
-      .trim();
-
-  if(!name){
-
-    alert(
-      "Please enter a goal"
-    );
-
-    return;
-
-  }
-
-  let progress =
-    Number(
-      document
-        .getElementById("goalProgress")
-        .value
-    );
-
-  if(isNaN(progress)){
-    progress=0;
-  }
-
-  progress =
-    Math.max(
-      0,
-      Math.min(100,progress)
-    );
-
-  appData.goals.push({
-
-    id:Date.now(),
-
-    name:name,
-
-    category:
-      document
-        .getElementById("goalCategory")
-        .value,
-
-    progress:progress
-
-  });
-
-  document
-    .getElementById("goalName")
-    .value="";
-
-  document
-    .getElementById("goalProgress")
-    .value=0;
-
-  saveData();
-
-  renderAll();
-
-}
-
-
-function deleteGoal(id){
-
-  appData.goals =
-    appData.goals.filter(
-      goal=>goal.id!==id
-    );
-
-  saveData();
-
-  renderAll();
-
-}
-
-
-/* =====================================
-   JOURNAL
-===================================== */
-
-function saveJournal(){
-
-  const text =
-    document
-      .getElementById("journalText")
-      .value
-      .trim();
-
-  if(!text){
-
-    alert(
-      "Please write something"
-    );
-
-    return;
-
-  }
-
-  appData.journals.push({
-
-    id:Date.now(),
-
-    date:today(),
-
-    text:text
-
-  });
-
-  document
-    .getElementById("journalText")
-    .value="";
-
-  saveData();
-
-  renderAll();
-
-}
-
-
-/* =====================================
-   STREAK
-===================================== */
-
-function completeDay(key){
-
-  const p =
-    appData.practices[key];
-
-  if(!p) return false;
-
-  return (
-    p.morning &&
-    p.afternoon &&
-    p.evening
-  );
-
-}
-
-
-function currentStreak(){
-
-  let count=0;
-
-  const d=new Date();
-
-  while(true){
-
-    const key =
-      d.getFullYear()+"-"+
-      String(d.getMonth()+1).padStart(2,"0")+"-"+
-      String(d.getDate()).padStart(2,"0");
-
-    if(!completeDay(key)){
-
-      break;
+      console.error("Save error:",error);
 
     }
 
-    count++;
+  }
 
-    d.setDate(
-      d.getDate()-1
+  function loadData(){
+
+    try{
+
+      const raw =
+        localStorage.getItem(STORAGE_KEY);
+
+      if(!raw){
+
+        return cloneDefault();
+
+      }
+
+      const parsed =
+        JSON.parse(raw);
+
+      return Object.assign(
+        cloneDefault(),
+        parsed
+      );
+
+    }catch(error){
+
+      console.error("Load error:",error);
+
+      return cloneDefault();
+
+    }
+
+  }
+
+  function cloneDefault(){
+
+    return JSON.parse(
+      JSON.stringify(DEFAULT_DATA)
     );
 
   }
 
-  return count;
+  function escapeHTML(value){
 
-}
+    return String(value || "")
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+
+  }
+
+  function toast(message){
+
+    const el = $("toast");
+
+    if(!el) return;
+
+    el.textContent = message;
+
+    el.classList.add("show");
+
+    clearTimeout(
+      toast.timer
+    );
+
+    toast.timer =
+      setTimeout(function(){
+
+        el.classList.remove("show");
+
+      },2200);
+
+  }
 
 
-/* =====================================
-   RENDER
-===================================== */
+  /* =========================================
+     NAVIGATION
+  ========================================= */
 
-function renderAll(){
+  const titles = {
 
-  const day =
-    getTodayPractice();
+    dashboard:[
+      "Dashboard",
+      "Your daily focus and progress"
+    ],
+
+    practice:[
+      "369 Practice",
+      "Complete today's three sessions"
+    ],
+
+    goals:[
+      "My Goals",
+      "Turn intention into measurable action"
+    ],
+
+    journal:[
+      "Journal",
+      "Reflect, appreciate and learn"
+    ],
+
+    vision:[
+      "My Vision",
+      "Describe the future you are building"
+    ],
+
+    history:[
+      "History",
+      "Review your consistency"
+    ],
+
+    settings:[
+      "Settings",
+      "Manage your preferences and data"
+    ]
+
+  };
+
+
+  function openView(view){
+
+    document
+      .querySelectorAll(".view")
+      .forEach(function(el){
+
+        el.classList.remove("active");
+
+      });
+
+    document
+      .querySelectorAll(".nav-btn")
+      .forEach(function(el){
+
+        el.classList.remove("active");
+
+      });
+
+    const target =
+      $("view-"+view);
+
+    if(!target){
+
+      return;
+
+    }
+
+    target.classList.add("active");
+
+    const nav =
+      document.querySelector(
+        '.nav-btn[data-view="'+view+'"]'
+      );
+
+    if(nav){
+
+      nav.classList.add("active");
+
+    }
+
+    if(titles[view]){
+
+      $("pageTitle").textContent =
+        titles[view][0];
+
+      $("pageSubtitle").textContent =
+        titles[view][1];
+
+    }
+
+    closeSidebar();
+
+    renderAll();
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+  }
+
 
   document
-    .getElementById("homePractice")
-    .innerHTML =
-      practiceHTML();
+    .querySelectorAll(".nav-btn")
+    .forEach(function(button){
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          openView(
+            button.getAttribute("data-view")
+          );
+
+        }
+      );
+
+    });
+
 
   document
-    .getElementById("practiceList")
-    .innerHTML =
-      practiceHTML();
+    .querySelectorAll("[data-open-view]")
+    .forEach(function(button){
 
-  document
-    .getElementById("intention")
-    .value =
-      appData.intention || "";
+      button.addEventListener(
+        "click",
+        function(){
 
-  document
-    .getElementById("homeStreak")
-    .textContent =
+          openView(
+            button.getAttribute("data-open-view")
+          );
+
+        }
+      );
+
+    });
+
+
+  /* =========================================
+     MOBILE SIDEBAR
+  ========================================= */
+
+  function openSidebar(){
+
+    $("sidebar").classList.add("open");
+
+    $("overlay").classList.add("show");
+
+  }
+
+  function closeSidebar(){
+
+    $("sidebar").classList.remove("open");
+
+    $("overlay").classList.remove("show");
+
+  }
+
+  $("menuBtn").addEventListener(
+    "click",
+    openSidebar
+  );
+
+  $("overlay").addEventListener(
+    "click",
+    closeSidebar
+  );
+
+
+  /* =========================================
+     PRACTICE DATA
+  ========================================= */
+
+  function ensureToday(){
+
+    const key =
+      todayKey();
+
+    if(!data.practices[key]){
+
+      data.practices[key] = {
+
+        morning:false,
+        afternoon:false,
+        evening:false
+
+      };
+
+    }
+
+    return data.practices[key];
+
+  }
+
+
+  function toggleSession(type){
+
+    if(!data.intention.trim()){
+
+      toast("Save your intention first");
+
+      openView("practice");
+
+      $("intentionInput").focus();
+
+      return;
+
+    }
+
+    const day =
+      ensureToday();
+
+    day[type] =
+      !day[type];
+
+    save();
+
+    renderAll();
+
+    if(day[type]){
+
+      toast("Session completed ✓");
+
+    }else{
+
+      toast("Session marked incomplete");
+
+    }
+
+  }
+
+
+  function sessionComplete(day,type){
+
+    return !!(
+      day &&
+      day[type]
+    );
+
+  }
+
+
+  function completedToday(){
+
+    const day =
+      data.practices[todayKey()];
+
+    if(!day){
+
+      return 0;
+
+    }
+
+    let count=0;
+
+    if(day.morning) count++;
+
+    if(day.afternoon) count++;
+
+    if(day.evening) count++;
+
+    return count;
+
+  }
+
+
+  function isDayComplete(key){
+
+    const day =
+      data.practices[key];
+
+    return !!(
+      day &&
+      day.morning &&
+      day.afternoon &&
+      day.evening
+    );
+
+  }
+
+
+  /* =========================================
+     STREAK
+  ========================================= */
+
+  function currentStreak(){
+
+    let count=0;
+
+    const d =
+      new Date();
+
+    while(true){
+
+      const key =
+        todayKey(d);
+
+      if(!isDayComplete(key)){
+
+        break;
+
+      }
+
+      count++;
+
+      d.setDate(
+        d.getDate()-1
+      );
+
+    }
+
+    return count;
+
+  }
+
+
+  function bestStreak(){
+
+    const dates =
+      Object.keys(data.practices)
+        .filter(isDayComplete)
+        .sort();
+
+    if(!dates.length){
+
+      return 0;
+
+    }
+
+    let best=1;
+    let current=1;
+
+    for(
+      let i=1;
+      i<dates.length;
+      i++
+    ){
+
+      const previous =
+        new Date(
+          dates[i-1]+"T00:00:00"
+        );
+
+      const current =
+        new Date(
+          dates[i]+"T00:00:00"
+        );
+
+      const difference =
+        Math.round(
+          (
+            current-previous
+          ) / 86400000
+        );
+
+      if(difference===1){
+
+        current++;
+
+        if(current>best){
+
+          best=current;
+
+        }
+
+      }else{
+
+        current=1;
+
+      }
+
+    }
+
+    return best;
+
+  }
+
+
+  /* =========================================
+     PRACTICE RENDER
+  ========================================= */
+
+  function renderPractice(){
+
+    const day =
+      ensureToday();
+
+    const sessions = [
+
+      {
+        type:"morning",
+        number:3,
+        title:"Morning Focus",
+        text:"Write your intention 3 times"
+      },
+
+      {
+        type:"afternoon",
+        number:6,
+        title:"Afternoon Focus",
+        text:"Write your intention 6 times"
+      },
+
+      {
+        type:"evening",
+        number:9,
+        title:"Evening Reflection",
+        text:"Write your intention 9 times"
+      }
+
+    ];
+
+    let html="";
+
+    sessions.forEach(function(item){
+
+      const done =
+        sessionComplete(
+          day,
+          item.type
+        );
+
+      html += `
+
+        <div class="session ${done ? "done":""}">
+
+          <div class="session-number">
+            ${done ? "✓" : item.number}
+          </div>
+
+          <div>
+
+            <h3>
+              ${item.title}
+            </h3>
+
+            <p>
+              ${item.text}
+            </p>
+
+          </div>
+
+          <button
+            class="btn ${done ? "btn-success":"btn-primary"}"
+            data-session="${item.type}"
+          >
+            ${done ? "Completed":"Complete Session"}
+          </button>
+
+        </div>
+
+      `;
+
+    });
+
+    $("practiceList").innerHTML =
+      html;
+
+    $("practiceCounter").textContent =
+      completedToday()+" / 3";
+
+    document
+      .querySelectorAll("[data-session]")
+      .forEach(function(button){
+
+        button.addEventListener(
+          "click",
+          function(){
+
+            toggleSession(
+              button.getAttribute("data-session")
+            );
+
+          }
+        );
+
+      });
+
+  }
+
+
+  /* =========================================
+     INTENTION
+  ========================================= */
+
+  $("saveIntentionBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        const value =
+          $("intentionInput")
+            .value
+            .trim();
+
+        if(!value){
+
+          toast("Please enter an intention");
+
+          $("intentionInput").focus();
+
+          return;
+
+        }
+
+        data.intention =
+          value;
+
+        save();
+
+        renderAll();
+
+        toast("Intention saved ✓");
+
+      }
+    );
+
+
+  /* =========================================
+     GOALS
+  ========================================= */
+
+  function renderGoals(){
+
+    const list =
+      $("goalList");
+
+    if(!data.goals.length){
+
+      list.innerHTML = `
+
+        <div class="intention-box">
+          <span class="intention-empty">
+            No goals yet — create your first goal above
+          </span>
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+    let html="";
+
+    data.goals
+      .forEach(function(goal){
+
+        html += `
+
+          <div class="goal-card">
+
+            <div class="goal-head">
+
+              <div>
+
+                <div class="goal-name">
+                  ${escapeHTML(goal.name)}
+                </div>
+
+                <div class="goal-category">
+                  ${escapeHTML(goal.category)}
+                  ${goal.target
+                    ? " • Target: "+escapeHTML(goal.target)
+                    : ""}
+                </div>
+
+              </div>
+
+              <div class="goal-percent">
+                ${goal.progress}%
+              </div>
+
+            </div>
+
+            <div class="progress-wrap">
+
+              <div class="progress">
+                <span
+                  style="width:${goal.progress}%"
+                ></span>
+              </div>
+
+            </div>
+
+            <div class="goal-actions">
+
+              <button
+                class="btn btn-secondary"
+                data-goal-plus="${goal.id}"
+              >
+                +10%
+              </button>
+
+              <button
+                class="btn btn-danger"
+                data-goal-delete="${goal.id}"
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      });
+
+    list.innerHTML =
+      html;
+
+
+    document
+      .querySelectorAll("[data-goal-plus]")
+      .forEach(function(button){
+
+        button.addEventListener(
+          "click",
+          function(){
+
+            const id =
+              Number(
+                button.getAttribute(
+                  "data-goal-plus"
+                )
+              );
+
+            const goal =
+              data.goals.find(
+                function(item){
+                  return item.id===id;
+                }
+              );
+
+            if(!goal){
+
+              return;
+
+            }
+
+            goal.progress =
+              Math.min(
+                100,
+                Number(goal.progress)+10
+              );
+
+            save();
+
+            renderAll();
+
+            toast("Goal progress updated");
+
+          }
+        );
+
+      });
+
+
+    document
+      .querySelectorAll("[data-goal-delete]")
+      .forEach(function(button){
+
+        button.addEventListener(
+          "click",
+          function(){
+
+            const id =
+              Number(
+                button.getAttribute(
+                  "data-goal-delete"
+                )
+              );
+
+            data.goals =
+              data.goals.filter(
+                function(goal){
+                  return goal.id!==id;
+                }
+              );
+
+            save();
+
+            renderAll();
+
+            toast("Goal deleted");
+
+          }
+        );
+
+      });
+
+  }
+
+
+  $("addGoalBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        const name =
+          $("goalName")
+            .value
+            .trim();
+
+        if(!name){
+
+          toast("Please enter a goal");
+
+          $("goalName").focus();
+
+          return;
+
+        }
+
+        let progress =
+          Number(
+            $("goalProgress").value
+          );
+
+        if(isNaN(progress)){
+
+          progress=0;
+
+        }
+
+        progress =
+          Math.max(
+            0,
+            Math.min(
+              100,
+              progress
+            )
+          );
+
+        data.goals.push({
+
+          id:Date.now(),
+
+          name:name,
+
+          category:
+            $("goalCategory").value,
+
+          target:
+            $("goalTarget")
+              .value
+              .trim(),
+
+          progress:progress
+
+        });
+
+        $("goalName").value="";
+        $("goalTarget").value="";
+        $("goalProgress").value="0";
+
+        save();
+
+        renderAll();
+
+        toast("Goal created ✓");
+
+      }
+    );
+
+
+  /* =========================================
+     JOURNAL
+  ========================================= */
+
+  function renderJournal(){
+
+    const list =
+      $("journalList");
+
+    if(!data.journals.length){
+
+      list.innerHTML = `
+
+        <div class="intention-box">
+          <span class="intention-empty">
+            No journal entries yet
+          </span>
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+    list.innerHTML =
+      data.journals
+        .slice()
+        .reverse()
+        .map(function(entry){
+
+          return `
+
+            <div class="journal-entry">
+
+              <div class="journal-date">
+                ${escapeHTML(entry.date)}
+              </div>
+
+              ${
+                entry.gratitude
+                ? `
+                  <p>
+                    <strong>Gratitude</strong><br>
+                    ${escapeHTML(entry.gratitude)}
+                  </p>
+                `
+                : ""
+              }
+
+              ${
+                entry.text
+                ? `
+                  <p style="margin-top:10px">
+                    <strong>Reflection</strong><br>
+                    ${escapeHTML(entry.text)}
+                  </p>
+                `
+                : ""
+              }
+
+            </div>
+
+          `;
+
+        })
+        .join("");
+
+  }
+
+
+  $("saveJournalBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        const gratitude =
+          $("gratitudeInput")
+            .value
+            .trim();
+
+        const text =
+          $("journalInput")
+            .value
+            .trim();
+
+        if(!gratitude && !text){
+
+          toast("Write something first");
+
+          return;
+
+        }
+
+        data.journals.push({
+
+          id:Date.now(),
+
+          date:todayKey(),
+
+          gratitude:gratitude,
+
+          text:text
+
+        });
+
+        $("gratitudeInput").value="";
+        $("journalInput").value="";
+
+        save();
+
+        renderAll();
+
+        toast("Journal saved ✓");
+
+      }
+    );
+
+
+  /* =========================================
+     VISION
+  ========================================= */
+
+  function renderVision(){
+
+    $("visionInput").value =
+      data.vision || "";
+
+    $("futureSelfInput").value =
+      data.futureSelf || "";
+
+    $("savedVision").innerHTML =
+      data.vision
+      ? escapeHTML(data.vision)
+      : '<span class="intention-empty">No vision saved yet</span>';
+
+    $("savedFuture").innerHTML =
+      data.futureSelf
+      ? escapeHTML(data.futureSelf)
+      : '<span class="intention-empty">No future-self statement saved yet</span>';
+
+  }
+
+
+  $("saveVisionBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        const value =
+          $("visionInput")
+            .value
+            .trim();
+
+        if(!value){
+
+          toast("Write your vision first");
+
+          return;
+
+        }
+
+        data.vision=value;
+
+        save();
+
+        renderAll();
+
+        toast("Vision saved ✓");
+
+      }
+    );
+
+
+  $("saveFutureBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        const value =
+          $("futureSelfInput")
+            .value
+            .trim();
+
+        if(!value){
+
+          toast("Write your statement first");
+
+          return;
+
+        }
+
+        data.futureSelf=value;
+
+        save();
+
+        renderAll();
+
+        toast("Statement saved ✓");
+
+      }
+    );
+
+
+  /* =========================================
+     AFFIRMATIONS
+  ========================================= */
+
+  const affirmations = [
+
+    "I am building the life I want through focused action",
+
+    "I choose progress over perfection",
+
+    "I trust myself to take the next useful step",
+
+    "I am capable of learning, growing and improving",
+
+    "My daily actions are moving me toward my goals",
+
+    "I create opportunities through consistent effort",
+
+    "I focus on what I can control today",
+
+    "I am becoming more disciplined every day",
+
+    "I deserve to pursue meaningful goals with courage",
+
+    "Small actions repeated consistently create meaningful progress"
+
+  ];
+
+
+  function newAffirmation(){
+
+    data.affirmationIndex =
+      (
+        Number(data.affirmationIndex || 0)
+        + 1
+      ) % affirmations.length;
+
+    $("dashboardAffirmation")
+      .textContent =
+      affirmations[
+        data.affirmationIndex
+      ];
+
+    save();
+
+  }
+
+
+  $("affirmationBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        newAffirmation();
+
+        toast("Affirmation changed");
+
+      }
+    );
+
+
+  /* =========================================
+     HISTORY
+  ========================================= */
+
+  function renderHistory(){
+
+    const completed =
+      Object.keys(data.practices)
+        .filter(isDayComplete)
+        .sort();
+
+    $("historyCurrent").textContent =
       currentStreak();
 
-  const sessions =
-    Object
-      .values(appData.practices)
-      .reduce(
-        (total,p)=>{
+    $("historyBest").textContent =
+      bestStreak();
 
-          return total +
-            (p.morning?1:0) +
-            (p.afternoon?1:0) +
-            (p.evening?1:0);
+    $("historyDays").textContent =
+      completed.length;
+
+    $("historySessions").textContent =
+      totalSessions();
+
+
+    renderCalendar();
+
+    const activity =
+      $("activityList");
+
+    const allDates =
+      Object.keys(data.practices)
+        .sort()
+        .reverse();
+
+    if(!allDates.length){
+
+      activity.innerHTML = `
+
+        <div class="intention-box">
+          <span class="intention-empty">
+            No practice activity yet
+          </span>
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+    activity.innerHTML =
+      allDates
+        .slice(0,20)
+        .map(function(date){
+
+          const day =
+            data.practices[date];
+
+          const count =
+            (day.morning?1:0)
+            +(day.afternoon?1:0)
+            +(day.evening?1:0);
+
+          return `
+
+            <div
+              class="journal-entry"
+              style="display:flex;justify-content:space-between;align-items:center"
+            >
+
+              <span>
+                ${escapeHTML(date)}
+              </span>
+
+              <span class="badge">
+                ${count} / 3
+              </span>
+
+            </div>
+
+          `;
+
+        })
+        .join("");
+
+  }
+
+
+  function totalSessions(){
+
+    return Object.values(
+      data.practices
+    )
+      .reduce(
+        function(total,day){
+
+          return total
+            +(day.morning?1:0)
+            +(day.afternoon?1:0)
+            +(day.evening?1:0);
 
         },
         0
       );
 
-  document
-    .getElementById("homeSessions")
-    .textContent =
-      sessions;
-
-  document
-    .getElementById("homeGoals")
-    .textContent =
-      appData.goals.length;
-
-
-  /* GOALS */
-
-  const goalList =
-    document
-      .getElementById("goalList");
-
-  if(!appData.goals.length){
-
-    goalList.innerHTML =
-      '<div class="empty">No goals yet</div>';
-
-  }else{
-
-    goalList.innerHTML =
-      appData.goals
-        .map(goal=>`
-
-          <div class="goal">
-
-            <strong>
-              ${escapeHTML(goal.name)}
-            </strong>
-
-            <small>
-              ${escapeHTML(goal.category)}
-            </small>
-
-            <div class="progress">
-
-              <span
-                style="width:${goal.progress}%"
-              ></span>
-
-            </div>
-
-            <p>
-              ${goal.progress}% complete
-            </p>
-
-            <button
-              class="secondary"
-              onclick="deleteGoal(${goal.id})"
-            >
-              Delete
-            </button>
-
-          </div>
-
-        `)
-        .join("");
-
   }
 
 
-  /* JOURNAL */
+  function renderCalendar(){
 
-  const journalList =
-    document
-      .getElementById("journalList");
+    const container =
+      $("calendar");
 
-  if(!appData.journals.length){
+    const now =
+      new Date();
 
-    journalList.innerHTML =
-      '<div class="empty">No journal entries yet</div>';
+    const year =
+      now.getFullYear();
 
-  }else{
+    const month =
+      now.getMonth();
 
-    journalList.innerHTML =
-      appData.journals
-        .slice()
-        .reverse()
-        .map(entry=>`
-
-          <div class="goal">
-
-            <small>
-              ${entry.date}
-            </small>
-
-            <p>
-              ${escapeHTML(entry.text)}
-            </p>
-
-          </div>
-
-        `)
-        .join("");
-
-  }
-
-
-  /* HISTORY */
-
-  const completedDays =
-    Object
-      .keys(appData.practices)
-      .filter(completeDay);
-
-  document
-    .getElementById("historyCurrent")
-    .textContent =
-      currentStreak();
-
-  document
-    .getElementById("historyDays")
-    .textContent =
-      completedDays.length;
-
-  document
-    .getElementById("historyBest")
-    .textContent =
-      calculateBestStreak();
-
-  const historyList =
-    document
-      .getElementById("historyList");
-
-  if(!completedDays.length){
-
-    historyList.innerHTML =
-      '<div class="empty">No completed days yet</div>';
-
-  }else{
-
-    historyList.innerHTML =
-      completedDays
-        .slice()
-        .reverse()
-        .map(key=>`
-
-          <div class="goal">
-
-            ✓ ${key}
-
-          </div>
-
-        `)
-        .join("");
-
-  }
-
-
-  document
-    .getElementById("language")
-    .value =
-      appData.language || "en";
-
-}
-
-
-/* =====================================
-   BEST STREAK
-===================================== */
-
-function calculateBestStreak(){
-
-  const dates =
-    Object
-      .keys(appData.practices)
-      .filter(completeDay)
-      .sort();
-
-  if(!dates.length){
-    return 0;
-  }
-
-  let best=1;
-  let current=1;
-
-  for(let i=1;i<dates.length;i++){
-
-    const previous =
+    const first =
       new Date(
-        dates[i-1]+"T00:00:00"
+        year,
+        month,
+        1
       );
 
-    const currentDate =
+    const last =
       new Date(
-        dates[i]+"T00:00:00"
+        year,
+        month+1,
+        0
       );
 
-    const difference =
-      Math.round(
-        (
-          currentDate -
-          previous
-        ) / 86400000
-      );
+    let html="";
 
-    if(difference===1){
+    const labels=[
+      "S","M","T","W","T","F","S"
+    ];
 
-      current++;
+    labels.forEach(function(label){
 
-      best =
-        Math.max(
-          best,
-          current
-        );
+      html += `
 
-    }else{
+        <div
+          class="calendar-day"
+          style="
+            background:transparent;
+            border:0;
+            color:var(--muted);
+            min-height:25px;
+          "
+        >
+          ${label}
+        </div>
 
-      current=1;
+      `;
+
+    });
+
+
+    for(
+      let i=0;
+      i<first.getDay();
+      i++
+    ){
+
+      html += `
+        <div
+          class="calendar-day"
+          style="opacity:0"
+        ></div>
+      `;
 
     }
 
+
+    for(
+      let day=1;
+      day<=last.getDate();
+      day++
+    ){
+
+      const key =
+        year+"-"+
+        String(month+1).padStart(2,"0")+"-"+
+        String(day).padStart(2,"0");
+
+      const classes = [
+
+        "calendar-day",
+
+        isDayComplete(key)
+          ? "completed"
+          : "",
+
+        key===todayKey()
+          ? "today"
+          : ""
+
+      ].join(" ");
+
+      html += `
+
+        <div class="${classes}">
+          ${day}
+        </div>
+
+      `;
+
+    }
+
+    container.innerHTML =
+      html;
+
   }
 
-  return best;
 
-}
+  /* =========================================
+     SETTINGS
+  ========================================= */
 
+  $("reminderToggle")
+    .checked =
+    !!data.reminder;
 
-/* =====================================
-   AFFIRMATION
-===================================== */
+  $("reminderToggle")
+    .addEventListener(
+      "change",
+      function(){
 
-const affirmations=[
+        data.reminder =
+          $("reminderToggle").checked;
 
-  "I am creating the life I truly want",
+        save();
 
-  "I trust myself to take the next right step",
+        toast(
+          data.reminder
+            ? "Reminder enabled"
+            : "Reminder disabled"
+        );
 
-  "I am worthy of meaningful success",
-
-  "I focus on what I can build today",
-
-  "I welcome growth, clarity and abundance",
-
-  "I choose progress over perfection",
-
-  "My actions are aligned with my goals",
-
-  "I believe in my ability to create change"
-
-];
-
-
-function newAffirmation(){
-
-  const random =
-    affirmations[
-      Math.floor(
-        Math.random()*
-        affirmations.length
-      )
-    ];
-
-  document
-    .getElementById("affirmation")
-    .textContent =
-      random;
-
-}
-
-
-/* =====================================
-   SETTINGS
-===================================== */
-
-function saveSettings(){
-
-  appData.language =
-    document
-      .getElementById("language")
-      .value;
-
-  saveData();
-
-  alert(
-    "Settings saved"
-  );
-
-}
-
-
-/* =====================================
-   EXPORT
-===================================== */
-
-function exportData(){
-
-  const blob =
-    new Blob(
-      [
-        JSON.stringify(
-          appData,
-          null,
-          2
-        )
-      ],
-      {
-        type:"application/json"
       }
     );
 
-  const url =
-    URL.createObjectURL(blob);
 
-  const a =
-    document.createElement("a");
-
-  a.href=url;
-
-  a.download =
-    "369-backup.json";
-
-  a.click();
-
-  URL.revokeObjectURL(url);
-
-}
+  $("languageSelect")
+    .value =
+    data.language || "en";
 
 
-/* =====================================
-   RESET
-===================================== */
+  $("languageSelect")
+    .addEventListener(
+      "change",
+      function(){
 
-function resetData(){
+        data.language =
+          $("languageSelect").value;
 
-  if(
-    !confirm(
-      "Delete all 369 data?"
-    )
-  ){
-    return;
+        save();
+
+        toast(
+          data.language==="my"
+            ? "Language saved"
+            : "Language saved"
+        );
+
+      }
+    );
+
+
+  /* =========================================
+     EXPORT
+  ========================================= */
+
+  $("exportBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        const content =
+          JSON.stringify(
+            data,
+            null,
+            2
+          );
+
+        const blob =
+          new Blob(
+            [content],
+            {
+              type:"application/json"
+            }
+          );
+
+        const url =
+          URL.createObjectURL(blob);
+
+        const link =
+          document.createElement("a");
+
+        link.href=url;
+
+        link.download =
+          "369-backup-"+todayKey()+".json";
+
+        document
+          .body
+          .appendChild(link);
+
+        link.click();
+
+        link.remove();
+
+        setTimeout(
+          function(){
+            URL.revokeObjectURL(url);
+          },
+          500
+        );
+
+        toast("Backup exported");
+
+      }
+    );
+
+
+  /* =========================================
+     IMPORT
+  ========================================= */
+
+  $("importBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        $("importFile").click();
+
+      }
+    );
+
+
+  $("importFile")
+    .addEventListener(
+      "change",
+      function(event){
+
+        const file =
+          event.target.files[0];
+
+        if(!file){
+
+          return;
+
+        }
+
+        const reader =
+          new FileReader();
+
+        reader.onload =
+          function(){
+
+            try{
+
+              const imported =
+                JSON.parse(
+                  reader.result
+                );
+
+              if(
+                typeof imported!=="object" ||
+                imported===null
+              ){
+
+                throw new Error(
+                  "Invalid backup"
+                );
+
+              }
+
+              data =
+                Object.assign(
+                  cloneDefault(),
+                  imported
+                );
+
+              save();
+
+              renderAll();
+
+              toast("Backup restored ✓");
+
+            }catch(error){
+
+              console.error(error);
+
+              toast("Invalid backup file");
+
+            }
+
+            $("importFile").value="";
+
+          };
+
+        reader.readAsText(file);
+
+      }
+    );
+
+
+  /* =========================================
+     RESET
+  ========================================= */
+
+  $("resetBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        const confirmed =
+          window.confirm(
+            "Reset all 369 app data?"
+          );
+
+        if(!confirmed){
+
+          return;
+
+        }
+
+        data =
+          cloneDefault();
+
+        save();
+
+        renderAll();
+
+        openView("dashboard");
+
+        toast("App data reset");
+
+      }
+    );
+
+
+  /* =========================================
+     QUICK ADD
+  ========================================= */
+
+  function openQuick(){
+
+    $("quickModal")
+      .classList.add("show");
+
   }
 
-  localStorage.removeItem(KEY);
+  function closeQuick(){
 
-  location.reload();
+    $("quickModal")
+      .classList.remove("show");
 
-}
+  }
 
+  $("quickBtn")
+    .addEventListener(
+      "click",
+      openQuick
+    );
 
-/* =====================================
-   ESCAPE
-===================================== */
-
-function escapeHTML(value){
-
-  return String(value)
-
-    .replaceAll("&","&amp;")
-
-    .replaceAll("<","&lt;")
-
-    .replaceAll(">","&gt;")
-
-    .replaceAll('"',"&quot;")
-
-    .replaceAll("'","&#039;");
-
-}
+  $("quickClose")
+    .addEventListener(
+      "click",
+      closeQuick
+    );
 
 
-/* =====================================
-   START
-===================================== */
+  $("quickModal")
+    .addEventListener(
+      "click",
+      function(event){
 
-loadData();
+        if(
+          event.target ===
+          $("quickModal")
+        ){
 
-renderAll();
+          closeQuick();
 
+        }
+
+      }
+    );
+
+
+  document
+    .querySelectorAll("[data-quick]")
+    .forEach(function(button){
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          const action =
+            button.getAttribute(
+              "data-quick"
+            );
+
+          closeQuick();
+
+          if(action==="goal"){
+
+            openView("goals");
+
+            setTimeout(
+              function(){
+
+                $("goalName").focus();
+
+              },
+              100
+            );
+
+          }
+
+          if(action==="journal"){
+
+            openView("journal");
+
+            setTimeout(
+              function(){
+
+                $("journalInput").focus();
+
+              },
+              100
+            );
+
+          }
+
+          if(action==="practice"){
+
+            openView("practice");
+
+          }
+
+          if(action==="vision"){
+
+            openView("vision");
+
+          }
+
+        }
+      );
+
+    });
+
+
+  /* =========================================
+     DASHBOARD
+  ========================================= */
+
+  function renderDashboard(){
+
+    $("statStreak").textContent =
+      currentStreak();
+
+    $("statSessions").textContent =
+      totalSessions();
+
+    $("statGoals").textContent =
+      data.goals.length;
+
+    $("statBest").textContent =
+      bestStreak();
+
+
+    if(data.intention){
+
+      $("dashboardIntention")
+        .textContent =
+        data.intention;
+
+    }else{
+
+      $("dashboardIntention")
+        .innerHTML =
+        '<span class="intention-empty">No intention saved yet</span>';
+
+    }
+
+
+    const completed =
+      completedToday();
+
+    const percent =
+      Math.round(
+        (completed/3)*100
+      );
+
+    $("dashboardProgress")
+      .innerHTML = `
+
+        <div class="progress-top">
+
+          <span>
+            Today's completion
+          </span>
+
+          <strong>
+            ${percent}%
+          </strong>
+
+        </div>
+
+        <div class="progress">
+
+          <span
+            style="width:${percent}%"
+          ></span>
+
+        </div>
+
+        <div
+          style="
+            color:var(--muted);
+            font-size:12px;
+            margin-top:8px;
+          "
+        >
+          ${completed} of 3 sessions completed
+        </div>
+
+      `;
+
+
+    $("dashboardAffirmation")
+      .textContent =
+      affirmations[
+        Number(
+          data.affirmationIndex || 0
+        )
+      ];
+
+  }
+
+
+  /* =========================================
+     RENDER ALL
+  ========================================= */
+
+  function renderAll(){
+
+    renderDashboard();
+
+    renderPractice();
+
+    renderGoals();
+
+    renderJournal();
+
+    renderVision();
+
+    renderHistory();
+
+    $("reminderToggle").checked =
+      !!data.reminder;
+
+    $("languageSelect").value =
+      data.language || "en";
+
+    $("intentionInput").value =
+      data.intention || "";
+
+  }
+
+
+  /* =========================================
+     START
+  ========================================= */
+
+  renderAll();
+
+})();
 </script>
 
 </body>
 </html>
-```
